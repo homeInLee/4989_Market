@@ -1,23 +1,20 @@
 package com.kh.market.notice.model.vo;
 
-import java.sql.Date;
-
-
 public class Notice {
 
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeWriter;
 	private String noticeContent;
-	private Date noticeDate;
+	private String noticeDate;
 	private int noticeReadCount;
-	private Date noticeDelDate;
+	private String noticeDelDate;
 	private String noticeDelType;
 	
 	public Notice() {}
 
-	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, Date noticeDate,
-			int noticeReadCount, Date noticeDelDate, String noticeDelType) {
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, String noticeDate,
+			int noticeReadCount, String noticeDelDate, String noticeDelType) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
@@ -61,11 +58,11 @@ public class Notice {
 		this.noticeContent = noticeContent;
 	}
 
-	public Date getNoticeDate() {
+	public String getNoticeDate() {
 		return noticeDate;
 	}
 
-	public void setNoticeDate(Date noticeDate) {
+	public void setNoticeDate(String noticeDate) {
 		this.noticeDate = noticeDate;
 	}
 
@@ -77,11 +74,11 @@ public class Notice {
 		this.noticeReadCount = noticeReadCount;
 	}
 
-	public Date getNoticeDelDate() {
+	public String getNoticeDelDate() {
 		return noticeDelDate;
 	}
 
-	public void setNoticeDelDate(Date noticeDelDate) {
+	public void setNoticeDelDate(String noticeDelDate) {
 		this.noticeDelDate = noticeDelDate;
 	}
 
@@ -99,5 +96,7 @@ public class Notice {
 				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", noticeReadCount="
 				+ noticeReadCount + ", noticeDelDate=" + noticeDelDate + ", noticeDelType=" + noticeDelType + "]";
 	}
+
+	
 	
 }

@@ -7,7 +7,8 @@
   	<setting name="jdbcTypeForNull" value="NULL"/>
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
-  <!-- <typeAliases>
-  	<typeAlias type="com.kh.spring.member.model.vo.Member" alias="member"/>
-  </typeAliases> -->
+ <typeAliases>
+  	<typeAlias type="com.kh.market.notice.model.vo.Notice" 
+  	alias="notice"/>
+  </typeAliases>
 </configuration>
