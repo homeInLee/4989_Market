@@ -7,6 +7,6 @@
 <title>시작페이지</title>
 </head>
 <body>
-	<h2>성공했냐?</h2>
+	<h2>성공asdsads</h2>
 </body>
 </html>
