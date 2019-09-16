@@ -1,0 +1,220 @@
+@charset "UTF-8";
+/* * @ 초기화용 CSS * ------------------------------- */
+html, body, div, p, span, strong, b, em, iframe, pre, h1, h2, h3, h4, h5,
+	h6, img, dl, dt, dd, fieldset, form, legend, label, table, caption,
+	thead, tbody, tfoot, tr, th, td, ul, ol, li, a, input, select, textarea
+	{
+	margin: 0;
+	padding: 0;
+	border: 0 none;
+}
+
+html {
+	width: 1024px;
+	height: 100%;
+	min-height: 768px;
+}
+
+body {
+	height: 100%;
+	position: relative;
+	font-size: 16px;
+	line-height: 1.5;
+}
+
+ul, ol, li {
+	list-style: none;
+}
+
+em, address {
+	font-style: normal;
+}
+
+img {
+	border: 0 none;
+	font-size: 0;
+	line-height: 0;
+}
+
+sup {
+	position: relative;
+	top: 2px;
+	font-size: 11px;
+	line-height: 100%;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+caption {
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+}
+
+th, td {
+	vertical-align: middle; /* white-space: nowrap */
+}
+
+a {
+	color: #333;
+	text-decoration: none;
+	line-height: 1.5;
+}
+
+a:hover, a:focus, a:active {
+	text-decoration: none;
+}
+
+a:visited {
+	color: #333;
+}
+
+*, html {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+*, *:before, *:after {
+	box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+}
+
+#header {
+	width: 1024px;
+	height: 149px;
+	position: relative;
+}
+
+#header::after, #header-top::after {
+	content: '';
+	display: block;
+	clear: both;
+}
+
+#logo {
+	float: left;
+}
+/*로그인 회원가입*/
+#header-btn {
+	float: right;
+}
+
+#login, #info {
+	width: 80px;
+	height: 35px;
+	background: #ffffff;
+	border: 0;
+	outline: 0;
+}
+
+/*검색*/
+#search-box {
+	/* border: 1px solid #e9e9e9;*/
+	box-sizing: border-box;
+	position: absolute;
+	left: 50%;
+	transform: translateX(-50%);
+}
+
+#search-text {
+	height: 40px;
+	width: 460px;
+	border: 1px solid #1b5ac2;
+	background: #ffffff;
+}
+
+#search-btn {
+	width: 50px;
+	height: 40px;
+	border: 0px;
+	background: #1b5ac2;
+	outline: none;
+	float: right;
+	color: #ffffff;
+}
+
+/*메뉴바*/
+#header-catagory ul {
+	overflow: hidden;
+	list-style: none;
+}
+
+#header-catagory ul li {
+	float: left;
+	position: relative;
+}
+
+#header-catagory ul li a {
+	background: #ffffff;
+	display: block;
+	text-align: center;
+	color: #1b5ac2;
+	width: 200px;
+	z-index: 200;
+}
+
+#header-catagory ul ul {
+	display: none;
+}
+
+#dropdown a {
+	color: #1b5ac2;
+	padding: 12px 16px;
+	text-decoration: none;
+}
+
+#dropdown li a:hover {
+	background: #1b5ac2;
+	color: #fff;
+}
+
+#header-catagory ul ul.depth_open {
+	background: #1b5ac2;
+	display: block;
+}
+
+/*body*/
+div.gallery {
+	margin: 5px;
+	border: 1px solid #ccc;
+	float: left;
+	width: 180px;
+}
+
+div.gallery:hover {
+	border: 1px solid #777;
+}
+
+div.gallery img {
+	width: 100%;
+	height: auto;
+}
+
+div.desc {
+	padding: 15px;
+	text-align: center;
+}
+
+/*footer */
+#footer {
+	left: 0px;
+	bottom: 0px;
+	background: rgb(27, 90, 194, 0.5);
+	box-sizing: border-box;
+	border: 1px;
+	position: absolute;
+}
+
+#footer article {
+	width: 1024px;
+	margin: auto;
+	padding: 40px 0 67px 0;
+	text-align: center;
+}
