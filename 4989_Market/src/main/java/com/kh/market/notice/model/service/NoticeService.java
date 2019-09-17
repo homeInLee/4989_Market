@@ -8,4 +8,14 @@ public interface NoticeService {
 
 	List<Notice> selectNoticeMember();
 
+	List<Notice> selectNoticePayment();
+
+	List<Notice> selectNoticeSell();
+
+	List<Notice> selectNoticeDeclaration();
+
+	List<Notice> selectNoticeOther();
+
+	int insertNotice(Notice notice);
+
 }

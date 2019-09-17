@@ -18,4 +18,29 @@ public class NoticeServiceImpl implements NoticeService {
 	public List<Notice> selectNoticeMember() {
 		return noticeDAO.selectNoticeMember();
 	}
+
+	@Override
+	public List<Notice> selectNoticePayment() {
+		return noticeDAO.selectNoticePayment();
+	}
+
+	@Override
+	public List<Notice> selectNoticeSell() {
+		return noticeDAO.selectNoticeSell();
+	}
+
+	@Override
+	public List<Notice> selectNoticeDeclaration() {
+		return noticeDAO.selectNoticeDeclaration();
+	}
+
+	@Override
+	public List<Notice> selectNoticeOther() {
+		return noticeDAO.selectNoticeOther();
+	}
+
+	@Override
+	public int insertNotice(Notice notice) {
+		return noticeDAO.insertNotice(notice);
+	}
 }

@@ -4,6 +4,36 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 <select id="selectNoticeMember" resultType="notice">
-	select * from notice order by notice_no desc
+	select * from notice 
+	where notice_type = 'm' 
+	order by notice_no desc
 </select>
+<select id="selectNoticePayment" resultType="notice">
+	select * from notice 
+	where notice_type = 'p' 
+	order by notice_no desc
+</select>
+<select id="selectNoticeSell" resultType="notice">
+	select * from notice 
+	where notice_type = 's' 
+	order by notice_no desc
+</select>
+<select id="selectNoticeDeclaration" resultType="notice">
+	select * from notice 
+	where notice_type = 'd' 
+	order by notice_no desc
+</select>
+<select id="selectNoticeOther" resultType="notice">
+	select * from notice 
+	where notice_type = 'o' 
+	order by notice_no desc
+</select>
+<insert id="insertNotice">
+	insert into notice(notice_no, notice_title, notice_writer, notice_content, notice_type) values(
+	seq_notice_no.nextval,
+	#{noticeTitle},
+	#{noticeWriter},
+	#{noticeContent},
+	#{noticeType})
+</insert>
 </mapper>

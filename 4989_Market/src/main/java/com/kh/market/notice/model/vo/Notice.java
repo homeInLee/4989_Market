@@ -10,11 +10,12 @@ public class Notice {
 	private int noticeReadCount;
 	private String noticeDelDate;
 	private String noticeDelType;
+	private String noticeType;
 	
 	public Notice() {}
 
 	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, String noticeDate,
-			int noticeReadCount, String noticeDelDate, String noticeDelType) {
+			int noticeReadCount, String noticeDelDate, String noticeDelType, String noticeType) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeTitle = noticeTitle;
@@ -24,6 +25,7 @@ public class Notice {
 		this.noticeReadCount = noticeReadCount;
 		this.noticeDelDate = noticeDelDate;
 		this.noticeDelType = noticeDelType;
+		this.noticeType = noticeType;
 	}
 
 	public int getNoticeNo() {
@@ -90,12 +92,23 @@ public class Notice {
 		this.noticeDelType = noticeDelType;
 	}
 
+	public String getNoticeType() {
+		return noticeType;
+	}
+
+	public void setNoticeType(String noticeType) {
+		this.noticeType = noticeType;
+	}
+
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeWriter=" + noticeWriter
 				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", noticeReadCount="
-				+ noticeReadCount + ", noticeDelDate=" + noticeDelDate + ", noticeDelType=" + noticeDelType + "]";
+				+ noticeReadCount + ", noticeDelDate=" + noticeDelDate + ", noticeDelType=" + noticeDelType
+				+ ", noticeType=" + noticeType + "]";
 	}
+
+	
 
 	
 	
