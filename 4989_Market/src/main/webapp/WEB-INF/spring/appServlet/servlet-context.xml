@@ -48,12 +48,12 @@
 	<!-- #10.로깅을 위한 interceptor등록 -->
 	<!-- DispatcherServlet이 Controller를 호출하는 중간에 intercept한다. -->
 	<!-- 그래서 이 설정은 web.xml의 DispatcherServlet의 servlet-context.xml에 있다. -->
-	<!--<interceptors>
+	<!-- <interceptors>
 		<interceptor>
 			<mapping path="/**"/>
-			<beans:bean id="loggerInterceptor" class="com.kh.spring.common.interceptor.LoggerInterceptor"/>
+			<beans:bean id="loginInterceptor" class="com.kh.market.common.interceptor.LoginInterceptor"/>
 		</interceptor>
-	</interceptors>-->
+	</interceptors> -->
 	 <!-- #13.1 파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의) -->
 	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
 		<beans:property name="maxUploadSize" value="10485760" /> <!-- max 파일용량은 10MB이다. -->

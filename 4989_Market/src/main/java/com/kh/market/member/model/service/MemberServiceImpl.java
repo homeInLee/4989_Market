@@ -20,4 +20,14 @@ public class MemberServiceImpl implements MemberService {
 	public int insertMember(Member member) {
 		return memberDAO.insertMember(member);
 	}
+
+	@Override
+	public int memberUpdate(Member member) {
+		return memberDAO.memberUpdate(member);
+	}
+
+	@Override
+	public int memberDelete(Member memberLoggedIn) {
+		return memberDAO.memberDelete(memberLoggedIn);
+	}
 }

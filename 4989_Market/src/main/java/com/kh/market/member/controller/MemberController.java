@@ -4,6 +4,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,15 +61,27 @@ public class MemberController {
 		return "common/msg";
 	}
 	@RequestMapping(value="/memberLogin.do", method=RequestMethod.POST)
-	public ModelAndView memberLogin(@RequestParam String memberId, @RequestParam String password, ModelAndView mav) {
-		logger.debug("로그인 요청");
-		logger.debug(passwordEncoder.encode(password));
+	public ModelAndView memberLogin(@RequestParam String memberId, @RequestParam String password, ModelAndView mav, HttpServletRequest request) {
+		logger.info("로그인 요청");
+		logger.info(passwordEncoder.encode(password));
 		//1.업무로직: 회원정보 가져오기
 		Member member = memberService.selectOneMember(memberId);
+		String referer = request.getHeader("referer");
+		String origin = request.getHeader("Origin");
+		String url = request.getRequestURL().toString();
+		String uri = request.getRequestURI();
+		int idx = referer.indexOf(request.getContextPath())+request.getContextPath().length();
+		String loc = referer.substring(idx);
+		
+		logger.info("loc="+loc);
+		
 		String msg = "";
 		//아이디가 존재하지 않는 경우
 		if(member == null) {
 			msg = "아이디가 존재하지 않습니다.";
+		}
+		else if(member.getMemberDeltype().equals("Y")) {
+			msg = "삭제된 아이디 입니다.";
 		}
 		else {
 			//2.로그인성공
@@ -83,18 +97,29 @@ public class MemberController {
 			}
 		}
 		mav.addObject("msg",msg);
-		mav.addObject("loc","/");
+		mav.addObject("loc",loc);
 		mav.setViewName("common/msg");
 		return mav;
 	}
 	@RequestMapping("/memberLogout.do")
-	public String memberLogout(SessionStatus sessionStatus) {
+	public String memberLogout(SessionStatus sessionStatus, HttpServletRequest request) {
 		logger.debug("로그아웃 요청");
 		if(!sessionStatus.isComplete())
 			sessionStatus.setComplete();
+		String referer = request.getHeader("referer");
+		String origin = request.getHeader("Origin");
+		String url = request.getRequestURL().toString();
+		String uri = request.getRequestURI();
+		int idx = referer.indexOf(request.getContextPath())+request.getContextPath().length();
+		String loc = referer.substring(idx);
+		logger.info("referer="+referer);
+		logger.info("origin="+origin);
+		logger.info("url="+url);
+		logger.info("uri="+uri);
+		logger.info("idx="+idx);
+		logger.info("loc="+loc);
 		
-		
-		return "redirect:/";
+		return "redirect:"+loc;
 	}
 	@ResponseBody
 	@RequestMapping("/checkIdDuplicate.do")
@@ -112,4 +137,35 @@ public class MemberController {
 	public void memberView() {
 		logger.debug("회원정보 페이지 요청");
 	}
+	@RequestMapping("/memberUpdate.do")
+	public void memberUpdate() {
+		logger.debug("회원수정 요청");
+	}
+	@RequestMapping(value="memberUpdateEnd.do",method=RequestMethod.POST)
+	public String memberUpdateEnd(Member member, Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+		member.setMemberId(memberLoggedIn.getMemberId());
+		logger.info("member="+member);
+		int result = memberService.memberUpdate(member);
+		model.addAttribute("msg", result>0?"성공적으로 변경되었습니다.":"변경이 실패하였습니다.");
+		model.addAttribute("loc", "/member/memberView.do?memberId="+member.getMemberId());
+		return "common/msg";
+	}
+	@RequestMapping(value="memberDelete.do", method=RequestMethod.POST)
+	public String memberDelete(Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+		logger.info("memberLoggedIn="+memberLoggedIn);
+		int result = memberService.memberDelete(memberLoggedIn);
+		model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
+		model.addAttribute("loc", result>0?"/member/memberLogout.do":"/member/memberView.do?memberId="+memberLoggedIn.getMemberId());
+		return "common/msg";
+	}
 }
+
+
+
+
+
+
+
+
+
+

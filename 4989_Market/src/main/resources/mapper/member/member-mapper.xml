@@ -10,4 +10,27 @@
 		insert into member values
 		(#{memberId},#{memberName},#{memberPassword},#{memberPhone},#{memberEmail},#{memberAddress},default,default,default)
 	</insert>
+	<update id="memberUpdate">
+		update member
+		<trim prefix="set" suffixOverrides=",">
+		<if test="memberName != null and memberName !=''">
+		member_name = #{memberName},
+		</if>
+		<if test="memberPhone != null and memberPhone !=''">
+		member_phone = #{memberPhone},
+		</if>
+		<if test="memberEmail != null and memberEmail !=''">
+		member_email = #{memberEmail},
+		</if>
+		<if test="memberAddress != null and memberAddress !=''">
+		member_address = #{memberAddress},
+		</if>
+		</trim>
+		where member_id = #{memberId}
+	</update>
+	<update id="memberDelete">
+		update member set
+		member_deltype = 'Y', member_deldate = sysdate
+		where member_id = #{memberId}
+	</update>
 </mapper>

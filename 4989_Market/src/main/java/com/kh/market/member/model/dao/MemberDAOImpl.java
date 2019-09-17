@@ -20,4 +20,14 @@ public class MemberDAOImpl implements MemberDAO {
 	public int insertMember(Member member) {
 		return sqlSession.insert("member.insertMember",member);
 	}
+
+	@Override
+	public int memberUpdate(Member member) {
+		return sqlSession.update("member.memberUpdate",member);
+	}
+
+	@Override
+	public int memberDelete(Member memberLoggedIn) {
+		return sqlSession.update("member.memberDelete",memberLoggedIn);
+	}
 }

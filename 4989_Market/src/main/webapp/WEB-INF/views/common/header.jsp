@@ -22,8 +22,7 @@
 <body>
 	<header id="header">
 		<section id="header-top">
-			<h1 id="logo">
-				4989 Market <a href="#"> <img src=""></a>
+			<h1 id="logo"><a href="${pageContext.request.contextPath}">4989 Market  <img src=""></a>
 			</h1>
 			<div id="search-box">
 				<form>
