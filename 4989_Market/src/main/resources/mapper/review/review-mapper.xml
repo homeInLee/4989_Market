@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="review">
+	<insert id="reviewCheckEnd">
+		insert into review values
+		(seq_review_no.nextval,
+		#{reviewWriter},
+		#{reviewReceiver},
+		#{reviewPoint, typeHandler=strArrTypeHandler},
+		#{reviewContent})
+	</insert>
+	
+	<select id="reviewContentForm" resultMap="reviewMap">
+		select * from review
+		where review_receiver = #{memberId}	
+	</select>
+	<resultMap type="review" id="reviewMap">
+		<result column="review_point" property="reviewPoint"
+				typeHandler="strArrTypeHandler"/>
+	</resultMap>
+</mapper>
