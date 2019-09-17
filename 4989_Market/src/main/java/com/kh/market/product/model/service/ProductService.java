@@ -8,4 +8,8 @@ public interface ProductService {
 
 	List<Product> productList();
 
+	int productRegistration(Product p);
+
+
+
 }

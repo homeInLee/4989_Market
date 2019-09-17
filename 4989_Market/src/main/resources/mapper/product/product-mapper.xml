@@ -4,10 +4,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 	<select id="productList" resultType="product">
-		select * from sell
+		select * from sell order by sell_no desc
 	
 	
 	</select>
-
-
+	<insert id="productRegistration" parameterType="product">
+	insert into sell values(seq_product_no.nextval, 
+							#{sellTitle}, #{sellWriter}, default, 
+							#{sellContent}, 
+							default, 
+							#{sellPrice}, 
+							default, 
+							default, 
+							default, 
+							default)
+	
+	
+	
+	</insert>
 </mapper>

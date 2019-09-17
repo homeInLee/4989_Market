@@ -21,7 +21,7 @@ li {
 }
 
 #product-container{
-
+	padding-top: 100px;
 }
 
 </style>
@@ -29,6 +29,7 @@ li {
 <jsp:include page="/WEB-INF/views/common/header.jsp" >
 	<jsp:param value="상품목록" name="pageTitle"/>
 </jsp:include>
+
 <div id="product-container">
 	<ul>
 		<c:forEach items="${plist }" var="product">

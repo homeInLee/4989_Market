@@ -21,6 +21,15 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.productList");
 	}
+
+	@Override
+	public int productRegistration(Product p) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("product.productRegistration", p);
+
+	}
+
+
 	
 	
 }

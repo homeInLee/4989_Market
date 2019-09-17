@@ -20,4 +20,12 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return productDAO.productList();
 	}
+
+	@Override
+	public int productRegistration(Product p) {
+		// TODO Auto-generated method stub
+		return productDAO.productRegistration(p);
+	}
+
+
 }

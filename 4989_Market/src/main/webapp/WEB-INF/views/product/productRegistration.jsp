@@ -14,15 +14,7 @@ textarea{
 
 
 }
-label{
-	font-size: 20px;
 
-}
-input{
-	font-size: 20px;
-	
-
-}
 form{
 	border: 1px solid;
 }
@@ -35,58 +27,69 @@ form{
 label{
 	padding-right: 50px;
 }
+#content-area{
+	font-size: 20px;
+}
 </style>
 <jsp:include page="/WEB-INF/views/common/header.jsp" >
 	<jsp:param value="물품 등록하기" name="pageTitle"/>
 </jsp:include>
 
 <!-- 컨텐츠 영역 시작-->
-
-<form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data">
+<div id="content-area">
+<form name="productFrm" action="${pageContext.request.contextPath }/productRegistrationEnd.do"  method="get" >
 	<div id="Registration">
 
-		<label for="productType">분류</label>
+<!-- 		<label for="productType">분류</label>
 		<select id="productType">
 			<option value="">--분류 선택--</option>
 			<option value="house">집</option>
 			<option value="clothes">의류</option>
 			<option value="food">식품</option>
 			<option value="bicycle">자전거</option>
-		</select>
-		<br />
+		</select> -->
+			<br />
 		
 		<label for="writer">작성자 정보</label>
-		<input type="text"  id="writer" disabled="disabled" value="admin" name="productWriter"/>
-		<input type="text"  id="phone" disabled="disabled" value="01015412215" />
-		<input type="text"  id="phone" disabled="disabled" value="" placeholder="이메일 없음"/>
-		<br />
+		<input type="text"  id="writer" disabled="disabled" value="admin" />
+		<input type="hidden"  value="admin" name="productWriter"/>
+		
+		<input type="tel"  id="phone" disabled="disabled" value="01015412215" />
+		
+		<input type="email"  id="email" disabled="disabled" value="" placeholder="이메일 없음"/>
+		
+		
+			<br />
 		<label for="title">제목</label>		
-		<input type="text" id="title" name="productTitle"/>
+		<input type="text" id="title" name="productTitle" required="required"/>
 		<br />
 		<label for="price">가격</label>		
-		<input type="number" id="price" name="productPrice"/>원
-		<br />
-		<label for="attachPhoto">사진첨부</label>
-		<input type="file"  id="attachPhoto" name="attachPhoto"/>
-		<br />
-		<br />
-		<label for="content">내용</label>
-		<textarea rows="30" cols="113" id="content" name="content"></textarea>
+		<input type="number" id="price" name="productPrice" required="required"/>원
+			<br />
+		<div id="photo">
+			이미지 등록
+			<input type="file" />
 		
+		</div>
+		<!-- <label for="attachPhoto">사진첨부</label>
+		<input type="file"  id="attachPhoto" name="attachPhoto"/>
+		 -->
+		 	<br />
+			<br />
+		<label for="content">내용</label>
+		<textarea rows="18" cols="100" id="content" name="content"></textarea>
+	<br />
+	<br />
+	<br />
+	<button type="submit" >전송</button>
 	</div>
 
-	<button type="submit">전송</button>
 </form>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
+</div>
+<script>
+
+
+</script>
 
 
 <!-- 컨텐츠 영역 끝  -->

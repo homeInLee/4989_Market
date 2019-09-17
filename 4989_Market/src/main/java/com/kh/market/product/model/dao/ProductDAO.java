@@ -8,6 +8,8 @@ public interface ProductDAO {
 
 	List<Product> productList();
 
+	int productRegistration(Product p);
+
 	
 
 }

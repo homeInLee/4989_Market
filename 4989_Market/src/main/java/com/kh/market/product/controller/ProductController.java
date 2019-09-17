@@ -28,7 +28,6 @@ public class ProductController {
 	
 	@RequestMapping("/productView.do")
 	public String productView(Model model) {
-		logger.info("실행완료");
 		
 		
 		List<Product> plist = productService.productList();
@@ -51,11 +50,26 @@ public class ProductController {
 	@RequestMapping(value="/productRegistrationEnd.do", method=RequestMethod.GET)
 	public String productRegistrationEnd(
 										 @RequestParam String productWriter, 
-										 @RequestParam String productTitle, Model model) {
+										 @RequestParam String productTitle, 
+										 @RequestParam String productPrice, 
+										 @RequestParam String content, 
+										 Model model) {
+
+		Product p = new Product();
+		p.setSellTitle(productTitle);
+		p.setSellWriter(productWriter);
+		p.setSellPrice(Integer.parseInt(productPrice));
+		p.setSellContent(content);
 		
-		logger.info("asdsad 실행");
-		model.addAttribute("헣허", "하하");
-		return "/product/productRegistrationEnd";
+		int result = productService.productRegistration(p);
+		
+		
+		model.addAttribute("msg", result>0?"물품 등록 성공":"물품등록 실패");
+		model.addAttribute("loc", "/productView.do");
+		
+		return "common/msg";
 	}
+	
+	
 	
 }
