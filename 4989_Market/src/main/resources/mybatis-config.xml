@@ -10,8 +10,9 @@
  <typeAliases>
   	<typeAlias type="com.kh.market.notice.model.vo.Notice" alias="notice"/>
   	<typeAlias type="com.kh.market.member.model.vo.Member" alias="member"/>
+  	<typeAlias type="com.kh.market.review.model.vo.Review" alias="review"/>
+  	<typeAlias type="com.kh.market.message.model.vo.Message" alias="message"/>
   	<typeAlias type="com.kh.market.common.typehandler.StringArrayTypeHandler"
   			   alias="strArrTypeHandler"/>
-  	<typeAlias type="com.kh.market.review.model.vo.Review" alias="review"/>
   </typeAliases>
 </configuration>

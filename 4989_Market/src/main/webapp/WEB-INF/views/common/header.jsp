@@ -14,7 +14,16 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<%-- <fmt:requestEncoding value="utf-8"/> --%>
+<script>
+$(()=>{
+	$("#dropdown").click(function() {
+		$("#sub").slideDown(50)
+	});
+	$("#sub").click(function() {
+		$("#sub").slideUp(1000)
+	});
+});
+</script>
 </head>
 <script>
 
@@ -51,13 +60,23 @@
 			<div id="header-catagory">
 				<ul id="dropdown">
 					<li><a href="#">지역</a>
-						<ul id="sub1">
+						<ul id="sub">
 							<li><a href="">서울</a></li>
+							<li><a href="">경기</a></li>
+							<li><a href="">부산</a></li>
+							<li><a href="">인천</a></li>
+							<li><a href="">제주</a></li>
 						</ul>
 					</li>
 					<li><a href="#">상품</a></li>
-					<li><a href="#">무료나눔</a></li>
-					<li><a href="#">경매</a></li>
+						<ul id="sub">
+							<li>
+								<a href="#">무료나눔</a>
+								<a href="#">경매</a>
+							</li>
+						</ul>
+					<!-- <li><a href="#">무료나눔</a></li>
+					<li><a href="#">경매</a></li> -->
 					<li><a href="#">등록하기</a></li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
      

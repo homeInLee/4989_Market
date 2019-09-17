@@ -11,7 +11,7 @@
   
   <div style="margin-top: 50px; margin-left: 230px;">
   	<a class="badge badge-warning"><h2>회원정보</h2></a>
-  	<a class="badge badge-warning"><h2>쪽지함</h2></a>
+  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}"><h2>쪽지함</h2></a>
   	<a class="badge badge-warning" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}"><h2>나의거래</h2></a>
   	<a class="badge badge-warning"><h2>나의경매</h2></a>
   </div>
