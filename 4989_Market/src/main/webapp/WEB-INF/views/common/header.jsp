@@ -70,7 +70,7 @@ $(()=>{
 					</li>
 					<li><a href="${pageContext.request.contextPath }/productView.do">상품</a></li>
 					<li><a href="#">무료나눔</a></li>
-					<li><a href="#">경매</a></li>
+					<li><a href="${pageContext.request.contextPath }/auction.do">경매</a></li>
 					<li><a href="${pageContext.request.contextPath }/productRegistration.do">등록하기</a></li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
      
