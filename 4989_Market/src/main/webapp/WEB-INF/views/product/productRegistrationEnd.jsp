@@ -42,7 +42,7 @@ label{
 
 <!-- 컨텐츠 영역 시작-->
 
-<form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data">
+<%-- <form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data">
 	<div id="Registration">
 
 		<label for="productType">분류</label>
@@ -87,7 +87,7 @@ label{
 	<br />
 	<br />
 	<br />
-
+ --%>
 
 <!-- 컨텐츠 영역 끝  -->
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> --%>

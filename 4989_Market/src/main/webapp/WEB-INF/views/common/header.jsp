@@ -56,10 +56,10 @@
 							<li><a href="">서울</a></li>
 						</ul>
 					</li>
-					<li><a href="#">상품</a></li>
+					<li><a href="${pageContext.request.contextPath }/productView.do">상품</a></li>
 					<li><a href="#">무료나눔</a></li>
 					<li><a href="#">경매</a></li>
-					<li><a href="#">등록하기</a></li>
+					<li><a href="${pageContext.request.contextPath }/productRegistration.do">등록하기</a></li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
                     <li><a href="${pageContext.request.contextPath}/review/reviewMain.do">임시 마이페이지</a></li>
 				</ul>

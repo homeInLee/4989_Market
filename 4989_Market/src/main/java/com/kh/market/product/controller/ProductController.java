@@ -7,7 +7,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
@@ -30,7 +34,6 @@ public class ProductController {
 		List<Product> plist = productService.productList();
 		
 		logger.debug("list의 값={}", plist);
-		System.out.println(plist);
 		
 		
 		
@@ -45,13 +48,14 @@ public class ProductController {
 		return "/product/productRegistration";
 	}
 	
-	
-	@RequestMapping("/productRegistrationEnd.do")
-	public String productRegistrationEnd() {
+	@RequestMapping(value="/productRegistrationEnd.do", method=RequestMethod.GET)
+	public String productRegistrationEnd(
+										 @RequestParam String productWriter, 
+										 @RequestParam String productTitle, Model model) {
 		
-		
-		
-		return "/";
+		logger.info("asdsad 실행");
+		model.addAttribute("헣허", "하하");
+		return "/product/productRegistrationEnd";
 	}
 	
 }
