@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.message.model.service.MessageService;
@@ -22,10 +23,11 @@ public class MessageController {
 	MessageService messageService;
 	
 	@RequestMapping("/messageList.do")
-	public ModelAndView messageList(ModelAndView mav) {
+	public ModelAndView messageList(ModelAndView mav, @RequestParam(value="memberId")String memberId ) {
 		logger.debug("messageService={}", messageService.getClass());
+		logger.info("memberId="+memberId);
 		
-		List<Message> messageList = messageService.selectMessageList();
+		List<Message> messageList = messageService.selectMessageList(memberId);
 		
 		mav.addObject("messageList", messageList);
 		mav.setViewName("message/messageList");

@@ -16,8 +16,8 @@ public class MessageServiceImpl implements MessageService {
 	MessageDAO messageDAO;
 
 	@Override
-	public List<Message> selectMessageList() {
-		return messageDAO.selectMessageList();
+	public List<Message> selectMessageList(String memberId) {
+		return messageDAO.selectMessageList(memberId);
 	}
 
 	@Override

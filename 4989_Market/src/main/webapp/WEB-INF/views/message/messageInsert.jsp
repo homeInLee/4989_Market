@@ -10,7 +10,6 @@
 	<div id="message-container">
 		<form action="${pageContext.request.contextPath}/message/messageInsert.do" method="post">
 		<table>
-				<input type="hidden" name="messageWriter" value="admin"/>
 			<tr>
 				<th>받는 사람</th>
 				<td><input type="text" name="messageReciver" ></td>
@@ -21,8 +20,9 @@
 			</tr>
 			<tr>
 				<th>내용</th>
-				<td><textarea rows="30"  name="messageContent" required="required"></textarea></td>
+				<td><textarea rows="10"   name="messageContent" required="required"></textarea></td>
 			</tr>
+				<input type="hidden" name="messageWriter" value="${memberLoggedIn.memberId}"/>
 		</table>
 		<input type="submit" id="send" value="보내기">
 		</form>

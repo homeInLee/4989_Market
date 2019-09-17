@@ -6,7 +6,7 @@ import com.kh.market.message.model.vo.Message;
 
 public interface MessageDAO {
 
-	List<Message> selectMessageList();
+	List<Message> selectMessageList(String memberId);
 
 	int insertMessage(Message message);
 

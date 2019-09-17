@@ -14,6 +14,7 @@ function insertFrm() {
 }
 </script>
 	<div id="">
+	<c:if test="${memberLoggedIn != null }">
 		<table id="messageList">
 			<tr>
 				<th></th>
@@ -36,6 +37,7 @@ function insertFrm() {
 			</c:forEach>
 		</table>
 			<input type="button" id="send" value="글쓰기" onclick="insertFrm();"/>
+	</c:if>
 	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

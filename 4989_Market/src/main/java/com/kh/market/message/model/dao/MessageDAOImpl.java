@@ -15,8 +15,8 @@ public class MessageDAOImpl implements MessageDAO {
 	SqlSessionTemplate session;
 
 	@Override
-	public List<Message> selectMessageList() {
-		return session.selectList("message.selectMessageList");
+	public List<Message> selectMessageList( String memberId) {
+		return session.selectList("message.selectMessageList", memberId);
 	}
 
 	@Override
