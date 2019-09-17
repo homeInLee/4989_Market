@@ -7,16 +7,35 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="message" name="pageTitle"/>
 </jsp:include>
+<script >
+function insertFrm() {
+	location.href = "${pageContext.request.contextPath}/message/messageListEnd.do";
+	
+}
+</script>
 	<div id="">
 		<table id="messageList">
 			<tr>
 				<th></th>
-				<th></th>
-				<th></th>
-				<th></th>
+				<th>제목</th>
+				<th>보낸사람</th>
+				<th>날짜</th>
 				<th></th>
 			</tr>
+			<c:forEach items="${messageList}" var="m">
+			<tr>
+				<td>${m.messageNo }</td>
+				<td>${m.messageTitle}</td>
+				<td>${m.messageWriter }</td>
+				<td>${m.messageDate}</td>
+				<td>
+					<button id="reply" >답장</button>
+					<button id="delete" >삭제</button>
+				</td>
+			</tr>
+			</c:forEach>
 		</table>
+			<input type="button" id="send" value="글쓰기" onclick="insertFrm();"/>
 	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

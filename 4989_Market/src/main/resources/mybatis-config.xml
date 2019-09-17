@@ -8,7 +8,8 @@
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
  <typeAliases>
-  	<typeAlias type="com.kh.market.notice.model.vo.Notice" 
-  	alias="notice"/>
+  	<typeAlias type="com.kh.market.notice.model.vo.Notice" alias="notice"/>
+  	<typeAlias type="com.kh.market.member.model.vo.Member" alias="member"/>
+  	<typeAlias type="com.kh.market.message.model.vo.Message" alias="message"/>
   </typeAliases>
 </configuration>
