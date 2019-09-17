@@ -109,7 +109,11 @@ public class MemberController {
 		return map;
 	}
 	@RequestMapping("/memberView.do")
-	public void memberView() {
-		logger.debug("회원정보 페이지 요청");
+	public ModelAndView memberView(@RequestParam String memberId,ModelAndView mav) {
+		mav.addObject("memberId",memberId);
+		mav.setViewName("review/reviewMain");
+		return mav;
 	}
+	
+	
 }

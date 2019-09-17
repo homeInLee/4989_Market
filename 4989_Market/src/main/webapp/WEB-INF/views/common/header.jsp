@@ -61,7 +61,7 @@
 					<li><a href="#">경매</a></li>
 					<li><a href="#">등록하기</a></li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
-                    <li><a href="${pageContext.request.contextPath}/review/reviewMain.do">임시 마이페이지</a></li>
+     
 				</ul>
 			</div>
 		</section>

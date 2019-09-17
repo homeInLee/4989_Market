@@ -23,4 +23,18 @@
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
   </div>
+  <c:if test="${empty reviewList}">
+  	<span style="margin-left: 400px;">받은 매너평가 없습니다.</span>
+  </c:if>
+  <c:forEach items="${reviewList}" var="r">
+ 	<ul class="list-group list-group-flush">
+  	  <li class="list-group-item">
+  	  <c:forEach items="${r.reviewPoint}" var="p">
+		${p}  	  
+  	  </c:forEach>
+  	  </li>
+  	  
+    </ul> 
+  </c:forEach>
+ 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

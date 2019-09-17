@@ -51,7 +51,7 @@
 	<!--<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
-			<beans:bean id="loggerInterceptor" class="com.kh.spring.common.interceptor.LoggerInterceptor"/>
+			<beans:bean id="LoginInterceptor" class="com.kh.market.common.interceptor.LoginInterceptor"/>
 		</interceptor>
 	</interceptors>-->
 	 <!-- #13.1 파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의) -->

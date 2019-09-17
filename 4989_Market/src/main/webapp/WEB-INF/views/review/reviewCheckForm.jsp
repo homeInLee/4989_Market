@@ -365,6 +365,12 @@ label .glyphicon {
         background-color: #FFF
     }
 }
+span{
+font-size: 19px;
+}
+input[type="radio"]{
+    visibility:hidden;
+}
 </style>  
 <script>
 var index=1;
@@ -380,42 +386,49 @@ $(function(){
     
     $("label.btn").on('click',function () {
     	var choice = $(this).find('input:radio').val();
-    	$('#loadbar').show();
-    	$('#quiz').fadeOut();
+    	//$('#loadbar').show();
+    	//$('#quiz').fadeOut();
     	setTimeout(function(){
            $( "#answer" ).html(  $(this).checking(choice) );      
-            $('#quiz').show();
-            $('#loadbar').fadeOut();
-           //평가 번호 저장
+            //$('#quiz').show();
+            //$('#loadbar').fadeOut();
+           //평가 번호,한줄 거래 후기 저장
            checkList.push(choice);
            $("#qid"+index).hide();
            index++;
            $("#qid"+index).show();
-           if(index==3){
-        	   location.href="${pageContext.request.contextPath}/review/reviewCheckEnd.do?checkList="+checkList;
+           if(index==8){
+        	   var content="";
+        	   if(content=prompt("거래 후기 적어주세요")){
+        		   location.href="${pageContext.request.contextPath}/review/reviewCheckEnd.do?checkList="+checkList+"&content="+content+"&memberId=${memberLoggedIn.memberId}&receiver=test123";  
+        	   	  
+        	   }else{
+        		   location.href="${pageContext.request.contextPath}/review/reviewCheckForm.do";
+        	   }
+        	   
+        	   
            }
            
-    	}, 1500);
+    	}, 500);
     });
 
     $ans = 3;
 
     $.fn.checking = function(ck) {
         if (ck != $ans)
-            return 'INCORRECT';
+            return '';
         else 
-            return 'CORRECT';
+            return '';
     }; 
 });	
 </script>
-  <div style="margin-top: 50px; margin-left: 230px;">
+  <div style="margin-top: 20px; margin-left: 230px;">
   	<a class="badge badge-warning"><h2>회원정보</h2></a>
   	<a class="badge badge-warning"><h2>쪽지함</h2></a>
-  	<a class="badge badge-warning"><h2>나의거래</h2></a>
+  	<a class="badge badge-warning" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}"><h2>나의거래</h2></a>
   	<a class="badge badge-warning"><h2>나의경매</h2></a>
   </div>
   
-  <h3>user</h3>
   
   <div class="container-fluid bg-info">
     <div class="modal-dialog">
@@ -448,6 +461,7 @@ $(function(){
            <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">2 그렇다</label>
            <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">3 보통이다</label>
            <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">4 아니다</label>
+           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="5">5 매우 아니다</label>
        </div>
    </div>
    <div class="modal-footer text-muted">
