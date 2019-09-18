@@ -7,12 +7,24 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="messageInsert" name="pageTitle"/>
 </jsp:include>
+<style>
+tr th{
+	border: 1px solid black;
+}
+tr td{
+	border: 1px solid black;
+}
+</style>
 	<div id="message-container">
 		<form action="${pageContext.request.contextPath}/message/messageInsert.do" method="post">
 		<table>
 			<tr>
+				<th>보내는 사람</th>
+				<td><input type="text" name="messageWriter" value="${messageWriter}"/></td>
+			</tr>
+			<tr>
 				<th>받는 사람</th>
-				<td><input type="text" name="messageReciver" ></td>
+				<td><input type="text" name="messageReciver" value="${messageReciver}"></td>
 			</tr>
 			<tr>
 				<th>제목</th>

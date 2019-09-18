@@ -25,4 +25,9 @@ public class MessageServiceImpl implements MessageService {
 		return messageDAO.insertMessage(message);
 	}
 
+	@Override
+	public Message messageSelect(String messageNo) {
+		return messageDAO.messageSelect(messageNo);
+	}
+
 }

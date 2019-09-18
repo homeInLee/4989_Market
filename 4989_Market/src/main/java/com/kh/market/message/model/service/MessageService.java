@@ -10,4 +10,6 @@ public interface MessageService {
 
 	int insertMessage(Message message);
 
+	Message messageSelect(String messageNo);
+
 }

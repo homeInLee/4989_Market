@@ -10,4 +10,6 @@ public interface MessageDAO {
 
 	int insertMessage(Message message);
 
+	Message messageSelect(String messageNo);
+
 }
