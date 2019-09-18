@@ -5,7 +5,7 @@
 <mapper namespace="notice">
 <select id="selectNoticeMember" resultType="notice">
 	select * from notice 
-	where notice_type = 'm' 
+	where notice_type = 'm'
 	order by notice_no desc
 </select>
 <select id="selectNoticePayment" resultType="notice">
