@@ -30,4 +30,6 @@ public class MemberServiceImpl implements MemberService {
 	public int memberDelete(Member memberLoggedIn) {
 		return memberDAO.memberDelete(memberLoggedIn);
 	}
+
+	
 }

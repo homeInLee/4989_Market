@@ -30,4 +30,5 @@ public class MemberDAOImpl implements MemberDAO {
 	public int memberDelete(Member memberLoggedIn) {
 		return sqlSession.update("member.memberDelete",memberLoggedIn);
 	}
+
 }

@@ -9,4 +9,6 @@ public interface AuctionDAO {
 
 	List<Map<String, String>> auctionList();
 
+	Auction auctionSelectOne(int auctionNo);
+
 }

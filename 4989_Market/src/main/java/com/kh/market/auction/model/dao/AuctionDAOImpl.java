@@ -19,6 +19,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public List<Map<String, String>> auctionList() {
 		return sqlSession.selectList("auction.auctionList");
 	}
+
+	@Override
+	public Auction auctionSelectOne(int auctionNo) {
+		return sqlSession.selectOne("auction.auctionSelectOne",auctionNo);
+	}
 	
 
 }
