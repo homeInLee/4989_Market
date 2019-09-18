@@ -7,5 +7,9 @@
 	<select id="auctionList" resultType="auction">
 		select * from auction
 	</select>
+	
+	<select id="auctionSelectOne" resultType="auction">
+		select * from auction where auction_no = #{auctionNo}
+	</select>
 
 </mapper>
