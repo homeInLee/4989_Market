@@ -24,4 +24,9 @@ public class MessageDAOImpl implements MessageDAO {
 		return session.insert("message.insertMessage", message);
 	}
 
+	@Override
+	public Message messageSelect(String messageNo) {
+		return session.selectOne("message.messageSelect", messageNo);
+	}
+
 }

@@ -8,10 +8,6 @@
 	<jsp:param value="message" name="pageTitle"/>
 </jsp:include>
 <script >
-function insertFrm() {
-	location.href = "${pageContext.request.contextPath}/message/messageListEnd.do";
-	
-}
 </script>
 	<div id="">
 	<c:if test="${memberLoggedIn != null }">
@@ -26,7 +22,7 @@ function insertFrm() {
 			<c:forEach items="${messageList}" var="m">
 			<tr>
 				<td>${m.messageNo }</td>
-				<td>${m.messageTitle}</td>
+				<td><a href="${pageContext.request.contextPath}/message/messageSelect.do?messageNo=${m.messageNo}">${m.messageTitle}</a></td>
 				<td>${m.messageWriter }</td>
 				<td>${m.messageDate}</td>
 				<td>
@@ -36,7 +32,7 @@ function insertFrm() {
 			</tr>
 			</c:forEach>
 		</table>
-			<input type="button" id="send" value="글쓰기" onclick="insertFrm();"/>
+			<input type="button" id="send" value="글쓰기" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${memberLoggedIn.memberId}'"/>
 	</c:if>
 	</div>
 	

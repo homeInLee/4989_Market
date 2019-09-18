@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
@@ -37,8 +38,10 @@ public class MessageController {
 
 
 	 @RequestMapping("/messageListEnd.do")
-	 public ModelAndView messageListEnd(ModelAndView mav) { 
+	 public ModelAndView messageListEnd(ModelAndView mav, @RequestParam("messageWriter") String messageWriter, @RequestParam(name="messageReciver",required=false) String messageReciver) { 
 		 logger.debug("insert페이지로 연결");
+		 mav.addObject("messageWriter", messageWriter);
+		 mav.addObject("messageReciver", messageReciver);
 		 mav.setViewName("message/messageInsert");
 		 return mav; 
 	 }
@@ -53,4 +56,27 @@ public class MessageController {
 		
 		return mav;
 	}
+	
+	@RequestMapping("/messageSelect.do")
+	public String messageSelect(Model model, @RequestParam("messageNo") String messageNo) {
+		logger.info("messageNo="+messageNo);
+		Message message = messageService.messageSelect(messageNo);
+		logger.info("message="+message);
+		model.addAttribute("message", message);
+		return("message/messageSelect");
+	}
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+

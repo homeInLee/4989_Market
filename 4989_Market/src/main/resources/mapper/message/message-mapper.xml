@@ -10,4 +10,7 @@
  	insert into message (message_no, message_title, message_writer,message_reciver,message_content) values(
 		seq_message_no.nextval,  #{messageTitle},#{messageWriter}, #{messageReciver}, #{messageContent})
   </insert>
+  <select id="messageSelect" resultType="message">
+  	select * from message where message_no = #{messageNo}
+  </select>
 </mapper>
