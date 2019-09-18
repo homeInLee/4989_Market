@@ -9,6 +9,8 @@ public interface ReviewDAO {
 
 	int reviewCheckEnd(Review review);
 
-	List<Review> reviewContentForm(String memberId);
+	List<Review> reviewContentForm(Map<Object, Object> map);
+
+	List<Review> reviewMannerForm(String memberId);
 
 }

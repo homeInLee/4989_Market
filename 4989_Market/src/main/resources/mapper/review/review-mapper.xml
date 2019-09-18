@@ -13,9 +13,17 @@
 	</insert>
 	
 	<select id="reviewContentForm" resultMap="reviewMap">
-		select * from review
-		where review_receiver = #{memberId}	
+		select A.*,
+		(select count(*) from review 
+		where review_no=A.review_no) filecount
+		from review A where review_receiver=#{memberId} order by review_no desc	
 	</select>
+	
+	<select id="reviewMannerForm" resultMap="reviewMap">
+		select * from review
+		where review_receiver=#{memberId}
+	</select>
+	
 	<resultMap type="review" id="reviewMap">
 		<result column="review_point" property="reviewPoint"
 				typeHandler="strArrTypeHandler"/>

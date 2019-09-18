@@ -8,30 +8,55 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-  
-  <div style="margin-top: 50px; margin-left: 230px;">
-  	<a class="badge badge-warning"><h2>회원정보</h2></a>
-  	<a class="badge badge-warning"><h2>쪽지함</h2></a>
-  	<a class="badge badge-warning" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}"><h2>나의거래</h2></a>
-  	<a class="badge badge-warning"><h2>나의경매</h2></a>
-  </div>
-  
-  
-  <div style="margin-left: 300px;">
-  	<a class="badge badge-light">판매물품</a>
+<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
+<style>
+.list-group-item>span{
+display:table; 
+margin-left:auto; 
+margin-right:auto;
+}
+</style>
+<div class="menu">
+  	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">판매물품</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
-  </div>
-  <c:if test="${empty reviewList}">
-  	<span style="margin-left: 400px;">받은 매너평가 없습니다.</span>
+</div>
+  <c:if test="${empty reviewPoint}">
+  	<div style="text-align: center;">받은 매너평가 없습니다.</div>
   </c:if>
-  <c:forEach items="${reviewList}" var="r">
+  <div style="text-align: right">참여 인원수:${reviewSize}(평균 5점만점)</div>
+  <c:forEach items="${reviewPoint}" var="r" varStatus="status">
  	<ul class="list-group list-group-flush">
   	  <li class="list-group-item">
-  	  <c:forEach items="${r.reviewPoint}" var="p">
-		${p}  	  
-  	  </c:forEach>
+  	  	<c:if test="${status.count==1}">
+  	  	<span>1.친절하고 매너가 좋아요 - ${r}점</span>
+	  	          
+	  	</c:if>
+	  	<c:if test="${status.count==2}">
+	  	<span>2.시간 약속을 잘지켜요 - ${r}점</span>
+	  	         
+	  	</c:if>
+	  	<c:if test="${status.count==3}">
+	  	<span>3.응답이 빨라요 - ${r}점</span>
+	  	         
+	  	</c:if>
+	  	<c:if test="${status.count==4}">
+	  	<span>4.좋은 상품을 저렴하게 판매해요 - ${r}점</span>
+	  	         
+	  	</c:if>
+	  	<c:if test="${status.count==5}">
+	  	<span>5.상품상태가 설명한 것과 같아요 - ${r}점</span>
+	  	         
+	  	</c:if>
+	  	<c:if test="${status.count==6}">
+	  	<span>6.제가 있는 곳까지 와서 거래했어요 - ${r}점</span>
+	  	         
+	  	</c:if>
+	  	<c:if test="${status.count==7}">
+	  	<span>7.상품설명이 자세해요 - ${r}점</span>
+	  	         
+	  	</c:if>	
   	  </li>
   	  
     </ul> 

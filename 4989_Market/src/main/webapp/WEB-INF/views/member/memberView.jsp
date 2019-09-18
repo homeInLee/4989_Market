@@ -23,9 +23,7 @@ div#enroll-container table td{text-align: left;}
 	* label -> .form-check-label
 	* radio, checkbox는 div.form-check.form-check-inline으로 감싸줄것.
  -->
- <br />
- <br />
- <br />
+<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <div id="enroll-container">
 	<form id="Delete">
 		<table>
