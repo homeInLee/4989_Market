@@ -22,4 +22,21 @@
 	
 	
 	</insert>
+	<select id="productView" resultType="product">
+	select * from sell where sell_no= #{productNo}
+	
+	
+	</select>
+	
+	<update id="updateProduct" parameterType="product">
+	update sell set 
+	sell_title = #{sellTitle}, 
+	sell_content = #{sellContent}, 
+	sell_state = #{sellState}, 
+	sell_price = #{sellPrice}, 
+	sell_title = #{sellTitle}
+	where sell_no = #{sellNo} 
+	
+	
+	</update>
 </mapper>

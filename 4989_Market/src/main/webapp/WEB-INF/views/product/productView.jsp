@@ -4,49 +4,57 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
-<title>중고물품</title>
+<title></title>
 <style>
-ul{
-	list-style:none;
-    margin-right: 10px;
-    padding:0;
-
-}
-
-li {
-    margin-right: 10px;
-    padding: 0 0 0 0;
-    border : 0;
-    float: left;
-}
-
-#product-container{
-	padding-top: 100px;
-}
 
 </style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" >
-	<jsp:param value="상품목록" name="pageTitle"/>
+	<jsp:param value="" name=""/>
 </jsp:include>
+<!-- content 영역 -->
+<br />
+<br />
+<br />
+<br />
+<br />
+<h4>번호: ${p.sellNo}</h4>
+<h4>제목: ${p.sellTitle}</h4>
+<h4>작성자: ${p.sellWriter}</h4>
 
-<div id="product-container">
-	<ul>
-		<c:forEach items="${plist }" var="product">
-		
-		<li>
-			${product.sellNo} <br />
-			${product.sellTitle}<br />
-			판매자 ${product.sellWriter}<br />
-			상태 ${product.sellState}<br />
-			가격 ${product.sellPrice}&#8361;<br />
-			등록일 ${product.sellDate}<br />
-			조회수 ${product.sellReadCount}<br />		
-		
-		</li>
-		</c:forEach>
+<h4> 구매자:
+	<c:choose>
+		<c:when test="${not empty p.sellBuyer}">${p.sellBuyer}</c:when>
+		<c:when test="${empty p.sellBuyer}">없음</c:when>
+	</c:choose>
+</h4>
+
+
+<h4>내용: ${p.sellContent}</h4>
+<h4>상태:  ${p.sellState}
+
+
+</h4>
+<h4>가격: ${p.sellPrice}</h4>
+<h4>등록일: ${p.sellDate}</h4>
+<h4>조회수: ${p.sellReadCount}</h4>
+<button onclick="updateProduct();">수정하기</button>
+<button onclick="deleteProduct();">삭제</button>
+
+<script>
+function updateProduct() {
+	location.href = "${pageContext.request.contextPath}/product/productEdit.do?productNo=${p.sellNo}";
+
+}
+function deleteProduct() {
 	
-	</ul>
-</div>
+}
+
+
+</script>
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
