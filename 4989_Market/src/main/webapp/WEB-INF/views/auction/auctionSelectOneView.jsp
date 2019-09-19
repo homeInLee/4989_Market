@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value= "" name="pageTitle"/>
+	<jsp:param value= "경매제품 상세보기" name="pageTitle"/>
 </jsp:include>
 
 <style>
@@ -178,6 +178,9 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 a{
 	color:black;
 }
+#directPrice{
+	text-align: right;
+}
 
 
 </style>
@@ -187,24 +190,17 @@ a{
           <ul id="slider">
              <li data-color="#1abc9c">
                              
-<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg">
+<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
              </li>
              
              <li data-color="#3498db">
-<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg">
+<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
              </li>
              
              <li data-color="#9b59b6">
-<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg">
+<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
              </li>
-             
-             <li data-color="#34495e">
-<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg">
-             </li>
-             
-             <li data-color="#e74c3c">
-<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg">
-             </li>
+
              
              
           </ul>
@@ -224,8 +220,10 @@ a{
   
    </div>
    
-	<hr />
+  
+   
 	<div id="memberInfo">
+	<hr />
 		<a href="">
 			<h6>${auctionSelectOne.auctionWriter }</h6>
    		</a>
@@ -234,11 +232,34 @@ a{
 	
 	<div>
 		<h3 style="padding:32px 0;">${auctionSelectOne.auctionTitle}</h3>
-		<p style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.auctionPrice }" pattern="#,###"/>원</p>
 		<p>${auctionSelectOne.auctionContent}</p>
+		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.auctionReadCount }</p>
 	</div>
 	
 	<hr />
+	
+	<div>
+		<h3 style="padding: 32px 0">경매</h3>
+			<div> 
+				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="730000" pattern="#,###"/>원</span></span> 
+				&nbsp;/&nbsp;
+				<span style="font-size:13px">시작가격 : <fmt:formatNumber value="${auctionSelectOne.auctionPrice }" pattern="#,###"/>원</span>
+				&nbsp; -> &nbsp;
+				<span>즉시구매가격 : <span style="color:red; font-size:24px;"><fmt:formatNumber value="${auctionSelectOne.auctionDirectPrice }" pattern="#,###"/>원</span></span>
+			</div>
+			<br />
+			
+			<p>입찰 가격 단위 : <fmt:formatNumber value="1000" pattern="#,###" />원 </p>
+			<br />
+			
+			<p>
+				경매 시작 날짜 : <fmt:formatDate value="${auctionSelectOne.auctionDate }" pattern="yyyy-MM-dd"/> 
+				&nbsp;/&nbsp;
+				경매 종료 날짜 : 2019-10-11
+			</p>
+		
+		
+	</div>
 		
 		
    

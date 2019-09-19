@@ -68,7 +68,7 @@
 					    </ul>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/auction.do">경매</a>
+						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a>
 						<ul>
 						    <li><a href="#">menu1</a></li>
 						    <li><a href="#">menu2</a></li>
@@ -78,7 +78,7 @@
 					<li>
 						<a href="${pageContext.request.contextPath }/productRegistration.do">등록하기</a>
 						<ul>
-						    <li><a href="#">menu1</a></li>
+						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
 						    <li><a href="#">menu2</a></li>
 						    <li><a href="#">menu3</a></li>
 					    </ul>
