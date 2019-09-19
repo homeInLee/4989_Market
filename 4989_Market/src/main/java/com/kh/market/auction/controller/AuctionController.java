@@ -17,6 +17,7 @@ import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
 
 @Controller
+@RequestMapping("/auction")
 public class AuctionController {
 	
 	@Autowired
@@ -49,6 +50,12 @@ public class AuctionController {
 		model.addAttribute("member",member);
 		
 		return "auction/auctionSelectOneView";
+	}
+	
+	@RequestMapping("/auctionEnroll.do")
+	public void auctionEnroll() {
+		
+		logger.info("경매 등록 확인");
 	}
 	
 

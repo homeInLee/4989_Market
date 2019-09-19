@@ -29,7 +29,7 @@ h2, section{
 	border-radius: 8px;
 	
 }
-.top-card :hover{
+.top-card:hover{
 	cursor: pointer;
 	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	top: -2px;
@@ -43,13 +43,10 @@ h2, section{
 	<section>
 		<c:forEach items="${auctionList }" var="a">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath }/auctionSelectOne.do?auctionNo=${a.auctionNo}">
+				<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}" style="text-decoration: none;">
+					  	<img src="${pageContext.request.contextPath }/resources/images/mac.jpg" style="width:100%">
 					<div>
-					  	<img src="${pageContext.request.contextPath }/resources/images/iPhoneX.jpg" style="height: 100%; width:100%">
 					  	<br />
-					</div>
-					
-					<div>
 					  	<h5>${a.auctionTitle }</h5>
 						<div class="auction-content">
 							${a.auctionContent }
