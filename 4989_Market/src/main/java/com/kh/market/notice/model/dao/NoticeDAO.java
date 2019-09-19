@@ -18,4 +18,6 @@ public interface NoticeDAO {
 
 	int insertNotice(Notice notice);
 
+	Notice selectNoticeOne(int noticeNo);
+
 }

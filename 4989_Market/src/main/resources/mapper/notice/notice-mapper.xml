@@ -36,4 +36,8 @@
 	#{noticeContent},
 	#{noticeType})
 </insert>
+<select id="selectNoticeOne" resultType="notice">
+	select * from notice
+	where notice_no = #{noticeNo}
+</select>
 </mapper>
