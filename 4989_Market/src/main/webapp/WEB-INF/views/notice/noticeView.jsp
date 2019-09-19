@@ -9,5 +9,26 @@
 <br />
 <h2>공지사항 view</h2>
 
+${notice}
+
+<input type="hidden" name="noticeNo" value="" />
+<input type="button" value="수정" onclick="${pageContext.request.contextPath}/notice/noticeUpdate"/>
+<input type="button" value="삭제" />
+<%-- ?noticeNo=${notice.getNoticeNo} --%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 

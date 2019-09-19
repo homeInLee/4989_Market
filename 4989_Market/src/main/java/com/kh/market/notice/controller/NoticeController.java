@@ -132,10 +132,21 @@ public class NoticeController {
 		System.out.println("noticeNo="+noticeNo);
 		logger.debug("noticeView 이동");
 		
+		Notice notice = noticeService.selectNoticeOne(noticeNo);
+		
+		mav.addObject("notice", notice);
 		mav.setViewName("notice/noticeView");
 		
 		return mav;
 	}
 	
+	@RequestMapping("/noticeUpdate")
+	public ModelAndView noticeUpdate(ModelAndView mav,
+									@RequestParam("noticeNo")int noticeNo) {
+		logger.info("update@noticeNo="+noticeNo);
+		
+		
+		return mav;
+	}
 	
 }

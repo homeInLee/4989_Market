@@ -43,4 +43,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int insertNotice(Notice notice) {
 		return noticeDAO.insertNotice(notice);
 	}
+
+	@Override
+	public Notice selectNoticeOne(int noticeNo) {
+		return noticeDAO.selectNoticeOne(noticeNo);
+	}
+
+	
 }

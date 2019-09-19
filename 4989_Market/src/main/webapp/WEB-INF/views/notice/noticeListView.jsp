@@ -25,6 +25,7 @@ color: #fff;
 }
 div#result.result{
 border-collapse: none;
+height: 1000px;
 }
 
 div#result.result tr:nth-child(n):not(:nth-child(1)):hover {
@@ -130,18 +131,17 @@ cursor: pointer;
 			</tr>
 		
 	</div>
-	
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
 </section>
 <script>
 $(()=>{
 	$("tr[noticeNo]").click(function(){
 		var noticeNo = $(this).attr("noticeNo")
-		$("#accordian ul ul").slideUp();
-			if (!$(this).next().is(":visible")) {
-				$(this).next().slideDown();
-			}
-// 		location.href = "${pageContext.request.contextPath}/notice/noticeView.do?noticeNo="+noticeNo;
+// 		$("#accordian ul ul").slideUp();
+// 			if (!$(this).next().is(":visible")) {
+// 				$(this).next().slideDown();
+// 			}
+		location.href = "${pageContext.request.contextPath}/notice/noticeView.do?noticeNo="+noticeNo;
 // 		$.ajax({
 // 		url: "${pageContext.request.contextPath}/notice/noticeMember",
 // 		dataType: "json",
