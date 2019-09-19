@@ -47,7 +47,7 @@ public class ReviewController {
 		int result=reviewService.reviewCheckEnd(review);
 		
 		String msg="";
-		String loc="/member/memberView.do?memberId="+memberId;
+		String loc="/";
 		if(result>0) {
 			msg="리뷰작성완료";
 		}else {

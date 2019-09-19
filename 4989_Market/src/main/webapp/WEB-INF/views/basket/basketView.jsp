@@ -9,20 +9,6 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
-<style>
-div#pageBar {
-	margin-top: 10px;
-	text-align: center;	
-}
-
-div#pageBar span.cPage {	
-	margin-right: 5px;
-}
-
-div#pageBar a {
-	margin-right: 5px;
-}
-</style>
 <div class="menu">
   	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">장바구니</a>
@@ -30,22 +16,27 @@ div#pageBar a {
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
 </div>
-  <c:if test="${empty reviewList}">
-  	<div style="text-align: center;">거래후기가 없습니다.</div>
-  </c:if>
-  <div style="height: 450px;">
-  <c:forEach items="${reviewList}" var="r">
- 	<ul class="list-group list-group-flush">
-  	  <li class="list-group-item">
-  	  ${r.reviewWriter}
-  	  <br />
-  	  ${r.reviewContent}
-  	  </li>
-  	  
-    </ul> 
-  </c:forEach>
-  </div>
-  <div id='pageBar'>
-  ${pageBar}
-  </div>
+<!-- ${myBasketList} -->
+
+<c:if test="${empty myBasketList}">
+	<div style="text-align: center;">장바구니가 비어있습니다</div>	
+</c:if>
+
+<div class="container">
+	<div class="row">
+		<c:forEach items="${myBasketList}" var="b">
+			<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
+		      <div class="card h-70">
+		        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
+		        <div class="card-body">
+		          <h4 class="card-title">
+		            <a href="#">${b.sellTitle}</a>
+		          </h4>
+		          <p class="card-text">${b.sellPrice}원</p>
+		        </div>
+		      </div>
+		    </div>
+		</c:forEach>
+	</div>
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

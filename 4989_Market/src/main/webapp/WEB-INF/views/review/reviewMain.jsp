@@ -10,65 +10,11 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <div class="menu">
-  	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">판매물품</a>
+  	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
+  	<a class="badge badge-light" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">장바구니</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
 </div>
-<!-- Page Content -->
-<div class="container">
-
-  <!-- Page Heading -->
-  <div class="row">
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div class="card h-70">
-        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">제목</a>
-          </h4>
-          <p class="card-text">주소</p>
-          <p class="card-text">가격</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div class="card h-70">
-        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">제목</a>
-          </h4>
-          <p class="card-text">주소</p>
-          <p class="card-text">가격</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div class="card h-70">
-        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">제목</a>
-          </h4>
-          <p class="card-text">주소</p>
-          <p class="card-text">가격</p>
-        </div>
-      </div>
-    </div>
-    <div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-      <div class="card h-70">
-        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-        <div class="card-body">
-          <h4 class="card-title">
-            <a href="#">제목</a>
-          </h4>
-          <p class="card-text">주소</p>
-          <p class="card-text">가격</p>
-        </div>
-      </div>
-    </div>
-   </div>
-</div>
-<!-- /.container -->
+<div style="text-align: center;">작업하는중</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
