@@ -30,4 +30,19 @@ public class MessageServiceImpl implements MessageService {
 		return messageDAO.messageSelect(messageNo);
 	}
 
+	@Override
+	public int messageDelete(String messageNo) {
+		return messageDAO.messageDelete(messageNo);
+	}
+
+	@Override
+	public List<Message> selectMessageList2(String memberId) {
+		return messageDAO.selectMessageList2(memberId);
+	}
+
+	@Override
+	public int messageRead(String messageNo) {
+		return messageDAO.messageRead(messageNo);
+	}
+
 }
