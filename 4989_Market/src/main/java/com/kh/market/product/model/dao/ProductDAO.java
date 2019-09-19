@@ -10,6 +10,10 @@ public interface ProductDAO {
 
 	int productRegistration(Product p);
 
+	Product productSelectOne(String productNo);
+
+	int updateProduct(Product p);
+
 	
 
 }

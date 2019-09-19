@@ -21,13 +21,14 @@ form{
 
 #Registration{
 	padding-left: 25px;
-	border: 1px solid;
+
 }
 
 label{
 	padding-right: 50px;
 }
 #content-area{
+	border: 1px solid;
 	font-size: 20px;
 }
 </style>
@@ -37,7 +38,7 @@ label{
 
 <!-- 컨텐츠 영역 시작-->
 <div id="content-area">
-<form name="productFrm" action="${pageContext.request.contextPath }/productRegistrationEnd.do"  method="get" >
+<form name="productFrm" action="${pageContext.request.contextPath }/product/productRegistrationEnd.do"  method="get" >
 	<div id="Registration">
 
 <!-- 		<label for="productType">분류</label>
@@ -67,8 +68,11 @@ label{
 		<input type="number" id="price" name="productPrice" required="required"/>원
 			<br />
 		<div id="photo">
-			이미지 등록
-			<input type="file" />
+
+
+
+
+
 		
 		</div>
 		<!-- <label for="attachPhoto">사진첨부</label>
@@ -85,6 +89,24 @@ label{
 	</div>
 
 </form>
+<!-- 			(이미지 등록)
+			<form id="ajaxform" action="/upload" method="post" enctype="multipart/form-data">
+			    <input type="file" multiple id="photo_upload">
+			    <output id="list"></output>
+			    <button id="files_send">완료</button>
+			</form> -->
+			
+			
+<!-- <form name="PhotoUploadFrm" id="PhotoUploadFrm" method="post" enctype="multipart/form-data">
+    <input type="file" name="upfile" id="upfile">
+</form>
+ 
+ 
+<a href="javascript:upload();">등록</a> -->
+
+
+
+
 </div>
 <script>
 

@@ -10,6 +10,10 @@ public interface ProductService {
 
 	int productRegistration(Product p);
 
+	Product productSelectOne(String productNo);
+
+	int updateProduct(Product p);
+
 
 
 }

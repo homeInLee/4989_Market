@@ -27,5 +27,17 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.productRegistration(p);
 	}
 
+	@Override
+	public Product productSelectOne(String productNo) {
+		// TODO Auto-generated method stub
+		return productDAO.productSelectOne(productNo);
+	}
+
+	@Override
+	public int updateProduct(Product p) {
+		// TODO Auto-generated method stub
+		return productDAO.updateProduct(p);
+	}
+
 
 }
