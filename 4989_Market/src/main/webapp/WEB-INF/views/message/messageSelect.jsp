@@ -4,9 +4,8 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
-<jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value="messageSelect" name="pageTitle"/>
-</jsp:include>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <style>
 tr th{
 	border: 1px solid black;
@@ -23,6 +22,10 @@ textarea{
 	color:black;
 }
 </style>
+<div class="menu">
+  	<a class="badge badge-light" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}">받은 쪽찌함</a>
+  	<a class="badge badge-light" href="${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}">보낸 쪽찌함</a>
+</div>
 	<div id="message-container">
 		<table>
 			<tr>
@@ -43,8 +46,10 @@ textarea{
 			</tr>
 		</table>
 		<br />
+		<c:if test="${memberLoggedIn.memberId != message.messageWriter }">
 		<input class="log" type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${message.messageReciver }&messageReciver=${message.messageWriter }'"/>
-		<input class="log" type="button" value="삭제" <%-- onclick="location.href='${pageContext.request.contextPath}/message/memberView.do?memberId=${memberLoggedIn.memberId }'" --%>/>
+		<input class="log" type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/message/messageDelete.do?messageNo=${message.messageNo}&memberId=${message.messageReciver }'" />
+		</c:if>
 	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -29,6 +29,19 @@ public class MessageController {
 		logger.info("memberId="+memberId);
 		
 		List<Message> messageList = messageService.selectMessageList(memberId);
+		logger.info("messageList="+messageList);
+		
+		mav.addObject("messageList", messageList);
+		mav.setViewName("message/messageList");
+		
+		return mav;
+	}
+	@RequestMapping("/messageList2.do")
+	public ModelAndView messageList2(ModelAndView mav, @RequestParam(value="memberId")String memberId ) {
+		logger.debug("messageService={}", messageService.getClass());
+		logger.info("memberId="+memberId);
+		
+		List<Message> messageList = messageService.selectMessageList2(memberId);
 		
 		mav.addObject("messageList", messageList);
 		mav.setViewName("message/messageList");
@@ -47,23 +60,38 @@ public class MessageController {
 	 }
 
 	@RequestMapping("/messageInsert.do")
-	public ModelAndView insermessage(ModelAndView mav, Message message) {
+	public ModelAndView insertMessage(ModelAndView mav, Message message) {
 		logger.info("message="+message);
 		
 		int result = messageService.insertMessage(message);
 		
-		mav.setViewName("redirect:/message/messageList.do");
+		mav.addObject("msg", result>0?"전송이 성공하였습니다.":"전송이 실패하였습니다.");
+		mav.addObject("loc", result>0?"/message/messageList2.do?memberId="+message.getMessageWriter():"/message/messageListEnd.do?messageWriter="+message.getMessageWriter()+"&messageReciver="+message.getMessageReciver());
+		mav.setViewName("common/msg");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/messageSelect.do")
-	public String messageSelect(Model model, @RequestParam("messageNo") String messageNo) {
+	public String messageSelect(Model model, @RequestParam("messageNo") String messageNo, @RequestParam("memberId") String memberId) {
 		logger.info("messageNo="+messageNo);
 		Message message = messageService.messageSelect(messageNo);
+		if(memberId.equals(message.getMessageReciver())) {
+			int result = messageService.messageRead(messageNo);			
+		}
 		logger.info("message="+message);
 		model.addAttribute("message", message);
 		return("message/messageSelect");
+	}
+	
+	@RequestMapping("/messageDelete.do")
+	public String messageDelete(Model model, @RequestParam("messageNo") String messageNo, @RequestParam("memberId") String memberId) {
+		logger.info("messageNo="+messageNo);
+		
+		int result = messageService.messageDelete(messageNo);
+		model.addAttribute("msg", result>0?"성곡적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
+		model.addAttribute("loc", "/message/messageList.do?memberId="+memberId);
+		return("common/msg");
 	}
 }
 
