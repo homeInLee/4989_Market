@@ -2,6 +2,7 @@ package com.kh.market.member.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,17 +23,21 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
 import com.kh.market.member.model.service.MemberService;
 
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes("memberLoggedIn")
+@SessionAttributes(names= {"memberLoggedIn","messageCnt"})
 public class MemberController {
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	MessageService messageService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@RequestMapping("/memberEnroll.do")
@@ -90,6 +95,8 @@ public class MemberController {
 				//memberLoggedIn 세션 속성에 지정
 				//model에 지정된 속성은 requestScope속성에 담김
 				mav.addObject("memberLoggedIn", member);
+				int messageCnt = messageService.selectMessageList(memberId).size();
+				mav.addObject("messageCnt", messageCnt);
 			}
 			//3.비밀번호가 틀린 경우
 			else {

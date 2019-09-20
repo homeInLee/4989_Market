@@ -16,10 +16,6 @@
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 
 </head>
-<script>
-
-
-</script>
 <body>
 	<header id="header">
 		<section id="header-top">
@@ -41,8 +37,10 @@
 				<button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			</c:if>
 		    <c:if test="${memberLoggedIn!=null}">
-		        <span><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a> 님, 안녕하세요</span>
+		        <span id="nameNmessage"><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a>님, 안녕하세요.</span>
 		        &nbsp;
+		        <br />
+		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}'">쪽찌 ${messageCnt}개</button>
 		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
 		    </c:if>
 			</div>
