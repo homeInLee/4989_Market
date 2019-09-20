@@ -2,10 +2,12 @@ package com.kh.market.notice.model.dao;
 
 import java.util.List;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.notice.model.service.NoticeService;
 import com.kh.market.notice.model.vo.Notice;
 
 @Repository
@@ -30,8 +32,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public List<Notice> selectNoticeDeclaration() {
-		return session.selectList("notice.selectNoticeDeclaration");
+	public List<Notice> selectNoticeAuction() {
+		return session.selectList("notice.selectNoticeAuction");
 	}
 
 	@Override
@@ -47,6 +49,30 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public Notice selectNoticeOne(int noticeNo) {
 		return session.selectOne("notice.selectNoticeOne", noticeNo);
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return session.update("notice.deleteNotice", noticeNo);
+	}
+
+	@Override
+	public List<Notice> selectNoticeAll(int cPage) {
+		int offset = (cPage -1)*NoticeService.NUM_PER_PAGE;
+		int limit = NoticeService.NUM_PER_PAGE;
+		
+		RowBounds rowBounds = new RowBounds(offset, limit);
+		return session.selectList("notice.selectNoticeAll", null, rowBounds);
+	}
+
+	@Override
+	public int totalContents() {
+		return session.selectOne("notice.totalContents");
+	}
+
+	@Override
+	public int updateReadCount(int noticeNo) {
+		return session.update("notice.updateReadCount", noticeNo);
 	}
 	
 }

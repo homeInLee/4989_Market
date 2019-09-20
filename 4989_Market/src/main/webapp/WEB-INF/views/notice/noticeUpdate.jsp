@@ -8,29 +8,29 @@
 textarea {
 border: 1px solid lightgray;
 }
-div#noticeWrite-container{
+div#noticeUpdate-container{
 width:500px; 
 margin:0 auto; 
 text-align:center;
 padding: 10px;
 }
-div#noticeWrite-container table th,tr,td{
+div#noticeUpdate-container table th,tr,td{
 margin-bottom:15px;
 padding:5px;
 }
 
-div#noticeWrite-container input,
-div#noticeWrite-container textarea{
+div#noticeUpdate-container input,
+div#noticeUpdate-container textarea{
 margin-bottom:5px;
 margin-top: 5px;
 }
 
-div#noticeWrite-container .log{
+div#noticeUpdate-container .log{
 color: #1b5ac2;
 width: 75px;
 height: 40px;
 }
-div#noticeWrite-container select{
+div#noticeUpdate-container select{
 border: 1px solid lightgray;
 }
 input.log{
@@ -39,42 +39,52 @@ cursor: pointer;
 </style>
 <br />
 <br />
-<h2 style="text-align: center;">공지사항 글쓰기</h2>
+<h2 style="text-align: center;">공지사항 수정</h2>
 <br />
-<div id="noticeWrite-container">
-	<form name="noticeWriteFrm" 
-		  action="${pageContext.request.contextPath}/notice/noticeWriteEnd.do" 
-		  method="post" 
-		  enctype="multipart/form-data">
+<div id="noticeUpdate-container">
+	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeWriteEnd.do" method="post" >
 		<table>
 			<tr>
 				<th>제목</th>
 				<td>
-					<input type="text" class="form-control" name="noticeTitle" id="noticeTitle" required>
+					<input type="text" 
+					class="form-control" 
+					name="noticeTitle" 
+					id="noticeTitle" 
+					value="${notice.noticeTitle }"
+					required>
 				</td>
 			</tr>
 			<tr>
 				<th>분류</th>
-				<td style="text-align: left">
-				<select name="noticeType" id="noticeType">
-					<option value="m">회원관련</option>	
-					<option value="p">결제관련</option>	
-					<option value="s">중고거래관련</option>	
-					<option value="d">경매관련</option>	
-					<option value="o">기타</option>	
+				<td style="text-align: left;">
+				<c:if test="${not empty notice.noticeType}">
+				<select name="noticeType" id="noticeType" >
+					<option value="m" >회원관련</option>	
+					<option value="p" >결제관련</option>	
+					<option value="s" >중고거래관련</option>	
+					<option value="a" >경매관련</option>	
+					<option value="o" >기타</option>	
 				</select>
+				</c:if>
 				</td>
 				</tr>
 			<tr>
 				<th>아이디</th>
 				<td>
-					<input type="text" class="form-control" readonly value="${memberLoggedIn.memberId}" name="noticeWriter" id="noticeWriter" required>
+					<input type="text" 
+							class="form-control" 
+							readonly 
+							value="${memberLoggedIn.memberId}" 
+							name="noticeWriter" 
+							id="noticeWriter" 
+							required>
 				</td>
 			</tr>
 			<tr>
 				<th>내용</th>
 				<td>	
-				<textarea name="noticeContent" id="noticeContent" cols="40" rows="10" required></textarea>
+				<textarea name="noticeContent" id="noticeContent" cols="40" rows="10" required>${notice.noticeContent }</textarea>
 				</td>
 			</tr>
 			<tr>
@@ -95,5 +105,9 @@ cursor: pointer;
 $("input:button.log").click(()=>{
 	location.href='${pageContext.request.contextPath}/notice/noticeList.do'
 })
+
+$("#noticeType").val("${notice.noticeType}").attr("selected","selected");
+
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
