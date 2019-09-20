@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 <style>
 input.btn.btn{
 width:200px;
@@ -60,6 +61,9 @@ text-align: center;
 /* div#result td:nth-child(1){ */
 /* width: 200px; */
 /* } */
+div#pageBar{margin-top:10px; text-align:center;}
+div#pageBar span.cPage{color: gray; margin-right: 5px;}
+div#pageBar a{margin-right: 5px;}
 
 
 
@@ -78,7 +82,7 @@ cursor: pointer;
 }
 
 .hide, .accordion_banner{display:none;}
-
+div#noticeList-container{margin:0 auto;}
 </style>
 
 
@@ -86,6 +90,7 @@ cursor: pointer;
 <br />
 <h2 style="text-align: center;">공지사항</h2>
 <br />
+<div id="noticeList-container">
 <section id="header-bottom">
 	<div id="header-catagory">
 			<input type="button" 
@@ -98,18 +103,68 @@ cursor: pointer;
 					class="btn btn-block btn-outline-success sell" 
 					value="중고거래관련">
 			<input type="button" 
-					class="btn btn-block btn-outline-success declaration" 
+					class="btn btn-block btn-outline-success auction" 
 					value="경매관련">
 			<input type="button" 
 					class="btn btn-block btn-outline-success other" 
 					value="기타">
 	</div>
 	<br />
-	<div class="result" id="result"></div>
-	
+	<div class="result" id="result">
+	<table class=table>
+		<colgroup><col width='5%'><col width='15%'><col width='45%'><col width='10%'><col width='15%'><col width='15%'></colgroup>
+		<tr><th>번호</th><th>구분</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>
+		<c:if test="${empty list }">
+			<tr>
+				<td colspan="5">데이터가 없습니다.</td>
+			</tr>
+		</c:if>
+		<c:if test="${not empty list }">
+		<c:forEach items="${list }" var="n">
+			<tr noticeNo="${n.noticeNo}">
+				<td>${n.noticeNo }</td>
+				<c:if test="${not empty n.noticeType}">
+				<c:choose>
+					<c:when test="${n.noticeType == 'm'}">
+					<td>[회원관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'p'}">
+					<td>[결제관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 's'}">
+					<td>[중고거래관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'a'}">
+					<td>[경매관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'o'}">
+					<td>[기타]</td>
+					</c:when>
+				</c:choose>
+				</c:if>
+				<td>${n.noticeTitle }</td>
+				<td>${n.noticeWriter }</td>
+				<td>${n.noticeDate.substring(0,10)}</td>
+				<td>${n.noticeReadCount}</td>
+			</tr>
+		</c:forEach>
+		</c:if>
+	</table>
+	</div>
+<%-- 	<c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
+<%-- 	</c:if> --%>
 </section>
+</div>
+
 <script>
+$(()=>{
+	$("tr[noticeNo]").click(function(){
+		var noticeNo = $(this).attr("noticeNo")
+		location.href = "${pageContext.request.contextPath}/notice/noticeView.do?noticeNo="+noticeNo;
+	});
+	});
+
 // $("#header-bottom .member").on("click",()=>{
 // 	$.ajax({
 // 		url: "${pageContext.request.contextPath}/notice/noticeMember",
@@ -211,9 +266,9 @@ cursor: pointer;
 			
 // 		});
 // });
-// $("#header-bottom .declaration").on("click",()=>{
+// $("#header-bottom .Auction").on("click",()=>{
 // 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticeDeclaration",
+// 			url: "${pageContext.request.contextPath}/notice/noticeAuction",
 // 			dataType: "json",
 // 			type: "GET",
 // 			success: (data)=>{
@@ -289,8 +344,8 @@ $("#header-bottom .payment").click(()=>{
 $("#header-bottom .sell").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeSell";
 });
-$("#header-bottom .declaration").click(()=>{
-	location.href="${pageContext.request.contextPath}/notice/noticeDeclaration";
+$("#header-bottom .auction").click(()=>{
+	location.href="${pageContext.request.contextPath}/notice/noticeAuction";
 });
 $("#header-bottom .other").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeOther";

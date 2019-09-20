@@ -79,7 +79,7 @@ cursor: pointer;
 }
 
 .hide, .accordion_banner{display:none;}
-
+div#noticeListView-container{margin:0 auto;}
 </style>
 
 
@@ -87,6 +87,7 @@ cursor: pointer;
 <br />
 <h2 style="text-align: center;">noticeListView</h2>
 <br />
+<div id="noticeListView-container">
 <section id="header-bottom">
 	<div id="header-catagory">
 			<input type="button" 
@@ -99,7 +100,7 @@ cursor: pointer;
 					class="btn btn-block btn-outline-success sell" 
 					value="중고거래관련">
 			<input type="button" 
-					class="btn btn-block btn-outline-success declaration" 
+					class="btn btn-block btn-outline-success auction" 
 					value="경매관련">
 			<input type="button" 
 					class="btn btn-block btn-outline-success other" 
@@ -117,7 +118,7 @@ cursor: pointer;
 		</c:if>
 		<c:if test="${not empty list }">
 		<c:forEach items="${list }" var="n">
-			<tr noticeNo= ${n.noticeNo}>
+			<tr noticeNo="${n.noticeNo}">
 				<td>${n.noticeNo }</td>
 				<td>${n.noticeTitle }</td>
 				<td>${n.noticeWriter }</td>
@@ -129,10 +130,13 @@ cursor: pointer;
 			<tr id="hide">
 			<td>${n.noticeContent}</td>
 			</tr>
-		
-	</div>
+		</table>
+		</div>
+<%-- 	<c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
+<%-- 	</c:if> --%>
 </section>
+</div>
 <script>
 $(()=>{
 	$("tr[noticeNo]").click(function(){
@@ -277,9 +281,9 @@ $(()=>{
 			
 // 		});
 // });
-// $("#header-bottom .declaration").on("click",()=>{
+// $("#header-bottom .auction").on("click",()=>{
 // 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticeDeclaration",
+// 			url: "${pageContext.request.contextPath}/notice/noticeAuction",
 // 			dataType: "json",
 // 			type: "GET",
 // 			success: (data)=>{
@@ -358,9 +362,9 @@ $("#header-bottom .sell").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeSell";
 // alert("sell");
 });
-$("#header-bottom .declaration").click(()=>{
-	location.href="${pageContext.request.contextPath}/notice/noticeDeclaration";
-// alert("declaration");
+$("#header-bottom .auction").click(()=>{
+	location.href="${pageContext.request.contextPath}/notice/noticeAuction";
+// alert("auction");
 });
 $("#header-bottom .other").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeOther";
