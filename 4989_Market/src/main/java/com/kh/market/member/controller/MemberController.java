@@ -134,10 +134,8 @@ public class MemberController {
 		return map;
 	}
 	@RequestMapping("/memberView.do")
-	public ModelAndView memberView(@RequestParam String memberId,ModelAndView mav) {
-		mav.addObject("memberId",memberId);
-		mav.setViewName("review/reviewMain");
-		return mav;
+	public void memberView(@RequestParam String memberId,ModelAndView mav) {
+		
 	}
 
 	@RequestMapping("/memberUpdate.do")

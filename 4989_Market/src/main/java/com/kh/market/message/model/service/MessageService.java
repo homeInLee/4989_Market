@@ -10,4 +10,12 @@ public interface MessageService {
 
 	int insertMessage(Message message);
 
+	Message messageSelect(String messageNo);
+
+	int messageDelete(String messageNo);
+
+	List<Message> selectMessageList2(String memberId);
+
+	int messageRead(String messageNo);
+
 }

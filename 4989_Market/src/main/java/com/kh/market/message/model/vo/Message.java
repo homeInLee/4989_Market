@@ -1,6 +1,6 @@
 package com.kh.market.message.model.vo;
 
-import java.util.Date;
+import java.sql.Timestamp;;
 
 public class Message {
 	
@@ -10,12 +10,15 @@ public class Message {
 	private String messageReciver;
 	private String messageContent;
 	private String messageReadState;
-	private String messageDate;
-	private Date messageDeldate;
+	private Timestamp messageDate;
+	private Timestamp messageDeldate;
 	private String messageDeltype;
-
+	public Message() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 	public Message(int messageNo, String messageTitle, String messageWriter, String messageReciver,
-			String messageContent, String messageReadState, String messageDate, Date messageDeldate,
+			String messageContent, String messageReadState, Timestamp messageDate, Timestamp messageDeldate,
 			String messageDeltype) {
 		super();
 		this.messageNo = messageNo;
@@ -27,10 +30,6 @@ public class Message {
 		this.messageDate = messageDate;
 		this.messageDeldate = messageDeldate;
 		this.messageDeltype = messageDeltype;
-	}
-	public Message() {
-		super();
-		// TODO Auto-generated constructor stub
 	}
 	public int getMessageNo() {
 		return messageNo;
@@ -68,16 +67,16 @@ public class Message {
 	public void setMessageReadState(String messageReadState) {
 		this.messageReadState = messageReadState;
 	}
-	public String getMessageDate() {
+	public Timestamp getMessageDate() {
 		return messageDate;
 	}
-	public void setMessageDate(String messageDate) {
+	public void setMessageDate(Timestamp messageDate) {
 		this.messageDate = messageDate;
 	}
-	public Date getMessageDeldate() {
+	public Timestamp getMessageDeldate() {
 		return messageDeldate;
 	}
-	public void setMessageDeldate(Date messageDeldate) {
+	public void setMessageDeldate(Timestamp messageDeldate) {
 		this.messageDeldate = messageDeldate;
 	}
 	public String getMessageDeltype() {
@@ -93,7 +92,5 @@ public class Message {
 				+ messageReadState + ", messageDate=" + messageDate + ", messageDeldate=" + messageDeldate
 				+ ", messageDeltype=" + messageDeltype + "]";
 	}
-	
-	
 	
 }

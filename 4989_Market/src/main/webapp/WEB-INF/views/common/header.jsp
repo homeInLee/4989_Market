@@ -14,6 +14,9 @@
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+	
+
+</head>
 <script>
 $(()=>{
 	$("#dropdown").click(function() {
@@ -24,10 +27,7 @@ $(()=>{
 	});
 });
 </script>
-</head>
-<script>
 
-</script>
 <body>
 	<header id="header">
 		<section id="header-top">
@@ -58,22 +58,40 @@ $(()=>{
 		<hr>
 		<section id="header-bottom">
 			<div id="header-catagory">
-				<ul id="dropdown">
-					<li><a href="#">지역</a>
-						<ul id="sub">
-							<li><a href="">서울</a></li>
-							<li><a href="">경기</a></li>
-							<li><a href="">부산</a></li>
-							<li><a href="">인천</a></li>
-							<li><a href="">제주</a></li>
-						</ul>
+<ul id="menu">
+					<li>
+						<a href="${pageContext.request.contextPath }/productView.do">상품</a>
+						<ul>
+						    <li><a href="#">menu1</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+				    </li>
+					<li>
+						<a href="#">무료나눔</a>
+						<ul>
+						    <li><a href="#">menu1</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
 					</li>
-					<li><a href="${pageContext.request.contextPath }/product/productList.do">상품</a></li>
-					<li><a href="#">무료나눔</a></li>
-					<li><a href="#">경매</a></li>
-					<li><a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a></li>
+					<li>
+						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a>
+						<ul>
+						    <li><a href="#">menu1</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/productRegistration.do">등록하기</a>
+						<ul>
+						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+					</li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
-     
 				</ul>
 			</div>
 		</section>

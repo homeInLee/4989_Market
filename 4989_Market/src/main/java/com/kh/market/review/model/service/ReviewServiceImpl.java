@@ -22,8 +22,14 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Review> reviewContentForm(String memberId) {
+	public List<Review> reviewContentForm(Map<Object, Object> map) {
 		
-		return reviewDAO.reviewContentForm(memberId);
+		return reviewDAO.reviewContentForm(map);
+	}
+
+	@Override
+	public List<Review> reviewMannerForm(String memberId) {
+		
+		return reviewDAO.reviewMannerForm(memberId);
 	}
 }

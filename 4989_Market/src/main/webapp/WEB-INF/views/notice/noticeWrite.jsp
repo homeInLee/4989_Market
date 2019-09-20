@@ -33,6 +33,9 @@ height: 40px;
 div#noticeWrite-container select{
 border: 1px solid lightgray;
 }
+input.log{
+cursor: pointer;
+}
 </style>
 <br />
 <br />
@@ -82,10 +85,12 @@ border: 1px solid lightgray;
 		<br />
 		<input class="log" type="submit" value="등록" >
 		&nbsp;&nbsp;&nbsp;
-		<input class="log" type="reset" value="취소">
+		<input class="log" type="button" value="취소" >
 	</form>
 </div>
 <script>
-
+$("input:button.log").click(()=>{
+	location.href='${pageContext.request.contextPath}/notice/noticeList.do'
+})
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

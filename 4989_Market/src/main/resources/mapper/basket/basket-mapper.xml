@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="basket">
+	<select id="basketView" resultType="product">
+		select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype from sell S join basket B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
+	</select>
+</mapper>

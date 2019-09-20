@@ -7,10 +7,10 @@ import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -18,7 +18,7 @@ import com.kh.market.notice.model.service.NoticeService;
 import com.kh.market.notice.model.vo.Notice;
 
 
-@RestController
+@Controller
 @RequestMapping("/notice")
 public class NoticeController {
 	
@@ -27,7 +27,7 @@ public class NoticeController {
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
-	@GetMapping("/noticeList.do")
+	@RequestMapping("/noticeList.do")
 	public ModelAndView noticeList(ModelAndView mav) {
 		
 		logger.debug("/notice/noticeList.do 연결.");
@@ -36,41 +36,57 @@ public class NoticeController {
 		return mav;
 	}
 	
-	@GetMapping("/noticeMember")
-	public List<Notice> noticeMember(){
+	@RequestMapping("/noticeMember")
+	public ModelAndView noticeMember(ModelAndView mav){
 
 		List<Notice> list = noticeService.selectNoticeMember();
 		
-		return list;
+		mav.addObject("list",list);
+		mav.setViewName("notice/noticeListView");
+		
+		return mav;
+		
 	}
 	
-	@GetMapping("/noticePayment")
-	public List<Notice> noticePayment(){
+	@RequestMapping("/noticePayment")
+	public ModelAndView noticePayment(ModelAndView mav){
 		
 		List<Notice> list = noticeService.selectNoticePayment();
 		
-		return list;
+		mav.addObject("list",list);
+		mav.setViewName("notice/noticeListView");
+		
+		return mav;
 	}
-	@GetMapping("/noticeSell")
-	public List<Notice> noticeSell(){
+	@RequestMapping("/noticeSell")
+	public ModelAndView noticeSell(ModelAndView mav){
 		
 		List<Notice> list = noticeService.selectNoticeSell();
 		
-		return list;
+		mav.addObject("list",list);
+		mav.setViewName("notice/noticeListView");
+		
+		return mav;
 	}
-	@GetMapping("/noticeDeclaration")
-	public List<Notice> noticeDeclaration(){
+	@RequestMapping("/noticeDeclaration")
+	public ModelAndView noticeDeclaration(ModelAndView mav){
 		
 		List<Notice> list = noticeService.selectNoticeDeclaration();
 		
-		return list;
+		mav.addObject("list",list);
+		mav.setViewName("notice/noticeListView");
+		
+		return mav;
 	}
-	@GetMapping("/noticeOther")
-	public List<Notice> noticeOther(){
+	@RequestMapping("/noticeOther")
+	public ModelAndView noticeOther(ModelAndView mav){
 		
 		List<Notice> list = noticeService.selectNoticeOther();
 		
-		return list;
+		mav.addObject("list",list);
+		mav.setViewName("notice/noticeListView");
+		
+		return mav;
 	}
 	
 	@RequestMapping("/noticeWrite")
@@ -110,7 +126,27 @@ public class NoticeController {
 		return mav;
 	}
 	
+	@RequestMapping("/noticeView")
+	public ModelAndView noticeView(ModelAndView mav,
+									@RequestParam("noticeNo") int noticeNo) {
+		System.out.println("noticeNo="+noticeNo);
+		logger.debug("noticeView 이동");
+		
+		Notice notice = noticeService.selectNoticeOne(noticeNo);
+		
+		mav.addObject("notice", notice);
+		mav.setViewName("notice/noticeView");
+		
+		return mav;
+	}
 	
-	
+	@RequestMapping("/noticeUpdate")
+	public ModelAndView noticeUpdate(ModelAndView mav,
+									@RequestParam("noticeNo")int noticeNo) {
+		logger.info("update@noticeNo="+noticeNo);
+		
+		
+		return mav;
+	}
 	
 }

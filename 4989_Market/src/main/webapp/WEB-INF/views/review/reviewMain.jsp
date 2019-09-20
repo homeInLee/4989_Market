@@ -8,19 +8,13 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-  
-  <div style="margin-top: 50px; margin-left: 230px;">
-  	<a class="badge badge-warning"><h2>회원정보</h2></a>
-  	<a class="badge badge-warning" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}"><h2>쪽지함</h2></a>
-  	<a class="badge badge-warning" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}"><h2>나의거래</h2></a>
-  	<a class="badge badge-warning"><h2>나의경매</h2></a>
-  </div>
-  
-  
-  <div style="margin-left: 300px;">
-  	<a class="badge badge-light">판매물품</a>
+<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
+<div class="menu">
+  	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
+  	<a class="badge badge-light" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">장바구니</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
-  </div>
+</div>
+<div style="text-align: center;">작업하는중</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

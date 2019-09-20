@@ -43,5 +43,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public int insertNotice(Notice notice) {
 		return session.insert("notice.insertNotice", notice);
 	}
+
+	@Override
+	public Notice selectNoticeOne(int noticeNo) {
+		return session.selectOne("notice.selectNoticeOne", noticeNo);
+	}
 	
 }

@@ -365,7 +365,7 @@ label .glyphicon {
         background-color: #FFF
     }
 }
-span{
+.modal-header>span{
 font-size: 19px;
 }
 input[type="radio"]{
@@ -422,15 +422,10 @@ $(function(){
     }; 
 });	
 </script>
-  <div style="margin-top: 20px; margin-left: 230px;">
-  	<a class="badge badge-warning"><h2>회원정보</h2></a>
-  	<a class="badge badge-warning"><h2>쪽지함</h2></a>
-  	<a class="badge badge-warning" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}"><h2>나의거래</h2></a>
-  	<a class="badge badge-warning"><h2>나의경매</h2></a>
-  </div>
+<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
+ 
   
-  
-  <div class="container-fluid bg-info">
+  <div class="container-fluid">
     <div class="modal-dialog">
       <div class="modal-content">
          <div class="modal-header">
@@ -457,16 +452,14 @@ $(function(){
           </div>
 
           <div class="quiz" id="quiz" data-toggle="buttons">
-           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">1 매우 그렇다</label>
-           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">2 그렇다</label>
+           <label class="element-animation1 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="5">1 매우 그렇다</label>
+           <label class="element-animation2 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">2 그렇다</label>
            <label class="element-animation3 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="3">3 보통이다</label>
-           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="4">4 아니다</label>
-           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="5">5 매우 아니다</label>
+           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="2">4 아니다</label>
+           <label class="element-animation4 btn btn-lg btn-primary btn-block"><span class="btn-label"><i class="glyphicon glyphicon-chevron-right"></i></span> <input type="radio" name="q_answer" value="1">5 매우 아니다</label>
        </div>
    </div>
-   <div class="modal-footer text-muted">
-    <span id="answer"></span>
-</div>
+   
 </div>
 </div>
 </div>
