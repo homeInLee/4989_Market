@@ -48,7 +48,7 @@
 	<!-- #10.로깅을 위한 interceptor등록 -->
 	<!-- DispatcherServlet이 Controller를 호출하는 중간에 intercept한다. -->
 	<!-- 그래서 이 설정은 web.xml의 DispatcherServlet의 servlet-context.xml에 있다. -->
-	<!-- <interceptors>
+<!-- 	<interceptors>
 		<interceptor>
 			<mapping path="/**"/>
 			<beans:bean id="LoginInterceptor" class="com.kh.market.common.interceptor.LoginInterceptor"/>
