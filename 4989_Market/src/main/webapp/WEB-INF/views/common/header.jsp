@@ -60,7 +60,7 @@ $(()=>{
 			<div id="header-catagory">
 <ul id="menu">
 					<li>
-						<a href="${pageContext.request.contextPath }/productView.do">상품</a>
+						<a href="${pageContext.request.contextPath }/product/productList.do">상품</a>
 						<ul>
 						    <li><a href="#">menu1</a></li>
 						    <li><a href="#">menu2</a></li>
@@ -84,7 +84,7 @@ $(()=>{
 					    </ul>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/productRegistration.do">등록하기</a>
+						<a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a>
 						<ul>
 						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
 						    <li><a href="#">menu2</a></li>

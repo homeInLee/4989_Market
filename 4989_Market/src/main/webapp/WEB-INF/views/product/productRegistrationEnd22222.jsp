@@ -44,37 +44,7 @@ label{
 
 <form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data" >
 	<div id="Registration">
-
-<!-- 		<label for="productType">분류</label>
-		<select id="productType">
-			<option value="">--분류 선택--</option>
-			<option value="house">집</option>
-			<option value="clothes">의류</option>
-			<option value="food">식품</option>
-			<option value="bicycle">자전거</option>
-		</select> -->
-		<br />
-		
-		<label for="writer">작성자 정보</label>
-		<input type="text"  id="writer" disabled="disabled" value="admin" name="productWriter"/>
-		<input type="text"  id="phone" disabled="disabled" value="01015412215" />
-		<input type="text"  id="phone" disabled="disabled" value="" placeholder="이메일 없음"/>
-		<br />
-		<label for="title">제목</label>		
-		<input type="text" id="title" name="productTitle_"/>
-		<br />
-		<label for="price">가격</label>		
-		<input type="number" id="price" name="productPrice"/>원
-		<br />
-		<label for="attachPhoto">사진첨부</label>
-		<input type="file"  id="attachPhoto" name="attachPhoto"/>
-		<br />
-		<br />
-		<label for="content">내용</label>
-		<textarea rows="30" cols="113" id="content" name="content"></textarea>
-		
 	</div>
-
 	<button type="submit" onclick="checkYN();" >전송</button>
 </form>
 	<br />

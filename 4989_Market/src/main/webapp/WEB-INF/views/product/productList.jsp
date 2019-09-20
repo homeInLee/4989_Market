@@ -6,6 +6,11 @@
 <fmt:requestEncoding value="utf-8"/>
 <title>중고물품</title>
 <style>
+#product-img{
+	width: 90px;
+	height: 90px;
+}
+
 ul{
 	list-style:none;
     margin-right: 10px;
@@ -35,8 +40,8 @@ li {
 		<c:forEach items="${plist }" var="product">
 		
 		<li productNo="${product.sellNo}">
-		
 				${product.sellNo} <br />
+				<img id="product-img" src="${pageContext.request.contextPath}/resources/images/product/noimage.png" alt="" /><br />
 				${product.sellTitle}<br />
 				판매자 ${product.sellWriter}<br />
 				상태 ${product.sellState}<br />
