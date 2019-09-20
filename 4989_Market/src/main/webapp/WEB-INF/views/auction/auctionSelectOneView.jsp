@@ -233,7 +233,7 @@ a{
 	<div>
 		<h3 style="padding:32px 0;">${auctionSelectOne.auctionTitle}</h3>
 		<p>${auctionSelectOne.auctionContent}</p>
-		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.auctionReadCount }</p>
+		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.auctionReadcount }</p>
 	</div>
 	
 	<hr />

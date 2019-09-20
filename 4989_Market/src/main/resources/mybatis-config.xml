@@ -8,6 +8,7 @@
   	<setting name="mapUnderscoreToCamelCase" value="true"/>
   </settings>
  <typeAliases>
+  	<typeAlias type="com.kh.market.auction.model.vo.Attachment" alias="attachement"/>
   	<typeAlias type="com.kh.market.auction.model.vo.Auction" alias="auction"/>
   	<typeAlias type="com.kh.market.product.model.vo.Product" alias="product"/>
   	<typeAlias type="com.kh.market.notice.model.vo.Notice" alias="notice"/>

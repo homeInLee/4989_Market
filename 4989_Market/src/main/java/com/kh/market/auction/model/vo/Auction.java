@@ -10,12 +10,15 @@ public class Auction {
 	private String auctionBuyer;
 	private int auctionPrice;
 	private int auctionDirectPrice;
+	private int auctionUnitPrice;
 	private String auctionContent;
-	private int auctionReadCount;
+	private int auctionReadcount;
 	private Date auctionDate;
+	private Date auctionEndDate;
 	private String auctionType;
-	private Date auctionDelDate;
-	private String auctionDelType;
+	private String auctionCategory;
+	private Date auctionDeldate;
+	private String auctionDeltype;
 
 	public Auction() {
 		super();
@@ -23,8 +26,9 @@ public class Auction {
 	}
 
 	public Auction(int auctionNo, String auctionTitle, String auctionWriter, String auctionBuyer, int auctionPrice,
-			int auctionDirectPrice, String auctionContent, int auctionReadCount, Date auctionDate, String auctionType,
-			Date auctionDelDate, String auctionDelType) {
+			int auctionDirectPrice, int auctionUnitPrice, String auctionContent, int auctionReadcount, Date auctionDate,
+			Date auctionEndDate, String auctionType, String auctionCategory, Date auctionDeldate,
+			String auctionDeltype) {
 		super();
 		this.auctionNo = auctionNo;
 		this.auctionTitle = auctionTitle;
@@ -32,21 +36,25 @@ public class Auction {
 		this.auctionBuyer = auctionBuyer;
 		this.auctionPrice = auctionPrice;
 		this.auctionDirectPrice = auctionDirectPrice;
+		this.auctionUnitPrice = auctionUnitPrice;
 		this.auctionContent = auctionContent;
-		this.auctionReadCount = auctionReadCount;
+		this.auctionReadcount = auctionReadcount;
 		this.auctionDate = auctionDate;
+		this.auctionEndDate = auctionEndDate;
 		this.auctionType = auctionType;
-		this.auctionDelDate = auctionDelDate;
-		this.auctionDelType = auctionDelType;
+		this.auctionCategory = auctionCategory;
+		this.auctionDeldate = auctionDeldate;
+		this.auctionDeltype = auctionDeltype;
 	}
 
 	@Override
 	public String toString() {
 		return "Auction [auctionNo=" + auctionNo + ", auctionTitle=" + auctionTitle + ", auctionWriter=" + auctionWriter
 				+ ", auctionBuyer=" + auctionBuyer + ", auctionPrice=" + auctionPrice + ", auctionDirectPrice="
-				+ auctionDirectPrice + ", auctionContent=" + auctionContent + ", auctionReadCount=" + auctionReadCount
-				+ ", auctionDate=" + auctionDate + ", auctionType=" + auctionType + ", auctionDelDate=" + auctionDelDate
-				+ ", auctionDelType=" + auctionDelType + "]";
+				+ auctionDirectPrice + ", auctionUnitPrice=" + auctionUnitPrice + ", auctionContent=" + auctionContent
+				+ ", auctionReadcount=" + auctionReadcount + ", auctionDate=" + auctionDate + ", auctionEndDate="
+				+ auctionEndDate + ", auctionType=" + auctionType + ", auctionCategory=" + auctionCategory
+				+ ", auctionDeldate=" + auctionDeldate + ", auctionDeltype=" + auctionDeltype + "]";
 	}
 
 	public int getAuctionNo() {
@@ -97,6 +105,14 @@ public class Auction {
 		this.auctionDirectPrice = auctionDirectPrice;
 	}
 
+	public int getAuctionUnitPrice() {
+		return auctionUnitPrice;
+	}
+
+	public void setAuctionUnitPrice(int auctionUnitPrice) {
+		this.auctionUnitPrice = auctionUnitPrice;
+	}
+
 	public String getAuctionContent() {
 		return auctionContent;
 	}
@@ -105,12 +121,12 @@ public class Auction {
 		this.auctionContent = auctionContent;
 	}
 
-	public int getAuctionReadCount() {
-		return auctionReadCount;
+	public int getAuctionReadcount() {
+		return auctionReadcount;
 	}
 
-	public void setAuctionReadCount(int auctionReadCount) {
-		this.auctionReadCount = auctionReadCount;
+	public void setAuctionReadcount(int auctionReadcount) {
+		this.auctionReadcount = auctionReadcount;
 	}
 
 	public Date getAuctionDate() {
@@ -121,6 +137,14 @@ public class Auction {
 		this.auctionDate = auctionDate;
 	}
 
+	public Date getAuctionEndDate() {
+		return auctionEndDate;
+	}
+
+	public void setAuctionEndDate(Date auctionEndDate) {
+		this.auctionEndDate = auctionEndDate;
+	}
+
 	public String getAuctionType() {
 		return auctionType;
 	}
@@ -129,23 +153,31 @@ public class Auction {
 		this.auctionType = auctionType;
 	}
 
-	public Date getAuctionDelDate() {
-		return auctionDelDate;
+	public String getAuctionCategory() {
+		return auctionCategory;
 	}
 
-	public void setAuctionDelDate(Date auctionDelDate) {
-		this.auctionDelDate = auctionDelDate;
+	public void setAuctionCategory(String auctionCategory) {
+		this.auctionCategory = auctionCategory;
 	}
 
-	public String getAuctionDelType() {
-		return auctionDelType;
+	public Date getAuctionDeldate() {
+		return auctionDeldate;
 	}
 
-	public void setAuctionDelType(String auctionDelType) {
-		this.auctionDelType = auctionDelType;
+	public void setAuctionDeldate(Date auctionDeldate) {
+		this.auctionDeldate = auctionDeldate;
+	}
+
+	public String getAuctionDeltype() {
+		return auctionDeltype;
+	}
+
+	public void setAuctionDeltype(String auctionDeltype) {
+		this.auctionDeltype = auctionDeltype;
 	}
 	
 	
-
-
+	
 }
+	

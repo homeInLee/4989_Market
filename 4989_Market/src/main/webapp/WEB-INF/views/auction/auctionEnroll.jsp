@@ -34,39 +34,45 @@ div#memberId-container span.error{color:red;}
 
 
 <div id="enroll-container">
-	<form name="auctionEnrollFrm" action="auctionEnrollEnd.do" method="post" onsubmit="return validate();" >
+	<form name="auctionEnrollFrm" action="auctionEnrollEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>경매 물품명</th>
 				<td>
-					<div id="memberId-container">
-						<input type="text" class="form-control"  name="memberId" id="memberId_" required>
-	           			<input type="hidden" name="idDuplicateCheck" id="idDuplicateCheck" value="0"/>
+					<div id="auction-container">
+						<input type="text" class="form-control"  name="auctionTitle" id="auctionTitle_" required>
+	           			<input type="hidden" name="auctionWriter" id="auctionWriter" value="${memberLoggedIn.memberId }"/>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>경매시작 가격</th>
 				<td>
-					<input type="number" class="form-control" name="startPrice" id="startPrice" required>
+					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" required>
 				</td>
 			</tr>
 			<tr>
 				<th>경매금액 단위</th>
 				<td>	
-					<input type="number" class="form-control" id="priceUnit" min=100 step=100 required>
+					<input type="number" class="form-control" name="auctionUnitPrice" id="auctionUnitPrice" min=100 step=100 required>
+				</td>
+			</tr>
+			<tr>
+				<th>즉시구매 가격</th>
+				<td>	
+					<input type="number" class="form-control" name="auctionDirectPrice" id="auctionDirectPrice" min=100 step=100 required>
 				</td>
 			</tr>  
 			<tr>
 				<th>상품분류</th>
 				<td>
-					<input type="text" class="form-control"/>
+					<input type="text" class="form-control" name="auctionCategory"/>
 				</td>
 			</tr>
 			<tr>
 				<th>경매종료 날짜</th>
 				<td>	
-					<input type="date" class="form-control" placeholder="1900-00-00" name="endDate" id="endDate">
+					<input type="date" class="form-control" placeholder="1900-00-00" name="auctionEndDate" id="auctionEndDate">
 				</td>
 			</tr>
 			<tr>
@@ -81,6 +87,7 @@ div#memberId-container span.error{color:red;}
 					    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
 					  </div>
 					</div>
+					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">첨부파일2</span>
@@ -90,31 +97,34 @@ div#memberId-container span.error{color:red;}
 					    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
 					  </div>
 					</div>
+					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">첨부파일3</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile2" >
-					    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile3" >
+					    <label class="custom-file-label" for="upFile3">파일을 선택하세요</label>
 					  </div>
 					</div>
+					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">첨부파일4</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile2" >
-					    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile4" >
+					    <label class="custom-file-label" for="upFile4">파일을 선택하세요</label>
 					  </div>
 					</div>
+					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">첨부파일5</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile2" >
-					    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile5" >
+					    <label class="custom-file-label" for="upFile5">파일을 선택하세요</label>
 					  </div>
 					</div>
 				</td>
@@ -122,12 +132,38 @@ div#memberId-container span.error{color:red;}
 			<tr>
 				<th>상품 설명</th>
 				<td >	
-					<textarea rows="10" style="width:120%; border: 1px solid;"></textarea>
+					<textarea rows="10" style="width:120%; border: 1px solid;" name="auctionContent"></textarea>
 				</td>
 			</tr>
 		</table>
 		<input class="log" type="submit" value="등록하기" >
 	</form>
 </div>
+
+<script>
+/* textarea에도 required속성을 적용가능하지만, 공백이 입력된 경우 대비 유효성검사를 실시함. */
+function validate(){
+	var content = $("[name=productContent]").val();
+	if(content.trim().length==0){
+		alert("내용을 입력하세요");
+		return false;
+	}
+	return true;
+}
+
+$(()=>{
+	//부트스트랩 버그 : input:file 변경시 파일명 보이기
+	$("[name=upFile]").on("change", function(){
+		if($(this).prop('files')[0] === undefined){
+			$(this).next(".custom-file-label").html("파일을 선택하세요.");
+		}
+		
+		var fileName = $(this).prop('files')[0].name;
+		$(this).next(".custom-file-label").html(fileName);
+	});
+});
+
+</script>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
