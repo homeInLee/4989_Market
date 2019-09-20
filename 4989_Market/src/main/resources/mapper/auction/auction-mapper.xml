@@ -11,5 +11,21 @@
 	<select id="auctionSelectOne" resultType="auction">
 		select * from auction where auction_no = #{auctionNo}
 	</select>
+	
+	<insert id="insertAuction" >
+			insert into auction(auction_no, auction_title, auction_writer, auction_buyer, auction_price, auction_unit_price,
+								auction_direct_price, auction_content, auction_readcount, auction_date, auction_end_Date,
+								auction_category, auction_type, auction_deldate, auction_deltype)
+				values(seq_auction_no.nextval, #{auctionTitle}, #{auctionWriter}, 'homin', #{auctionPrice}, #{auctionUnitPrice},
+						#{auctionDirectPrice}, #{auctionContent}, default, default, #{auctionEndDate},
+						#{auctionCategory}, default, default, default)
+		
+	</insert>
+	
+	<insert id="insertAttachment" >
+		insert into attachment
+				(attachment_no, board_name, board_no, originalfile_name, renamedfile_name, attachment_date, attachment_deltype)
+			values(seq_attachment_no.nextval, #{boardName}, 62, #{originalfileName}, #{renamedfileName}, default, 'N' )
+	</insert>
 
 </mapper>
