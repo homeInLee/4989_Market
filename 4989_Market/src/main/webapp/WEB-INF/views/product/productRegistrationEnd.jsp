@@ -42,17 +42,17 @@ label{
 
 <!-- 컨텐츠 영역 시작-->
 
-<%-- <form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data">
+<form action="${pageContext.request.contextPath }/productRegistrationEnd.do" enctype="multipart/form-data" >
 	<div id="Registration">
 
-		<label for="productType">분류</label>
+<!-- 		<label for="productType">분류</label>
 		<select id="productType">
 			<option value="">--분류 선택--</option>
 			<option value="house">집</option>
 			<option value="clothes">의류</option>
 			<option value="food">식품</option>
 			<option value="bicycle">자전거</option>
-		</select>
+		</select> -->
 		<br />
 		
 		<label for="writer">작성자 정보</label>
@@ -61,7 +61,7 @@ label{
 		<input type="text"  id="phone" disabled="disabled" value="" placeholder="이메일 없음"/>
 		<br />
 		<label for="title">제목</label>		
-		<input type="text" id="title" name="productTitle"/>
+		<input type="text" id="title" name="productTitle_"/>
 		<br />
 		<label for="price">가격</label>		
 		<input type="number" id="price" name="productPrice"/>원
@@ -75,7 +75,7 @@ label{
 		
 	</div>
 
-	<button type="submit">전송</button>
+	<button type="submit" onclick="checkYN();" >전송</button>
 </form>
 	<br />
 	<br />
@@ -87,8 +87,28 @@ label{
 	<br />
 	<br />
 	<br />
- --%>
+
 
 <!-- 컨텐츠 영역 끝  -->
+<script>
+/* (()=>{
+	
+function checkYN() {
+	var check=confirm('등록 하시겠습니까?');
+	
+	return check;
+})
+
+	
+}
+
+
+(()=>{
+	alert("asdasd");
+})
+ */
+</script>
+
+
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> --%>
 

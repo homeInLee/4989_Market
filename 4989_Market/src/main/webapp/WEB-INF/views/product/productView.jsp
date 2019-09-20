@@ -47,7 +47,8 @@ function updateProduct() {
 
 }
 function deleteProduct() {
-	
+	location.href = "${pageContext.request.contextPath}/product/productDelete.do?productNo=${p.sellNo}";
+
 }
 
 

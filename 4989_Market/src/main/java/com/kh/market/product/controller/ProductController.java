@@ -68,9 +68,11 @@ public class ProductController {
 		
 		
 		model.addAttribute("msg", result>0?"물품 등록 성공":"물품등록 실패");
-		model.addAttribute("loc", "/productView.do");
+		model.addAttribute("loc", "/product/productList.do");
 		
 		return "common/msg";
+
+
 	}
 	@RequestMapping("/photo_upload.do")
 	public void photoUpload() {
@@ -103,11 +105,10 @@ public class ProductController {
 		model.addAttribute("p", p);
 		return "/product/productEdit";
 	}
-	@GetMapping("/productEditEnd.do")
+	@PostMapping("/productEditEnd.do")
 	public String productEditEnd(@RequestParam String productNo,
 								 @RequestParam String productTitle,
 								 @RequestParam String productContent,
-								 @RequestParam String productState,
 								 @RequestParam String productPrice,
 								 Model model) {
 	
@@ -115,14 +116,32 @@ public class ProductController {
 		p.setSellNo(Integer.parseInt(productNo));
 		p.setSellTitle(productTitle);
 		p.setSellContent(productContent);
-		p.setSellState(productState);
 		p.setSellPrice(Integer.parseInt(productPrice));
 		
 		int result = productService.updateProduct(p);
 		
 		
-	return "/product/productList";
+		model.addAttribute("msg", result>0?"수정 성공":"수정 실패");
+		model.addAttribute("loc", "/product/productView.do?productNo="+productNo);
+		
+		return "redirect:productView.do?productNo="+productNo;
+		
+		
 	
 	}
+	@RequestMapping("/productDelete.do")
+	public String productDelete(@RequestParam String productNo, Model model) {
+		
+		int result = productService.productDelete(productNo);
+		
+		
+		model.addAttribute("msg", result>0?"삭제 성공":"삭제 실패");
+		model.addAttribute("loc", "/product/productList.do");
+		
+		return "common/msg";
+		
+
+	}
+
 
 }
