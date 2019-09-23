@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.member.model.service.MemberService;
+import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
@@ -167,6 +168,11 @@ public class ProductController {
 		model.addAttribute("pList", pList);
 		model.addAttribute("aList", aList);
 		return "/product/productSearchList";
+	}
+	@RequestMapping("/editAddress.do")
+	public String editAddress() {
+		
+		return "/product/editAddress";
 	}
 
 

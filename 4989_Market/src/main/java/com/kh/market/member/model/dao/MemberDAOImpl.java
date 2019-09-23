@@ -46,4 +46,10 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("member.memberSellDetailView",sellNo);
 	}
 
+	@Override
+	public int updateAddress(Member m) {
+		// TODO Auto-generated method stub
+		return sqlSession.update("member.updateAddress", m);
+	}
+
 }

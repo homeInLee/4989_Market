@@ -186,6 +186,28 @@ public class MemberController {
 		mav.setViewName("member/memberSellDetailView");
 		return mav;
 	}
+	@ResponseBody
+	@RequestMapping("/editAddressEnd.do")
+	public int editAddressEnd(@RequestParam String memberId,
+					 			 @RequestParam String address,
+					 			 Model model
+								) {
+		logger.info("실행되었다");
+		Member m = new Member();
+		m.setMemberId(memberId);
+		m.setMemberAddress(address);
+		logger.info(memberId);
+		logger.info(address);
+		
+		int result = memberService.updateAddress(m);
+		
+		
+		logger.info("result= {}",result);
+		
+		
+		
+		return result;
+	}
 }
 
 

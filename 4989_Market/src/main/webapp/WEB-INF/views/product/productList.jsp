@@ -9,7 +9,15 @@
 #product-img{
 	width: 90px;
 	height: 90px;
+	position: relative;
+	
 }
+#noPanel{
+	position: absolute;
+
+
+}
+
 
 ul{
 	list-style:none;
@@ -29,6 +37,7 @@ li {
 	padding-top: 100px;
 }
 
+
 </style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" >
@@ -39,8 +48,8 @@ li {
 	<ul>
 		<c:forEach items="${plist }" var="product">
 		
-		<li productNo="${product.sellNo}">
-				${product.sellNo} <br />
+		<li productNo="${product.sellNo}" >
+				<p id="noPanel">${product.sellNo} </p><br />
 				<img id="product-img" src="${pageContext.request.contextPath}/resources/images/product/noimage.png" alt="" /><br />
 				${product.sellTitle}<br />
 				판매자 ${product.sellWriter}<br />
@@ -48,7 +57,7 @@ li {
 				가격 ${product.sellPrice}&#8361;<br />
 				등록일 ${product.sellDate}<br />
 				조회수 ${product.sellReadCount}<br />		
-			
+				
 		
 		</li>
 		</c:forEach>
