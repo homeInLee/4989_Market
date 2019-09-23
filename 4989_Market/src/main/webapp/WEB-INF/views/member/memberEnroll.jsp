@@ -6,6 +6,7 @@
 <%
 	//System.out.println("memberEnroll.jsp");
 %>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="회원등록" name="pageTitle"/>
 </jsp:include>
