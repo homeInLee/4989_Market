@@ -1,6 +1,8 @@
 package com.kh.market.product.controller;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,8 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.market.auction.model.service.AuctionService;
+import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.member.model.service.MemberService;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
@@ -28,6 +32,11 @@ public class ProductController {
 	@Autowired
 	ProductService productService;
 	
+	@Autowired
+	AuctionService auctionService;
+	
+	@Autowired
+	MemberService memberService;
 	
 	@RequestMapping("/productList.do")
 	public String productView(Model model) {
@@ -141,6 +150,23 @@ public class ProductController {
 		return "common/msg";
 		
 
+	}
+	@RequestMapping(value="/productSearch.do", method=RequestMethod.GET)
+	public String productSearch(@RequestParam String searchWord, Model model) {
+		logger.info("searchWord="+searchWord);
+		List<Product> pList = productService.productSearch(searchWord);
+		List<Auction> aList = auctionService.productSearch(searchWord);
+		String[] arr = searchWord.split("\\s");
+		for(int i=0; i<arr.length; i++) {
+			pList.addAll(productService.productSearch(arr[i]));
+			aList.addAll(auctionService.productSearch(arr[i]));
+		}
+//		List<Product> pList = new ArrayList<>(new TreeSet<>(List1));
+//		List<Auction> aList = new ArrayList<>(new TreeSet<>(List2));
+		
+		model.addAttribute("pList", pList);
+		model.addAttribute("aList", aList);
+		return "/product/productSearchList";
 	}
 
 

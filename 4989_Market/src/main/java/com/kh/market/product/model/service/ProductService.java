@@ -16,6 +16,8 @@ public interface ProductService {
 
 	int productDelete(String productNo);
 
+	List<Product> productSearch(String searchWord);
+
 
 
 }

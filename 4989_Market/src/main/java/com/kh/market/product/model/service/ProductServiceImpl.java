@@ -45,5 +45,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.productDelete(productNo);
 	}
 
+	@Override
+	public List<Product> productSearch(String searchWord) {
+		return productDAO.productSearch(searchWord);
+	}
+
 
 }

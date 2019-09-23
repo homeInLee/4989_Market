@@ -51,4 +51,11 @@
 	
 	</update>
 	
+	<select id="productSearch" resultType="product" parameterType="String">
+		select * 
+		from sell 
+		where sell_deltype in ('N') and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%')
+		order by sell_no desc
+	</select>
+	
 </mapper>

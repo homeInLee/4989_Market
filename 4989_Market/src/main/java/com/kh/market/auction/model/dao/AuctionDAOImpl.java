@@ -36,6 +36,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 		System.out.println("-------------insertAttachment-------------");
 		return sqlSession.insert("auction.insertAttachment",a);
 	}
+
+	@Override
+	public List<Auction> productSearch(String searchWord) {
+		return sqlSession.selectList("auction.productSearch", searchWord);
+	}
 	
 
 }

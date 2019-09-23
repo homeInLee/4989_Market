@@ -16,4 +16,6 @@ public interface AuctionDAO {
 
 	int insertAttachment(Attachment a);
 
+	List<Auction> productSearch(String searchWord);
+
 }

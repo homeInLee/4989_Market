@@ -27,16 +27,15 @@ $(()=>{
 	});
 });
 </script>
-
 <body>
 	<header id="header">
 		<section id="header-top">
 			<h1 id="logo"><a href="${pageContext.request.contextPath}">4989 Market  <img src=""></a>
 			</h1>
 			<div id="search-box">
-				<form>
-					<input id="search-text" type="text" placeholder="어떤 상품을 찾고 계세요?">
-					<button id="search-btn">
+				<form action="${pageContext.request.contextPath}/product/productSearch.do" method="get">
+					<input id="search-text" name="searchWord" type="text" placeholder="어떤 상품을 찾고 계세요?" required>
+					<button type="submit" id="search-btn">
 						<img src="">검색
 					</button>
 				</form>
@@ -49,7 +48,7 @@ $(()=>{
 				<button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			</c:if>
 		    <c:if test="${memberLoggedIn!=null}">
-		        <span><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a> 님, 안녕하세요</span>
+		        <span id="nameNmessage"><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a>님, 안녕하세요.</span>
 		        &nbsp;
 		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
 		    </c:if>

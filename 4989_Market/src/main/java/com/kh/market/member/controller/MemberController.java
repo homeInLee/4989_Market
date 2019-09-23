@@ -24,17 +24,21 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.vo.Product;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
 import com.kh.market.member.model.service.MemberService;
 
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes("memberLoggedIn")
+@SessionAttributes(names= {"memberLoggedIn","messageCnt"})
 public class MemberController {
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	MessageService messageService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@RequestMapping("/memberEnroll.do")

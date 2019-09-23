@@ -58,4 +58,9 @@ public class AuctionServiceImpl implements AuctionService {
 		return result;
 	}
 
+	@Override
+	public List<Auction> productSearch(String searchWord) {
+		return auctionDAO.productSearch(searchWord);
+	}
+
 }

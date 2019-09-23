@@ -28,4 +28,10 @@
 			values(seq_attachment_no.nextval, #{boardName}, 62, #{originalfileName}, #{renamedfileName}, default, 'N' )
 	</insert>
 
+	<select id="productSearch" resultType="auction" parameterType="String">
+		select * 
+		from auction 
+		where auction_deltype in ('N') and (auction_title like '%'||#{searchWord}||'%' or auction_address like '%'||#{searchWord}||'%')
+		order by auction_no desc
+	</select>
 </mapper>

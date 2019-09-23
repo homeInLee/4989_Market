@@ -19,5 +19,4 @@ public interface MemberService {
 
 	Product memberSellDetailView(int sellNo);
 
-
 }
