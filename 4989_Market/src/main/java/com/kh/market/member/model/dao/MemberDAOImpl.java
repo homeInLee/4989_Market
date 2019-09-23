@@ -1,10 +1,13 @@
 package com.kh.market.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.vo.Product;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -29,6 +32,18 @@ public class MemberDAOImpl implements MemberDAO {
 	@Override
 	public int memberDelete(Member memberLoggedIn) {
 		return sqlSession.update("member.memberDelete",memberLoggedIn);
+	}
+
+	@Override
+	public List<Product> memberSellView(String memberId) {
+		
+		return sqlSession.selectList("member.memberSellView",memberId);
+	}
+
+	@Override
+	public Product memberSellDetailView(int sellNo) {
+		
+		return sqlSession.selectOne("member.memberSellDetailView",sellNo);
 	}
 
 }

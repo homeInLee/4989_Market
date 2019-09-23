@@ -2,6 +2,7 @@ package com.kh.market.member.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.vo.Product;
 import com.kh.market.member.model.service.MemberService;
 
 
@@ -158,6 +160,27 @@ public class MemberController {
 		model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
 		model.addAttribute("loc", result>0?"/member/memberLogout.do":"/member/memberView.do?memberId="+memberLoggedIn.getMemberId());
 		return "common/msg";
+	}
+	
+	@RequestMapping("/memberSellView.do")
+	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav) {
+		
+		List<Product> list=memberService.memberSellView(memberId);
+		mav.addObject("list",list);
+		mav.setViewName("member/memberSellView");
+		return mav;
+	}
+	
+	@RequestMapping("/memberSellDetailView.do")
+	public ModelAndView memberSellDetailView(@RequestParam("sellNo") int sellNo,ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Product p=memberService.memberSellDetailView(sellNo);
+		Member member = memberService.selectOneMember(memberId);
+		
+		mav.addObject("p",p);
+		mav.addObject("member",member);
+		mav.setViewName("member/memberSellDetailView");
+		return mav;
 	}
 }
 

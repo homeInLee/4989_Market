@@ -10,18 +10,34 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <style>
-div#pageBar {
-	margin-top: 10px;
-	text-align: center;	
+h2, section{
+	text-align: center;
+	position: relative;
 }
+.auction-content{
+	color:gray;
+}
+.auction-price{
+	color:#ff8a3d;
+}
+.top-card{
+	position: relative;
+	text-align: left;
+	display: inline-block;
+	margin-right: 30px;
+	margin-bottom: 35px;
+	width: calc(25% - 34px);	
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
+	
+}
+.top-card:hover{
+	cursor: pointer;
+	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+	top: -2px;
+}
+	
 
-div#pageBar span.cPage {	
-	margin-right: 5px;
-}
-
-div#pageBar a {
-	margin-right: 5px;
-}
 </style>
 <div class="menu">
   	<a class="badge badge-light" href="${pageContext.request.contextPath }/review/reviewMain.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
@@ -30,30 +46,41 @@ div#pageBar a {
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	<a class="badge badge-light" href="${pageContext.request.contextPath}/review/reviewCheckForm.do">임시 거래 평가</a>
 </div>
-<!-- ${myBasketList} -->
 
-<c:if test="${empty myBasketList}">
-	<div style="text-align: center;">장바구니가 비어있습니다</div>	
-</c:if>
-
-<div class="container">
-	<div class="row">
-		<c:forEach items="${myBasketList}" var="b">
-			<div class="col-lg-3 col-md-4 col-sm-6 mb-4">
-		      <div class="card h-70">
-		        <a href="#"><img class="card-img-top" src="http://placehold.it/700x400" alt=""></a>
-		        <div class="card-body">
-		          <h4 class="card-title">
-		            <a href="#">${b.sellTitle}</a>
-		          </h4>
-		          <p class="card-text">${b.sellPrice}원</p>
-		        </div>
-		      </div>
-		    </div>
+<h2 style="display:block">나의 판매 물품</h2>
+	<br />
+	<c:if test="${empty list}">
+		<div style="text-align: center;">나의 판매 물품이 비어있습니다</div>
+	</c:if>
+	<section>
+		<c:forEach items="${list}" var="l">
+			<article class="top-card">
+				<a href="${pageContext.request.contextPath}/member/memberSellDetailView.do?sellNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+					  	<img src="http://placehold.it/700x400" style="width:100%">
+					<div>
+					  	<br />
+					  	<h5>${l.sellTitle }</h5>
+						<div class="auction-content">
+							${l.sellContent }
+						</div>
+						<div class="auction-price">
+							<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원
+						</div>
+						<c:if test="${l.sellBuyer==null}">
+							<div>
+								판매중
+							</div>
+						</c:if>
+						<c:if test="${l.sellBuyer!=null}">
+							<div>
+								판매완료
+							</div>
+						</c:if>
+					</div>
+				</a>
+				<br /><br />
+			</article>
 		</c:forEach>
-	</div>
-</div>
-<div id='pageBar'>
-  ${pageBar}
-</div>
+	</section>
+
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
