@@ -4,7 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 	<select id="productList" resultType="product">
-		select * from sell order by sell_no desc
+		select * 
+		from sell 
+		where sell_deltype in ('N') 
+		order by sell_no desc
 	
 	
 	</select>
@@ -23,20 +26,36 @@
 	
 	</insert>
 	<select id="productView" resultType="product">
-	select * from sell where sell_no= #{productNo}
+		select * 
+		from sell 
+		where sell_no= #{productNo}
 	
 	
 	</select>
 	
 	<update id="updateProduct" parameterType="product">
-	update sell set 
-	sell_title = #{sellTitle}, 
-	sell_content = #{sellContent}, 
-	sell_state = #{sellState}, 
-	sell_price = #{sellPrice}, 
-	sell_title = #{sellTitle}
-	where sell_no = #{sellNo} 
+		update sell set 
+		sell_title = #{sellTitle}, 
+		sell_content = #{sellContent}, 
+		sell_price = #{sellPrice}
+		where sell_no = #{sellNo} 
 	
 	
 	</update>
+	
+	<update id="productDelete" parameterType="product">
+		update sell set 
+		sell_deldate = sysdate,
+		sell_deltype = 'Y'
+		where sell_no = #{productNo}
+	
+	</update>
+	
+	<select id="productSearch" resultType="product" parameterType="String">
+		select * 
+		from sell 
+		where sell_deltype in ('N') and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%')
+		order by sell_no desc
+	</select>
+	
 </mapper>

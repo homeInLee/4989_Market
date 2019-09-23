@@ -6,26 +6,31 @@
 <select id="selectNoticeMember" resultType="notice">
 	select * from notice 
 	where notice_type = 'm'
+	and notice_deltype = 'N'
 	order by notice_no desc
 </select>
 <select id="selectNoticePayment" resultType="notice">
 	select * from notice 
 	where notice_type = 'p' 
+	and notice_deltype = 'N'
 	order by notice_no desc
 </select>
 <select id="selectNoticeSell" resultType="notice">
 	select * from notice 
 	where notice_type = 's' 
+	and notice_deltype = 'N'
 	order by notice_no desc
 </select>
-<select id="selectNoticeDeclaration" resultType="notice">
+<select id="selectNoticeAuction" resultType="notice">
 	select * from notice 
-	where notice_type = 'd' 
+	where notice_type = 'a' 
+	and notice_deltype = 'N'
 	order by notice_no desc
 </select>
 <select id="selectNoticeOther" resultType="notice">
 	select * from notice 
 	where notice_type = 'o' 
+	and notice_deltype = 'N'
 	order by notice_no desc
 </select>
 <insert id="insertNotice">
@@ -40,4 +45,20 @@
 	select * from notice
 	where notice_no = #{noticeNo}
 </select>
+<update id="deleteNotice">
+	update notice set notice_deltype = 'Y'
+	where notice_no = #{noticeNo}
+</update>
+<select id="selectNoticeAll" resultType="notice">
+	select * from notice
+	where notice_deltype = 'N'
+	order by notice_no desc
+</select>
+<select id="totalContents" resultType="_int">
+	select (select count(*) from notice) from dual
+</select>
+<update id="updateReadCount">
+	update notice set notice_readcount = notice_readcount+1
+	where notice_no = #{noticeNo}
+</update>
 </mapper>

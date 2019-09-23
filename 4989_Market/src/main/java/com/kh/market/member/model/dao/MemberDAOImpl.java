@@ -1,5 +1,7 @@
 package com.kh.market.member.model.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -30,5 +32,6 @@ public class MemberDAOImpl implements MemberDAO {
 	public int memberDelete(Member memberLoggedIn) {
 		return sqlSession.update("member.memberDelete",memberLoggedIn);
 	}
+
 
 }

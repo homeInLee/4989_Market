@@ -39,5 +39,16 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.updateProduct(p);
 	}
 
+	@Override
+	public int productDelete(String productNo) {
+		// TODO Auto-generated method stub
+		return productDAO.productDelete(productNo);
+	}
+
+	@Override
+	public List<Product> productSearch(String searchWord) {
+		return productDAO.productSearch(searchWord);
+	}
+
 
 }

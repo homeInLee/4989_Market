@@ -4,19 +4,67 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<br />
-<br />
-<br />
+<style>
+#noticeViewTable{
+margin-left: 150px;
+text-align: center;}
+
+#noticeViewTable tr{
+border: 1px solid;
+width: 800px;
+}
+#noticeViewTable th{
+border: 1px solid;
+width: 100px;
+}
+#noticeViewTable td{
+border: 1px solid;
+width: 100px;
+padding: 10px;
+}
+</style>
+
 <h2>공지사항 view</h2>
+<table id="noticeViewTable">
+	<tr>
+		<th>글번호</th>
+		<td>${notice.noticeNo}</td>
+		<th>조회수</th>
+		<td>${notice.noticeReadCount}</td>
+		<th>글쓴이</th>
+		<td>${notice.noticeWriter }</td>
+	</tr>
+	<tr>
+		<th>제목</th>
+		<td colspan="5">${notice.noticeTitle }</td>
+	</tr>
+	<tr style="height: 300px;">
+		<th>내용</th>
+		<td colspan="5">${notice.noticeContent }</td>
+	</tr>
+<%-- ${notice} --%>
 
-${notice}
+</table>
 
-<input type="hidden" name="noticeNo" value="" />
-<input type="button" value="수정" onclick="${pageContext.request.contextPath}/notice/noticeUpdate"/>
-<input type="button" value="삭제" />
-<%-- ?noticeNo=${notice.getNoticeNo} --%>
-
-
+<input type="hidden" name="noticeNo" value="${noticeNo}" />
+<%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
+<input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
+<input type="button" id="noticeDelete" value="삭제" />
+<input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
+<%-- </c:if> --%>
+<script>
+$("#noticeDelete").click(function(){
+    if(!confirm("정말 삭제하시겠습니까?")){
+    	console.log("삭제취소");
+    	return false;
+    }else {
+//     	console.log("삭제");
+    	location.href="${pageContext.request.contextPath}/notice/noticeDelete?noticeNo=${noticeNo}"
+		return true;    	
+    }
+});
+	
+</script>
 
 
 

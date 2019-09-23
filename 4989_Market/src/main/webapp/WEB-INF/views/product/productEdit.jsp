@@ -42,31 +42,36 @@ label{
 <br />
 <br />
 <br />
+	<form name="boardFrm" 
+		  action="${pageContext.request.contextPath}/product/productEditEnd.do" 
+		  method="post" >
+		번호:<h4>${p.sellNo}</h4>
+		<input type="hidden" value="${p.sellNo}" name=productNo />
+		
+		제목:<input type="text" class="form-control" value="${p.sellTitle}" 
+				name="productTitle" id="productTitle" required>
 
-<form action="${pageContext.request.contextPath}/product/productEditEnd.do" method="get">
-<h4>${p.sellNo}</h4>
-<input type="hidden" value="${p.sellNo}" name=productNo />
+		
+		<label for="writer">작성자</label>
+		<input id="writer" type="text" value="${p.sellWriter }" disabled="disabled"/><br />
+		<%-- <input type="hidden" value="${p.sellWriter }" />--%>
+		<label for="buyer">구매자</label>
+		<input id="buyer" type="text" value="${p.sellBuyer }" /><br />
 
-<label for="title">제목</label>
-<input id="title" type="text" value="${p.sellTitle }" name=productTitle/><br />
+		
+	          내용:<textarea class="form-control" name="productContent" placeholder="" required>${p.sellContent }</textarea>
+	    
+	    
+	          가격:<input type="number" class="form-control" value="${p.sellPrice }" 
+		name="productPrice" id="productPrice" required>
+	    
 
-<label for="writer">작성자</label>
-<input id="writer" type="text" value="${p.sellWriter }" disabled="disabled"/><br />
-<%-- <input type="hidden" value="${p.sellWriter }" />--%>
-<label for="buyer">구매자</label>
-<input id="buyer" type="text" value="${p.sellBuyer }" /><br />
-
-<label for="content">내용</label>
-<textarea name="productContent" id="" cols="30" rows="10" >${p.sellContent }</textarea><br />
-
-<%-- <label for="state">상태</label>
-<input id="state" type="text" value="${p.sellState }" name=productState/><br /> --%>
-
-<label for="price">가격</label>
-<input id="price" type="text" value="${p.sellPrice }" name=productPrice/><br />
-
-<button type="submit">전송</button>
-</form>
+	    
+		<br />
+		<input type="submit" class="btn btn-outline-success" value="저장" >
+		
+		
+	</form>
 
 
 
@@ -75,5 +80,14 @@ label{
 
 
 
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
+
+
+
+
+
+
+
+
+<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+ --%>

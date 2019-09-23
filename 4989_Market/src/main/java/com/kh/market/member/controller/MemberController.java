@@ -95,8 +95,6 @@ public class MemberController {
 				//memberLoggedIn 세션 속성에 지정
 				//model에 지정된 속성은 requestScope속성에 담김
 				mav.addObject("memberLoggedIn", member);
-				int messageCnt = messageService.selectMessageList(memberId).size();
-				mav.addObject("messageCnt", messageCnt);
 			}
 			//3.비밀번호가 틀린 경우
 			else {

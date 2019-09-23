@@ -14,6 +14,10 @@ public interface ProductDAO {
 
 	int updateProduct(Product p);
 
+	int productDelete(String productNo);
+
+	List<Product> productSearch(String searchWord);
+
 	
 
 }

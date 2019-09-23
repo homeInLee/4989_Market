@@ -22,8 +22,8 @@ body{text-align: center;}
 	<h2>재고관리 오류</h2>
 	<p><span id="e-msg"><%=msg%></span></p>
 	<a href="<%=request.getContextPath()%>">
-		<img src="<%=request.getContextPath() %>/images/home.png" 
-			 width="30px"
+<%-- 		<img src="<%=request.getContextPath() %>/images/home.png" 
+ --%>			 width="30px"
 			 alt="메인페이지 이동" />
 	</a>
 

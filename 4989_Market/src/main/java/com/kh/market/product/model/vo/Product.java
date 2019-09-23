@@ -28,6 +28,7 @@ public class Product {
 	private int sellReadCount;
 	private Date sellDelDate;
 	private String sellDelType;
+	private String sellAddress;
 	
 	
 	
@@ -100,6 +101,12 @@ public class Product {
 	public void setSellDelType(String sellDelType) {
 		this.sellDelType = sellDelType;
 	}
+	public String getSellAddress() {
+		return sellAddress;
+	}
+	public void setSellAddress(String sellAddress) {
+		this.sellAddress = sellAddress;
+	}
 	
 	
 	
@@ -108,13 +115,13 @@ public class Product {
 		return "Product [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellWriter=" + sellWriter + ", sellBuyer="
 				+ sellBuyer + ", sellContent=" + sellContent + ", sellState=" + sellState + ", sellPrice=" + sellPrice
 				+ ", sellDate=" + sellDate + ", sellReadCount=" + sellReadCount + ", sellDelDate=" + sellDelDate
-				+ ", sellDelType=" + sellDelType + "]";
+				+ ", sellDelType=" + sellDelType + ", sellAddress=" + sellAddress + "]";
 	}
 	
 	
 	
 	public Product(int sellNo, String sellTitle, String sellWriter, String sellBuyer, String sellContent,
-			String sellState, int sellPrice, Date sellDate, int sellReadCount, Date sellDelDate, String sellDelType) {
+			String sellState, int sellPrice, Date sellDate, int sellReadCount, Date sellDelDate, String sellDelType, String sellAddress) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -127,6 +134,7 @@ public class Product {
 		this.sellReadCount = sellReadCount;
 		this.sellDelDate = sellDelDate;
 		this.sellDelType = sellDelType;
+		this.sellAddress = sellAddress;
 	}
 	
 	

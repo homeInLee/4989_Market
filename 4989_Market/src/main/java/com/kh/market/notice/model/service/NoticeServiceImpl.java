@@ -30,8 +30,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<Notice> selectNoticeDeclaration() {
-		return noticeDAO.selectNoticeDeclaration();
+	public List<Notice> selectNoticeAuction() {
+		return noticeDAO.selectNoticeAuction();
 	}
 
 	@Override
@@ -46,7 +46,27 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public Notice selectNoticeOne(int noticeNo) {
-		return noticeDAO.selectNoticeOne(noticeNo);
+		int result = noticeDAO.updateReadCount(noticeNo);
+		Notice notice = new Notice();
+		if(result > 0) {
+			notice = noticeDAO.selectNoticeOne(noticeNo);
+		}
+		return notice;
+	}
+
+	@Override
+	public int deleteNotice(int noticeNo) {
+		return noticeDAO.deleteNotice(noticeNo);
+	}
+
+	@Override
+	public List<Notice> selectNoticeAll(int cPage) {
+		return noticeDAO.selectNoticeAll(cPage);
+	}
+
+	@Override
+	public int totalContents() {
+		return noticeDAO.totalContents();
 	}
 
 	
