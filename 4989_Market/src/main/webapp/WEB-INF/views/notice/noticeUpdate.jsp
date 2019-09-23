@@ -91,6 +91,12 @@ cursor: pointer;
 				<th>첨부파일</th>
 				<td>
 					<input type="file" name="upfile" id="upfile" />
+					<div style="text-align: left;" id="original">
+					<c:forEach items="${attachMap}" var="a">
+					&nbsp;&nbsp;&nbsp;&nbsp;${a['originalfileName']}
+					<input type="button" id="attachDel" value="삭제" />
+					</c:forEach>
+					</div>
 				</td>
 			</tr>
 			

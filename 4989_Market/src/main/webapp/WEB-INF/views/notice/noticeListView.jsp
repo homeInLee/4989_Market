@@ -109,8 +109,8 @@ div#noticeListView-container{margin:0 auto;}
 	<br />
 	<div class="result" id="result">
 		<table class=table>
-		<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>
-		<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>
+		<colgroup><col width='5%'><col width='15%'><col width='45%'><col width='10%'><col width='15%'><col width='10%'></colgroup>
+		<tr><th>번호</th><th>구분</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>
 		<c:if test="${empty list }">
 			<tr>
 				<td colspan="5">데이터가 없습니다.</td>
@@ -120,6 +120,25 @@ div#noticeListView-container{margin:0 auto;}
 		<c:forEach items="${list }" var="n">
 			<tr noticeNo="${n.noticeNo}">
 				<td>${n.noticeNo }</td>
+				<c:if test="${not empty n.noticeType}">
+				<c:choose>
+					<c:when test="${n.noticeType == 'm'}">
+					<td>[회원관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'p'}">
+					<td>[결제관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 's'}">
+					<td>[중고거래관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'a'}">
+					<td>[경매관련]</td>
+					</c:when>
+					<c:when test="${n.noticeType == 'o'}">
+					<td>[기타]</td>
+					</c:when>
+				</c:choose>
+				</c:if>
 				<td>${n.noticeTitle }</td>
 				<td>${n.noticeWriter }</td>
 				<td>${n.noticeDate.substring(0,10)}</td>

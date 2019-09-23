@@ -1,23 +1,28 @@
 package com.kh.market.notice.controller;
 
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.jsp.PageContext;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+import com.kh.market.notice.model.exception.NoticeException;
 import com.kh.market.notice.model.service.NoticeService;
+import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
+import com.kh.market.common.util.HelloSpringUtils;
 
 
 @Controller
@@ -40,10 +45,10 @@ public class NoticeController {
 		List<Notice> list = noticeService.selectNoticeAll(cPage);
 		
 		int totalContents = noticeService.totalContents();
-		logger.info("totalContents="+totalContents);
+//		logger.info("totalContents="+totalContents);
 		
 		int totalPage = (int)Math.ceil((double)totalContents/NoticeService.NUM_PER_PAGE);
-		logger.info("totalPage="+totalPage);
+//		logger.info("totalPage="+totalPage);
 		
 		String pageBar = "";
 		int pageBarSize = 5;
@@ -51,9 +56,9 @@ public class NoticeController {
 		int pageStart = ((cPage-1)/pageBarSize) * pageBarSize +1 ;
 		int pageEnd = pageStart+pageBarSize-1;
 		int pageNo = pageStart;
-		logger.info("pageStart["+pageStart+"] ~ pageEnd["+pageEnd+"]");
+//		logger.info("pageStart["+pageStart+"] ~ pageEnd["+pageEnd+"]");
 		
-		logger.info("pageBar="+pageBar);
+//		logger.info("pageBar="+pageBar);
 		
 		mav.addObject("list",list);
 		mav.addObject("cPage",cPage);
@@ -126,41 +131,69 @@ public class NoticeController {
 		return mav;
 	}
 	
-	@RequestMapping(value="/noticeWriteEnd.do",
-					method=RequestMethod.POST)
-	public ModelAndView noticeWriteEnd(Notice notice,
+	@RequestMapping("/noticeWriteEnd.do")
+	public String noticeWriteEnd(Notice notice,
 								MultipartFile[] upFile,
-								ModelAndView mav,
+								Model model,
 								HttpServletRequest request) {
 		logger.info("게시글 저장 요청!");
-//		logger.debug("Notice={}",notice);
-//		logger.debug("upFile={}",upFile);
-//		logger.debug("upFile.length={}",upFile.length);
-//		logger.debug("upFile[0].name={}",upFile[0].getName());
-//		logger.debug("upFile[0].originalFileName={}",upFile[0].getOriginalFilename());
-//		logger.debug("upFile[0].size={}",upFile[0].getSize());
-//		logger.debug("upFile[1].name={}",upFile[1].getName());
-//		logger.debug("upFile[1].originalFileName={}",upFile[1].getOriginalFilename());
-//		logger.debug("upFile[1].size={}",upFile[1].getSize());
+		logger.info("Notice={}",notice);
+		logger.info("upFile={}",upFile);
+		logger.info("upFile.length={}",upFile.length);
+		logger.info("upFile[0].name={}",upFile[0].getName());
+		logger.info("upFile[0].originalFileName={}",upFile[0].getOriginalFilename());
+		logger.info("upFile[0].size={}",upFile[0].getSize());
+//		logger.info("upFile[1].name={}",upFile[1].getName());
+//		logger.info("upFile[1].originalFileName={}",upFile[1].getOriginalFilename());
+//		logger.info("upFile[1].size={}",upFile[1].getSize());
 //		
-//		try {
-//			//파일 업로드: 서버에 파일저장
-//			String saveDirectory
-//			= request.getSession()
-//					 .getServletContext()
-//					 .getRealPath("/resources/upload/board");
-//		}catch(Exception e){
-//			e.printStackTrace();
-//		}
-//		
-		int result = noticeService.insertNotice(notice);
+		try {
+			//파일 업로드: 서버에 파일저장
+			String saveDirectory
+			= request.getSession()
+					 .getServletContext()
+					 .getRealPath("/resources/upload/notice");
+			
+			List<Attachment> attachList = new ArrayList<>();
+			
+//		//MultipartFile 다루기
+		for(MultipartFile f : upFile) {
+			if(!f.isEmpty()) {
+				//renamedFileName
+				String originalFileName = f.getOriginalFilename();
+				String renamedFileName = HelloSpringUtils.getRenamedFileName(originalFileName);
+				System.out.println("originalfileName="+originalFileName);
+				System.out.println("renamedFileName="+renamedFileName);
+				
+				try {
+					//파일 실제 저장
+					f.transferTo(new File(saveDirectory+"/"+renamedFileName));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				
+				//attachment vo 객체 담기
+				Attachment attach = new Attachment();
+				attach.setOriginalfileName(originalFileName);
+				attach.setRenamedfileName(renamedFileName);
+				attach.setBoardName("N");
+				attachList.add(attach);
+				
+//				logger.info("attach={}", attach);
+//				logger.info("attachList={}", attachList);
+			}
+		}
+		int result = noticeService.insertNotice(notice, attachList);
 		
 		String msg = result > 0?"게시물 등록 성공!":"게시물 등록 실패ㅠㅠ";
-		mav.addObject("msg",msg);
-		mav.addObject("loc","/notice/noticeList.do");
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/notice/noticeList.do");
 		
-		mav.setViewName("notice/noticeList");
-		return mav;
+		}catch(Exception e) {
+			logger.error("게시물 등록 오류", e);
+			throw new NoticeException("게시물 등록 오류",e);
+		}
+		return "common/msg";
 	}
 	
 	@RequestMapping("/noticeView")
@@ -170,7 +203,9 @@ public class NoticeController {
 		logger.debug("noticeView 이동");
 		
 		Notice notice = noticeService.selectNoticeOne(noticeNo);
+		List<Map<Attachment, String>> attachMap = noticeService.selectAttachmentOne(noticeNo);
 		
+		mav.addObject("attachMap", attachMap);
 		mav.addObject("notice", notice);
 		mav.addObject("noticeNo", noticeNo);
 		mav.setViewName("/notice/noticeView");
@@ -178,11 +213,16 @@ public class NoticeController {
 		return mav;
 	}
 	
+	
+	
 	@RequestMapping("/noticeUpdate")
 	public ModelAndView noticeUpdate(ModelAndView mav,
 									@RequestParam("noticeNo")int noticeNo) {
 		logger.info("update@noticeNo="+noticeNo);
 		Notice notice = noticeService.selectNoticeOne(noticeNo);
+		List<Map<Attachment, String>> attachMap = noticeService.selectAttachmentOne(noticeNo);
+		
+		mav.addObject("attachMap", attachMap);
 		mav.addObject("notice", notice);
 		mav.setViewName("notice/noticeUpdate");
 		return mav;
@@ -195,6 +235,58 @@ public class NoticeController {
 		int result = noticeService.deleteNotice(noticeNo);
 		mav.setViewName("notice/noticeList");
 		return mav;
+	}
+	
+	@RequestMapping("/noticeWriteEnd")
+	public String noticeUpdateEnd (Notice notice,
+									MultipartFile[] upFile,
+									Model model,
+									HttpServletRequest request
+										) {
+
+		try {
+			//파일 업로드: 서버에 파일저장
+			String saveDirectory
+			= request.getSession()
+					 .getServletContext()
+					 .getRealPath("/resources/upload/notice");
+			
+			List<Attachment> attachList = new ArrayList<>();
+			
+//		//MultipartFile 다루기
+		for(MultipartFile f : upFile) {
+			if(!f.isEmpty()) {
+				//renamedFileName
+				String originalFileName = f.getOriginalFilename();
+				String renamedFileName = HelloSpringUtils.getRenamedFileName(originalFileName);
+				System.out.println("originalfileName="+originalFileName);
+				System.out.println("renamedFileName="+renamedFileName);
+				
+				try {
+					//파일 실제 저장
+					f.transferTo(new File(saveDirectory+"/"+renamedFileName));
+				}catch(Exception e){
+					e.printStackTrace();
+				}
+				Attachment attach = new Attachment();
+				attach.setOriginalfileName(originalFileName);
+				attach.setRenamedfileName(renamedFileName);
+				attach.setBoardName("N");
+				attachList.add(attach);
+			}
+		}
+		
+		int result = noticeService.updateNotice(notice);
+		String msg = result > 0?"게시물 등록 성공!":"게시물 등록 실패ㅠㅠ";
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/notice/noticeList.do");
+		
+		}catch(Exception e) {
+			logger.error("게시물 등록 오류", e);
+			throw new NoticeException("게시물 등록 오류",e);
+		}
+		
+		return "common/msg";
 	}
 	
 }
