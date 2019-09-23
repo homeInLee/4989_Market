@@ -1,7 +1,9 @@
 package com.kh.market.notice.model.service;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
 
 public interface NoticeService {
@@ -18,7 +20,7 @@ public interface NoticeService {
 
 	List<Notice> selectNoticeOther();
 
-	int insertNotice(Notice notice);
+	int insertNotice(Notice notice, List<Attachment> attachList);
 
 	Notice selectNoticeOne(int noticeNo);
 
@@ -27,6 +29,10 @@ public interface NoticeService {
 	List<Notice> selectNoticeAll(int cPage);
 
 	int totalContents();
+
+	List<Map<Attachment, String>> selectAttachmentOne(int noticeNo);
+
+	int updateNotice(Notice notice);
 
 
 }

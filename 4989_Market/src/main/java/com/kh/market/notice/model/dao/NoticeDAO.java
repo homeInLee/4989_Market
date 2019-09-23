@@ -1,7 +1,9 @@
 package com.kh.market.notice.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
 
 public interface NoticeDAO {
@@ -27,5 +29,11 @@ public interface NoticeDAO {
 	int totalContents();
 
 	int updateReadCount(int noticeNo);
+
+	int insertAttachment(Attachment a);
+
+	int selectNoticeNo();
+
+	List<Map<Attachment, String>> selectAttachmentOne(int noticeNo);
 
 }
