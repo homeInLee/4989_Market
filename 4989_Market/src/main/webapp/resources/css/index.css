@@ -1,0 +1,42 @@
+@charset "UTF-8";
+ul{
+	list-style: none;
+	
+}
+#main-row{
+	width: 25%;
+	float: left;
+	min-height: 327px;
+}
+#card-box{
+	background: #fff;
+	display: block;
+	border: 1px solid #e5e5e5;
+	cursor: pointer;
+}
+#proimage{
+	width: 100%;
+	background: #000;
+	position: relative;
+	padding-top: 100%;
+	overflow: hidden;
+}
+img{
+	vertical-align: top;
+}
+#cont{
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	overflow: hidden;
+}
+#item-title{
+	color: #4e4e4c;
+	font-size: 17px;
+	line-height: 22px;
+	margin-top: 14px;
+}
+#item-price{
+	color: #000;
+	font-size: 22px;
+	padding-bottom: 10px;
+}

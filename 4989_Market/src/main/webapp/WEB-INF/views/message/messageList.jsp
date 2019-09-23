@@ -3,12 +3,56 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <fmt:requestEncoding value="utf-8"/>
+<style>
+.submenu{
+	text-align: center;
+	padding-bottom: 30px;
+}
+#submenu-btn{
+	text-decoration: none;
+	text-shadow: 0 0 24px #8c59b9;
+	margin: 30px;
+	
+}
+#messageList{
+width: 800px;
+margin: auto;
+text-align: center;
+padding-top: 30px;
+}
+#messageList th{
+border-bottom: 1px solid #1b5ac2;
+}
+#messageList tr:hover{
+background-color: #f5f5f5;
+}
+#send{
+text-align: center;
+background: none;
+display: block;
+margin: 0 auto;
+padding-top: 30px;
+text-shadow: 0 0 24px #8c59b9;
+}
+#delete, #reply{
+background-color: #403E8C;
+  color: white;
+  border: 2px solid #403E8C;
+  margin-top: 5px;
+}
+#delete:hover, #reply:hover {
+	background: white;
+	color: black;
+}
+	
+</style>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
-<div class="menu">
-  	<a class="badge badge-light" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}">받은 쪽찌함</a>
-  	<a class="badge badge-light" href="${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}">보낸 쪽찌함</a>
+<div class="submenu">
+  	<a id="submenu-btn" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}">받은 쪽지함</a>
+  	<a id="submenu-btn" href="${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}">보낸 쪽지함</a>
 </div>
 	<div id="">
 	<c:if test="${memberLoggedIn != null }">
