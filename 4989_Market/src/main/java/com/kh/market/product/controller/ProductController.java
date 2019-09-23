@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
@@ -142,6 +143,14 @@ public class ProductController {
 		
 
 	}
+	@RequestMapping("/editAddress.do")
+	public String editAddress() {
+		
+		return "/product/editAddress";
+	}
+	
+	
+
 
 
 }

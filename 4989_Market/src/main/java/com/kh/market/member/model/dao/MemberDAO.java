@@ -12,5 +12,7 @@ public interface MemberDAO {
 
 	int memberDelete(Member memberLoggedIn);
 
+	int updateAddress(Member m);
+
 
 }

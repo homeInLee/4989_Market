@@ -34,4 +34,12 @@
 		member_deltype = 'Y', member_deldate = sysdate
 		where member_id = #{memberId}
 	</update>
+	
+	<update id="updateAddress" parameterType="member">
+		update member set 
+		member_address = #{memberAddress}
+		where member_id = #{memberId}
+	
+	
+	</update>
 </mapper>

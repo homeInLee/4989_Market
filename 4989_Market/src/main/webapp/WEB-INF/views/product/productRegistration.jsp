@@ -81,6 +81,8 @@ label{
 							<input type="hidden" name="productWriter" value="admin"/>
 							<input type="text"  id="phone" disabled="disabled" value="01015412215" class="form-control"/>
 							<input type="text"  id="email" disabled="disabled" value="" placeholder="이메일 없음" class="form-control"/>
+							<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
+							<button type="button" onclick="editable();">변경</button>
 							</div>
 						</td>
 					
@@ -132,26 +134,12 @@ label{
 		</form>
 		
 	</div>
-		<!-- <label for="attachPhoto">사진첨부</label>
-		<input type="file"  id="attachPhoto" name="attachPhoto"/>
-		 -->
 
-
-<!-- 			(이미지 등록)
-			<form id="ajaxform" action="/upload" method="post" enctype="multipart/form-data">
-			    <input type="file" multiple id="photo_upload">
-			    <output id="list"></output>
-			    <button id="files_send">완료</button>
-			</form> -->
-			
-			
-<!-- <form name="PhotoUploadFrm" id="PhotoUploadFrm" method="post" enctype="multipart/form-data">
-    <input type="file" name="upfile" id="upfile">
+<form id="ajaxform" action="/upload" method="post" enctype="multipart/form-data">
+    <input type="file" multiple id="photo_upload">
+    <output id="list"></output>
+    <input type="button" value="완료" id="files_send">
 </form>
- 
- 
-<a href="javascript:upload();">등록</a> -->
-
 
 
 
@@ -164,7 +152,25 @@ function checkYN() {
 }
 
 </script>
+<script>
 
+	function editable() {
+		window.open("${pageContext.request.contextPath}/product/editAddress.do","주소 변경하기", "width=400, height=300,left=100,top=50")
+		/* $("#sell-address").removeAttr('disabled'); */
+		window.location.reload('#sell-address');
+	}
+/* $(()=>{
+	
+	
+	$("input[id=sell-address]").click(function() {
+	})
+	
+}) */
+
+	
+
+
+</script>
 
 <!-- 컨텐츠 영역 끝  -->
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> --%>
