@@ -17,8 +17,8 @@ public class AuctionDAOImpl implements AuctionDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Map<String, String>> auctionList() {
-		return sqlSession.selectList("auction.auctionList");
+	public List<Map<String, String>> auctionForList() {
+		return sqlSession.selectList("auction.auctionForList");
 	}
 
 	@Override
@@ -40,6 +40,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 	@Override
 	public List<Auction> productSearch(String searchWord) {
 		return sqlSession.selectList("auction.productSearch", searchWord);
+	}
+
+	@Override
+	public int selectBoardNo() {
+		return sqlSession.selectOne("auction.selectBoardNo");
 	}
 	
 

@@ -45,12 +45,12 @@ h2, section{
 		<c:forEach items="${auctionList }" var="a">
 			<article class="top-card">
 				<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}" style="text-decoration: none;">
-					  	<img src="${pageContext.request.contextPath }/resources/images/mac.jpg" style="width:100%">
+					  	<img src="${pageContext.request.contextPath }/resources/upload/auction/${a.renamedfileName }" style="width:100%">
 					<div>
 					  	<br />
 					  	<h5>${a.auctionTitle }</h5>
 						<div class="auction-content">
-							${a.auctionContent }
+							${a.auctionAddress }
 						</div>
 						<div class="auction-price">
 							<fmt:formatNumber value="${a.auctionPrice }" pattern="#,###" />원

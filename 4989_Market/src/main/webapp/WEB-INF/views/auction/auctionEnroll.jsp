@@ -47,6 +47,14 @@ div#memberId-container span.error{color:red;}
 				</td>
 			</tr>
 			<tr>
+				<th>거래 지역</th>
+				<td>
+					<div id="auction-container">
+						<input type="text" class="form-control"  name="auctionAddress" id="auctionAddress" required>
+					</div>
+				</td>
+			</tr>
+			<tr>
 				<th>경매시작 가격</th>
 				<td>
 					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" required>
