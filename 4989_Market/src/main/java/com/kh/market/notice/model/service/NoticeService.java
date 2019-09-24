@@ -32,7 +32,9 @@ public interface NoticeService {
 
 	List<Map<Attachment, String>> selectAttachmentOne(int noticeNo);
 
-	int updateNotice(Notice notice);
+	int noticeUpdateEnd(Notice notice);
+
+	List<String> selectOldFile(int noticeNo);
 
 
 }
