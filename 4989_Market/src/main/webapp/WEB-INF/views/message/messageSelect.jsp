@@ -61,6 +61,10 @@ padding: 15px;
 		<input class="log" type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${message.messageReciver }&messageReciver=${message.messageWriter }'"/>
 		<input class="log" type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/message/messageDelete.do?messageNo=${message.messageNo}&memberId=${message.messageReciver }'" />
 		</c:if>
+		<c:if test="${message.messageReview eq 'Y'}">
+			<!-- 여기서부터 하자 -->
+			<input class="log" type="button" value="설문조사" onclick="#"/>
+		</c:if>
 	</div>
 	
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

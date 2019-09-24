@@ -28,4 +28,8 @@
   <update id="messageRead">
   	update message set message_read_state = 'Y' where message_no = #{messageNo}
   </update>
+  <insert id="messageReview">
+  	insert into message (message_no, message_title, message_writer,message_reciver,message_content,message_review) values(
+	seq_message_no.nextval,#{messageTitle},#{messageWriter}, #{messageReciver}, #{messageContent}, #{messageReview})
+  </insert>
 </mapper>

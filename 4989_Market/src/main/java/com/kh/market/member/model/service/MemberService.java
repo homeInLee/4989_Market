@@ -17,10 +17,6 @@ public interface MemberService {
 
 	int memberDelete(Member memberLoggedIn);
 
-	List<Product> memberSellView(String memberId);
-
-	Product memberSellDetailView(int sellNo);
-
 	int updateAddress(Member m);
 
 }

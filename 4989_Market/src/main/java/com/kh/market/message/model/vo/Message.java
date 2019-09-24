@@ -10,6 +10,7 @@ public class Message {
 	private String messageReciver;
 	private String messageContent;
 	private String messageReadState;
+	private String messageReview;
 	private Timestamp messageDate;
 	private Timestamp messageDeldate;
 	private String messageDeltype;
@@ -18,7 +19,8 @@ public class Message {
 		// TODO Auto-generated constructor stub
 	}
 	public Message(int messageNo, String messageTitle, String messageWriter, String messageReciver,
-			String messageContent, String messageReadState, Timestamp messageDate, Timestamp messageDeldate,
+			String messageContent, String messageReadState, String messageReview,Timestamp messageDate, 
+			Timestamp messageDeldate,
 			String messageDeltype) {
 		super();
 		this.messageNo = messageNo;
@@ -27,6 +29,7 @@ public class Message {
 		this.messageReciver = messageReciver;
 		this.messageContent = messageContent;
 		this.messageReadState = messageReadState;
+		this.messageReview=messageReview;
 		this.messageDate = messageDate;
 		this.messageDeldate = messageDeldate;
 		this.messageDeltype = messageDeltype;
@@ -85,12 +88,19 @@ public class Message {
 	public void setMessageDeltype(String messageDeltype) {
 		this.messageDeltype = messageDeltype;
 	}
+	public String getMessageReview() {
+		return messageReview;
+	}
+	public void setMessageReview(String messageReview) {
+		this.messageReview = messageReview;
+	}
 	@Override
 	public String toString() {
 		return "Message [messageNo=" + messageNo + ", messageTitle=" + messageTitle + ", messageWriter=" + messageWriter
 				+ ", messageReciver=" + messageReciver + ", messageContent=" + messageContent + ", messageReadState="
-				+ messageReadState + ", messageDate=" + messageDate + ", messageDeldate=" + messageDeldate
-				+ ", messageDeltype=" + messageDeltype + "]";
+				+ messageReadState + ", messageReview=" + messageReview + ", messageDate=" + messageDate
+				+ ", messageDeldate=" + messageDeldate + ", messageDeltype=" + messageDeltype + "]";
 	}
+	
 	
 }

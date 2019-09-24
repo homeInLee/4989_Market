@@ -44,4 +44,10 @@ public class MessageDAOImpl implements MessageDAO {
 		return session.update("message.messageRead", messageNo);
 	}
 
+	@Override
+	public int messageReview(Message m) {
+		
+		return session.insert("message.messageReview",m);
+	}
+
 }

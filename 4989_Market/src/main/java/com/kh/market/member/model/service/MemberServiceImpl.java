@@ -36,17 +36,7 @@ public class MemberServiceImpl implements MemberService {
 	public int memberDelete(Member memberLoggedIn) {
 		return memberDAO.memberDelete(memberLoggedIn);
 	}
-
-	@Override
-	public List<Product> memberSellView(String memberId) {
-		
-		return memberDAO.memberSellView(memberId);
-	}
-
-	@Override
-	public Product memberSellDetailView(int sellNo) {
-		return memberDAO.memberSellDetailView(sellNo);
-	}
+	
 	public int updateAddress(Member m) {
 		// TODO Auto-generated method stub
 		return memberDAO.updateAddress(m);

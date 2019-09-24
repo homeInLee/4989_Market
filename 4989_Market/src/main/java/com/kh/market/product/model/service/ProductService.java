@@ -18,6 +18,10 @@ public interface ProductService {
 
 	List<Product> productSearch(String searchWord);
 
+	List<Product> memberSellView(String memberId);
 
+	Product memberSellDetailView(int sellNo);
+
+	int sellComplete(int sellNo);
 
 }

@@ -35,18 +35,6 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Product> memberSellView(String memberId) {
-		
-		return sqlSession.selectList("member.memberSellView",memberId);
-	}
-
-	@Override
-	public Product memberSellDetailView(int sellNo) {
-		
-		return sqlSession.selectOne("member.memberSellDetailView",sellNo);
-	}
-
-	@Override
 	public int updateAddress(Member m) {
 		// TODO Auto-generated method stub
 		return sqlSession.update("member.updateAddress", m);

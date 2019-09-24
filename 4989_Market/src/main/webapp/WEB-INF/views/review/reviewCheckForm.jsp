@@ -424,7 +424,6 @@ $(function(){
     }; 
 });	
 </script>
-<jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
  
   
   <div class="container-fluid">

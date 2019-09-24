@@ -18,4 +18,6 @@ public interface MessageService {
 
 	int messageRead(String messageNo);
 
+	int messageReview(Message m);
+
 }

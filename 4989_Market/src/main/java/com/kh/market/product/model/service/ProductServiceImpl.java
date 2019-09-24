@@ -50,5 +50,21 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.productSearch(searchWord);
 	}
 
+	@Override
+	public List<Product> memberSellView(String memberId) {
+		
+		return productDAO.memberSellView(memberId);
+	}
+
+	@Override
+	public Product memberSellDetailView(int sellNo) {
+		return productDAO.memberSellDetailView(sellNo);
+	}
+
+	@Override
+	public int sellComplete(int sellNo) {
+		
+		return productDAO.sellComplete(sellNo);
+	}
 
 }

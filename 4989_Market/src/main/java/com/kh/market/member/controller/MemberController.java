@@ -166,26 +166,6 @@ public class MemberController {
 		return "common/msg";
 	}
 	
-	@RequestMapping("/memberSellView.do")
-	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav) {
-		
-		List<Product> list=memberService.memberSellView(memberId);
-		mav.addObject("list",list);
-		mav.setViewName("member/memberSellView");
-		return mav;
-	}
-	
-	@RequestMapping("/memberSellDetailView.do")
-	public ModelAndView memberSellDetailView(@RequestParam("sellNo") int sellNo,ModelAndView mav,@RequestParam("memberId") String memberId) {
-		
-		Product p=memberService.memberSellDetailView(sellNo);
-		Member member = memberService.selectOneMember(memberId);
-		
-		mav.addObject("p",p);
-		mav.addObject("member",member);
-		mav.setViewName("member/memberSellDetailView");
-		return mav;
-	}
 	@ResponseBody
 	@RequestMapping("/editAddressEnd.do")
 	public int editAddressEnd(@RequestParam String memberId,

@@ -14,11 +14,14 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
@@ -39,6 +42,8 @@ public class ProductController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	MessageService messageService;
 	@RequestMapping("/productList.do")
 	public String productView(Model model) {
 		
@@ -174,6 +179,48 @@ public class ProductController {
 		
 		return "/product/editAddress";
 	}
-
+	
+	@RequestMapping("/memberSellView.do")
+	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav) {
+		
+		List<Product> list=productService.memberSellView(memberId);
+		mav.addObject("list",list);
+		mav.setViewName("member/memberSellView");
+		return mav;
+	}
+	
+	@RequestMapping("/memberSellDetailView.do")
+	public ModelAndView memberSellDetailView(@RequestParam("sellNo") int sellNo,ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Product p=productService.memberSellDetailView(sellNo);
+		Member member = memberService.selectOneMember(memberId);
+		
+		mav.addObject("p",p);
+		mav.addObject("member",member);
+		mav.setViewName("member/memberSellDetailView");
+		return mav;
+	}
+	
+	@RequestMapping("/sellComplete.do")
+	public ModelAndView sellComplete(ModelAndView mav,@RequestParam("sellNo") int sellNo,@RequestParam("sellWriter") String sellWriter,@RequestParam("sellBuyer") String sellBuyer) {
+		int result1=productService.sellComplete(sellNo);
+		Product p=productService.memberSellDetailView(sellNo);
+		Message m=new Message(0, sellWriter+"님과의 거래가 완료되었습니다", sellWriter, sellBuyer, "구매물품 제목:"+p.getSellTitle()+",가격:"+p.getSellPrice(), null,"Y" ,null, null, null);
+		int result2=messageService.messageReview(m);
+		
+		String msg="";
+		String loc="";
+		if(result1>0&&result2>0) {
+			msg="판매완료확정 성공";
+			loc="/product/memberSellView.do?memberId="+sellWriter;
+		}else {
+			msg="판매완료확정 실패";
+			loc="/product/memberSellDetailView.do?sellNo="+sellNo+"&memberId="+sellWriter;
+		}
+		mav.addObject("msg",msg);
+		mav.addObject("loc",loc);
+		mav.setViewName("common/msg");
+		return mav;
+	}
 
 }

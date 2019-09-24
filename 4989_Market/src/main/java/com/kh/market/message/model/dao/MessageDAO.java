@@ -18,4 +18,6 @@ public interface MessageDAO {
 
 	int messageRead(String messageNo);
 
+	int messageReview(Message m);
+
 }

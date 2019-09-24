@@ -14,10 +14,6 @@ public interface MemberDAO {
 	int memberUpdate(Member member);
 
 	int memberDelete(Member memberLoggedIn);
-
-	List<Product> memberSellView(String memberId);
-
-	Product memberSellDetailView(int sellNo);
 	
 	int updateAddress(Member m);
 

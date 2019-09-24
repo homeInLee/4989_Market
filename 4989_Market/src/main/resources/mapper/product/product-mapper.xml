@@ -58,4 +58,13 @@
 		order by sell_no desc
 	</select>
 	
+	<select id="memberSellView" resultType="product">
+		select * from sell where sell_writer=#{memberId}
+	</select>
+	<select id="memberSellDetailView" resultType="product">
+		select * from sell where sell_no=#{sellNo}
+	</select>
+	<update id="sellComplete">
+		update sell set sell_state='soldout' where sell_no=#{sellNo}
+	</update>
 </mapper>

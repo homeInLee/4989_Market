@@ -52,7 +52,23 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.productSearch", searchWord);
 	}
 
+	@Override
+	public List<Product> memberSellView(String memberId) {
+		
+		return sqlSession.selectList("product.memberSellView",memberId);
+	}
 
+	@Override
+	public Product memberSellDetailView(int sellNo) {
+		
+		return sqlSession.selectOne("product.memberSellDetailView",sellNo);
+	}
+
+	@Override
+	public int sellComplete(int sellNo) {
+		
+		return sqlSession.update("product.sellComplete",sellNo);
+	}
 	
 	
 }
