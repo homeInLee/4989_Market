@@ -1,6 +1,9 @@
 package com.kh.market.member.model.dao;
 
+import java.util.List;
+
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.vo.Product;
 
 public interface MemberDAO {
 
@@ -12,6 +15,10 @@ public interface MemberDAO {
 
 	int memberDelete(Member memberLoggedIn);
 
+	List<Product> memberSellView(String memberId);
+
+	Product memberSellDetailView(int sellNo);
+	
 	int updateAddress(Member m);
 
 

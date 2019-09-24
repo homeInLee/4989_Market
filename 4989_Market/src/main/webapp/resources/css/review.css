@@ -1,0 +1,11 @@
+@charset "UTF-8";
+.submenu{
+	text-align: center;
+	padding-bottom: 30px;
+}
+#review-btn{
+	text-decoration: none;
+	text-shadow: 0 0 24px #8c59b9;
+	margin: 30px;
+	
+}

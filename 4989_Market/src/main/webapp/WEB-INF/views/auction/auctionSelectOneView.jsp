@@ -3,6 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value= "경매제품 상세보기" name="pageTitle"/>
@@ -234,6 +235,7 @@ a{
 		<h3 style="padding:32px 0;">${auctionSelectOne.auctionTitle}</h3>
 		<p>${auctionSelectOne.auctionContent}</p>
 		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.auctionReadcount }</p>
+		<jsp:include page="/WEB-INF/views/comment/comment.jsp"></jsp:include>
 	</div>
 	
 	<hr />

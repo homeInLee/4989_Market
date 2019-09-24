@@ -47,6 +47,11 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.update("product.productDelete", productNo);
 	}
 
+	@Override
+	public List<Product> productSearch(String searchWord) {
+		return sqlSession.selectList("product.productSearch", searchWord);
+	}
+
 
 	
 	

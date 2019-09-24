@@ -14,4 +14,6 @@ public interface AuctionService {
 
 	int insertAuction(Auction auction, List<Attachment> attachList);
 
+	List<Auction> productSearch(String searchWord);
+
 }

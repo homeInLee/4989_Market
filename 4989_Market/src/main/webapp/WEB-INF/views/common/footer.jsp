@@ -3,7 +3,8 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%> 
- <footer id="footer"> 
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
+ <footer id="footer">
         <article>
            <p>
                 상호명 : 4989 마켓  |  대표 : 이호민  |  영업소재지 : 서울특별시 강남구 테헤란로 10 10길 9 <br>

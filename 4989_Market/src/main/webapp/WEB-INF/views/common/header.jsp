@@ -7,11 +7,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>시작페이지</title>
+<title>4989Market</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/main.css">
 <!-- 부트스트랩관련 라이브러리 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
+<link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
 	
@@ -27,16 +28,15 @@ $(()=>{
 	});
 });
 </script>
-
 <body>
 	<header id="header">
 		<section id="header-top">
 			<h1 id="logo"><a href="${pageContext.request.contextPath}">4989 Market  <img src=""></a>
 			</h1>
 			<div id="search-box">
-				<form>
-					<input id="search-text" type="text" placeholder="어떤 상품을 찾고 계세요?">
-					<button id="search-btn">
+				<form action="${pageContext.request.contextPath}/product/productSearch.do" method="get">
+					<input id="search-text" name="searchWord" type="text" placeholder="어떤 상품을 찾고 계세요?" required>
+					<button type="submit" id="search-btn">
 						<img src="">검색
 					</button>
 				</form>
@@ -49,7 +49,7 @@ $(()=>{
 				<button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			</c:if>
 		    <c:if test="${memberLoggedIn!=null}">
-		        <span><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a> 님, 안녕하세요</span>
+		        <span id="nameNmessage"><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a>님, 안녕하세요.</span>
 		        &nbsp;
 		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
 		    </c:if>
@@ -58,7 +58,7 @@ $(()=>{
 		<hr>
 		<section id="header-bottom">
 			<div id="header-catagory">
-<ul id="menu">
+			<ul id="menu">
 					<li>
 						<a href="${pageContext.request.contextPath }/product/productList.do">상품</a>
 						<ul>
@@ -96,6 +96,7 @@ $(()=>{
 			</div>
 		</section>
 	</header>
+	<hr>
 	<!-- 로그인모달 : https://getbootstrap.com/docs/4.1/components/modal/#live-demo -->
 	<div class="modal fade" id="loginModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
 		<div class="modal-dialog" role="document">

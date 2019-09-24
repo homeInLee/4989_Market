@@ -1,9 +1,11 @@
 package com.kh.market.member.model.service;
 
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.vo.Product;
 
 public interface MemberService {
 
@@ -14,6 +16,10 @@ public interface MemberService {
 	int memberUpdate(Member member);
 
 	int memberDelete(Member memberLoggedIn);
+
+	List<Product> memberSellView(String memberId);
+
+	Product memberSellDetailView(int sellNo);
 
 	int updateAddress(Member m);
 

@@ -2,6 +2,7 @@ package com.kh.market.member.controller;
 
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,17 +23,22 @@ import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.vo.Product;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
 import com.kh.market.member.model.service.MemberService;
 
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes("memberLoggedIn")
+@SessionAttributes(names= {"memberLoggedIn","messageCnt"})
 public class MemberController {
 	@Autowired
 	MemberService memberService;
 	@Autowired
 	BCryptPasswordEncoder passwordEncoder;
+	@Autowired
+	MessageService messageService;
 	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	@RequestMapping("/memberEnroll.do")
@@ -160,6 +166,26 @@ public class MemberController {
 		return "common/msg";
 	}
 	
+	@RequestMapping("/memberSellView.do")
+	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav) {
+		
+		List<Product> list=memberService.memberSellView(memberId);
+		mav.addObject("list",list);
+		mav.setViewName("member/memberSellView");
+		return mav;
+	}
+	
+	@RequestMapping("/memberSellDetailView.do")
+	public ModelAndView memberSellDetailView(@RequestParam("sellNo") int sellNo,ModelAndView mav,@RequestParam("memberId") String memberId) {
+		
+		Product p=memberService.memberSellDetailView(sellNo);
+		Member member = memberService.selectOneMember(memberId);
+		
+		mav.addObject("p",p);
+		mav.addObject("member",member);
+		mav.setViewName("member/memberSellDetailView");
+		return mav;
+	}
 	@ResponseBody
 	@RequestMapping("/editAddressEnd.do")
 	public int editAddressEnd(@RequestParam String memberId,
@@ -182,8 +208,6 @@ public class MemberController {
 		
 		return result;
 	}
-	
-	
 }
 
 

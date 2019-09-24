@@ -19,6 +19,7 @@ public class Auction {
 	private String auctionCategory;
 	private Date auctionDeldate;
 	private String auctionDeltype;
+	private String auctionAddress;
 
 	public Auction() {
 		super();
@@ -28,7 +29,7 @@ public class Auction {
 	public Auction(int auctionNo, String auctionTitle, String auctionWriter, String auctionBuyer, int auctionPrice,
 			int auctionDirectPrice, int auctionUnitPrice, String auctionContent, int auctionReadcount, Date auctionDate,
 			Date auctionEndDate, String auctionType, String auctionCategory, Date auctionDeldate,
-			String auctionDeltype) {
+			String auctionDeltype, String auctionAddress) {
 		super();
 		this.auctionNo = auctionNo;
 		this.auctionTitle = auctionTitle;
@@ -45,6 +46,7 @@ public class Auction {
 		this.auctionCategory = auctionCategory;
 		this.auctionDeldate = auctionDeldate;
 		this.auctionDeltype = auctionDeltype;
+		this.auctionAddress = auctionAddress;
 	}
 
 	@Override
@@ -54,7 +56,7 @@ public class Auction {
 				+ auctionDirectPrice + ", auctionUnitPrice=" + auctionUnitPrice + ", auctionContent=" + auctionContent
 				+ ", auctionReadcount=" + auctionReadcount + ", auctionDate=" + auctionDate + ", auctionEndDate="
 				+ auctionEndDate + ", auctionType=" + auctionType + ", auctionCategory=" + auctionCategory
-				+ ", auctionDeldate=" + auctionDeldate + ", auctionDeltype=" + auctionDeltype + "]";
+				+ ", auctionDeldate=" + auctionDeldate + ", auctionDeltype=" + auctionDeltype + ", auctionAddress=" + auctionAddress + "]";
 	}
 
 	public int getAuctionNo() {
@@ -177,7 +179,12 @@ public class Auction {
 		this.auctionDeltype = auctionDeltype;
 	}
 	
-	
+	public String getAuctionAddress() {
+		return auctionAddress;
+	}
+	public void setAuctionAddress(String auctionAddress) {
+		this.auctionAddress = auctionAddress;
+	}
 	
 }
 	

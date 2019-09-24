@@ -4,6 +4,13 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="basket">
 	<select id="basketView" resultType="product">
-		select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype from sell S join basket B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
+		select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype,filecount from sell S join (select A.*,
+		(select count(*) from basket 
+		where basket_sell_no=A.basket_sell_no) filecount
+		from basket A where basket_member_id=#{basketMemberId} order by basket_sell_no desc) B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
+	</select>
+	
+	<select id="totalBasketCount" resultType="basket">
+		select * from basket where basket_member_id=#{basketMemberId}
 	</select>
 </mapper>

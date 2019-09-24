@@ -61,4 +61,18 @@
 	update notice set notice_readcount = notice_readcount+1
 	where notice_no = #{noticeNo}
 </update>
+<insert id="noticeInsertAttachment">
+	insert into attachment(attachment_no,board_name,board_no,originalfile_name,renamedfile_name) values(
+	seq_attachment_no.nextval,
+	#{boardName},
+	#{boardNo},
+	#{originalfileName},
+	#{renamedfileName})
+</insert>
+<select id="selectNoticeNo" resultType="_int">
+	select seq_notice_no.currval from dual
+</select>
+<select id="selectAttachmentOne" resultType="noticeAttachement">
+	select * from attachment where board_name = 'N' and board_no = #{noticeNo}
+</select>
 </mapper>
