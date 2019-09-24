@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="comment">
+	<insert id="commentInsert">
+		insert into market_comment (COMMENT_NO, COMMENT_WRITER, COMMENT_CONTENT, COMMENT_REF)
+		values(seq_comment_no.nextval, #{commentWriter}, #{commentContent}, #{commentREF})
+	</insert>
+	<!-- <select id="commentList" resultType="comment">
+		select * from market_comment
+		where comment_no = #{commentNo} 
+	</select> -->
+</mapper>

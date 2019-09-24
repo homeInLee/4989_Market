@@ -19,9 +19,13 @@
 			<table>
 				<tr>
 					<td>
-						<textarea style="width: 800px" rows="3" cols="30" id="comment" placeholder="댓글을 입려하세요"></textarea>
+						<input type="hidden" name="commentREF" value="41">
+						<textarea style="width: 800px" rows="3" cols="30" name="commentContent" id="comment" placeholder="댓글을 입력하세요"></textarea>
+						<input type="hidden" name="commentWriter" value="admin" >
 						<br />
-						<a href="#" onclick="send_comment();">등록</a>
+						<%-- <c:if test="${memberLoggedIn != null }"> --%>
+						<input type="button" id="btn-send" value="등록">
+						<%-- </c:if> --%>
 					</td>
 				</tr>
 			</table>
@@ -29,75 +33,43 @@
 		<input type="hidden" id="">
 	</form>
 </div>
-<div id="container">
-	<form id="commentListFrm" method="post">
-		<div id="commentList">
-		</div>
-	</form>
-</div>
+	<div id="commentList">
+		<table>
+			<c:forEach items="${commentList }" var="c">
+				<tr>
+					<td><input type="hidden" name="auctionNo">
+						${c.commentNo}</td>
+					<td>${c.commentLevel }</td>
+					<td>${c.commentWriter }</td>
+					<td>${c.commentContent }</td>
+					<td>${c.commentREF }</td>
+					<td>${c.commentDate }</td>
+				</tr>
+			</c:forEach>
+		</table>
+	</div>
+
 <script>
-function send_comment() {
-	$.ajax({
-        type:'POST',
-        url : '/comment/commentInsert.do',
-        data:$("#commentFrm").serialize(),
-        success : function(data){
-            if(data=="success")
-            {
-                getCommentList();
-                $("#comment").val("");
-            }
-        },
-        error:function(request,status,error){
-            console("실패!!");
-       }
-        
-    });
-}
-	
-	$(function() {
-		getCommentList();
+$(()=>{
+	$("#commentFrm #btn-send").on("click", ()=>{
+		var comment = {};
+		comment.commentWriter = $("#commentFrm [name=commentWriter]").val();
+		comment.commentContent = $("#commentFrm [name=commentContent]").val();
+		comment.commentREF = $("#commentFrm [name=commentREF]").val();
+		console.log(comment);		
+		$.ajax({
+			url: "${pageContext.request.contextPath}/comment/commentInsert",
+			data: comment,
+			dataType: "json",
+			type: "POST",
+			success: (data)=>{
+				console.log(data);
+			},
+			error: (xhr, txtStatus, err)=>{
+				console.log("ajax처리실패!", xhr, txtStatus, err);
+			}
+		});
 	});
-function commentList() {
-	 $.ajax({
-	        type:'GET',
-	        url : '/comment/commentList.do',
-	        dataType : "json",
-	        data:$("#commentListFrm").serialize(),
-	        contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
-	        success : function(data){
-	            
-	            var html = "";
-	            var cCnt = data.length;
-	            
-	            if(data.length > 0){
-	                
-	                for(i=0; i<data.length; i++){
-	                    html += "<div>";
-	                    html += "<div><table class='table'><h6><strong>"+data[i].commentWriter+"</strong></h6>";
-	                    html += data[i].comment + "<tr><td></td></tr>";
-	                    html += "</table></div>";
-	                    html += "</div>";
-	                }
-	                
-	            } else {
-	                
-	                html += "<div>";
-	                html += "<div><table class='table'><h6><strong>등록된 댓글이 없습니다.</strong></h6>";
-	                html += "</table></div>";
-	                html += "</div>";
-	                
-	            }
-	            
-	            $("#cCnt").html(cCnt);
-	            $("#commentListFrm").html(html);
-	            
-	        },
-	        error:function(request,status,error){
-	            
-	       }
-	        
-	    });
-}	
 	
+});
 </script>
