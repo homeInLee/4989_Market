@@ -22,8 +22,8 @@ public class AuctionServiceImpl implements AuctionService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public List<Map<String, String>> auctionList() {
-		return auctionDAO.auctionList();
+	public List<Map<String, String>> auctionForList() {
+		return auctionDAO.auctionForList();
 	}
 
 	@Override
@@ -39,9 +39,8 @@ public class AuctionServiceImpl implements AuctionService {
 		if(result == 0) {
 			throw new AuctionException("게시글 등록 오류!");
 		}
-		
-		int boardNo = auction.getAuctionNo();
-		logger.info("auction={}",auction);
+		int boardNo = auctionDAO.selectBoardNo();
+		logger.info("selectBoardNo={}",boardNo);
 		
 		//첨부파일 등록
 		if(attachList.size() > 0) {
@@ -49,6 +48,7 @@ public class AuctionServiceImpl implements AuctionService {
 				a.setBoardNo(boardNo);//생성된 게시물번호 대입
 				
 				result = auctionDAO.insertAttachment(a);
+				logger.info("-------------result={}------------",result);
 				if(result ==0) {
 					throw new AuctionException("첨부파일 등록 오류!");
 				}
@@ -61,6 +61,11 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public List<Auction> productSearch(String searchWord) {
 		return auctionDAO.productSearch(searchWord);
+	}
+
+	@Override
+	public int selectBoardNo() {
+		return auctionDAO.selectBoardNo();
 	}
 
 }

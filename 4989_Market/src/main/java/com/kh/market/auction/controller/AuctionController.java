@@ -45,9 +45,11 @@ public class AuctionController {
 	@RequestMapping("/auction.do")
 	public String auctionMain(Model model) {
 		
-		List<Map<String,String>> auctionList = auctionService.auctionList();
+		List<Map<String,String>> auctionForList = auctionService.auctionForList();
 
-		model.addAttribute("auctionList",auctionList);
+		model.addAttribute("auctionList",auctionForList);
+		
+		logger.info("auctionList={}",auctionForList);
 		
 		return "auction/auction";
 	}
@@ -55,6 +57,7 @@ public class AuctionController {
 	@RequestMapping("/auctionSelectOne.do")
 	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
 		Auction auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
+		
 		
 		Member member = memberService.selectOneMember(auctionSelectOne.getAuctionWriter());
 		
@@ -134,7 +137,7 @@ public class AuctionController {
 		String msg = result>0?"게시물 등록 성공~":"게시물 등록 실패!!";
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc","/auction/auctionSelectOne.do?auctionNo="+auction.getAuctionNo());
+		model.addAttribute("loc","/auction/auctionSelectOne.do?auctionNo="+auctionService.selectBoardNo());
 		
 		}catch(Exception e) {
 			logger.error("게시물등록 오류!!!", e);
