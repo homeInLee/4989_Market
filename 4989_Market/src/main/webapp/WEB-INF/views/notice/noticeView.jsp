@@ -39,19 +39,20 @@ padding: 10px;
 		<th>제목</th>
 		<td colspan="5">${notice.noticeTitle }</td>
 	</tr>
-	<c:forEach items="${attachMap}" var="a">
 	<tr>
 		<th>첨부파일</th>
 		<td colspan="5">
-		${a['originalfileName']}
+	<c:forEach items="${attachMap}" var="a" varStatus="status">
+		${a['originalfileName']}<c:if test="${status.last eq false}">,</c:if>
+	</c:forEach>
 		</td>
 	</tr>
-	</c:forEach>
 	<tr style="height: 300px;">
 		<th>내용</th>
 		<td colspan="5">
 	<c:forEach items="${attachMap}" var="a">
-		<img alt="" src="${pageContext.request.contextPath}/resources/upload/notice/${a['renamedfileName']}">
+		<img style="width: 200px; height: 200px;" alt="" src="${pageContext.request.contextPath}/resources/upload/notice/${a['renamedfileName']}">
+		<br />
 	</c:forEach>
 		<br />
 		${notice.noticeContent }

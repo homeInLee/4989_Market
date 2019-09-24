@@ -99,7 +99,7 @@ cursor: pointer;
 <script>
 var cnt = 0;
 attachFile = {
-       idx:0,
+       idx:1,
        add:function(){ // 파일필드 추가
        	if(cnt>1){
        		alert("사진은 세장까지만 추가가 가능합니다.")
@@ -122,7 +122,7 @@ attachFile = {
            file.type = 'file';
            file.name = 'upFile';
            file.size = '40';
-           file.id = 'upFile' + idx;
+           file.id = 'upFile' + (o.idx+1);
            file.onchange = function(){o.prev(this,'dv'+idx)};
 
            var btn = document.createElement('input');

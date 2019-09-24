@@ -36,4 +36,8 @@ public interface NoticeDAO {
 
 	List<Map<Attachment, String>> selectAttachmentOne(int noticeNo);
 
+	int noticeUpdateEnd(Notice notice);
+
+	List<String> selectOldFile(int noticeNo);
+
 }

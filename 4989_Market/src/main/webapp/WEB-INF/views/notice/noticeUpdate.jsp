@@ -43,7 +43,7 @@ cursor: pointer;
 <h2 style="text-align: center;">공지사항 수정</h2>
 <br />
 <div id="noticeUpdate-container">
-	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeWriteEnd.do" method="post" >
+	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeUpdateEnd.do" method="post" >
 		<table>
 			<tr>
 				<th>제목</th>
@@ -54,6 +54,7 @@ cursor: pointer;
 					id="noticeTitle" 
 					value="${notice.noticeTitle }"
 					required>
+					<input type="hidden" name="noticeNo" value="${noticeNo}"/>
 				</td>
 			</tr>
 			<tr>
@@ -76,7 +77,7 @@ cursor: pointer;
 					<input type="text" 
 							class="form-control" 
 							readonly 
-							value="${memberLoggedIn.memberId}" 
+							value="${notice.noticeWriter}" 
 							name="noticeWriter" 
 							id="noticeWriter" 
 							required>
@@ -92,15 +93,14 @@ cursor: pointer;
 				<th>첨부파일</th>
 				<td>
 					<input type="file" name="upfile" id="upfile" />
-					<div style="text-align: left;" id="original">
-					<c:forEach items="${attachMap}" var="a">
-					&nbsp;&nbsp;&nbsp;&nbsp;${a['originalfileName']}
-					<input type="button" id="attachDel" value="삭제" />
+					<c:forEach items="${attachMap}" var="a" varStatus="status">
+					<input type="text" name="" id="oldOriginal${status.index}" value="${a['originalfileName']}"/>
+					<input type="button" id="attachDel${status.index}" value="삭제" />
+					<br />
 					</c:forEach>
-					</div>
+					<input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
 				</td>
 			</tr>
-			
 		</table>
 		<br />
 		<input class="log" type="submit" value="등록" >
@@ -109,6 +109,7 @@ cursor: pointer;
 	</form>
 </div>
 <script>
+
 $("input:button.log").click(()=>{
 	location.href='${pageContext.request.contextPath}/notice/noticeList.do'
 })

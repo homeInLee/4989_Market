@@ -95,5 +95,15 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public List<Map<Attachment, String>> selectAttachmentOne(int noticeNo) {
 		return session.selectList("notice.selectAttachmentOne",noticeNo);
 	}
+
+	@Override
+	public int noticeUpdateEnd(Notice notice) {
+		return session.update("notice.noticeUpdateEnd",notice);
+	}
+
+	@Override
+	public List<String> selectOldFile(int noticeNo) {
+		return session.selectList("notice.selectOldFile", noticeNo);
+	}
 	
 }
