@@ -15,11 +15,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.auction.model.exception.AuctionException;
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.comment.model.service.CommentService;
+import com.kh.market.comment.model.vo.Comment;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
@@ -34,6 +37,9 @@ public class AuctionController {
 	@Autowired
 	MemberService memberService;
 	
+	@Autowired
+	CommentService commentService;
+	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/auction.do")
@@ -47,15 +53,18 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionSelectOne.do")
-	public String auctionSelectOne(Model model, @RequestParam int auctionNo) {
+	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
 		Auction auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
 		
 		Member member = memberService.selectOneMember(auctionSelectOne.getAuctionWriter());
+		
+		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		
 		logger.info(auctionSelectOne.toString());
 		
 		model.addAttribute("auctionSelectOne",auctionSelectOne);
 		model.addAttribute("member",member);
+//		model.addAttribute("comment", comment);
 		
 		return "auction/auctionSelectOneView";
 	}
