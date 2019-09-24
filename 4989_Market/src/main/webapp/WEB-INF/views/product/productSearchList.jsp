@@ -40,36 +40,12 @@ h2, section{
 	
 	<section>
 	<div>
-		<c:if test="${aList != null}">
-			<h2 style="display:block">중고 거래</h2>
-			<br />
-			<c:forEach items="${aList }" var="a">
-				<article class="top-card">
-					<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}" style="text-decoration: none;">
-						  	<img src="${pageContext.request.contextPath }/resources/images/mac.jpg" style="width:100%">
-						<div>
-						  	<br />
-						  	<h5>${a.auctionTitle }</h5>
-							<div class="auction-content">
-								${a.auctionAddress}
-							</div>
-							<div class="auction-price">
-								<fmt:formatNumber value="${a.auctionPrice }" pattern="#,###" />원
-							</div>
-						</div>
-					</a>
-					<br /><br />
-				</article>
-			</c:forEach>
-		</c:if>
-	</div>
-	<div>
 		<c:if test="${pList != null}">
-			<h2 style="display:block">중고 경매</h2>
+			<h2 style="display:block">중고 거래</h2>
 			<br />
 			<c:forEach items="${pList }" var="a">
 				<article class="top-card">
-					<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?productNo=${a.sellNo}" style="text-decoration: none;">
+					<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.sellNo}" style="text-decoration: none;">
 						  	<img src="${pageContext.request.contextPath }/resources/images/mac.jpg" style="width:100%">
 						<div>
 						  	<br />
@@ -79,6 +55,30 @@ h2, section{
 							</div>
 							<div class="auction-price">
 								<fmt:formatNumber value="${a.sellPrice }" pattern="#,###" />원
+							</div>
+						</div>
+					</a>
+					<br /><br />
+				</article>
+			</c:forEach>
+		</c:if>
+	</div>
+	<div>
+		<c:if test="${aList != null}">
+			<h2 style="display:block">중고 경매</h2>
+			<br />
+			<c:forEach items="${aList }" var="a">
+				<article class="top-card">
+					<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?productNo=${a.auctionNo}" style="text-decoration: none;">
+						  	<img src="${pageContext.request.contextPath }/resources/images/mac.jpg" style="width:100%">
+						<div>
+						  	<br />
+						  	<h5>${a.auctionTitle }</h5>
+							<div class="auction-content">
+								${a.auctionAddress}
+							</div>
+							<div class="auction-price">
+								<fmt:formatNumber value="${a.auctionPrice }" pattern="#,###" />원
 							</div>
 						</div>
 					</a>

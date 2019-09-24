@@ -185,6 +185,106 @@ public class Auction {
 	public void setAuctionAddress(String auctionAddress) {
 		this.auctionAddress = auctionAddress;
 	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((auctionAddress == null) ? 0 : auctionAddress.hashCode());
+		result = prime * result + ((auctionBuyer == null) ? 0 : auctionBuyer.hashCode());
+		result = prime * result + ((auctionCategory == null) ? 0 : auctionCategory.hashCode());
+		result = prime * result + ((auctionContent == null) ? 0 : auctionContent.hashCode());
+		result = prime * result + ((auctionDate == null) ? 0 : auctionDate.hashCode());
+		result = prime * result + ((auctionDeldate == null) ? 0 : auctionDeldate.hashCode());
+		result = prime * result + ((auctionDeltype == null) ? 0 : auctionDeltype.hashCode());
+		result = prime * result + auctionDirectPrice;
+		result = prime * result + ((auctionEndDate == null) ? 0 : auctionEndDate.hashCode());
+		result = prime * result + auctionNo;
+		result = prime * result + auctionPrice;
+		result = prime * result + auctionReadcount;
+		result = prime * result + ((auctionTitle == null) ? 0 : auctionTitle.hashCode());
+		result = prime * result + ((auctionType == null) ? 0 : auctionType.hashCode());
+		result = prime * result + auctionUnitPrice;
+		result = prime * result + ((auctionWriter == null) ? 0 : auctionWriter.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Auction other = (Auction) obj;
+		if (auctionAddress == null) {
+			if (other.auctionAddress != null)
+				return false;
+		} else if (!auctionAddress.equals(other.auctionAddress))
+			return false;
+		if (auctionBuyer == null) {
+			if (other.auctionBuyer != null)
+				return false;
+		} else if (!auctionBuyer.equals(other.auctionBuyer))
+			return false;
+		if (auctionCategory == null) {
+			if (other.auctionCategory != null)
+				return false;
+		} else if (!auctionCategory.equals(other.auctionCategory))
+			return false;
+		if (auctionContent == null) {
+			if (other.auctionContent != null)
+				return false;
+		} else if (!auctionContent.equals(other.auctionContent))
+			return false;
+		if (auctionDate == null) {
+			if (other.auctionDate != null)
+				return false;
+		} else if (!auctionDate.equals(other.auctionDate))
+			return false;
+		if (auctionDeldate == null) {
+			if (other.auctionDeldate != null)
+				return false;
+		} else if (!auctionDeldate.equals(other.auctionDeldate))
+			return false;
+		if (auctionDeltype == null) {
+			if (other.auctionDeltype != null)
+				return false;
+		} else if (!auctionDeltype.equals(other.auctionDeltype))
+			return false;
+		if (auctionDirectPrice != other.auctionDirectPrice)
+			return false;
+		if (auctionEndDate == null) {
+			if (other.auctionEndDate != null)
+				return false;
+		} else if (!auctionEndDate.equals(other.auctionEndDate))
+			return false;
+		if (auctionNo != other.auctionNo)
+			return false;
+		if (auctionPrice != other.auctionPrice)
+			return false;
+		if (auctionReadcount != other.auctionReadcount)
+			return false;
+		if (auctionTitle == null) {
+			if (other.auctionTitle != null)
+				return false;
+		} else if (!auctionTitle.equals(other.auctionTitle))
+			return false;
+		if (auctionType == null) {
+			if (other.auctionType != null)
+				return false;
+		} else if (!auctionType.equals(other.auctionType))
+			return false;
+		if (auctionUnitPrice != other.auctionUnitPrice)
+			return false;
+		if (auctionWriter == null) {
+			if (other.auctionWriter != null)
+				return false;
+		} else if (!auctionWriter.equals(other.auctionWriter))
+			return false;
+		return true;
+	}
 	
 }
 	

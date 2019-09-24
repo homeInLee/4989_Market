@@ -3,6 +3,7 @@ package com.kh.market.product.controller;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.TreeSet;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -164,12 +165,28 @@ public class ProductController {
 		List<Auction> aList = auctionService.productSearch(searchWord);
 		String[] arr = searchWord.split("\\s");
 		for(int i=0; i<arr.length; i++) {
-			pList.addAll(productService.productSearch(arr[i]));
-			aList.addAll(auctionService.productSearch(arr[i]));
+			List<Product> List1 = productService.productSearch(arr[i]);
+			List<Auction> List2 = auctionService.productSearch(arr[i]);
+			logger.info("pList="+pList);
+			logger.info("aList="+aList);
+			logger.info("List1="+List1);
+			logger.info("List2="+List2);
+	        for(int y=0; y<List1.size(); y++) {
+	        	if(!pList.contains(List1.get(y))) {
+	        		System.out.println(pList.contains(List1.get(y)));
+	        		pList.add(List1.get(y));
+	        		logger.info("List1.get(y)"+List1.get(y));
+	        	}
+	        }
+	        for(int z=0; z<List2.size(); z++) {
+	        	if(!aList.contains(List2.get(z))) {
+	        		aList.add(List2.get(z));
+	        		logger.info("List2.getzy)"+List2.get(z));
+	        	}
+	        }
 		}
-//		List<Product> pList = new ArrayList<>(new TreeSet<>(List1));
-//		List<Auction> aList = new ArrayList<>(new TreeSet<>(List2));
-		
+		logger.info("pList="+pList);
+		logger.info("aList="+aList);
 		model.addAttribute("pList", pList);
 		model.addAttribute("aList", aList);
 		return "/product/productSearchList";

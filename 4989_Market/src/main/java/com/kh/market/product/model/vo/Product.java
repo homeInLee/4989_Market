@@ -142,6 +142,86 @@ public class Product {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((sellAddress == null) ? 0 : sellAddress.hashCode());
+		result = prime * result + ((sellBuyer == null) ? 0 : sellBuyer.hashCode());
+		result = prime * result + ((sellContent == null) ? 0 : sellContent.hashCode());
+		result = prime * result + ((sellDate == null) ? 0 : sellDate.hashCode());
+		result = prime * result + ((sellDelDate == null) ? 0 : sellDelDate.hashCode());
+		result = prime * result + ((sellDelType == null) ? 0 : sellDelType.hashCode());
+		result = prime * result + sellNo;
+		result = prime * result + sellPrice;
+		result = prime * result + sellReadCount;
+		result = prime * result + ((sellState == null) ? 0 : sellState.hashCode());
+		result = prime * result + ((sellTitle == null) ? 0 : sellTitle.hashCode());
+		result = prime * result + ((sellWriter == null) ? 0 : sellWriter.hashCode());
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Product other = (Product) obj;
+		if (sellAddress == null) {
+			if (other.sellAddress != null)
+				return false;
+		} else if (!sellAddress.equals(other.sellAddress))
+			return false;
+		if (sellBuyer == null) {
+			if (other.sellBuyer != null)
+				return false;
+		} else if (!sellBuyer.equals(other.sellBuyer))
+			return false;
+		if (sellContent == null) {
+			if (other.sellContent != null)
+				return false;
+		} else if (!sellContent.equals(other.sellContent))
+			return false;
+		if (sellDate == null) {
+			if (other.sellDate != null)
+				return false;
+		} else if (!sellDate.equals(other.sellDate))
+			return false;
+		if (sellDelDate == null) {
+			if (other.sellDelDate != null)
+				return false;
+		} else if (!sellDelDate.equals(other.sellDelDate))
+			return false;
+		if (sellDelType == null) {
+			if (other.sellDelType != null)
+				return false;
+		} else if (!sellDelType.equals(other.sellDelType))
+			return false;
+		if (sellNo != other.sellNo)
+			return false;
+		if (sellPrice != other.sellPrice)
+			return false;
+		if (sellReadCount != other.sellReadCount)
+			return false;
+		if (sellState == null) {
+			if (other.sellState != null)
+				return false;
+		} else if (!sellState.equals(other.sellState))
+			return false;
+		if (sellTitle == null) {
+			if (other.sellTitle != null)
+				return false;
+		} else if (!sellTitle.equals(other.sellTitle))
+			return false;
+		if (sellWriter == null) {
+			if (other.sellWriter != null)
+				return false;
+		} else if (!sellWriter.equals(other.sellWriter))
+			return false;
+		return true;
+	}
 	
 	
 	
