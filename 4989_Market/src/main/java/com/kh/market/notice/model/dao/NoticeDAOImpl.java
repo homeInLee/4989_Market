@@ -105,5 +105,10 @@ public class NoticeDAOImpl implements NoticeDAO {
 	public List<String> selectOldFile(int noticeNo) {
 		return session.selectList("notice.selectOldFile", noticeNo);
 	}
+
+	@Override
+	public int noticeDelFile(Map<Object, Object> map) {
+		return session.update("notice.noticeDelFile",map);
+	}
 	
 }

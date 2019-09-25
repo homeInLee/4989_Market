@@ -43,7 +43,7 @@ cursor: pointer;
 <h2 style="text-align: center;">공지사항 수정</h2>
 <br />
 <div id="noticeUpdate-container">
-	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeUpdateEnd.do" method="post" >
+	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeUpdateEnd.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>제목</th>
@@ -92,11 +92,14 @@ cursor: pointer;
 			<tr>
 				<th>첨부파일</th>
 				<td>
-					<input type="file" name="upfile" id="upfile" />
+					<input type="file" name="upFile" id="upFile" />
 					<c:forEach items="${attachMap}" var="a" varStatus="status">
-					<input type="text" name="" id="oldOriginal${status.index}" value="${a['originalfileName']}"/>
-					<input type="button" id="attachDel${status.index}" value="삭제" />
+					<div>
+					<input type="text" name="oldOName" id="oldOName${status.index}" value="${a['originalfileName']}"/>
+					<input type="hidden" name="oldRName" id="oldRName${status.index}" value="${a['renamedfileName']}"/>
+					<input type="button" id="btn-attachDel${status.index}" value="삭제" />
 					<br />
+					</div>
 					</c:forEach>
 					<input type="hidden" name="noticeNo" value="${notice.noticeNo}"/>
 				</td>
@@ -115,6 +118,21 @@ $("input:button.log").click(()=>{
 })
 
 $("#noticeType").val("${notice.noticeType}").attr("selected","selected");
+
+var cnt = 0;
+
+$("input:button[id^=btn-attachDel]").on("click",(e)=>{
+	if(confirm('삭제 하시겠습니까?')){
+		$(e.target).parent("div").hide();
+		cnt = cnt-1;
+		var delOName = $(e.target).siblings("input:text[id^=oldOName]").val();
+		var delRName = $(e.target).siblings("input:hidden[id^=oldRName]").val();
+		console.log(delOName);
+		console.log(delRName);
+		$("table").before($("<input type='hidden' name='delOName' value="+delOName+">"));
+		$("table").before($("<input type='hidden' name='delRName' value="+delRName+">"));
+	}
+});
 
 
 </script>

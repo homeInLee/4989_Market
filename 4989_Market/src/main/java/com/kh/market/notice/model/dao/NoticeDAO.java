@@ -40,4 +40,6 @@ public interface NoticeDAO {
 
 	List<String> selectOldFile(int noticeNo);
 
+	int noticeDelFile(Map<Object, Object> map);
+
 }

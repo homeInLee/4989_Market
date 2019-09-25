@@ -112,5 +112,10 @@ public class NoticeServiceImpl implements NoticeService {
 		return noticeDAO.selectOldFile(noticeNo);
 	}
 
+	@Override
+	public int noticeDelFile(Map<Object, Object> map) {
+		return noticeDAO.noticeDelFile(map);
+	}
+
 	
 }
