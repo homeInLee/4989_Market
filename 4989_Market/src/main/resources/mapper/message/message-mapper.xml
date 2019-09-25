@@ -32,4 +32,7 @@
   	insert into message (message_no, message_title, message_writer,message_reciver,message_content,message_review) values(
 	seq_message_no.nextval,#{messageTitle},#{messageWriter}, #{messageReciver}, #{messageContent}, #{messageReview})
   </insert>
+  <update id="messageReviewUpdate">
+  	update message set message_review='N' where message_no=#{messageNo}
+  </update>
 </mapper>

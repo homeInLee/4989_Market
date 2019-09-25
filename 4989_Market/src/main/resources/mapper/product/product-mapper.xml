@@ -67,4 +67,7 @@
 	<update id="sellComplete">
 		update sell set sell_state='soldout' where sell_no=#{sellNo}
 	</update>
+	<select id="memberBuyView" resultType="product">
+		select * from sell where sell_buyer=#{memberId}
+	</select>
 </mapper>

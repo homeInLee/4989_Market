@@ -24,4 +24,6 @@ public interface ProductService {
 
 	int sellComplete(int sellNo);
 
+	List<Product> memberBuyView(String memberId);
+
 }

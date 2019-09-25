@@ -188,13 +188,7 @@ a{
 
 </style>
 <script>
-function sellComplete(sellNo,sellBuyer){
-	if(confirm("정말 완료 하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/product/sellComplete.do?sellNo="+sellNo+"&sellWriter=${memberLoggedIn.memberId}&sellBuyer="+sellBuyer;
-	}else{
-		return;
-	}
-}
+
 </script>
 <div class="submenu">
 	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
@@ -249,9 +243,7 @@ function sellComplete(sellNo,sellBuyer){
 		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
 		<fmt:formatNumber value="${p.sellPrice }" pattern="#,###" />원	
 		<p>${p.sellContent}</p>
-		<c:if test="${'soldout' ne fn:trim(p.sellState)}">
-			<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
-		</c:if>
+		
 	</div>
 	
 	<hr />

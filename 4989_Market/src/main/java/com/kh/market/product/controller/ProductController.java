@@ -239,5 +239,26 @@ public class ProductController {
 		mav.setViewName("common/msg");
 		return mav;
 	}
+	
+	@RequestMapping("/memberbuyView.do")
+	public ModelAndView memberbuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
 
+		List<Product> list=productService.memberBuyView(memberId);
+		mav.addObject("list",list);
+		mav.setViewName("member/memberBuyView");
+		return mav;
+	}
+	
+	@RequestMapping("/memberBuyDetailView.do")
+	public ModelAndView memberBuyDetailView(@RequestParam("sellNo") int sellNo,ModelAndView mav,@RequestParam("sellWriter") String sellWriter) {
+		
+		Product p=productService.memberSellDetailView(sellNo);
+		Member member = memberService.selectOneMember(sellWriter);
+		
+		mav.addObject("p",p);
+		mav.addObject("member",member);
+		mav.setViewName("member/memberBuyDetailView");
+		return mav;
+		
+	}
 }

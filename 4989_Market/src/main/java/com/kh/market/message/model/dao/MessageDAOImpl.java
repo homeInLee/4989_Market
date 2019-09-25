@@ -50,4 +50,10 @@ public class MessageDAOImpl implements MessageDAO {
 		return session.insert("message.messageReview",m);
 	}
 
+	@Override
+	public int messageReviewUpdate(int messageNo) {
+		
+		return session.update("message.messageReviewUpdate",messageNo);
+	}
+
 }

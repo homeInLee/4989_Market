@@ -20,4 +20,6 @@ public interface MessageDAO {
 
 	int messageReview(Message m);
 
+	int messageReviewUpdate(int messageNo);
+
 }

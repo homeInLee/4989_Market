@@ -63,7 +63,7 @@ padding: 15px;
 		</c:if>
 		<c:if test="${message.messageReview eq 'Y'}">
 			<!-- 여기서부터 하자 -->
-			<input class="log" type="button" value="설문조사" onclick="#"/>
+			<input class="log" type="button" value="설문조사" onclick="location.href='${pageContext.request.contextPath}/review/reviewCheckForm.do?messageWriter=${message.messageWriter}&messageNo=${message.messageNo}'"/>
 		</c:if>
 	</div>
 	

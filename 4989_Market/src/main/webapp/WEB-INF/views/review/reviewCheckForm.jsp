@@ -402,7 +402,7 @@ $(function(){
            if(index==8){
         	   var content="";
         	   if(content=prompt("거래 후기 적어주세요")){
-        		   location.href="${pageContext.request.contextPath}/review/reviewCheckEnd.do?checkList="+checkList+"&content="+content+"&memberId=${memberLoggedIn.memberId}&receiver=test123";  
+        		   location.href="${pageContext.request.contextPath}/review/reviewCheckEnd.do?checkList="+checkList+"&content="+content+"&memberId=${memberLoggedIn.memberId}&receiver=${messageWriter}&messageNo=${messageNo}";  
         	   	  
         	   }else{
         		   location.href="${pageContext.request.contextPath}/review/reviewCheckForm.do";

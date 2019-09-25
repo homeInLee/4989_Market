@@ -20,4 +20,6 @@ public interface MessageService {
 
 	int messageReview(Message m);
 
+	int messageReviewUpdate(int messageNo);
+
 }

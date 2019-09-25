@@ -16,6 +16,9 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.basket.model.service.BasketService;
 import com.kh.market.basket.model.vo.Basket;
+import com.kh.market.member.model.service.MemberService;
+import com.kh.market.member.model.vo.Member;
+import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
 @Controller
@@ -25,6 +28,12 @@ public class BasketController {
 	@Autowired
 	BasketService basketService;
 
+	@Autowired
+	ProductService productService;
+	
+	@Autowired
+	MemberService memberService;
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@RequestMapping("/basketView.do")
@@ -87,5 +96,17 @@ public class BasketController {
 		mav.addObject("myBasketList",myBasketList);
 		mav.setViewName("basket/basketView");
 		return mav;
+	}
+	
+	@RequestMapping("/basketDetailView.do")
+	public ModelAndView basketDetailView(ModelAndView mav,@RequestParam("sellNo") int sellNo,@RequestParam("sellWriter") String sellWriter) {
+		Product p=productService.memberSellDetailView(sellNo);
+		Member member = memberService.selectOneMember(sellWriter);
+		
+		mav.addObject("p",p);
+		mav.addObject("member",member);
+		mav.setViewName("basket/basketDetailView");
+		return mav;
+
 	}
 }

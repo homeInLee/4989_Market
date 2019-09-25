@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.market.message.model.service.MessageService;
 import com.kh.market.review.model.service.ReviewService;
 import com.kh.market.review.model.vo.Review;
 
@@ -25,6 +26,9 @@ public class ReviewController {
 	@Autowired
 	ReviewService reviewService;
 	
+	@Autowired
+	MessageService messageService;
+	
 	private Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/reviewMain.do")
@@ -34,21 +38,25 @@ public class ReviewController {
 	}
 	
 	@RequestMapping("/reviewCheckForm.do")
-	public ModelAndView reviewCheckForm(ModelAndView mav) {
+	public ModelAndView reviewCheckForm(ModelAndView mav,@RequestParam("messageWriter") String messageWriter,@RequestParam("messageNo") int messageNo) {
+		
+		mav.addObject("messageWriter",messageWriter);
+		mav.addObject("messageNo",messageNo);		
 		mav.setViewName("review/reviewCheckForm");
 		return mav;
 	}
 	
 	@RequestMapping("/reviewCheckEnd.do")
-	public ModelAndView reviewCheckEnd(ModelAndView mav,@RequestParam("checkList") ArrayList<String> checkList,@RequestParam("content") String content,@RequestParam("memberId") String memberId,@RequestParam("receiver") String receiver) {
+	public ModelAndView reviewCheckEnd(ModelAndView mav,@RequestParam("checkList") ArrayList<String> checkList,@RequestParam("content") String content,@RequestParam("memberId") String memberId,@RequestParam("receiver") String receiver,@RequestParam("messageNo") int messageNo) {
 		
 		String[] point=checkList.toArray(new String[checkList.size()]);
 		Review review=new Review(0, memberId, receiver, point, content);
-		int result=reviewService.reviewCheckEnd(review);
+		int result1=reviewService.reviewCheckEnd(review);
+		messageService.messageReviewUpdate(messageNo);
 		
 		String msg="";
 		String loc="/";
-		if(result>0) {
+		if(result1>0) {
 			msg="리뷰작성완료";
 		}else {
 			msg="리뷰작성실패";			

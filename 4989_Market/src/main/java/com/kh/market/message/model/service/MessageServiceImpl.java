@@ -51,4 +51,10 @@ public class MessageServiceImpl implements MessageService {
 		return messageDAO.messageReview(m);
 	}
 
+	@Override
+	public int messageReviewUpdate(int messageNo) {
+		
+		return messageDAO.messageReviewUpdate(messageNo);
+	}
+
 }

@@ -12,19 +12,6 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <style>
-div#pageBar {
-	margin-top: 10px;
-	text-align: center;	
-}
-
-div#pageBar span.cPage {	
-	margin-right: 5px;
-}
-
-div#pageBar a {
-	margin-right: 5px;
-}
-
 h2, section{
 	text-align: center;
 	position: relative;
@@ -51,9 +38,9 @@ h2, section{
 	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	top: -2px;
 }
+	
+
 </style>
-
-
 <div class="submenu">
 	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
   	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
@@ -63,33 +50,33 @@ h2, section{
   	
 </div>
 
-<h2 style="display:block">장바구니</h2>
+<h2 style="display:block">나의 구매 물품</h2>
 	<br />
-	<c:if test="${empty myBasketList}">
-		<div style="text-align: center;">장바구니가 비어있습니다</div>
+	<c:if test="${empty list}">
+		<div style="text-align: center;">나의 구매 물품이 비어있습니다</div>
 	</c:if>
 	<section>
-		<c:forEach items="${myBasketList}" var="b">
+		<c:forEach items="${list}" var="l">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/basket/basketDetailView.do?sellNo=${b.sellNo}&sellWriter=${b.sellWriter}" style="text-decoration: none;">
+				<a href="${pageContext.request.contextPath}/product/memberBuyDetailView.do?sellNo=${l.sellNo}&sellWriter=${l.sellWriter}" style="text-decoration: none;">
 					  	<img src="http://placehold.it/700x400" style="width:100%">
 					<div>
 					  	<br />
-					  	<h5>${b.sellTitle }</h5>
+					  	<h5>${l.sellTitle }</h5>
 						<div class="auction-content">
-							${b.sellContent }
+							${l.sellContent }
 						</div>
 						<div class="auction-price">
-							<fmt:formatNumber value="${b.sellPrice }" pattern="#,###" />원
+							<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원
 						</div>
-						<c:if test="${'sale' eq fn:trim(b.sellState)}">
+						<c:if test="${'sale' eq fn:trim(l.sellState)}">
 							<div>
-								판매중
+								구매중
 							</div>
 						</c:if>
-						<c:if test="${'soldout' eq fn:trim(b.sellState)}">
+						<c:if test="${'soldout' eq fn:trim(l.sellState)}">
 							<div>
-								판매완료
+								구매완료
 							</div>
 						</c:if>
 					</div>
@@ -99,8 +86,4 @@ h2, section{
 		</c:forEach>
 	</section>
 
-
-<div id='pageBar'>
-  ${pageBar}
-</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

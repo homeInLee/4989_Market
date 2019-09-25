@@ -69,6 +69,12 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		return sqlSession.update("product.sellComplete",sellNo);
 	}
+
+	@Override
+	public List<Product> memberBuyView(String memberId) {
+		
+		return sqlSession.selectList("product.memberBuyView",memberId);
+	}
 	
 	
 }
