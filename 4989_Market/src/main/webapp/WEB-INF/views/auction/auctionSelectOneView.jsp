@@ -187,6 +187,7 @@ a{
 </style>
 
 <div id="wrapper">
+${auctionSelectOne.auctionNo }
       <div id="slider-wrap">
           <ul id="slider">
              <li data-color="#1abc9c">

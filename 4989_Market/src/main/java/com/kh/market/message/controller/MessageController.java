@@ -26,11 +26,13 @@ public class MessageController {
 	MessageService messageService;
 	
 	@RequestMapping("/messageList.do")
-	public ModelAndView messageList(ModelAndView mav, @RequestParam(value="memberId")String memberId ) {
+	public ModelAndView messageList(ModelAndView mav, @RequestParam(value="memberId")String memberId, 
+									@RequestParam(defaultValue="1") int curPage) {
 		logger.debug("messageService={}", messageService.getClass());
 		logger.info("memberId="+memberId);
 		
 		List<Message> messageList = messageService.selectMessageList(memberId);
+		
 		logger.info("messageList="+messageList);
 		
 		mav.addObject("messageList", messageList);

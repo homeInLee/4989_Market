@@ -19,4 +19,14 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.commentInsert(comment);
 	}
 
+	@Override
+	public List<Comment> selectCommentList(int auctionNo) {
+		return commentDAO.selectCommentList(auctionNo);
+	}
+
+	@Override
+	public int commentDelete(int commentNo) {
+		return commentDAO.commentDelete(commentNo);
+	}
+
 }

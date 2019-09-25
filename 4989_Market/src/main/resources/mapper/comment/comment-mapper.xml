@@ -7,8 +7,13 @@
 		insert into market_comment (COMMENT_NO, COMMENT_WRITER, COMMENT_CONTENT, COMMENT_REF)
 		values(seq_comment_no.nextval, #{commentWriter}, #{commentContent}, #{commentREF})
 	</insert>
-	<!-- <select id="commentList" resultType="comment">
+	<select id="selectCommentList" resultType="comment">
 		select * from market_comment
-		where comment_no = #{commentNo} 
-	</select> -->
+		where COMMENT_REF = #{auctionNo} and COMMENT_DELTYPE ='N'
+	</select>
+	<update id="commentDelete">
+  		update market_comment set
+		COMMENT_DELTYPE = 'Y', COMMENT_DATE = DEFAULT
+		where comment_no = #{commentNo}
+  </update>
 </mapper>
