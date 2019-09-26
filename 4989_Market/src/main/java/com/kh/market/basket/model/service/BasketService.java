@@ -15,4 +15,10 @@ public interface BasketService {
 
 	List<Basket> totalBasketCount(String basketMemberId);
 
+	int basketInsert(Basket b);
+
+	int basketDelete(Basket b);
+
+	Basket basketCheck(Basket b);
+
 }

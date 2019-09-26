@@ -10,8 +10,11 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.basket.model.service.BasketService;
@@ -21,7 +24,7 @@ import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Product;
 
-@Controller
+@RestController
 @RequestMapping("/basket")
 public class BasketController {
 
@@ -99,14 +102,36 @@ public class BasketController {
 	}
 	
 	@RequestMapping("/basketDetailView.do")
-	public ModelAndView basketDetailView(ModelAndView mav,@RequestParam("sellNo") int sellNo,@RequestParam("sellWriter") String sellWriter) {
+	public ModelAndView basketDetailView(ModelAndView mav,@RequestParam("sellNo") int sellNo,@RequestParam("sellWriter") String sellWriter,@RequestParam("memberId") String memberId) {
 		Product p=productService.memberSellDetailView(sellNo);
 		Member member = memberService.selectOneMember(sellWriter);
 		
+		//장바구니 여부 검사 코드 (나중에 옮기자)
+		Basket b=new Basket(sellNo, memberId);
+		Basket basket=basketService.basketCheck(b);
+		
+		//
+		mav.addObject("basket",basket);
 		mav.addObject("p",p);
 		mav.addObject("member",member);
 		mav.setViewName("basket/basketDetailView");
 		return mav;
 
+	}
+	
+	@GetMapping("/basketInsert")
+	public int basketInsert(@RequestParam("sellNo") int sellNo,@RequestParam("memberId") String memberId) {
+				
+		Basket b=new Basket(sellNo, memberId);
+		int result=basketService.basketInsert(b);
+		return result;
+	}
+	
+	@GetMapping("/basketDelete")
+	public int basketDelete(@RequestParam("sellNo") int sellNo,@RequestParam("memberId") String memberId) {
+				
+		Basket b=new Basket(sellNo, memberId);
+		int result=basketService.basketDelete(b);
+		return result;
 	}
 }

@@ -33,4 +33,22 @@ public class BasketDAOImpl implements BasketDAO {
 		
 		return sqlSession.selectList("basket.totalBasketCount",basketMemberId);
 	}
+
+	@Override
+	public int basketInsert(Basket b) {
+		
+		return sqlSession.insert("basket.basketInsert",b);
+	}
+
+	@Override
+	public int basketDelete(Basket b) {
+		
+		return sqlSession.delete("basket.basketDelete",b);
+	}
+
+	@Override
+	public Basket basketCheck(Basket b) {
+		
+		return sqlSession.selectOne("basket.basketCheck",b);
+	}
 }

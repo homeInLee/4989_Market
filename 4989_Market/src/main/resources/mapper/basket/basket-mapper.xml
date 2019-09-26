@@ -13,4 +13,16 @@
 	<select id="totalBasketCount" resultType="basket">
 		select * from basket where basket_member_id=#{basketMemberId}
 	</select>
+	
+	<insert id="basketInsert" parameterType="basket">
+		insert into basket values(#{basketSellNo},#{basketMemberId})
+	</insert>
+	
+	<delete id="basketDelete" parameterType="basket">
+		delete from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId}
+	</delete>
+	
+	<select id="basketCheck" resultType="basket">
+		select * from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId}
+	</select>
 </mapper>
