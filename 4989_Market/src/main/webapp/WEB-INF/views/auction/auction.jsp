@@ -43,9 +43,13 @@ h2, section{
 	<br />
 	<section>
 		<c:forEach items="${auctionList }" var="a">
-			<article class="top-card">
+			<article class="top-card" >
 				<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}" style="text-decoration: none;">
-					  	<img src="${pageContext.request.contextPath }/resources/upload/auction/${a.renamedfileName }" style="width:100%">
+						<c:forEach items="${mainImage }" var="i">
+							<c:if test="${a.auctionNo eq i.boardNo and i.boardName eq '경매'}">
+					  			<img src="${pageContext.request.contextPath }/resources/upload/auction/${i.renamedfileName }" style="width:100%; height:160px; position: relative;">
+					  		</c:if>
+						</c:forEach>
 					<div>
 					  	<br />
 					  	<h5>${a.auctionTitle }</h5>

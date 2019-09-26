@@ -192,7 +192,7 @@ ${auctionSelectOne.auctionNo }
           <ul id="slider">
              <li data-color="#1abc9c">
                              
-				<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
+				<img src="${pageContext.request.contextPath }/resources/upload/auction/${auctionSelectOne.renamedfileName}">
              </li>
 <%--              
              <li data-color="#3498db">

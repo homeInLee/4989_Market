@@ -8,6 +8,7 @@ public class AuctionForList extends Auction {
 	private int boardNo;
 	private String originalfileName;
 	private String renamedfileName;
+	
 	public AuctionForList() {
 		super();
 		// TODO Auto-generated constructor stub
@@ -24,37 +25,70 @@ public class AuctionForList extends Auction {
 				this.originalfileName = originalfileName;
 				this.renamedfileName = renamedfileName;
 	}
-	
-	
+	/* (non-Javadoc)
+	 * @see java.lang.Object#toString()
+	 */
 	@Override
 	public String toString() {
 		return "AuctionForList [boardName=" + boardName + ", boardNo=" + boardNo + ", originalfileName="
-				+ originalfileName + ", renamedfileName=" + renamedfileName + ", toString()=" + super.toString() + "]";
+				+ originalfileName + ", renamedfileName=" + renamedfileName + ", auctionNo=" + auctionNo
+				+ ", auctionTitle=" + auctionTitle + ", auctionWriter=" + auctionWriter + ", auctionBuyer="
+				+ auctionBuyer + ", auctionPrice=" + auctionPrice + ", auctionDirectPrice=" + auctionDirectPrice
+				+ ", auctionIngPrice=" + auctionIngPrice + ", auctionUnitPrice=" + auctionUnitPrice
+				+ ", auctionContent=" + auctionContent + ", auctionReadcount=" + auctionReadcount + ", auctionDate="
+				+ auctionDate + ", auctionEndDate=" + auctionEndDate + ", auctionType=" + auctionType
+				+ ", auctionCategory=" + auctionCategory + ", auctionDeldate=" + auctionDeldate + ", auctionDeltype="
+				+ auctionDeltype + ", auctionAddress=" + auctionAddress + "]";
 	}
+	/**
+	 * @return the boardName
+	 */
 	public String getBoardName() {
 		return boardName;
 	}
+	/**
+	 * @param boardName the boardName to set
+	 */
 	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+	/**
+	 * @return the boardNo
+	 */
 	public int getBoardNo() {
 		return boardNo;
 	}
+	/**
+	 * @param boardNo the boardNo to set
+	 */
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+	/**
+	 * @return the originalfileName
+	 */
 	public String getOriginalfileName() {
 		return originalfileName;
 	}
+	/**
+	 * @param originalfileName the originalfileName to set
+	 */
 	public void setOriginalfileName(String originalfileName) {
 		this.originalfileName = originalfileName;
 	}
+	/**
+	 * @return the renamedfileName
+	 */
 	public String getRenamedfileName() {
 		return renamedfileName;
 	}
+	/**
+	 * @param renamedfileName the renamedfileName to set
+	 */
 	public void setRenamedfileName(String renamedfileName) {
 		this.renamedfileName = renamedfileName;
 	}
+	
 	
 	
 
