@@ -2,6 +2,7 @@ package com.kh.market.notice.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -219,7 +220,7 @@ public class NoticeController {
 	@RequestMapping("/noticeUpdate")
 	public ModelAndView noticeUpdate(ModelAndView mav,
 									@RequestParam("noticeNo")int noticeNo) {
-		logger.info("update@noticeNo="+noticeNo);
+		logger.debug("update@noticeNo="+noticeNo);
 		Notice notice = noticeService.selectNoticeOne(noticeNo);
 		List<Map<Attachment, String>> attachMap = noticeService.selectAttachmentOne(noticeNo);
 		
@@ -243,17 +244,15 @@ public class NoticeController {
 	
 	@RequestMapping("/noticeUpdateEnd")
 	public String noticeUpdateEnd (Notice notice,
+									@RequestParam(value="oldOName", defaultValue="", required = false) String[] oldOName,
+									@RequestParam(value="oldRName", defaultValue="", required = false) String[] oldRName,
+									@RequestParam(value="delRName", defaultValue="", required = false) String[] delRName,
+									int noticeNo,
 									MultipartFile[] upFile,
 									Model model,
 									HttpServletRequest request
 										) {
-		List<String> oldFile = new ArrayList<>();
-		
-		oldFile = noticeService.selectOldFile(notice.getNoticeNo());
-		System.out.println(oldFile);
-		
-		
-		if(upFile == null) {
+		logger.info("upFile={}",upFile);	
 			try {
 				//파일 업로드: 서버에 파일저장
 				String saveDirectory
@@ -262,7 +261,9 @@ public class NoticeController {
 						 .getRealPath("/resources/upload/notice");
 				
 				List<Attachment> attachList = new ArrayList<>();
-				
+				//첨부파일 추가 
+			if(upFile != null && upFile.length>0 ) {
+				logger.info("첨부파일 추가 있음");
 			//MultipartFile 다루기
 			for(MultipartFile f : upFile) {
 				if(!f.isEmpty()) {
@@ -271,7 +272,7 @@ public class NoticeController {
 					String renamedFileName = HelloSpringUtils.getRenamedFileName(originalFileName);
 					System.out.println("originalfileName="+originalFileName);
 					System.out.println("renamedFileName="+renamedFileName);
-//					
+					
 					try {
 						//파일 실제 저장
 						f.transferTo(new File(saveDirectory+"/"+renamedFileName));
@@ -285,22 +286,38 @@ public class NoticeController {
 					attachList.add(attach);
 				}
 			}
-		
-		
-		
-		
+			}
+			try {
+				
+				if(delRName.length > 0 && delRName != null) {
+					
+					logger.info("파일 삭제 요청");
+					Map<Object, Object> map = new HashMap<>();
+					map.put("noticeNo", noticeNo);
+					
+					for(int i = 0; i<delRName.length; i++) {
+						
+//				System.out.println("delRName"+i+":"+delRName[i]);
+						map.put("del", delRName[i]);
+//				System.out.println(map.toString());
+						int attachDel = noticeService.noticeDelFile(map);
+					}
+				}
+			}catch(Exception e) {
+				logger.error("파일삭제 오류", e);
+				throw new NoticeException("게시물 등록 오류",e);
+			}
 		System.out.println("notice="+notice);
 		int result = noticeService.noticeUpdateEnd(notice);
 		String msg = result > 0?"게시물 수정 성공!":"게시물 수정 실패ㅠㅠ";
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc","/notice/noticeList.do");
 		
-		}catch(Exception e) {
-			logger.error("게시물 등록 오류", e);
-			throw new NoticeException("게시물 등록 오류",e);
-		}
-		}
+			}catch(Exception e) {
+				logger.error("게시물 등록 오류", e);
+				throw new NoticeException("게시물 등록 오류",e);
+			}
+			
 		return "common/msg";
 	}
-	
 }

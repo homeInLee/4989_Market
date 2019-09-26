@@ -73,7 +73,7 @@
 	select seq_notice_no.currval from dual
 </select>
 <select id="selectAttachmentOne" resultType="noticeAttachement">
-	select * from attachment where board_name = 'N' and board_no = #{noticeNo}
+	select * from attachment where board_name = 'N' and board_no = #{noticeNo} and attachment_deltype = 'N'
 </select>
 <update id="noticeUpdateEnd" >
 	update notice set 
@@ -85,4 +85,11 @@
 <select id="selectOldFile" resultType="hashmap">
 	select originalfile_name,renamedfile_name from attachment where board_name = 'N' and board_no = #{noticeNo} and attachment_deltype = 'N'
 </select>
+<update id="noticeDelFile">
+	update attachment set 
+	attachment_deltype = 'Y'
+	where board_name = 'N' and
+	board_no = #{noticeNo} and renamedfile_name = #{del}
+</update>
+
 </mapper>

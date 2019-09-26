@@ -42,9 +42,16 @@ padding: 10px;
 	<tr>
 		<th>첨부파일</th>
 		<td colspan="5">
+	<c:choose>
+	<c:when test="${not empty attachMap}">
 	<c:forEach items="${attachMap}" var="a" varStatus="status">
 		${a['originalfileName']}<c:if test="${status.last eq false}">,</c:if>
 	</c:forEach>
+	</c:when>
+	<c:when test="${empty attachMap}">
+		<span>첨부파일이 없습니다.</span>
+	</c:when>
+	</c:choose>
 		</td>
 	</tr>
 	<tr style="height: 300px;">
