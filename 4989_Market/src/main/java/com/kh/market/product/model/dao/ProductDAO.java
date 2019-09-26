@@ -30,6 +30,8 @@ public interface ProductDAO {
 	int insertImg(Attachment a);
 
 	List<Attachment> attachList();
+
+	List<Attachment> attachSelectOne(String productNo);
 	
 
 }

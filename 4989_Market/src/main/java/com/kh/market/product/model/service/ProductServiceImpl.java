@@ -108,5 +108,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.attachList();
 	}
 
+	@Override
+	public List<Attachment> attachSelectOne(String productNo) {
+		// TODO Auto-generated method stub
+		return productDAO.attachSelectOne(productNo);
+	}
+
 
 }

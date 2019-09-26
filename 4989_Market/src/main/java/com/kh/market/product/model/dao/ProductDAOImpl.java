@@ -85,6 +85,12 @@ public class ProductDAOImpl implements ProductDAO {
 		
 		return sqlSession.selectList("product.memberBuyView",memberId);
 	}
+
+	@Override
+	public List<Attachment> attachSelectOne(String productNo) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.attachSelectOne", productNo);
+	}
 	
 	
 }

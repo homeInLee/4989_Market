@@ -1,8 +1,10 @@
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/imageSlider/sliderStyle.css">
 <fmt:requestEncoding value="utf-8"/>
 <title></title>
 <style>
@@ -13,6 +15,44 @@
 	<jsp:param value="" name=""/>
 </jsp:include>
 <!-- content 영역 -->
+<div id="wrapper">
+	<div id="slider-wrap">
+		<ul id="slider">
+			<li data-color="#1abc9c">		                             
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images0">
+			</li>		
+			             
+			<li data-color="#3498db">
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images1">
+			</li>	
+				             
+			<li data-color="#9b59b6">
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images2">
+			</li>         
+		</ul>
+          
+		<!--controls-->
+		<div class="btns" id="next">
+			<i class="fa fa-arrow-right">&gt;</i>
+		</div>
+		
+		<div class="btns" id="previous">
+			<i class="fa fa-arrow-left">&lt;</i>
+		</div>
+		
+		<div id="counter"></div>		          
+		<div id="pagination-wrap">
+			<ul>
+			
+			</ul>
+		</div>
+		<!--controls-->  
+                 
+	</div> 
+</div>
+
+
+
 <br />
 <br />
 <br />
@@ -53,6 +93,8 @@ function deleteProduct() {
 
 
 </script>
+<!-- 이미지 슬라이더 -->
+<script src="${pageContext.request.contextPath }/resources/js/imageSlider.js"></script>
 
 
 

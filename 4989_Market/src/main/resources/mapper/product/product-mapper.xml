@@ -82,14 +82,19 @@
 									  #{originalfileName},
 									  #{renamedfileName},
 									  sysdate,
-									  default
+									  default,
+									  #{attachmentMainImage}									  
 									  )
 	
 	
 	</insert>
 	
 	<select id="attachList" resultType="productAttch">
-		select * from attachment where board_name = 's'
+		select * from attachment where board_name = 's' and attachment_main_image = 'Y'
 	
+	</select>
+	
+	<select id="attachSelectOne" resultType="productAttch">
+		select * from attachment where board_no = #{productNo}
 	</select>
 </mapper>

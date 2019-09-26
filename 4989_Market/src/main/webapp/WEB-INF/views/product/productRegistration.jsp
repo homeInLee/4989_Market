@@ -75,6 +75,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
                  
 	</div> 
 </div>
+
 	<p>미리보기</p>
 	<div id="preview">
 		<ul>
@@ -98,7 +99,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
         
         <div class="input-group mb-3" style="padding:0px;">
 		  <div class="input-group-prepend" style="padding:0px;">
-		    <span class="input-group-text">첨부파일1</span>		    
+		    <span class="input-group-text">첨부파일</span>		    
 		  </div>
 		  <div class="custom-file">
 		    <input type="file" multiple="multiple" class="custom-file-input imageUpload" 
@@ -141,7 +142,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 					<tr>
 						<th>가격</th>
 						<td>		
-						<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required"/>
+						<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required" />
 						</td>			
 					</tr>
 					
@@ -265,6 +266,8 @@ function deleteImageAction(index) {
     var img_id = ".images"+index;
     $(img_id).attr('src', '${pageContext.request.contextPath }/resources/images/product/noimage.png') 
 }
+
+ 
 </script>
 
 
