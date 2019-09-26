@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.product.model.vo.Attachment;
 import com.kh.market.product.model.vo.Product;
 
 @Repository
@@ -50,6 +51,17 @@ public class ProductDAOImpl implements ProductDAO {
 	@Override
 	public List<Product> productSearch(String searchWord) {
 		return sqlSession.selectList("product.productSearch", searchWord);
+	}
+
+	@Override
+	public int insertImg(Attachment a) {
+		return sqlSession.insert("product.insertImg", a);
+	}
+
+	@Override
+	public List<Attachment> attachList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.attachList");
 	}
 
 

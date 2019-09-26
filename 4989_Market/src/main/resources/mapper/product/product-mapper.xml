@@ -13,16 +13,20 @@
 	</select>
 	<insert id="productRegistration" parameterType="product">
 	insert into sell values(seq_product_no.nextval, 
-							#{sellTitle}, #{sellWriter}, default, 
+							#{sellTitle}, 
+							#{sellWriter}, 
+							default, 
 							#{sellContent}, 
 							default, 
 							#{sellPrice}, 
 							default, 
 							default, 
 							default, 
-							default)
-	
-	
+							default,
+							#{sellAddress})
+		<selectKey keyProperty="sellNo" resultType="_int" order="AFTER">
+			select seq_product_no.currval from dual
+		</selectKey>
 	
 	</insert>
 	<select id="productView" resultType="product">
@@ -58,4 +62,22 @@
 		order by sell_no desc
 	</select>
 	
+
+	<insert id="insertImg" parameterType="productAttch">
+		insert into attachment values(SEQ_ATTACHMENT_NO.nextval,
+									 's',
+									  #{boardNo},
+									  #{originalfileName},
+									  #{renamedfileName},
+									  sysdate,
+									  default
+									  )
+	
+	
+	</insert>
+	
+	<select id="attachList" resultType="productAttch">
+		select * from attachment where board_name = 's'
+	
+	</select>
 </mapper>

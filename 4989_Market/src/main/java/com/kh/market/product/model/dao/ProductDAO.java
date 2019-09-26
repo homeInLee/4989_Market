@@ -2,6 +2,7 @@ package com.kh.market.product.model.dao;
 
 import java.util.List;
 
+import com.kh.market.product.model.vo.Attachment;
 import com.kh.market.product.model.vo.Product;
 
 public interface ProductDAO {
@@ -17,6 +18,10 @@ public interface ProductDAO {
 	int productDelete(String productNo);
 
 	List<Product> productSearch(String searchWord);
+
+	int insertImg(Attachment a);
+
+	List<Attachment> attachList();
 
 	
 
