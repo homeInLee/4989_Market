@@ -2,8 +2,12 @@ package com.kh.market.product.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
@@ -59,13 +63,16 @@ public class ProductController {
 		List<Product> plist = productService.productList();
 		List<Attachment> attachList = productService.attachList();
 		
+		Map<List<Product>, List<Attachment>> map = new HashMap<>();
+		
+		map.put(plist, attachList);
+
 		
 		
-		logger.info("list의 값={}", plist);
-		logger.info("attachList의 값={}", attachList);
-		logger.info("attachList의 첫번째값={}", attachList.get(1));
-		
-		
+
+//		logger.info("attachList = {}",attachList);
+//		logger.info("plist = {}", plist);
+
 		
 		model.addAttribute("attachList", attachList);
 		model.addAttribute("plist", plist);	
@@ -90,58 +97,12 @@ public class ProductController {
 										 MultipartFile[] upFile,
 										 MultipartHttpServletRequest mtfRequest
 										) {
-		
-		
-//        List<MultipartFile> fileList = mtfRequest.getFiles("file");
-//        String src = mtfRequest.getParameter("src");
-//        System.out.println("src value : " + src);
-//
-//		String saveDirectory_
-//		= mtfRequest.getSession()
-//				 .getServletContext()
-//				 .getRealPath("/resources/upload/product");
-//
-//        for (MultipartFile mf : fileList) {
-//            String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-//            long fileSize = mf.getSize(); // 파일 사이즈
-//
-//            System.out.println("originFileName : " + originFileName);
-//            System.out.println("fileSize : " + fileSize);
-//
-//            String safeFile = saveDirectory_ + System.currentTimeMillis() + originFileName;
-//            try {
-//                mf.transferTo(new File(safeFile));
-//            } catch (IllegalStateException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            } catch (IOException e) {
-//                // TODO Auto-generated catch block
-//                e.printStackTrace();
-//            }
-//        }
-
 
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
-		
-			
-		
-		logger.info("upFile.length={}",upFile.length);
-		logger.info("upFile[0].name={}",upFile[0].getName());
 
-		logger.info("upFile[0].originalFileName={}",upFile[0].getOriginalFilename());
-		logger.info("upFile[0].originalFileName={}",upFile[1].getOriginalFilename());
-		logger.info("upFile[0].originalFileName={}",upFile[2].getOriginalFilename());
-		logger.info("upFile[0].size={}",upFile[0].getSize());
 
 	
 	
@@ -159,6 +120,7 @@ public class ProductController {
 		logger.info("upFile.toString={}",upFile.toString());
 		
 		for(MultipartFile f : upFile) {
+
 			//파일 유효성 검사
 			if(!f.isEmpty()) {
 				//renamedFileName
@@ -173,9 +135,18 @@ public class ProductController {
 				}
 				
 				//attachment vo객체 담기
+
+				
+				
+				
 				Attachment attach = new Attachment();
 				attach.setOriginalfileName(originalFileName);
 				attach.setRenamedfileName(renamedFileName);
+				if (f.equals(upFile[0])) {
+					attach.setAttachmentMainImage("Y");
+					logger.info("현재 파일은 첫번째 파일  ori: {} 입니다.",originalFileName);
+					logger.info("현재 파일은 첫번째 파일 rename: {} 입니다.",renamedFileName);
+				}
 				attachList.add(attach);
 				logger.info("attachList={}", attachList.toString());
 			}
@@ -186,10 +157,7 @@ public class ProductController {
 		
 		
 		
-		
-		
-		
-		
+				
 		Product p = new Product();
 		p.setSellTitle(productTitle);
 		p.setSellWriter(productWriter);
@@ -216,8 +184,11 @@ public class ProductController {
 		
 		Product p = productService.productSelectOne(productNo);
 		
-		logger.info(p.toString());
-		
+		List<Attachment> attach = productService.attachSelectOne(productNo);
+
+		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(0).getOriginalfileName());
+		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(1).getOriginalfileName());
+		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(2).getOriginalfileName());
 		
 		model.addAttribute("p", p);
 		return "/product/productView";
