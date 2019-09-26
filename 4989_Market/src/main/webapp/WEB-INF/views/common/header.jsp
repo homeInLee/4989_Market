@@ -51,9 +51,14 @@ $(()=>{
 				<button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberEnroll.do'">회원가입</button>
 			</c:if>
 		    <c:if test="${memberLoggedIn!=null}">
-		        <span id="nameNmessage"><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a>님, 안녕하세요.</span>
+		    	<img style=" width:50px; border-radius:50%" src="${pageContext.request.contextPath }/resources/images/normal.jpg">
+		        <span><a href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">${memberLoggedIn.memberName}</a>님</span>
 		        &nbsp;
 		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberLogout.do'">로그아웃</button>
+		    <c:if test="${memberLoggedIn.memberId.trim()=='admin' }">
+		        
+		        <button class="log" type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberList.do'">회원관리</button>
+		    </c:if>
 		    </c:if>
 			</div>
 		</section>		

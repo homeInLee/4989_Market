@@ -40,4 +40,9 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.update("member.updateAddress", m);
 	}
 
+	@Override
+	public List<Member> memberList() {
+		return sqlSession.selectList("member.memberList");
+	}
+
 }

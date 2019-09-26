@@ -107,7 +107,7 @@ public class MemberController {
 		mav.setViewName("common/msg");
 		return mav;
 	}
-	@RequestMapping("/memberLogout.do")
+	@RequestMapping(value="/memberLogout.do",method=RequestMethod.GET)
 	public String memberLogout(SessionStatus sessionStatus, HttpServletRequest request) {
 		logger.debug("로그아웃 요청");
 		if(!sessionStatus.isComplete())
@@ -157,12 +157,17 @@ public class MemberController {
 		model.addAttribute("loc", "/member/memberView.do?memberId="+member.getMemberId());
 		return "common/msg";
 	}
-	@RequestMapping(value="memberDelete.do", method=RequestMethod.POST)
-	public String memberDelete(Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+	@RequestMapping(value="memberDelete.do", method={RequestMethod.GET, RequestMethod.POST})
+	public String memberDelete(SessionStatus sessionStatus, Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
 		logger.info("memberLoggedIn="+memberLoggedIn);
 		int result = memberService.memberDelete(memberLoggedIn);
+		if(result>0) {
+			if(!sessionStatus.isComplete())
+				sessionStatus.setComplete();
+		}
 		model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
-		model.addAttribute("loc", result>0?"/member/memberLogout.do":"/member/memberView.do?memberId="+memberLoggedIn.getMemberId());
+		model.addAttribute("loc", result>0?"/":"/member/memberView.do?memberId="+memberLoggedIn.getMemberId());
+		logger.info("memberLoggedIn="+memberLoggedIn);
 		return "common/msg";
 	}
 	
@@ -187,6 +192,13 @@ public class MemberController {
 		
 		
 		return result;
+	}
+	
+	@RequestMapping("/memberList.do")
+	public String memberList(Model model) {
+		List<Member> mList = memberService.memberList();
+		model.addAttribute("mList", mList);
+		return "member/memberList";
 	}
 }
 

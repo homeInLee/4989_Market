@@ -68,6 +68,14 @@ div#enroll-container table td{text-align: left;}
 					<input type="text" class="form-control" value="${memberLoggedIn.memberAddress }" name="memberAddress" id="memberAddress">
 				</td>
 			</tr>
+			<tr>
+				<th>프로필 사진</th>
+				<td>
+					<div id="attachFile" style="margin-left: 0.5px;">
+					<input type="file" name="upFile" id="upFile" onchange="checkFile(this)" accept="image/*"/>
+					</div>
+				</td>
+			</tr>
 		</table>
 		<input class="log" type="submit" value="수정" >
 		<input class="log" type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${memberLoggedIn.memberId }'">

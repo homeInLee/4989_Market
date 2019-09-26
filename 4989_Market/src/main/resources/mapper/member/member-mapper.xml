@@ -42,4 +42,8 @@
 	
 	
 	</update>
+	<select id="memberList" resultType="member">
+		select * from member
+		order by member_deltype, member_no
+	</select>
 </mapper>

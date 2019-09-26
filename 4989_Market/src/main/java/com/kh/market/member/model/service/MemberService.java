@@ -19,4 +19,6 @@ public interface MemberService {
 
 	int updateAddress(Member m);
 
+	List<Member> memberList();
+
 }
