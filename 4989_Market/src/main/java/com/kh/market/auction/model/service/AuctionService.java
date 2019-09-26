@@ -8,14 +8,18 @@ import com.kh.market.auction.model.vo.Auction;
 
 public interface AuctionService {
 
-	List<Map<String, String>> auctionForList();
+	List<Map<String, String>> auctionList();
 
-	Auction auctionSelectOne(int auctionNo);
+	List<Map<String, String>> auctionSelectOne(int auctionNo);
 
 	int insertAuction(Auction auction, List<Attachment> attachList);
 
 	List<Auction> productSearch(String searchWord);
 	
 	int selectBoardNo();
+
+	List<Map<String, String>> mainImage();
+
+
 
 }

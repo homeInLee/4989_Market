@@ -4,23 +4,23 @@ import java.sql.Date;
 
 public class Auction {
 
-	private int auctionNo;
-	private String auctionTitle;
-	private String auctionWriter;
-	private String auctionBuyer;
-	private int auctionPrice;
-	private int auctionDirectPrice;
-	private int auctionIngPrice;
-	private int auctionUnitPrice;
-	private String auctionContent;
-	private int auctionReadcount;
-	private Date auctionDate;
-	private Date auctionEndDate;
-	private String auctionType;
-	private String auctionCategory;
-	private Date auctionDeldate;
-	private String auctionDeltype;
-	private String auctionAddress;
+	protected int auctionNo;
+	protected String auctionTitle;
+	protected String auctionWriter;
+	protected String auctionBuyer;
+	protected int auctionPrice;
+	protected int auctionDirectPrice;
+	protected int auctionIngPrice;
+	protected int auctionUnitPrice;
+	protected String auctionContent;
+	protected int auctionReadcount;
+	protected Date auctionDate;
+	protected Date auctionEndDate;
+	protected String auctionType;
+	protected String auctionCategory;
+	protected Date auctionDeldate;
+	protected String auctionDeltype;
+	protected String auctionAddress;
 	
 
 	public Auction() {

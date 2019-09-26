@@ -8,9 +8,9 @@ import com.kh.market.auction.model.vo.Auction;
 
 public interface AuctionDAO {
 
-	List<Map<String, String>> auctionForList();
+	List<Map<String, String>> auctionList();
 
-	Auction auctionSelectOne(int auctionNo);
+	List<Map<String, String>> auctionSelectOne(int auctionNo);
 
 	int insertAuction(Auction auction);
 
@@ -19,5 +19,8 @@ public interface AuctionDAO {
 	List<Auction> productSearch(String searchWord);
 
 	int selectBoardNo();
+
+
+	List<Map<String, String>> mainImage();
 
 }

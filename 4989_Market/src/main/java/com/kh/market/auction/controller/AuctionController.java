@@ -2,6 +2,7 @@ package com.kh.market.auction.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,14 +16,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.auction.model.exception.AuctionException;
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.comment.model.service.CommentService;
-import com.kh.market.comment.model.vo.Comment;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
@@ -45,21 +44,27 @@ public class AuctionController {
 	@RequestMapping("/auction.do")
 	public String auctionMain(Model model) {
 		
-		List<Map<String,String>> auctionForList = auctionService.auctionForList();
-
-		model.addAttribute("auctionList",auctionForList);
+		List<Map<String,String>> auctionList = auctionService.auctionList();
 		
-		logger.info("auctionList={}",auctionForList);
+		List<Map<String,String>> mainImage = auctionService.mainImage();
+		
+			
+
+		model.addAttribute("auctionList",auctionList);
+		model.addAttribute("mainImage", mainImage);
+		
+		logger.info("auctionList={}",auctionList);
+		logger.info("mainImage={}",mainImage);
 		
 		return "auction/auction";
 	}
 	
 	@RequestMapping("/auctionSelectOne.do")
 	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
-		Auction auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
+		List<Map<String,String>> auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
 		
-		
-		Member member = memberService.selectOneMember(auctionSelectOne.getAuctionWriter());
+		System.out.println("---------==========---------"+auctionSelectOne);
+		Member member = memberService.selectOneMember(auctionSelectOne.get(0).get("auctionWriter"));
 		
 		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		

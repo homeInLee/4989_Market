@@ -22,12 +22,12 @@ public class AuctionServiceImpl implements AuctionService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public List<Map<String, String>> auctionForList() {
-		return auctionDAO.auctionForList();
+	public List<Map<String, String>> auctionList() {
+		return auctionDAO.auctionList();
 	}
 
 	@Override
-	public Auction auctionSelectOne(int auctionNo) {
+	public List<Map<String, String>> auctionSelectOne(int auctionNo) {
 		return auctionDAO.auctionSelectOne(auctionNo);
 	}
 
@@ -67,5 +67,12 @@ public class AuctionServiceImpl implements AuctionService {
 	public int selectBoardNo() {
 		return auctionDAO.selectBoardNo();
 	}
+
+
+	@Override
+	public List<Map<String, String>> mainImage() {
+		return auctionDAO.mainImage();
+	}
+
 
 }
