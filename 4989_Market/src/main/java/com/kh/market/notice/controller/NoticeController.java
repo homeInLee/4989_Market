@@ -284,10 +284,12 @@ public class NoticeController {
 					attach.setRenamedfileName(renamedFileName);
 					attach.setBoardName("N");
 					attachList.add(attach);
+					logger.info("attach={}",attach);
+					logger.info("attachList={}",attachList);
 				}
 			}
 			}
-			try {
+//			try {
 				
 				if(delRName.length > 0 && delRName != null) {
 					
@@ -303,12 +305,13 @@ public class NoticeController {
 						int attachDel = noticeService.noticeDelFile(map);
 					}
 				}
-			}catch(Exception e) {
-				logger.error("파일삭제 오류", e);
-				throw new NoticeException("게시물 등록 오류",e);
-			}
+//			}catch(Exception e) {
+//				logger.error("파일삭제 오류", e);
+//				throw new NoticeException("게시물 등록 오류",e);
+//			}
 		System.out.println("notice="+notice);
-		int result = noticeService.noticeUpdateEnd(notice);
+		int result = noticeService.noticeUpdateEnd(notice,attachList);
+		System.out.println("result="+result);
 		String msg = result > 0?"게시물 수정 성공!":"게시물 수정 실패ㅠㅠ";
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc","/notice/noticeList.do");
