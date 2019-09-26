@@ -1,4 +1,6 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/product/productRegistrationStyle.css">
+<link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/imageSlider/sliderStyle.css">
+
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -12,195 +14,104 @@
 	<jsp:param value="물품 등록하기" name="pageTitle"/>
 </jsp:include>
 <style>
-#slider-wrap{
-    width:600px;
-    height:400px;
-    position:relative;
-    overflow:hidden;
+#Registration{
+	margin: 0 auto;
 }
 
-#slider-wrap ul#slider{
-    width:100%;
-    height:100%;
-    
-    position:absolute;
-    top:0;
-    left:0;     
-}
-
-#slider-wrap ul#slider li{
-    float:left;
-    position:relative;
-    width:600px;
-    height:400px;   
-}
-
-#slider-wrap ul#slider li > div{
-    position:absolute;
-    top:20px;
-    left:35px;  
-}
-
-#slider-wrap ul#slider li > div h3{
-    font-size:36px;
-    text-transform:uppercase;   
-}
-
-#slider-wrap ul#slider li > div span{
-    font-family: Neucha, Arial, sans serif;
-    font-size:21px;
-}
-
-#slider-wrap ul#slider li img{
-    display:block;
-    width:100%;
-  height: 100%;
-}
-
-
-/*btns*/
-.btns{
-    position:absolute;
-    width:50px;
-    height:60px;
-    top:50%;
-    margin-top:-25px;
-    line-height:57px;
-    text-align:center;
-    cursor:pointer; 
-    background:rgba(0,0,0,0.1);
-    z-index:100;
-    
-    
-    -webkit-user-select: none;  
-    -moz-user-select: none; 
-    -khtml-user-select: none; 
-    -ms-user-select: none;
-    
-    -webkit-transition: all 0.1s ease;
-    -moz-transition: all 0.1s ease;
-    -o-transition: all 0.1s ease;
-    -ms-transition: all 0.1s ease;
-    transition: all 0.1s ease;
-}
-
-.btns:hover{
-    background:rgba(0,0,0,0.3); 
-}
-
-#next{right:-50px; border-radius:7px 0px 0px 7px;}
-#previous{left:-50px; border-radius:0px 7px 7px 7px;}
-#counter{
-    top: 30px; 
-    right:35px; 
-    width:auto;
-    position:absolute;
-}
-
-#slider-wrap.active #next{right:0px;}
-#slider-wrap.active #previous{left:0px;}
-
-
-/*bar*/
-#pagination-wrap{
-    min-width:20px;
-    margin-top:350px;
-    margin-left: auto; 
-    margin-right: auto;
-    height:15px;
-    position:relative;
-    text-align:center;
-}
-
-#pagination-wrap ul {
-    width:100%;
-}
-
-#pagination-wrap ul li{
-    margin: 0 4px;
-    display: inline-block;
-    width:5px;
-    height:5px;
-    border-radius:50%;
-    background:#fff;
-    opacity:0.5;
-    position:relative;
-  top:0;
-  
-  
-}
-
-#pagination-wrap ul li.active{
-  width:12px;
-  height:12px;
-  top:3px;
-    opacity:1;
-    box-shadow:rgba(0,0,0,0.1) 1px 1px 0px; 
-}
-
-
-
-
-/*Header*/
+/* /*Header*/
 h1, h2{text-shadow:none; text-align:center;}
 h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; margin-bottom:30px;} 
-
-
-
-
-/*ANIMATION*/
-#slider-wrap ul, #pagination-wrap ul li{
-    -webkit-transition: all 0.3s cubic-bezier(1,.01,.32,1);
-    -moz-transition: all 0.3s cubic-bezier(1,.01,.32,1);
-    -o-transition: all 0.3s cubic-bezier(1,.01,.32,1);
-    -ms-transition: all 0.3s cubic-bezier(1,.01,.32,1);
-    transition: all 0.3s cubic-bezier(1,.01,.32,1); 
+ */
+#preview{
+	display: inline;
 }
 
+.preimg{
+	
+	border: 1px solid;
+	width: 100px;
+	height: 100px;
+	float: left;
+}
 </style>
 <!-- 컨텐츠 영역 시작-->
+
+
+<!-- 이미지 슬라이더 -->
+
 <div id="wrapper">
-      <div id="slider-wrap">
-          <ul id="slider">
-             <li data-color="#1abc9c">
-                             
-<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
-             </li>
-             
-             <li data-color="#3498db">
-<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
-             </li>
-             
-             <li data-color="#9b59b6">
-<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
-             </li>
-
-             
-             
-          </ul>
+	<div id="slider-wrap">
+		<ul id="slider">
+			<li data-color="#1abc9c">		                             
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images0">
+			</li>		
+			             
+			<li data-color="#3498db">
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images1">
+			</li>	
+				             
+			<li data-color="#9b59b6">
+				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images2">
+			</li>         
+		</ul>
           
-           <!--controls-->
-          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
-          <div id="counter"></div>
-          
-          <div id="pagination-wrap">
-            <ul>
-            </ul>
-          </div>
-          <!--controls-->  
+		<!--controls-->
+		<div class="btns" id="next">
+			<i class="fa fa-arrow-right">&gt;</i>
+		</div>
+		
+		<div class="btns" id="previous">
+			<i class="fa fa-arrow-left">&lt;</i>
+		</div>
+		
+		<div id="counter"></div>		          
+		<div id="pagination-wrap">
+			<ul>
+			
+			</ul>
+		</div>
+		<!--controls-->  
                  
-      </div>
-  
-   </div>
-   
+	</div> 
+</div>
+	<p>미리보기</p>
+	<div id="preview">
+		<ul>
+			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images0" /></li>
+			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images1" /></li>
+			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images2" /></li>
+		</ul>
+	</div>
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+<!-- 정보 입력 폼 -->
+<div id="Registration">
 
+	<form name="productFrm" action="${pageContext.request.contextPath }/product/productRegistrationEnd.do"  
+		  method="post" 
+		  enctype="multipart/form-data">
+	
+        
+        <div class="input-group mb-3" style="padding:0px;">
+		  <div class="input-group-prepend" style="padding:0px;">
+		    <span class="input-group-text">첨부파일1</span>		    
+		  </div>
+		  <div class="custom-file">
+		    <input type="file" multiple="multiple" class="custom-file-input imageUpload" 
+		    	   name="upFile" id="upFile1" >
+		    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+		  </div>
+		</div>
 
+    <br />
+    <br />
+    <br />
 
-	<div id="Registration">
-	<form name="productFrm" action="${pageContext.request.contextPath }/product/productRegistrationEnd.do"  method="get" >
-		<table id="tbl-Registration">
+	<table id="tbl-Registration">
 					<tr style="padding-bottom: 1px;">
 						
 						<th>작성자 정보</th>
@@ -208,10 +119,11 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 						<td>
 							<div id="userinfo">
 							<input type="text"  id="writer" disabled="disabled" value="admin" class="form-control"/>
-							<input type="hidden" name="productWriter" value="admin"/>
+							<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
 							<input type="text"  id="phone" disabled="disabled" value="01015412215" class="form-control"/>
 							<input type="text"  id="email" disabled="disabled" value="" placeholder="이메일 없음" class="form-control"/>
 							<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
+							<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
 							<button type="button" onclick="editable();">변경</button>
 							</div>
 						</td>
@@ -221,7 +133,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 					<tr>
 						<th>제목</th>
 						<td>		
-							<input type="text" id="title" name="productTitle" class="form-control"/>
+							<input type="text" id="title" name="productTitle" class="form-control" required="required"/>
 						</td>			
 					</tr>		
 				
@@ -229,21 +141,21 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 					<tr>
 						<th>가격</th>
 						<td>		
-						<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원"/>
+						<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required"/>
 						</td>			
 					</tr>
 					
 					<tr>
 						<th>내용</th>
 						<td>		
-						<textarea rows="30" cols="113" id="content" name="content" class="form-control"></textarea>
+						<textarea rows="30" cols="113" id="content" name="content" class="form-control" required="required"></textarea>
 						</td>			
 					</tr>
 					<tr>
 						<th></th>
-						<td></td>			
+						<td><input type="file" class="imageUpload" /></td>			
+
 					</tr>
-	
 		</table>
 			<br />
 
@@ -252,26 +164,164 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 			</p>
 		</form>
 		
-	</div>
+</div>
 
+	<div>
+        <h2><b>이미지 미리보기</b></h2>
+        <div class="input_wrap">
+            <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
+            <input type="file" id="input_imgs" multiple/>
+        </div>
+    </div>
 
-
+    <div>
+        <div class="imgs_wrap">
+            <!-- <img id="img" /> -->
+        </div>
+    </div>
 
 
 
 
 
 <script>
-
-
-
 function checkYN() {
 	var check=confirm('정말 등록 하시겠습니까?');
 	
 	return check;
 }
-
 </script>
+
+
+
+
+<!-- 이미지 슬라이더 스크립트 -->
+<script src="${pageContext.request.contextPath }/resources/js/imageSlider.js"></script>
+
+
+
+<script>
+var sel_files = [];
+
+
+$(document).ready(function() {
+    $("#upFile1").on("change", handleImgFileSelect);
+}); 
+
+function fileUploadAction() {
+    console.log("fileUploadAction");
+    $("#upFile1").trigger('click');
+}
+
+
+function handleImgFileSelect() {
+	alert("handleImgFileSelect 실행");
+}
+
+
+function handleImgFileSelect(e) {
+
+    // 이미지 정보들을 초기화
+/*             sel_files = [];
+    $(".imgs_wrap").empty(); */
+
+    var files = e.target.files;
+    var filesArr = Array.prototype.slice.call(files);
+
+    var index = 0;
+    filesArr.forEach(function(f) {
+        if(!f.type.match("image.*")) {
+            alert("확장자는 이미지 확장자만 가능합니다.");
+            return;
+        }
+
+        sel_files.push(f);
+
+        var reader = new FileReader();
+        reader.onload = function(e) {
+            var html = "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"img_id_"+index+"\"><img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'></a>";
+            $('.images'+index).attr('src', e.target.result);
+            $('.images'+index).attr('href', 'javascript:void(0);');
+            $('.images'+index).attr('onclick', 'deleteImageAction('+index+')');
+            $('.images'+index).attr('id', "img_id_"+index);
+            $('.images'+index).attr('title', '클릭 시 삭제됩니다.');
+            /* <img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'> */
+/*             $('.images'+imgIndex).attr('src', e.target.result); */
+            $(".imgs_wrap").append(html);
+            index++;
+
+        }
+        reader.readAsDataURL(f);
+        
+    });
+}
+
+function deleteImageAction(index) {
+    console.log("index : "+index);
+    console.log("sel length : "+sel_files.length);
+
+    sel_files.splice(index, 1);
+
+    var img_id = ".images"+index;
+    $(img_id).attr('src', '${pageContext.request.contextPath }/resources/images/product/noimage.png') 
+}
+</script>
+
+
+
+
+
+
+
+
+
+
+<!-- 
+<!-- 미리보기 이미지 삽입 스크립트(@@@@@@@구버전@@@@@)
+<script type="text/javascript">
+/*     var a = 1;
+    function addNum() {
+
+		alert(a);
+        a++;
+    }    */
+	
+    
+    var imgIndex = 0
+    function readURL(input) {
+
+    	
+        if (input.files && input.files[0] && imgIndex <= 2) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+            	console.log(imgIndex);
+                $('.images'+imgIndex).attr('src', e.target.result);
+                imgIndex++;
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+        else if(imgIndex = 3){
+            	
+            	imgIndex = 0;
+                console.log(imgIndex);
+                console.log("이미지 인덱스 초기화");
+
+        }
+
+
+
+    }
+
+    $("#upFile1").change(function() {
+        readURL(this);
+    });
+</script> 
+ -->
+
+<!-- 컨텐츠 영역 끝  -->
+
+<!-- 
+주소변경 스크립트 (보류)
 <script>
 
 	function editable() {
@@ -297,13 +347,8 @@ $(()=>{
 	});
 	
 });
-</script>
+</script> -->
 
 
-
-
-
-
-<!-- 컨텐츠 영역 끝  -->
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> --%>
 
