@@ -19,5 +19,15 @@ public class CommentDAOImpl implements CommentDAO {
 		return session.insert("comment.commentInsert", comment);
 	}
 
+	@Override
+	public List<Comment> selectCommentList(int auctionNo) {
+		return session.selectList("comment.selectCommentList", auctionNo);
+	}
+
+	@Override
+	public int commentDelete(int commentNo) {
+		return session.update("comment.commentDelete", commentNo);
+	}
+
 	
 }

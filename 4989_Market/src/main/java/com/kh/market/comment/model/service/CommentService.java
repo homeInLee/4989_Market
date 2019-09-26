@@ -8,5 +8,9 @@ public interface CommentService {
 
 	int commentInsert(Comment comment);
 
+	List<Comment> selectCommentList(int auctionNo);
+
+	int commentDelete(int commentNo);
+
 
 }
