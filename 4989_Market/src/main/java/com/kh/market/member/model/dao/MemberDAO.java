@@ -17,5 +17,7 @@ public interface MemberDAO {
 	
 	int updateAddress(Member m);
 
+	List<Member> memberList();
+
 
 }
