@@ -186,11 +186,12 @@ public class ProductController {
 		
 		List<Attachment> attach = productService.attachSelectOne(productNo);
 
-		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(0).getOriginalfileName());
-		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(1).getOriginalfileName());
-		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(2).getOriginalfileName());
-		
+//		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(0).getOriginalfileName());
+//		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(1).getOriginalfileName());
+//		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(2).getOriginalfileName());
+		/* attach.get(1).getRenamedfileName(); */
 		model.addAttribute("p", p);
+		model.addAttribute("attach", attach);
 		return "/product/productView";
 		
 	}

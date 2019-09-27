@@ -43,8 +43,28 @@ h2, section{
 	text-align: center;
 }
 
-
-
+.more-btn {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  height: 50px;
+  cursor: pointer;
+  width: 100%;
+  color: #868e96;
+  font-size: 16px;
+  border-top: 1px solid #e9ecef;
+}
+.more-btn .more-loading {
+  display: none;
+}
+.more-btn:hover{
+	cursor: pointer;
+	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+	top: -2px;
+}
 
 
 
@@ -79,51 +99,21 @@ h2, section{
 				<br /><br />
 			</article>
 		</c:forEach>
+		<div onclick="moreResult(this, 'flea_market', 'flea-market-wrap');" class="more-btn" data-o-keyword="자전거" data-page="1"  data-total-pages="11412">
+      <span class="more-text">더보기</span>
+      <div class="more-loading">
+        <div class="loader"></div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
 	</section>
 
-
-
-	<%-- <ul>
-		<!-- forEach 반복문 탈출을 위한 변수  -->
-
-		
-		
-		<!-- 상품 정보를 출력하는 forEach문  -->
-		<c:forEach items="${plist }" var="product">
-		
-		<li productNo="${product.sellNo}" >
-			<article class="top-card" >		
-				<p id="noPanel">${product.sellNo} </p><br />
-				
-				<!-- 상품사진을 출력하는 forEach문  -->				
-				<c:forEach items="${attachList }" var="attach" varStatus="status">
-					
-					<!-- 게시판 타입, 첨부파일 리스트의 데이터 중 첨부파일의 참조게시물 번호와 비교 -->
-					<c:if test="${attach.boardName eq 's' && attach.boardNo eq product.sellNo }">								
-							<img id="product-img" src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}" alt="" /><br />				
-									
-									
-					</c:if>
-									
-					
-	
-					
-				</c:forEach>
-				${product.sellTitle}<br />
-				판매자 ${product.sellWriter}<br />
-				상태 ${product.sellState}<br />
-				<div class="auction-content">
-				가격 ${product.sellPrice}&#8361;<br />
-				</div>
-				등록일 ${product.sellDate}<br />
-				조회수 ${product.sellReadCount}<br />		
-				
-			</article>
-		</li>				
-		</c:forEach>
-		
-	</ul>
-	</section> --%>
 
 
 <script>
@@ -138,5 +128,5 @@ $(()=>{
 
 </script>
 
-<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
- --%>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+

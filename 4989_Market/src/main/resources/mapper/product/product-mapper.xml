@@ -97,4 +97,5 @@
 	<select id="attachSelectOne" resultType="productAttch">
 		select * from attachment where board_no = #{productNo}
 	</select>
+	
 </mapper>
