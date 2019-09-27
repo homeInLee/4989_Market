@@ -6,6 +6,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.common.vo.Attachment;
 import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.vo.Product;
 

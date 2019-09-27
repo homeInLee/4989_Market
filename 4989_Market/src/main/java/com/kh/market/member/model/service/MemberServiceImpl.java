@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.common.vo.Attachment;
 import com.kh.market.member.model.dao.MemberDAO;
 import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.vo.Product;
@@ -15,7 +16,7 @@ import com.kh.market.product.model.vo.Product;
 public class MemberServiceImpl implements MemberService {
 	@Autowired
 	MemberDAO memberDAO;
-
+	private Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
 	public Member selectOneMember(String memberId) {

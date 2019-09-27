@@ -32,7 +32,7 @@ div#enroll-container table td{text-align: left;}
 				<th>아이디</th>
 				<td>
 					<div id="memberId-container">
-						<input type="text" class="form-control" value="${memberLoggedIn.memberId }" name="memberId" id="memberId_" disabled="disabled">
+						<input type="text" class="form-control" value="${member.memberId }" name="memberId" id="memberId_" disabled="disabled">
 					</div>
 				</td>
 			</tr>
@@ -45,25 +45,25 @@ div#enroll-container table td{text-align: left;}
 			<tr>
 				<th>이름</th>
 				<td>	
-				<input type="text" class="form-control" value="${memberLoggedIn.memberName }" name="memberName" id="memberName" required disabled="disabled">
+				<input type="text" class="form-control" value="${member.memberName }" name="memberName" id="memberName" required disabled="disabled">
 				</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td>	
-					<input type="email" class="form-control" value="${memberLoggedIn.memberEmail }" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail" disabled="disabled">
+					<input type="email" class="form-control" value="${member.memberEmail }" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail" disabled="disabled">
 				</td>
 			</tr>
 			<tr>
 				<th>휴대폰</th>
 				<td>	
-					<input type="tel" class="form-control" value="${memberLoggedIn.memberPhone }" name="memberPhone" id="memberPhone" maxlength="11" required disabled="disabled">
+					<input type="tel" class="form-control" value="${member.memberPhone }" name="memberPhone" id="memberPhone" maxlength="11" required disabled="disabled">
 				</td>
 			</tr>
 			<tr>
 				<th>주소</th>
 				<td>	
-					<input type="text" class="form-control" value="${memberLoggedIn.memberAddress }" name="memberAddress" id="memberAddress" disabled="disabled">
+					<input type="text" class="form-control" value="${member.memberAddress }" name="memberAddress" id="memberAddress" disabled="disabled">
 				</td>
 			</tr>
 			<tr>
@@ -75,13 +75,15 @@ div#enroll-container table td{text-align: left;}
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="memberId" value="${member.memberId }"/>
+		<input type="hidden" name="loginId" value="${memberLoggedIn.memberId }"/>
 	</form>
-		<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdate.do'" class="log" id="btnUpdate">정보수정</button>
+		<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdate.do?memberId=${member.memberId }'" class="log" id="btnUpdate">정보수정</button>
 		<button type="button" onclick="memberDelete();" class="log" id="btnDelete">회원삭제</button>
 </div>
 <script>
 function memberDelete(){
-	$("#Delete").attr("action", "${pageContext.request.contextPath}/member/memberDelete.do?memberId=${memberLoggedIn.memberId }").attr("method","post").submit();
+	$("#Delete").attr("action", "${pageContext.request.contextPath}/member/memberDelete.do").attr("method","post").submit();
 }
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

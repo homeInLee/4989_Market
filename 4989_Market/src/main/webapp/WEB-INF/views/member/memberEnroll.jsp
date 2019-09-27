@@ -82,14 +82,6 @@ div#memberId-container span.error{color:red;}
 					<input type="text" class="form-control" placeholder="" name="memberAddress" id="memberAddress">
 				</td>
 			</tr>
-			<tr>
-				<th>프로필 사진</th>
-				<td>
-					<div id="attachFile" style="margin-left: 0.5px;">
-					<input type="file" name="upFile" id="upFile" onchange="checkFile(this)" accept="image/*"/>
-					</div>
-				</td>
-			</tr>
 		</table>
 		<input class="log" type="submit" value="가입" >
 		<input class="log" type="reset" value="취소">
@@ -139,24 +131,6 @@ $(function(){
 	
 });
 
-function checkFile(f){
-
-	// files 로 해당 파일 정보 얻기.
-	var file = f.files;
-
-	// file[0].name 은 파일명 입니다.
-	// 정규식으로 확장자 체크
-	if(!/\.(gif|jpg|jpeg|png)$/i.test(file[0].name)) alert('gif, jpg, png 파일만 선택해 주세요.\n\n현재 파일 : ' + file[0].name);
-
-	// 체크를 통과했다면 종료.
-	else return;
-
-	// 체크에 걸리면 선택된  내용 취소 처리를 해야함.
-	// 파일선택 폼의 내용은 스크립트로 컨트롤 할 수 없습니다.
-	// 그래서 그냥 새로 폼을 새로 써주는 방식으로 초기화 합니다.
-	// 이렇게 하면 간단 !?
-	f.outerHTML = f.outerHTML;
-}
 function validate(){
 	var memberId = $("#memberId_");
 	if(memberId.val().trim().length<4){
