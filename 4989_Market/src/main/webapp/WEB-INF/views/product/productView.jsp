@@ -1,4 +1,7 @@
 
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.kh.market.product.model.vo.Attachment"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -7,8 +10,36 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/resources/css/imageSlider/sliderStyle.css">
 <fmt:requestEncoding value="utf-8"/>
 <title></title>
+<% 
+	List<Attachment> attach = (List<Attachment>)request.getAttribute("attach");
+int attachIndex = 0;
+/* List<BoardComment> bclist = (List<BoardComment>)request.getAttribute("bclist") */
+%>
 <style>
+.btn-primary, .btn-primary:hover, .btn-primary:active, .btn-primary:visited {
+    background-color: red;
+}
 
+#purchase{
+	border: 1px solid #da1519;
+	height: 56px;
+	background-color: #e81e22;
+	font-size: 18px;
+	font-weight: 700;
+	color: #fff;
+	cursor: pointer;
+	
+}
+#addCart{
+	border: 1px solid #f39614;
+	height: 56px;
+	background-color: #f39614;
+	font-size: 18px;
+	font-weight: 700;
+	color: #fff;
+	cursor: pointer;
+	
+}
 </style>
 
 <jsp:include page="/WEB-INF/views/common/header.jsp" >
@@ -31,7 +62,7 @@
 			</li>         
 		</ul>
           
-		<!--controls-->
+		<!--image slider controls-->
 		<div class="btns" id="next">
 			<i class="fa fa-arrow-right">&gt;</i>
 		</div>
@@ -46,12 +77,14 @@
 			
 			</ul>
 		</div>
-		<!--controls-->  
+		<!--image slider controls end-->  
                  
 	</div> 
 </div>
-
-
+<!-- image slider section end -->
+<br />
+<button type="button" id="purchase">&nbsp;&nbsp;구매하기&nbsp;&nbsp;</button>
+<button type="button" id="addCart">&nbsp;&nbsp;장바구니에 담기&nbsp;&nbsp;</button>
 
 <br />
 <br />
@@ -90,14 +123,30 @@ function deleteProduct() {
 	location.href = "${pageContext.request.contextPath}/product/productDelete.do?productNo=${p.sellNo}";
 
 }
-
-
 </script>
+
+
+
+
+
+<script>
+var index = 0;
+
+$(()=>{
+		 <%for(; attach.size()>attachIndex; attachIndex++){%>
+			$('.images'+<%=attachIndex%>).attr('src', '<%=request.getContextPath()%>/resources/upload/product/<%=attach.get(attachIndex).getRenamedfileName()%>');		 
+		 <% }%>
+})
+</script>
+
+	
+
+
+
+
+
+
 <!-- 이미지 슬라이더 -->
 <script src="${pageContext.request.contextPath }/resources/js/imageSlider.js"></script>
-
-
-
-
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 
