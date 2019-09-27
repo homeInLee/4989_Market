@@ -1,5 +1,6 @@
 package com.kh.market.member.controller;
 
+import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -20,18 +21,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.market.member.model.vo.Member;
-import com.kh.market.product.model.vo.Product;
-import com.kh.market.message.model.service.MessageService;
-import com.kh.market.message.model.vo.Message;
+import com.kh.market.common.vo.Attachment;
 import com.kh.market.member.model.service.MemberService;
+import com.kh.market.member.model.vo.Member;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.common.util.HelloSpringUtils;
 
 
 @Controller
 @RequestMapping("/member")
-@SessionAttributes(names= {"memberLoggedIn","messageCnt"})
+@SessionAttributes(names= "memberLoggedIn")
 public class MemberController {
 	@Autowired
 	MemberService memberService;
@@ -57,12 +59,10 @@ public class MemberController {
 		logger.debug("암호화전: "+encodedPassword);
 		//member객체 대임
 		member.setMemberPassword(encodedPassword);
-		
-		//1.비지니스로직
-		int result = memberService.insertMember(member);
+		int	result = memberService.insertMember(member);
+        model.addAttribute("msg", result>0?"회원가입성공":"회원가입실패");
+        model.addAttribute("loc", "/");
 		//2.view단처리
-		model.addAttribute("msg", result>0?"회원가입성공":"회원가입실패");
-		model.addAttribute("loc", "/");
 		
 		return "common/msg";
 	}
@@ -140,34 +140,53 @@ public class MemberController {
 		return map;
 	}
 	@RequestMapping("/memberView.do")
-	public void memberView(@RequestParam String memberId,ModelAndView mav) {
-		
+	public String memberView(@RequestParam String memberId,Model model) {
+			logger.info("memberId"+memberId);
+			Member member = memberService.selectOneMember(memberId);			
+			model.addAttribute("member", member);
+			return "member/memberView";
 	}
 
 	@RequestMapping("/memberUpdate.do")
-	public void memberUpdate() {
+	public String memberUpdate(@RequestParam String memberId, Model model) {
 		logger.debug("회원수정 요청");
+		Member member = memberService.selectOneMember(memberId);
+		model.addAttribute("member", member);
+		return "member/memberUpdate";
 	}
 	@RequestMapping(value="memberUpdateEnd.do",method=RequestMethod.POST)
-	public String memberUpdateEnd(Member member, Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
-		member.setMemberId(memberLoggedIn.getMemberId());
+	public String memberUpdateEnd(Member member, Model model, @RequestParam("loginId") String loginId) {
 		logger.info("member="+member);
-		int result = memberService.memberUpdate(member);
+		Member memberLoggedIn = memberService.selectOneMember(loginId);
+		logger.info("memberLoggedIn="+memberLoggedIn);
+		int result = 0;
+		if(member.getMemberId().equals(memberLoggedIn.getMemberId()) || memberLoggedIn.getMemberId().equals("admin")) {
+			result = memberService.memberUpdate(member);			
+		}
 		model.addAttribute("msg", result>0?"성공적으로 변경되었습니다.":"변경이 실패하였습니다.");
 		model.addAttribute("loc", "/member/memberView.do?memberId="+member.getMemberId());
+		model.addAttribute("memberLoggedIn", memberLoggedIn);
+		logger.info("memberLoggedIn="+memberLoggedIn);
 		return "common/msg";
 	}
-	@RequestMapping(value="memberDelete.do", method={RequestMethod.GET, RequestMethod.POST})
-	public String memberDelete(SessionStatus sessionStatus, Model model, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
-		logger.info("memberLoggedIn="+memberLoggedIn);
-		int result = memberService.memberDelete(memberLoggedIn);
-		if(result>0) {
-			if(!sessionStatus.isComplete())
-				sessionStatus.setComplete();
+	@RequestMapping(value="memberDelete.do", method={RequestMethod.POST})
+	public String memberDelete(SessionStatus sessionStatus, Model model, @RequestParam("loginId") String loginId, @RequestParam String memberId) {
+		Member memberLoggedIn = memberService.selectOneMember(loginId);
+		Member member = memberService.selectOneMember(memberId);
+		int result = 0;
+		if(member.getMemberId().equals(memberLoggedIn.getMemberId()) || memberLoggedIn.getMemberId().equals("admin")) {
+			result = memberService.memberDelete(member);			
+		}
+		if(!memberLoggedIn.getMemberId().equals("admin")) {
+			if(result>0) {
+				if(!sessionStatus.isComplete())
+					sessionStatus.setComplete();								
+				model.addAttribute("loc", result>0?"/":"/member/memberView.do?memberId="+member.getMemberId());			
+			}
+			model.addAttribute("loc","/member/memberView.do?memberId="+member.getMemberId());			
 		}
 		model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
-		model.addAttribute("loc", result>0?"/":"/member/memberView.do?memberId="+memberLoggedIn.getMemberId());
-		logger.info("memberLoggedIn="+memberLoggedIn);
+		model.addAttribute("memberLoggedIn", memberLoggedIn);
 		return "common/msg";
 	}
 	

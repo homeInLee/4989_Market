@@ -36,6 +36,7 @@ height: 34px;
 				<th>연락처</th>
 				<th>이메일</th>
 				<th>가입일</th>
+				<th>탈퇴여부</th>
 			</tr>
 			<c:forEach items="${mList}" var="m">
 			<tr class="bottom">
@@ -44,7 +45,7 @@ height: 34px;
 				<td>${m.memberPhone}</td>
 				<td>${m.memberEmail }</td>
 				<td><fmt:formatDate value="${m.memberEnrolldate}" pattern="yy-MM-dd HH:mm"/></td>
-				
+				<td>${m.memberDeltype }</td>
 			</tr>
 			</c:forEach>
 		</table>
