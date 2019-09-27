@@ -1,5 +1,7 @@
 package com.kh.market.declaration.contorller;
 
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,11 +26,13 @@ public class DeclarationController {
 	@Autowired
 	DeclarationService declarationService;
 	
-	@RequestMapping("/memberDeclaration")
-	public ModelAndView memberDeclaration(ModelAndView mav,
-										 @RequestParam("declarationReceiver")String declarationReceiver) {
+	@RequestMapping("/connectDeclaration")
+	public ModelAndView connectDeclaration(ModelAndView mav,
+										 @RequestParam("declarationReceiver")String declarationReceiver,
+										 @RequestParam("declarationDivision")String declarationDivision) {
 		
 		mav.addObject("declarationReceiver",declarationReceiver);
+		mav.addObject("declarationDivision",declarationDivision);
 		mav.setViewName("declaration/declarationWrite");
 		
 		return mav;
@@ -39,6 +43,7 @@ public class DeclarationController {
 		
 		logger.info("declaration={}",declaration);
 		int result = declarationService.insertMemberDeclaration(declaration);
+		logger.info("result=",result);
 		String msg = result > 0?"신고 등록 성공!":"신고 등록 실패ㅠㅠ";
 		model.addAttribute("msg",msg);
 		model.addAttribute("loc","/notice/noticeList.do");
@@ -46,4 +51,22 @@ public class DeclarationController {
 		
 		return "common/msg";
 	}
+	
+	@RequestMapping("/declarationList")
+	public ModelAndView declarationList(ModelAndView mav,
+										@RequestParam(value="cPage",
+													  defaultValue="1",
+													  required=false)int cPage) {
+		
+		logger.info("declarationList 요청");
+		List<Declaration> list = declarationService.declarationList(cPage);
+		
+		logger.info("list={}",list);
+		mav.addObject("list",list);
+		mav.setViewName("declaration/declarationList");
+		
+		return mav;
+		
+	}
+	
 }

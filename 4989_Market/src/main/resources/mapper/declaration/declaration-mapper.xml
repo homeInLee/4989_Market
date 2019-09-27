@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="declaration">
+<insert id="insertMemberDeclaration">
+insert into declaration(
+DECLARATION_NO,
+DECLARATION_TITLE,
+DECLARATION_WRITER,
+DECLARATION_RECEIVER,
+DECLARATION_REASON,
+DECLARATION_CONTENT,
+DECLARATION_DIVISION) values(
+seq_declaration_no.nextval,
+#{declarationTitle},
+#{declarationWriter},
+#{declarationReceiver},
+#{declarationReason},
+#{declarationContent},
+#{declarationDivision}
+)
+</insert>
+<select id="declarationList" resultType="declaration">
+	select * from declaration 
+	where declaration_deltype = 'N'
+	order by declaration_no desc
+</select>
+
+
+
+
+</mapper>

@@ -119,7 +119,7 @@ table#noticeViewTable td#drop {
 		<li><a href="#">${notice.noticeWriter }</a>
 	   		<ul>
 		      <li><a id="memberNotice">회원정보</a></li>
-		      <li><a href="${pageContext.request.contextPath}/declaration/memberDeclaration?declarationReceiver=${notice.noticeWriter}" 
+		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=m" 
 		      		onclick="window.open(this.href,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); return false;">신고</a></li>
 	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li>
 	        </ul>
@@ -165,6 +165,7 @@ table#noticeViewTable td#drop {
 <%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 <input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
 <input type="button" id="noticeDelete" value="삭제" />
+<input type="button" id="noticeDeclaration" onclick="goDeclaration()" value="신고" />
 <input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
 <%-- </c:if> --%>
 <script>
@@ -177,11 +178,6 @@ $("#noticeDelete").click(function(){
     	location.href="${pageContext.request.contextPath}/notice/noticeDelete?noticeNo=${noticeNo}"
 		return true;    	
     }
-});
-	
-$("#drop").click(()=>{
-	alert("아이디클릭");
-	$(".manubar").css('display','block');
 });
 
 $(function(){
@@ -211,8 +207,20 @@ $(function(){
 });
 
 console.log($("[name=declarationReceiver]").val());
-	
 
+// $("#noticeDeclaration").click(()=>{
+// // 	window.open();
+// 	var url='${pageContext.request.contextPath}/declaration/memberDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
+// 	window.open(url,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); 
+// 	return false;
+	
+// });
+
+function goDeclaration() {
+	var url='${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
+	window.open(url,'글신고','width=500,height=500,location=no,status=no,scrollbars=yes'); 
+	return false;
+}
 
 </script>
 

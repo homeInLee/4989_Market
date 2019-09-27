@@ -23,6 +23,9 @@ border-bottom: 1px solid #dcd7d7;
 height: 34px;
 }
 </style>
+
+<input type="button" value="회원목록" />
+<input type="button" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'"/>
 	<div id="">
 	<h2 style="text-align: center;">회원목록</h2>
 	<c:if test="${memberLoggedIn != null }">

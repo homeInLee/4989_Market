@@ -1,5 +1,7 @@
 package com.kh.market.declaration.model.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +16,11 @@ public class DeclarationServiceImpl implements DeclarationService {
 
 	@Override
 	public int insertMemberDeclaration(Declaration declaration) {
-		return 0;
+		return declarationDAO.insertMemberDeclaration(declaration);
+	}
+
+	@Override
+	public List<Declaration> declarationList(int cPage) {
+		return declarationDAO.declarationList(cPage);
 	}
 }

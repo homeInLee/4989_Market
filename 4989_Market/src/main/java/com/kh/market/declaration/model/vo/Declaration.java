@@ -7,26 +7,28 @@ public class Declaration {
 	private String declarationWriter;
 	private String declarationReceiver;
 	private String declarationContent;
-	private String declarationdate;
+	private String declarationReason;
+	private String declarationDate;
 	private String declarationState;
-	private String declarationDelete;
+	private String declarationDeldte;
 	private String declarationDeltype;
 	private String declarationDivision;
 	
 	public Declaration() {}
 
 	protected Declaration(int declarationNo, String declarationTitle, String declarationWriter,
-			String declarationReceiver, String declarationContent, String declarationdate, String declarationState,
-			String declarationDelete, String declarationDeltype, String declarationDivision) {
+			String declarationReceiver, String declarationContent, String declarationReason, String declarationDate,
+			String declarationState, String declarationDeldte, String declarationDeltype, String declarationDivision) {
 		super();
 		this.declarationNo = declarationNo;
 		this.declarationTitle = declarationTitle;
 		this.declarationWriter = declarationWriter;
 		this.declarationReceiver = declarationReceiver;
 		this.declarationContent = declarationContent;
-		this.declarationdate = declarationdate;
+		this.declarationReason = declarationReason;
+		this.declarationDate = declarationDate;
 		this.declarationState = declarationState;
-		this.declarationDelete = declarationDelete;
+		this.declarationDeldte = declarationDeldte;
 		this.declarationDeltype = declarationDeltype;
 		this.declarationDivision = declarationDivision;
 	}
@@ -71,12 +73,20 @@ public class Declaration {
 		this.declarationContent = declarationContent;
 	}
 
-	public String getDeclarationdate() {
-		return declarationdate;
+	public String getDeclarationReason() {
+		return declarationReason;
 	}
 
-	public void setDeclarationdate(String declarationdate) {
-		this.declarationdate = declarationdate;
+	public void setDeclarationReason(String declarationReason) {
+		this.declarationReason = declarationReason;
+	}
+
+	public String getDeclarationDate() {
+		return declarationDate;
+	}
+
+	public void setDeclarationDate(String declarationDate) {
+		this.declarationDate = declarationDate;
 	}
 
 	public String getDeclarationState() {
@@ -87,12 +97,12 @@ public class Declaration {
 		this.declarationState = declarationState;
 	}
 
-	public String getDeclarationDelete() {
-		return declarationDelete;
+	public String getDeclarationDeldte() {
+		return declarationDeldte;
 	}
 
-	public void setDeclarationDelete(String declarationDelete) {
-		this.declarationDelete = declarationDelete;
+	public void setDeclarationDeldte(String declarationDeldte) {
+		this.declarationDeldte = declarationDeldte;
 	}
 
 	public String getDeclarationDeltype() {
@@ -115,11 +125,11 @@ public class Declaration {
 	public String toString() {
 		return "Declaration [declarationNo=" + declarationNo + ", declarationTitle=" + declarationTitle
 				+ ", declarationWriter=" + declarationWriter + ", declarationReceiver=" + declarationReceiver
-				+ ", declarationContent=" + declarationContent + ", declarationdate=" + declarationdate
-				+ ", declarationState=" + declarationState + ", declarationDelete=" + declarationDelete
-				+ ", declarationDeltype=" + declarationDeltype + ", declarationDivision=" + declarationDivision + "]";
+				+ ", declarationContent=" + declarationContent + ", declarationReason=" + declarationReason
+				+ ", declarationDate=" + declarationDate + ", declarationState=" + declarationState
+				+ ", declarationDeldte=" + declarationDeldte + ", declarationDeltype=" + declarationDeltype
+				+ ", declarationDivision=" + declarationDivision + "]";
 	}
 
-	
 	
 }
