@@ -28,7 +28,7 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public AuctionForList auctionSelectOne(int auctionNo) {
+	public List<AuctionForList> auctionSelectOne(int auctionNo) {
 		return auctionDAO.auctionSelectOne(auctionNo);
 	}
 

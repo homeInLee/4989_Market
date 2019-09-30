@@ -18,9 +18,9 @@
 	
 	<select id="auctionSelectOne" resultType="auctionForList">
 		select * from
-			(select board_no, board_name, originalfile_name, renamedfile_name
-			from attachment)a join auction b on a.board_no = b.auction_no 
-			where auction_no = #{auctionNo} and rownum = 1
+			(select board_no, board_name, originalfile_name, renamedfile_name, attachment_main_image
+			from attachment)a join auction b on a.board_no = b.auction_no
+		where b.auction_no = #{auctionNo}
 	</select>
 	
 	<select id="selectBoardNo" resultType="_int">

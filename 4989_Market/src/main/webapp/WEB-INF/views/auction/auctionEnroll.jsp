@@ -89,7 +89,7 @@ div#memberId-container span.error{color:red;}
 				<td>
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">첨부파일1</span>
+					    <span class="input-group-text">대표 이미지</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile1" >
@@ -99,7 +99,7 @@ div#memberId-container span.error{color:red;}
 					</div>
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">첨부파일2</span>
+					    <span class="input-group-text">이미지1</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile2" >
@@ -109,7 +109,7 @@ div#memberId-container span.error{color:red;}
 					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">첨부파일3</span>
+					    <span class="input-group-text">이미지2</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile3" >
@@ -119,7 +119,7 @@ div#memberId-container span.error{color:red;}
 					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">첨부파일4</span>
+					    <span class="input-group-text">이미지3</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile4" >
@@ -129,7 +129,7 @@ div#memberId-container span.error{color:red;}
 					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">첨부파일5</span>
+					    <span class="input-group-text">이미지4</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile5" >
