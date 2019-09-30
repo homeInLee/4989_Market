@@ -109,7 +109,8 @@ table#noticeViewTable td#drop {
 <table id="noticeViewTable">
 	<tr>
 		<th>글번호</th>
-		<td>${notice.noticeNo}</td>
+		<td>${notice.noticeNo}
+		</td>
 		<th>조회수</th>
 		<td>${notice.noticeReadCount}</td>
 		<th>글쓴이</th>
@@ -119,8 +120,9 @@ table#noticeViewTable td#drop {
 		<li><a href="#">${notice.noticeWriter }</a>
 	   		<ul>
 		      <li><a id="memberNotice">회원정보</a></li>
-		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=m" 
-		      		onclick="window.open(this.href,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); return false;">신고</a></li>
+		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?noticeNo?${notice.noticeNo}" id="id-declaration"
+		      		onclick="window.open(this.href,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); return false;">신고</a>
+		      		</li>
 	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li>
 	        </ul>
 		</li>
@@ -160,12 +162,17 @@ table#noticeViewTable td#drop {
 	</tr>
 
 </table>
-
-<input type="hidden" name="noticeNo" value="${noticeNo}" />
+<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
+<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
+<input type="hidden" id="declarationDivision" name="declarationDivision" value="m" />
+<input type="hidden" id="declarationReceiver" name="declarationReceiver" value="${notice.noticeWriter }" />
+<input type="hidden" id="boardName" name="boardName" value="n" />
+<input type="hidden" id="boardNo" name="boardNo" value="${notice.noticeNo}" />
+</form>
 <%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 <input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
 <input type="button" id="noticeDelete" value="삭제" />
-<input type="button" id="noticeDeclaration" onclick="goDeclaration()" value="신고" />
+<input type="button" id="noticeDeclaration" onclick="goDeclaration();" value="신고" />
 <input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
 <%-- </c:if> --%>
 <script>
@@ -208,19 +215,33 @@ $(function(){
 
 console.log($("[name=declarationReceiver]").val());
 
-// $("#noticeDeclaration").click(()=>{
-// // 	window.open();
-// 	var url='${pageContext.request.contextPath}/declaration/memberDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
-// 	window.open(url,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); 
-// 	return false;
+$("#noticeDeclaration").click(()=>{
+		$("#frmPop").submit();
+	});
+
+// function goDeclaration() {
+// 	var frmPop = document.frmPopup;
 	
+// 	var url='${pageContext.request.contextPath}/declaration/connectDeclaration';
+// 	window.open(url,'글신고','width=500,height=500'); 
+// 	return false;
+// }
+
+// $("input:button#noticeDeclaration").click(()=>{
+// 	alert("!!!");
+// 	$("input:hidden[name=declarationDivision]").val('w');
+// 	var a = $("input:hidden[name=declarationDivision]").val();
+// 	console.log(a);
 // });
 
-function goDeclaration() {
-	var url='${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
-	window.open(url,'글신고','width=500,height=500,location=no,status=no,scrollbars=yes'); 
-	return false;
-}
+// $("#id-declaration").click(()=>{
+// 	alert("사람신고");
+// // 	$("input:hidden[name=declarationDivision]").val('m');
+// // 	var a = $("input:hidden[name=declarationDivision]").val();
+// // 	console.log(a);
+// });
+
+
 
 </script>
 
