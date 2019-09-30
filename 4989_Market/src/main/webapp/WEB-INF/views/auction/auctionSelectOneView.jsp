@@ -187,14 +187,13 @@ a{
 </style>
 
 <div id="wrapper">
-${auctionSelectOne.auctionNo }
       <div id="slider-wrap">
           <ul id="slider">
-             <li data-color="#1abc9c">
+          <%--    <li data-color="#1abc9c">
                              
 				<img src="${pageContext.request.contextPath }/resources/upload/auction/${auctionSelectOne.renamedfileName}">
-             </li>
-<%--              
+             </li> --%>
+             
              <li data-color="#3498db">
 <img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
              </li>
@@ -202,7 +201,7 @@ ${auctionSelectOne.auctionNo }
              <li data-color="#9b59b6">
 <img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
              </li>
- --%>
+
              
              
           </ul>

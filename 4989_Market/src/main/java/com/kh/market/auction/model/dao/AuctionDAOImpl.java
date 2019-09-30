@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.auction.model.vo.AuctionForList;
 
 @Repository
 public class AuctionDAOImpl implements AuctionDAO {
@@ -22,8 +23,8 @@ public class AuctionDAOImpl implements AuctionDAO {
 	}
 
 	@Override
-	public List<Map<String, String>> auctionSelectOne(int auctionNo) {
-		return sqlSession.selectList("auction.auctionSelectOne",auctionNo);
+	public AuctionForList auctionSelectOne(int auctionNo) {
+		return sqlSession.selectOne("auction.auctionSelectOne",auctionNo);
 	}
 
 	@Override
