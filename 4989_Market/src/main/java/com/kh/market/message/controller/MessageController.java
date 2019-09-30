@@ -32,7 +32,6 @@ public class MessageController {
 		logger.info("memberId="+memberId);
 		
 		List<Message> messageList = messageService.selectMessageList(memberId);
-		
 		logger.info("messageList="+messageList);
 		
 		mav.addObject("messageList", messageList);

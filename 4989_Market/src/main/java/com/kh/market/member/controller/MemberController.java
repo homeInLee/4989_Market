@@ -1,6 +1,5 @@
 package com.kh.market.member.controller;
 
-import java.io.File;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -21,14 +20,12 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.bind.support.SessionStatus;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.kh.market.common.vo.Attachment;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
 import com.kh.market.message.model.service.MessageService;
-import com.kh.market.common.util.HelloSpringUtils;
 
 
 @Controller
@@ -175,7 +172,14 @@ public class MemberController {
 		Member member = memberService.selectOneMember(memberId);
 		int result = 0;
 		if(member.getMemberId().equals(memberLoggedIn.getMemberId()) || memberLoggedIn.getMemberId().equals("admin")) {
-			result = memberService.memberDelete(member);			
+			if(member.getMemberDeltype().equals("N")) {
+				result = memberService.memberDelete(member);							
+				model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
+			}
+			else {
+				result = memberService.memberDeleteCancle(member);
+				model.addAttribute("msg", result>0?"성공적으로 복구되었습니다.":"복구가 실패하였습니다.");
+			}
 		}
 		if(!memberLoggedIn.getMemberId().equals("admin")) {
 			if(result>0) {
@@ -185,7 +189,11 @@ public class MemberController {
 			}
 			model.addAttribute("loc","/member/memberView.do?memberId="+member.getMemberId());			
 		}
-		model.addAttribute("msg", result>0?"성공적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
+		else {
+			model.addAttribute("loc", "/member/memberView.do?memberId="+member.getMemberId());
+		}
+		logger.info("memberLoggedIn.getMemberId()="+memberLoggedIn.getMemberId());
+		logger.info("member.getMemberId()="+member.getMemberId());
 		model.addAttribute("memberLoggedIn", memberLoggedIn);
 		return "common/msg";
 	}
@@ -214,8 +222,23 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/memberList.do")
-	public String memberList(Model model) {
-		List<Member> mList = memberService.memberList();
+	public String memberList(Model model, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
+		int listCnt = memberService.memberListCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Member> mList = memberService.memberList(paging);
+		logger.info("mList="+mList);
+		logger.info("paging.getEndPage="+paging.getEndPage());
+		logger.info("paging.getListCnt="+paging.getListCnt());
+		logger.info("paging.getListSize="+paging.getListSize());
+		logger.info("paging.getPage="+paging.getPage());
+		logger.info("paging.getRange="+paging.getRange());
+		logger.info("paging.getRangeSize="+paging.getRangeSize());
+		logger.info("paging.getStartList="+paging.getStartList());
+		logger.info("paging.getStartPage="+paging.getStartPage());
+		logger.info("paging.getStartPage="+paging.getEndPage());
+		logger.info("paging.getPageCnt="+paging.getPageCnt());
+        model.addAttribute("paging", paging);
 		model.addAttribute("mList", mList);
 		return "member/memberList";
 	}

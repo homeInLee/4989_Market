@@ -2,6 +2,7 @@ package com.kh.market.member.model.service;
 
 import java.util.List;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.member.model.vo.Member;
 
 public interface MemberService {
@@ -14,8 +15,12 @@ public interface MemberService {
 
 	int updateAddress(Member m);
 
-	List<Member> memberList();
+	List<Member> memberList(Paging paging);
 
 	int insertMember(Member member);
+
+	int memberDeleteCancle(Member member);
+
+	int memberListCnt();
 
 }

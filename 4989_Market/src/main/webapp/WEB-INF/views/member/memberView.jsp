@@ -66,20 +66,17 @@ div#enroll-container table td{text-align: left;}
 					<input type="text" class="form-control" value="${member.memberAddress }" name="memberAddress" id="memberAddress" disabled="disabled">
 				</td>
 			</tr>
-			<tr>
-				<th>프로필 사진</th>
-				<td>
-					<div id="attachFile" style="margin-left: 0.5px;">
-					<input type="file" name="upFile" id="upFile" onchange="checkFile(this)" accept="image/*"/>
-					</div>
-				</td>
-			</tr>
 		</table>
 		<input type="hidden" name="memberId" value="${member.memberId }"/>
 		<input type="hidden" name="loginId" value="${memberLoggedIn.memberId }"/>
 	</form>
 		<button type="button" onclick="location.href='${pageContext.request.contextPath}/member/memberUpdate.do?memberId=${member.memberId }'" class="log" id="btnUpdate">정보수정</button>
+		<c:if test="${member.memberDeltype.trim()=='N' }">
 		<button type="button" onclick="memberDelete();" class="log" id="btnDelete">회원삭제</button>
+		</c:if>
+		<c:if test="${member.memberDeltype.trim()=='Y' }">
+		<button type="button" onclick="memberDelete();" class="log" id="btnDelete">회원복구</button>
+		</c:if>
 </div>
 <script>
 function memberDelete(){

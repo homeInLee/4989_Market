@@ -39,11 +39,19 @@
 		update member set 
 		member_address = #{memberAddress}
 		where member_id = #{memberId}
-	
-	
 	</update>
-	<select id="memberList" resultType="member">
-		select * from member
-		order by member_deltype, member_no
+	<select id="memberList" resultType="member" parameterType="paging">
+		select * from 
+		( select rownum rnum, A.* from
+		( select * from member A order by member_no) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
+	</select>
+	<update id="memberDeleteCancle">
+		update member set
+		member_deltype = 'N', member_deldate = default
+		where member_id = #{memberId}
+	</update>
+	<select id="memberListCnt" resultType="int">
+		select count(*) cnt from member
 	</select>
 </mapper>

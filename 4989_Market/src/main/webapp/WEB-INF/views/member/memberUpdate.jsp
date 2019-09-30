@@ -68,14 +68,6 @@ div#enroll-container table td{text-align: left;}
 					<input type="text" class="form-control" value="${member.memberAddress }" name="memberAddress" id="memberAddress">
 				</td>
 			</tr>
-			<tr>
-				<th>프로필 사진</th>
-				<td>
-					<div id="attachFile" style="margin-left: 0.5px;">
-					<input type="file" name="upFile" id="upFile" onchange="checkFile(this)" accept="image/*"/>
-					</div>
-				</td>
-			</tr>
 		</table>
 		<input type="hidden" name="memberId" value="${member.memberId }"/>
 		<input type="hidden" name="loginId" value="${memberLoggedIn.memberId }"/>

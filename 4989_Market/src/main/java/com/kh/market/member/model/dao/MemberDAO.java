@@ -2,7 +2,7 @@ package com.kh.market.member.model.dao;
 
 import java.util.List;
 
-import com.kh.market.common.vo.Attachment;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.member.model.vo.Member;
 import com.kh.market.product.model.vo.Product;
 
@@ -18,7 +18,11 @@ public interface MemberDAO {
 	
 	int updateAddress(Member m);
 
-	List<Member> memberList();
+	List<Member> memberList(Paging paging);
+
+	int memberDeleteCancle(Member member);
+
+	int memberListCnt();
 
 
 }
