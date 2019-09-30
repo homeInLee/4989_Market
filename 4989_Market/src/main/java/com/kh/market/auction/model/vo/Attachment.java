@@ -12,10 +12,12 @@ public class Attachment {
 	private Date attachmentDate;
 	private String attachmentDeltype;
 	private String attachmentMainImage;
+
 	public Attachment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
+
 	public Attachment(int attachmentNo, String boardName, int boardNo, String originalfileName, String renamedfileName,
 			Date attachmentDate, String attachmentDeltype, String attachmentMainImage) {
 		super();
@@ -27,49 +29,104 @@ public class Attachment {
 		this.attachmentDate = attachmentDate;
 		this.attachmentDeltype = attachmentDeltype;
 		this.attachmentMainImage = attachmentMainImage;
+
 	}
+
 	public int getAttachmentNo() {
 		return attachmentNo;
 	}
+
+	/**
+	 * @param attachmentNo the attachmentNo to set
+	 */
 	public void setAttachmentNo(int attachmentNo) {
 		this.attachmentNo = attachmentNo;
 	}
+
+	/**
+	 * @return the boardName
+	 */
 	public String getBoardName() {
 		return boardName;
 	}
+
+	/**
+	 * @param boardName the boardName to set
+	 */
 	public void setBoardName(String boardName) {
 		this.boardName = boardName;
 	}
+
+	/**
+	 * @return the boardNo
+	 */
 	public int getBoardNo() {
 		return boardNo;
 	}
+
+	/**
+	 * @param boardNo the boardNo to set
+	 */
 	public void setBoardNo(int boardNo) {
 		this.boardNo = boardNo;
 	}
+
+	/**
+	 * @return the originalfileName
+	 */
 	public String getOriginalfileName() {
 		return originalfileName;
 	}
+
+	/**
+	 * @param originalfileName the originalfileName to set
+	 */
 	public void setOriginalfileName(String originalfileName) {
 		this.originalfileName = originalfileName;
 	}
+
+	/**
+	 * @return the renamedfileName
+	 */
 	public String getRenamedfileName() {
 		return renamedfileName;
 	}
+
+	/**
+	 * @param renamedfileName the renamedfileName to set
+	 */
 	public void setRenamedfileName(String renamedfileName) {
 		this.renamedfileName = renamedfileName;
 	}
+
+	/**
+	 * @return the attachmentDate
+	 */
 	public Date getAttachmentDate() {
 		return attachmentDate;
 	}
+
+	/**
+	 * @param attachmentDate the attachmentDate to set
+	 */
 	public void setAttachmentDate(Date attachmentDate) {
 		this.attachmentDate = attachmentDate;
 	}
+
+	/**
+	 * @return the attachmentDeltype
+	 */
 	public String getAttachmentDeltype() {
 		return attachmentDeltype;
 	}
+
+	/**
+	 * @param attachmentDeltype the attachmentDeltype to set
+	 */
 	public void setAttachmentDeltype(String attachmentDeltype) {
 		this.attachmentDeltype = attachmentDeltype;
 	}
+
 	public String getAttachmentMainImage() {
 		return attachmentMainImage;
 	}
@@ -82,6 +139,7 @@ public class Attachment {
 				+ ", originalfileName=" + originalfileName + ", renamedfileName=" + renamedfileName
 				+ ", attachmentDate=" + attachmentDate + ", attachmentDeltype=" + attachmentDeltype
 				+ ", attachmentMainImage=" + attachmentMainImage + "]";
-	}
 	
+	
+}
 }

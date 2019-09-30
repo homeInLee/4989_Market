@@ -2,7 +2,6 @@ package com.kh.market.auction.controller;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -15,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -22,6 +22,7 @@ import com.kh.market.auction.model.exception.AuctionException;
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.auction.model.vo.AuctionForList;
 import com.kh.market.comment.model.service.CommentService;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
@@ -29,6 +30,7 @@ import com.kh.market.member.model.vo.Member;
 
 @Controller
 @RequestMapping("/auction")
+@SessionAttributes("memberLoggedIn")
 public class AuctionController {
 	
 	@Autowired
@@ -47,9 +49,10 @@ public class AuctionController {
 		
 		List<Map<String,String>> auctionList = auctionService.auctionList();
 		
+		
 		List<Map<String,String>> mainImage = auctionService.mainImage();
 		
-			
+		logger.info("----------auctionList{}::::::::::::",auctionList);
 
 		model.addAttribute("auctionList",auctionList);
 		model.addAttribute("mainImage", mainImage);
@@ -62,10 +65,10 @@ public class AuctionController {
 	
 	@RequestMapping("/auctionSelectOne.do")
 	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
-		List<Map<String,String>> auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
 		
-		System.out.println("---------==========---------"+auctionSelectOne);
-		Member member = memberService.selectOneMember(auctionSelectOne.get(0).get("auctionWriter"));
+		AuctionForList auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
+		
+		Member member = memberService.selectOneMember(auctionSelectOne.getAuctionWriter());
 		
 		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		
@@ -73,6 +76,7 @@ public class AuctionController {
 		
 		model.addAttribute("auctionSelectOne",auctionSelectOne);
 		model.addAttribute("member",member);
+		
 //		model.addAttribute("comment", comment);
 		
 		return "auction/auctionSelectOneView";
@@ -85,7 +89,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionEnrollEnd.do")
-	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request) {
+	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
 		logger.info("경매 등록 요청!!");
 		
 		try {
@@ -128,6 +132,13 @@ public class AuctionController {
 				Attachment attach = new Attachment();
 				attach.setOriginalfileName(originalFileName);
 				attach.setRenamedfileName(renamedFileName);
+				
+				if(f.equals(upFile[0])) {
+					attach.setAttachmentMainImage("Y");
+				}
+				else
+					attach.setAttachmentMainImage("N");
+				
 				attach.setBoardName("경매");
 				attachList.add(attach);
 				

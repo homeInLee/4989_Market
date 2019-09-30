@@ -4,8 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="auction">
 	
-	<select id="auctionList" resultType="auction">
-		select * from auction
+	<select id="auctionList" resultType="auctionForList">
+		select * from
+		(select board_no, board_name, originalfile_name, renamedfile_name, attachment_main_image
+		from attachment)a join auction b on a.board_no = b.auction_no
 	</select>
 	
 	<select id="mainImage" resultType="attachment">
@@ -18,7 +20,7 @@
 		select * from
 			(select board_no, board_name, originalfile_name, renamedfile_name
 			from attachment)a join auction b on a.board_no = b.auction_no 
-			where auction_no = #{auctionNo}
+			where auction_no = #{auctionNo} and rownum = 1
 	</select>
 	
 	<select id="selectBoardNo" resultType="_int">
@@ -39,8 +41,8 @@
 	
 	<insert id="insertAttachment">
 		insert into attachment
-				(attachment_no, board_name, board_no, originalfile_name, renamedfile_name, attachment_date, attachment_deltype)
-			values(seq_attachment_no.nextval, #{boardName}, #{boardNo}, #{originalfileName}, #{renamedfileName}, default, 'N' )
+				(attachment_no, board_name, board_no, originalfile_name, renamedfile_name, attachment_date, attachment_deltype, attachment_main_image)
+			values(seq_attachment_no.nextval, #{boardName}, #{boardNo}, #{originalfileName}, #{renamedfileName}, default, 'N', #{attachmentMainImage})
 	</insert>
 
 	<select id="productSearch" resultType="auction" parameterType="String">

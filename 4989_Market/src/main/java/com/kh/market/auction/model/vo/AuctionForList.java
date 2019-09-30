@@ -8,6 +8,7 @@ public class AuctionForList extends Auction {
 	private int boardNo;
 	private String originalfileName;
 	private String renamedfileName;
+	private String attachmentMainImage;
 	
 	public AuctionForList() {
 		super();
@@ -16,7 +17,7 @@ public class AuctionForList extends Auction {
 	public AuctionForList(int auctionNo, String auctionTitle, String auctionWriter, String auctionBuyer,
 			int auctionPrice, int auctionDirectPrice, int auctionIngPrice, int auctionUnitPrice, String auctionContent,
 			int auctionReadcount, Date auctionDate, Date auctionEndDate, String auctionType, String auctionCategory,
-			Date auctionDeldate, String auctionDeltype, String auctionAddress, String boardName, int boardNo, String originalfileName, String renamedfileName) {
+			Date auctionDeldate, String auctionDeltype, String auctionAddress, String boardName, int boardNo, String originalfileName, String renamedfileName, String attachmentMainImage) {
 		super(auctionNo, auctionTitle, auctionWriter, auctionBuyer, auctionPrice, auctionDirectPrice, auctionIngPrice,
 				auctionUnitPrice, auctionContent, auctionReadcount, auctionDate, auctionEndDate, auctionType, auctionCategory,
 				auctionDeldate, auctionDeltype, auctionAddress);
@@ -24,6 +25,7 @@ public class AuctionForList extends Auction {
 				this.boardNo = boardNo;
 				this.originalfileName = originalfileName;
 				this.renamedfileName = renamedfileName;
+				this.attachmentMainImage = attachmentMainImage;
 	}
 	/* (non-Javadoc)
 	 * @see java.lang.Object#toString()
@@ -31,14 +33,15 @@ public class AuctionForList extends Auction {
 	@Override
 	public String toString() {
 		return "AuctionForList [boardName=" + boardName + ", boardNo=" + boardNo + ", originalfileName="
-				+ originalfileName + ", renamedfileName=" + renamedfileName + ", auctionNo=" + auctionNo
-				+ ", auctionTitle=" + auctionTitle + ", auctionWriter=" + auctionWriter + ", auctionBuyer="
-				+ auctionBuyer + ", auctionPrice=" + auctionPrice + ", auctionDirectPrice=" + auctionDirectPrice
-				+ ", auctionIngPrice=" + auctionIngPrice + ", auctionUnitPrice=" + auctionUnitPrice
-				+ ", auctionContent=" + auctionContent + ", auctionReadcount=" + auctionReadcount + ", auctionDate="
-				+ auctionDate + ", auctionEndDate=" + auctionEndDate + ", auctionType=" + auctionType
-				+ ", auctionCategory=" + auctionCategory + ", auctionDeldate=" + auctionDeldate + ", auctionDeltype="
-				+ auctionDeltype + ", auctionAddress=" + auctionAddress + "]";
+				+ originalfileName + ", renamedfileName=" + renamedfileName + ", attachmentMainImage="
+				+ attachmentMainImage + ", auctionNo=" + auctionNo + ", auctionTitle=" + auctionTitle
+				+ ", auctionWriter=" + auctionWriter + ", auctionBuyer=" + auctionBuyer + ", auctionPrice="
+				+ auctionPrice + ", auctionDirectPrice=" + auctionDirectPrice + ", auctionIngPrice=" + auctionIngPrice
+				+ ", auctionUnitPrice=" + auctionUnitPrice + ", auctionContent=" + auctionContent
+				+ ", auctionReadcount=" + auctionReadcount + ", auctionDate=" + auctionDate + ", auctionEndDate="
+				+ auctionEndDate + ", auctionType=" + auctionType + ", auctionCategory=" + auctionCategory
+				+ ", auctionDeldate=" + auctionDeldate + ", auctionDeltype=" + auctionDeltype + ", auctionAddress="
+				+ auctionAddress + "]";
 	}
 	/**
 	 * @return the boardName
@@ -88,6 +91,19 @@ public class AuctionForList extends Auction {
 	public void setRenamedfileName(String renamedfileName) {
 		this.renamedfileName = renamedfileName;
 	}
+	/**
+	 * @return the attachmentMainImage
+	 */
+	public String getAttachmentMainImage() {
+		return attachmentMainImage;
+	}
+	/**
+	 * @param attachmentMainImage the attachmentMainImage to set
+	 */
+	public void setAttachmentMainImage(String attachmentMainImage) {
+		this.attachmentMainImage = attachmentMainImage;
+	}
+	
 	
 	
 	

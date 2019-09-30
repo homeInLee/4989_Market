@@ -5,12 +5,13 @@ import java.util.Map;
 
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.auction.model.vo.AuctionForList;
 
 public interface AuctionDAO {
 
 	List<Map<String, String>> auctionList();
 
-	List<Map<String, String>> auctionSelectOne(int auctionNo);
+	AuctionForList auctionSelectOne(int auctionNo);
 
 	int insertAuction(Auction auction);
 

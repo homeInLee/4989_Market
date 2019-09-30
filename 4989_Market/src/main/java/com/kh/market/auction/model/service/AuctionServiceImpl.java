@@ -12,6 +12,7 @@ import com.kh.market.auction.model.dao.AuctionDAO;
 import com.kh.market.auction.model.exception.AuctionException;
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.auction.model.vo.AuctionForList;
 
 @Service
 public class AuctionServiceImpl implements AuctionService {
@@ -27,7 +28,7 @@ public class AuctionServiceImpl implements AuctionService {
 	}
 
 	@Override
-	public List<Map<String, String>> auctionSelectOne(int auctionNo) {
+	public AuctionForList auctionSelectOne(int auctionNo) {
 		return auctionDAO.auctionSelectOne(auctionNo);
 	}
 
