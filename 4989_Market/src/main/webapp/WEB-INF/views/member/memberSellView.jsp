@@ -39,12 +39,22 @@ h2, section{
 	top: -2px;
 }
 	
+div#pageBar {
+	margin-top: 10px;
+	text-align: center;	
+}
 
+div#pageBar span.cPage {	
+	margin-right: 5px;
+}
+
+div#pageBar a {
+	margin-right: 5px;
+}
 </style>
 <div class="submenu">
 	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
   	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">장바구니</a>
   	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
   	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
   	
@@ -85,5 +95,7 @@ h2, section{
 			</article>
 		</c:forEach>
 	</section>
-
+<div id='pageBar'>
+  ${pageBar}
+</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

@@ -23,4 +23,10 @@ public interface AuctionDAO {
 
 	List<Map<String, String>> mainImage();
 
+	List<Auction> memberAuctionSellView(String memberId);
+
+	List<Attachment> auctionAttachment(String boardName);
+
+	List<Auction> memberAuctionBuyView(String memberId);
+
 }

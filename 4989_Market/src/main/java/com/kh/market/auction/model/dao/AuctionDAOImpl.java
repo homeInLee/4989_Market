@@ -52,6 +52,24 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public List<Map<String, String>> mainImage() {
 		return sqlSession.selectList("auction.mainImage");
 	}
+
+	@Override
+	public List<Auction> memberAuctionSellView(String memberId) {
+		
+		return sqlSession.selectList("auction.memberAuctionSellView",memberId);
+	}
+
+	@Override
+	public List<Attachment> auctionAttachment(String boardName) {
+		
+		return sqlSession.selectList("auction.auctionAttachment",boardName);
+	}
+
+	@Override
+	public List<Auction> memberAuctionBuyView(String memberId) {
+		
+		return sqlSession.selectList("auction.memberAuctionBuyView",memberId);
+	}
 	
 
 }

@@ -20,6 +20,12 @@ public interface AuctionService {
 
 	List<Map<String, String>> mainImage();
 
+	List<Auction> memberAutionSellView(String memberId);
+
+	List<Attachment> auctionAttachment(String boardName);
+
+	List<Auction> memberAuctionBuyView(String memberId);
+
 
 
 }

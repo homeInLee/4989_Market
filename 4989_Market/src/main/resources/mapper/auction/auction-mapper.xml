@@ -50,5 +50,15 @@
 		order by auction_no desc
 	</select>
 	
+	<select id="memberAuctionSellView" resultType="auction">
+		select * from auction where auction_writer=#{memberId}
+	</select>
 	
+	<select id="auctionAttachment" resultType="attachment">
+		select * from attachment where board_name=#{boardName}
+	</select>
+	
+	<select id="memberAuctionBuyView" resultType="auction">
+		select * from auction where auction_buyer=#{memberId}
+	</select>
 </mapper>

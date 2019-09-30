@@ -226,6 +226,7 @@ function basketCheck(check,sellNo,memberId){
 		    dataType: "json",
 		    success: function(data) {
 		      alert("장바구니에서 삭제되었습니다")
+		      location.href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}";
 		    },
 		    error: function(xhr,txtStatus,err){
 		      console.log("ajax실패",xhr,txtStatus,err);
@@ -239,12 +240,8 @@ function basketCheck(check,sellNo,memberId){
 //
 </script>
 <div class="submenu">
-	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">장바구니</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
-  	
+	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">중고물품 장바구니</a>
+  	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketAuctionView.do?memberId=${memberLoggedIn.memberId}">경매물품 장바구니</a>	
 </div>
 
 <div id="wrapper">

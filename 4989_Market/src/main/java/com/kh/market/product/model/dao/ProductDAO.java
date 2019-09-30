@@ -1,6 +1,7 @@
 package com.kh.market.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import com.kh.market.product.model.vo.Attachment;
 import com.kh.market.product.model.vo.Product;
@@ -19,7 +20,7 @@ public interface ProductDAO {
 
 	List<Product> productSearch(String searchWord);
 
-	List<Product> memberSellView(String memberId);
+	List<Product> memberSellView(Map<Object, Object> map);
 
 	Product memberSellDetailView(int sellNo);
 
@@ -32,6 +33,8 @@ public interface ProductDAO {
 	List<Attachment> attachList();
 
 	List<Attachment> attachSelectOne(String productNo);
+
+	List<Product> memberSellSize(String memberId);
 	
 
 }

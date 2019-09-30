@@ -11,6 +11,8 @@ import java.util.Map;
 import java.util.TreeSet;
 import java.util.stream.Collectors;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -35,6 +37,8 @@ import com.kh.market.message.model.vo.Message;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Attachment;
 import com.kh.market.product.model.vo.Product;
+import com.kh.market.review.model.service.ReviewService;
+import com.kh.market.review.model.vo.Review;
 
 
 
@@ -283,9 +287,63 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/memberSellView.do")
-	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav) {
+	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav,@RequestParam(value="cPage",defaultValue="1", required=false) int cPage,HttpServletRequest request) {
 		
-		List<Product> list=productService.memberSellView(memberId);
+		Map<Object, Object> map=new HashMap<Object, Object>();
+		map.put("memberId", memberId);
+		map.put("cPage", cPage);
+		
+		List<Product> list=productService.memberSellView(map);
+		
+		//2.2 전체게시글수, 전체페이지수 구하기
+		List<Product> memberSellSize=productService.memberSellSize(memberId);
+		int totalBoardCount = memberSellSize.size();
+				
+		//(공식2)전체페이지수 구하기
+		int totalPage = (int)Math.ceil((double)totalBoardCount/ProductService.NUM_PER_PAGE);
+		
+		//2.3 페이지바구성
+		String pageBar = "";	
+		int pageBarSize = 5;
+		//(공식3)시작페이지 번호 세팅
+		//cPage=5,pageBarSize=5 -> 1
+		//cPage=6,pageBarSize=5 -> 6
+		int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
+		//종료페이지 번호 세팅
+		int pageEnd = pageStart+pageBarSize-1;
+		int pageNo = pageStart;
+				
+		//[이전] section
+		if(pageNo == 1 ){
+			//pageBar += "<span>[이전]</span>"; 
+		}
+		else {
+			pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
+			
+		}
+					
+		// pageNo section
+		// 보통 !(빠져나가는 조건식)으로 많이 쓴다.
+		while(!(pageNo>pageEnd || pageNo > totalPage)){
+					
+		if(cPage == pageNo ){
+				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
+		} 
+		else {
+				pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
+		}
+				pageNo++;
+		}
+				
+		//[다음] section
+		if(pageNo > totalPage){
+			//pageBar += "<span>[다음]</span>";
+		} else {
+			pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>";
+		}
+		
+		
+		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.setViewName("member/memberSellView");
 		return mav;

@@ -2,6 +2,7 @@ package com.kh.market.product.model.service;
 
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -82,9 +83,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> memberSellView(String memberId) {
+	public List<Product> memberSellView(Map<Object, Object> map) {
 		
-		return productDAO.memberSellView(memberId);
+		return productDAO.memberSellView(map);
 	}
 
 	@Override
@@ -112,6 +113,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<Attachment> attachSelectOne(String productNo) {
 		// TODO Auto-generated method stub
 		return productDAO.attachSelectOne(productNo);
+	}
+
+	@Override
+	public List<Product> memberSellSize(String memberId) {
+		
+		return productDAO.memberSellSize(memberId);
 	}
 
 

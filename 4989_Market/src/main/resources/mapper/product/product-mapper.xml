@@ -63,7 +63,10 @@
 	</select>
 	
 	<select id="memberSellView" resultType="product">
-		select * from sell where sell_writer=#{memberId}
+		select A.*,
+		(select count(*) from sell 
+		where sell_no=A.sell_no) filecount
+		from sell A where sell_writer=#{memberId} order by sell_no desc
 	</select>
 	<select id="memberSellDetailView" resultType="product">
 		select * from sell where sell_no=#{sellNo}
@@ -98,4 +101,7 @@
 		select * from attachment where board_no = #{productNo}
 	</select>
 	
+	<select id="memberSellSize" resultType="product">
+		select * from sell where sell_writer=#{memberId}
+	</select>
 </mapper>

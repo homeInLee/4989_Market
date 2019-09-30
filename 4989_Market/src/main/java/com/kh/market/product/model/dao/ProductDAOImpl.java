@@ -1,13 +1,17 @@
 package com.kh.market.product.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Attachment;
 import com.kh.market.product.model.vo.Product;
+import com.kh.market.review.model.service.ReviewService;
 
 @Repository
 public class ProductDAOImpl implements ProductDAO {
@@ -54,8 +58,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> memberSellView(String memberId) {
-		return sqlSession.selectList("product.memberSellView",memberId);
+	public List<Product> memberSellView(Map<Object, Object> map) {
+		int cPage=(int)map.get("cPage");
+		int offset = (cPage-1)*ProductService.NUM_PER_PAGE;
+		int limit = ProductService.NUM_PER_PAGE;
+		RowBounds rowBounds=new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("product.memberSellView",map,rowBounds);
 	}
 	public int insertImg(Attachment a) {
 		return sqlSession.insert("product.insertImg", a);
@@ -90,6 +99,12 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<Attachment> attachSelectOne(String productNo) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.attachSelectOne", productNo);
+	}
+
+	@Override
+	public List<Product> memberSellSize(String memberId) {
+		
+		return sqlSession.selectList("product.memberSellSize",memberId);
 	}
 	
 	

@@ -157,7 +157,25 @@ public class AuctionController {
 	
 	@RequestMapping("/memberAuctionSellView.do")
 	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId) {
-		mav.setViewName("member/memberAutionSellView");
+		String boardName="A";
+		List<Auction> auctionList=auctionService.memberAutionSellView(memberId);
+		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+		
+		mav.addObject("attachmentList",attachmentList);
+		mav.addObject("auctionList",auctionList);
+		mav.setViewName("member/memberAuctionSellView");
+		return mav;
+	}
+	
+	@RequestMapping("/memberAuctionBuyView.do")
+	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
+		String boardName="A";
+		List<Auction> auctionList=auctionService.memberAuctionBuyView(memberId);
+		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+		
+		mav.addObject("attachmentList",attachmentList);
+		mav.addObject("auctionList",auctionList);
+		mav.setViewName("member/memberAuctionBuyView");
 		return mav;
 	}
 }

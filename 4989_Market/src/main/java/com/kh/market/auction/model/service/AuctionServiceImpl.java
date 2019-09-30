@@ -74,5 +74,23 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.mainImage();
 	}
 
+	@Override
+	public List<Auction> memberAutionSellView(String memberId) {
+		
+		return auctionDAO.memberAuctionSellView(memberId);
+	}
+
+	@Override
+	public List<Attachment> auctionAttachment(String boardName) {
+		
+		return auctionDAO.auctionAttachment(boardName);
+	}
+
+	@Override
+	public List<Auction> memberAuctionBuyView(String memberId) {
+		
+		return auctionDAO.memberAuctionBuyView(memberId);
+	}
+
 
 }

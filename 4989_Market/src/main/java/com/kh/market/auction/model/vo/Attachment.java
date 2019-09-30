@@ -11,12 +11,13 @@ public class Attachment {
 	private String renamedfileName;
 	private Date attachmentDate;
 	private String attachmentDeltype;
+	private String attachmentMainImage;
 	public Attachment() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Attachment(int attachmentNo, String boardName, int boardNo, String originalfileName, String renamedfileName,
-			Date attachmentDate, String attachmentDeltype) {
+			Date attachmentDate, String attachmentDeltype, String attachmentMainImage) {
 		super();
 		this.attachmentNo = attachmentNo;
 		this.boardName = boardName;
@@ -25,12 +26,7 @@ public class Attachment {
 		this.renamedfileName = renamedfileName;
 		this.attachmentDate = attachmentDate;
 		this.attachmentDeltype = attachmentDeltype;
-	}
-	@Override
-	public String toString() {
-		return "Attachment [attachmentNo=" + attachmentNo + ", boardName=" + boardName + ", boardNo=" + boardNo
-				+ ", originalfileName=" + originalfileName + ", renamedfileName=" + renamedfileName
-				+ ", attachmentDate=" + attachmentDate + ", attachmentDeltype=" + attachmentDeltype + "]";
+		this.attachmentMainImage = attachmentMainImage;
 	}
 	public int getAttachmentNo() {
 		return attachmentNo;
@@ -74,7 +70,18 @@ public class Attachment {
 	public void setAttachmentDeltype(String attachmentDeltype) {
 		this.attachmentDeltype = attachmentDeltype;
 	}
+	public String getAttachmentMainImage() {
+		return attachmentMainImage;
+	}
+	public void setAttachmentMainImage(String attachmentMainImage) {
+		this.attachmentMainImage = attachmentMainImage;
+	}
+	@Override
+	public String toString() {
+		return "Attachment [attachmentNo=" + attachmentNo + ", boardName=" + boardName + ", boardNo=" + boardNo
+				+ ", originalfileName=" + originalfileName + ", renamedfileName=" + renamedfileName
+				+ ", attachmentDate=" + attachmentDate + ", attachmentDeltype=" + attachmentDeltype
+				+ ", attachmentMainImage=" + attachmentMainImage + "]";
+	}
 	
-	
-
 }
