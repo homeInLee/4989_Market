@@ -3,15 +3,10 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
-</head>
-<body>
-	<h2>신고신고</h2>
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
+	<h2>신고</h2>
+	
 	<form action="${pageContext.request.contextPath}/declaration/insertMemberDeclaration"
 		  method="post"
 		  id="declarationFrm"
@@ -35,34 +30,29 @@
 	<tr>
 		<th>내용</th>
 		<td><textarea name="declarationContent" id="" cols="30" rows="10"></textarea>
-		<input type="hidden" name="declarationDivision" value="${declarationDivision }"/>
-		<input type="hidden" name="declarationReceiver" value="${declarationReceiver}"/>
+		<input type="hidden" name="declarationDivision" value="${declaration.declarationDivision }"/>
+		<input type="hidden" name="declarationReceiver" value="${declaration.declarationReceiver}"/>
 		<input type="hidden" name="declarationWriter" value="${memberLoggedIn.memberId}"/>
+		<input type="hidden" name="boardName" value="n"/>
+		<input type="hidden" name="boardNo" value="${declaration.boardNo}"/>
 		</td>
 	</tr>
 	
 	</table>
 	</form>
 	
-	<button id="btn-dec" onclick="closeWithSubmit();" >신고</button>
-	<input type="button" onclick="self.close()" value="닫기" />
+	<input type="submit" id="btn-dec" value="신고" />
+	<input type="button"  value="닫기" />
 <script>
 $("#btn-dec").click(()=>{
-	document.getElementById('declarationFrm').submit();
-	window.opener.name = "parentPage"; // 부모창의 이름 설정
-    document.declarationFrm.target = "parentPage"; // 타켓을 부모창으로 설정
-    document.declarationFrm.action = "${pageContext.request.contextPath}/declaration/insertMemberDeclaration";  //부모창에 호출될 url 
-    document.declarationFrm.submit();
-    self.close();
+	$("#declarationFrm").submit();
+// 	document.getElementById('declarationFrm');
+// 	window.opener.name = "parentPage"; // 부모창의 이름 설정
+//     document.declarationFrm.target = "parentPage"; // 타켓을 부모창으로 설정
+//     document.declarationFrm.action = "${pageContext.request.contextPath}/declaration/insertMemberDeclaration";  //부모창에 호출될 url 
+//     document.declarationFrm.submit();
+//     self.close();
 });
 </script>
 	
-	
-	
-	
-	
-	
-	
-	
-</body>
-</html>
+<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

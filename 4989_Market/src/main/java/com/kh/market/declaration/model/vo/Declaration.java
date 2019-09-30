@@ -13,12 +13,15 @@ public class Declaration {
 	private String declarationDeldte;
 	private String declarationDeltype;
 	private String declarationDivision;
+	private String boardName;
+	private int boardNo;
 	
 	public Declaration() {}
 
 	protected Declaration(int declarationNo, String declarationTitle, String declarationWriter,
 			String declarationReceiver, String declarationContent, String declarationReason, String declarationDate,
-			String declarationState, String declarationDeldte, String declarationDeltype, String declarationDivision) {
+			String declarationState, String declarationDeldte, String declarationDeltype, String declarationDivision,
+			String boardName, int boardNo) {
 		super();
 		this.declarationNo = declarationNo;
 		this.declarationTitle = declarationTitle;
@@ -31,6 +34,8 @@ public class Declaration {
 		this.declarationDeldte = declarationDeldte;
 		this.declarationDeltype = declarationDeltype;
 		this.declarationDivision = declarationDivision;
+		this.boardName = boardName;
+		this.boardNo = boardNo;
 	}
 
 	public int getDeclarationNo() {
@@ -121,6 +126,22 @@ public class Declaration {
 		this.declarationDivision = declarationDivision;
 	}
 
+	public String getBoardName() {
+		return boardName;
+	}
+
+	public void setBoardName(String boardName) {
+		this.boardName = boardName;
+	}
+
+	public int getBoardNo() {
+		return boardNo;
+	}
+
+	public void setBoardNo(int boardNo) {
+		this.boardNo = boardNo;
+	}
+
 	@Override
 	public String toString() {
 		return "Declaration [declarationNo=" + declarationNo + ", declarationTitle=" + declarationTitle
@@ -128,8 +149,10 @@ public class Declaration {
 				+ ", declarationContent=" + declarationContent + ", declarationReason=" + declarationReason
 				+ ", declarationDate=" + declarationDate + ", declarationState=" + declarationState
 				+ ", declarationDeldte=" + declarationDeldte + ", declarationDeltype=" + declarationDeltype
-				+ ", declarationDivision=" + declarationDivision + "]";
+				+ ", declarationDivision=" + declarationDivision + ", boardName=" + boardName + ", boardNo=" + boardNo
+				+ "]";
 	}
 
+	
 	
 }
