@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -34,6 +35,7 @@ import com.kh.market.message.model.service.MessageService;
 import com.kh.market.message.model.vo.Message;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 
@@ -346,11 +348,7 @@ public class ProductController {
 		return mav;
 		
 	}
-	@RequestMapping("/ajaxUpload.do")
-	public String ajaxUpload() {
-		
-		return "/product/ajaxUpload";
-	}
+
 	
 	
 	
@@ -386,6 +384,48 @@ public class ProductController {
 		
 	return "redirect:/";
 	}
+	
+	
+	@ResponseBody 
+	@PostMapping("/moreResult.do")
+	public Map<String, Object> moreResult(	  
+							  @RequestParam String startCount,							  
+							  @RequestParam String endCount,
+							  Model model
+							  
+							 ) {
+		
+		logger.info("ajax 실행");
+		
+		
+		
 
+		
+		Page p = new Page();
+		
+		p.setStartCount(Integer.parseInt(startCount));
+		p.setEndCount(Integer.parseInt(endCount));
+		
+		
+		List<Product> moreProductList = productService.moreResult(p);
+		
+		
+		Map<String, Object> returnVal = new HashMap<String, Object>();
+		
+		returnVal.put("moreList", moreProductList);
+
+		
+		
+		
+		logger.info("시작 값={}", startCount);
+		logger.info("끝나는  값={}", endCount);
+
+		
+		return returnVal;
+		
+	}
 
 }
+
+
+

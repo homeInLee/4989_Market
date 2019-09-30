@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 @Repository
@@ -91,6 +92,14 @@ public class ProductDAOImpl implements ProductDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.attachSelectOne", productNo);
 	}
+
+	@Override
+	public List<Product> moreResult(Page p) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.moreResult", p);
+	}
+
+
 	
 	
 }

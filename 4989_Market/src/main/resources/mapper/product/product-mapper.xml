@@ -4,10 +4,9 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
 	<select id="productList" resultType="product">
-		select * 
-		from sell 
-		where sell_deltype in ('N') 
-		order by sell_no desc
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
+		where rnum between 1 and 8
 	
 	
 	</select>
@@ -98,4 +97,16 @@
 		select * from attachment where board_no = #{productNo}
 	</select>
 	
+	<select id="moreResult" resultType="product" parameterType="page">
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
+		where rnum between #{startCount} and #{endCount}
+	
+	</select>
+<!-- 	<select id="moreResult" parameterType="page" resultType="product">
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
+		where rnum between #{startCount} and #{endCount}
+	
+	</select> -->
 </mapper>

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.market.product.model.dao.ProductDAO;
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 @Service
@@ -113,6 +114,16 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return productDAO.attachSelectOne(productNo);
 	}
+
+	@Override
+	public List<Product> moreResult(Page p) {
+		// TODO Auto-generated method stub
+		return productDAO.moreResult(p);
+	}
+
+
+
+
 
 
 }

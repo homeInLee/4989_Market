@@ -3,6 +3,7 @@ package com.kh.market.product.model.service;
 import java.util.List;
 
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 public interface ProductService {
@@ -30,5 +31,10 @@ public interface ProductService {
 	List<Product> memberBuyView(String memberId);
 
 	List<Attachment> attachSelectOne(String productNo);
+
+
+
+	List<Product> moreResult(Page p);
+
 
 }
