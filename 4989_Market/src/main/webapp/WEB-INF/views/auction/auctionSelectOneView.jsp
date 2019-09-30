@@ -189,26 +189,18 @@ a{
 <div id="wrapper">
       <div id="slider-wrap">
           <ul id="slider">
-          <%--    <li data-color="#1abc9c">
-                             
-				<img src="${pageContext.request.contextPath }/resources/upload/auction/${auctionSelectOne.renamedfileName}">
-             </li> --%>
-             
-             <li data-color="#3498db">
-<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
-             </li>
-             
-             <li data-color="#9b59b6">
-<img src="${pageContext.request.contextPath }/resources/images/mac.jpg">
-             </li>
-
-             
+          
+             	<c:forEach items="${auctionSelectOne }" var="as">
+		             <li data-color="#3498db">
+							<img src="${pageContext.request.contextPath }/resources/upload/auction/${as.renamedfileName}">
+		             </li>
+             	</c:forEach>
              
           </ul>
           
            <!--controls-->
-          <div class="btns" id="next"><i class="fa fa-arrow-right"></i></div>
-          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i></div>
+          <div class="btns" id="next"><i class="fa fa-arrow-right"></i>&gt;</div>
+          <div class="btns" id="previous"><i class="fa fa-arrow-left"></i>&lt;</div>
           <div id="counter"></div>
           
           <div id="pagination-wrap">
@@ -221,21 +213,20 @@ a{
   
    </div>
    
-  
-   
+
 	<div id="memberInfo">
 	<hr />
 		<a href="">
-			<h6>${auctionSelectOne.auctionWriter }</h6>
+			<h6>${auctionSelectOne.get(0).auctionWriter }</h6>
    		</a>
 	   		<span>${member.memberAddress}</span>	
 	<hr />
 	
 	<div>
-		<h3 style="padding:32px 0;">${auctionSelectOne.auctionTitle}</h3>
-		<p>거래 가능 지역 : ${auctionSelectOne.auctionAddress }</p>
-		<p>${auctionSelectOne.auctionContent}</p>
-		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.auctionReadcount }</p>
+		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
+		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
+		<p>${auctionSelectOne.get(0).auctionContent}</p>
+		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 		<jsp:include page="/WEB-INF/views/comment/comment.jsp"></jsp:include>
 	</div>
 	
@@ -244,27 +235,27 @@ a{
 	<div>
 		<h3 style="padding: 32px 0">경매</h3>
 			<div>
-				<c:if test="${auctionSelectOne.auctionIngPrice == 0 }">
-				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.auctionPrice }" pattern="#,###"/>원</span></span> 
+				<c:if test="${auctionSelectOne.get(0).auctionIngPrice == 0 }">
+				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionPrice }" pattern="#,###"/>원</span></span> 
 				&nbsp;/&nbsp;
 				</c:if>
-				<c:if test="${auctionSelectOne.auctionIngPrice != 0 }">
-				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.auctionIngPrice}" pattern="#,###"/>원</span></span> 
+				<c:if test="${auctionSelectOne.get(0).auctionIngPrice != 0 }">
+				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionIngPrice}" pattern="#,###"/>원</span></span> 
 				&nbsp;/&nbsp;
 				</c:if>
-				<span style="font-size:13px">시작가격 : <fmt:formatNumber value="${auctionSelectOne.auctionPrice }" pattern="#,###"/>원</span>
+				<span style="font-size:13px">시작가격 : <fmt:formatNumber value="${auctionSelectOne.get(0).auctionPrice }" pattern="#,###"/>원</span>
 				&nbsp; -> &nbsp;
-				<span>즉시구매가격 : <span style="color:red; font-size:24px;"><fmt:formatNumber value="${auctionSelectOne.auctionDirectPrice }" pattern="#,###"/>원</span></span>
+				<span>즉시구매가격 : <span style="color:red; font-size:24px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionDirectPrice }" pattern="#,###"/>원</span></span>
 			</div>
 			<br />
 			
-			<p>입찰 가격 단위 : <fmt:formatNumber value="${auctionSelectOne.auctionUnitPrice }" pattern="#,###" />원 </p>
+			<p>입찰 가격 단위 : <fmt:formatNumber value="${auctionSelectOne.get(0).auctionUnitPrice }" pattern="#,###" />원 </p>
 			<br />
 			
 			<p>
-				경매 시작 날짜 : <fmt:formatDate value="${auctionSelectOne.auctionDate }" pattern="yyyy-MM-dd"/> 
+				경매 시작 날짜 : <fmt:formatDate value="${auctionSelectOne.get(0).auctionDate }" pattern="yyyy-MM-dd"/> 
 				&nbsp;/&nbsp;
-				경매 종료 날짜 : <fmt:formatDate value="${auctionSelectOne.auctionEndDate }" pattern="yyyy-MM-dd"/>
+				경매 종료 날짜 : <fmt:formatDate value="${auctionSelectOne.get(0).auctionEndDate }" pattern="yyyy-MM-dd"/>
 			</p>
 		
 		
@@ -377,6 +368,8 @@ function pagination(){
     $('#pagination-wrap ul li').removeClass('active');
     $('#pagination-wrap ul li:eq('+pos+')').addClass('active');
 }
+ 
+<!--// mode : development or production-->
  
 </script>
 

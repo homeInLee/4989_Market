@@ -11,7 +11,7 @@ public interface AuctionService {
 
 	List<Map<String, String>> auctionList();
 
-	AuctionForList auctionSelectOne(int auctionNo);
+	List<AuctionForList> auctionSelectOne(int auctionNo);
 
 	int insertAuction(Auction auction, List<Attachment> attachList);
 

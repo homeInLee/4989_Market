@@ -52,7 +52,6 @@ public class AuctionController {
 		
 		List<Map<String,String>> mainImage = auctionService.mainImage();
 		
-		logger.info("----------auctionList{}::::::::::::",auctionList);
 
 		model.addAttribute("auctionList",auctionList);
 		model.addAttribute("mainImage", mainImage);
@@ -66,9 +65,9 @@ public class AuctionController {
 	@RequestMapping("/auctionSelectOne.do")
 	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
 		
-		AuctionForList auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
+		List<AuctionForList> auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
 		
-		Member member = memberService.selectOneMember(auctionSelectOne.getAuctionWriter());
+		Member member = memberService.selectOneMember(auctionSelectOne.get(0).getAuctionWriter());
 		
 		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		
@@ -139,7 +138,7 @@ public class AuctionController {
 				else
 					attach.setAttachmentMainImage("N");
 				
-				attach.setBoardName("경매");
+				attach.setBoardName("A");
 				attachList.add(attach);
 				
 				logger.info("attach={}", attach);

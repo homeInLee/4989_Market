@@ -23,8 +23,8 @@ public class AuctionDAOImpl implements AuctionDAO {
 	}
 
 	@Override
-	public AuctionForList auctionSelectOne(int auctionNo) {
-		return sqlSession.selectOne("auction.auctionSelectOne",auctionNo);
+	public List<AuctionForList> auctionSelectOne(int auctionNo) {
+		return sqlSession.selectList("auction.auctionSelectOne",auctionNo);
 	}
 
 	@Override

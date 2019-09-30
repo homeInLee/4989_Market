@@ -10,7 +10,7 @@
 }
 </style>
 <div id="container">
-${auctionSelectOne.auctionNo }
+${auctionSelectOne.get(0).auctionNo }
 ${selectCommentList.commentNo }
 	<form action="" id="commentFrm" method="post">
 	<br /><br />
@@ -21,7 +21,7 @@ ${selectCommentList.commentNo }
 			<table>
 				<tr>
 					<td>
-						<input type="hidden" name="commentREF" value="${auctionSelectOne.auctionNo }">
+						<input type="hidden" name="commentREF" value="${auctionSelectOne.get(0).auctionNo }">
 						<input type="hidden" name="commentWriter" value="${memberLoggedIn.memberId}">
 						<input type="hidden" name="commentNo" value="${commentInsert.commentNo }"/>
 						<textarea style="width: 800px" rows="3" cols="30" name="commentContent" id="comment" placeholder="댓글을 입력하세요"></textarea>
