@@ -6,36 +6,67 @@
 <fmt:requestEncoding value="utf-8"/>
 <title>중고물품</title>
 <style>
-#product-img{
-	width: 90px;
-	height: 90px;
+h2, section{
+	text-align: center;
 	position: relative;
+}
+.auction-content{
+	color:gray;
+}
+.auction-price{
+	color:#ff8a3d;
+}
+.top-card{
+	position: relative;
+	text-align: left;
+	display: inline-block;
+	margin-right: 30px;
+	margin-bottom: 35px;
+	width: calc(25% - 34px);	
+	border: 1px solid #e9ecef;
+	border-radius: 8px;
 	
 }
-#noPanel{
-	position: absolute;
+.top-card:hover{
+	cursor: pointer;
+	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+	top: -2px;
+}
+#product-img{
+	width: 90px;
+	height: 90px; 
+	width:100%; 
+	height:160px; 
+	position: relative;
+}
+#info{
+	text-align: center;
+}
 
-
+.more-btn {
+  display: -webkit-box;
+  display: flex;
+  -webkit-box-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+          justify-content: center;
+  height: 50px;
+  cursor: pointer;
+  width: 100%;
+  color: #868e96;
+  font-size: 16px;
+  border-top: 1px solid #e9ecef;
+}
+.more-btn .more-loading {
+  display: none;
+}
+.more-btn:hover{
+	cursor: pointer;
+	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
+	top: -2px;
 }
 
 
-ul{
-	list-style:none;
-    margin-right: 10px;
-    padding:0;
-
-}
-
-li {
-    margin-right: 10px;
-    padding: 0 0 0 0;
-    border : 0;
-    float: left;
-}
-
-#product-container{
-	padding-top: 100px;
-}
 
 
 </style>
@@ -44,29 +75,50 @@ li {
 	<jsp:param value="상품목록" name="pageTitle"/>
 </jsp:include>
 
-<div id="product-container">
-	<ul>
+	<section>
 		<c:forEach items="${plist }" var="product">
-		
-		<li productNo="${product.sellNo}" >
-				<p id="noPanel">${product.sellNo} </p><br />
-				<img id="product-img" src="${pageContext.request.contextPath}/resources/images/product/noimage.png" alt="" /><br />
-				${product.sellTitle}<br />
-				판매자 ${product.sellWriter}<br />
-				상태 ${product.sellState}<br />
-				가격 ${product.sellPrice}&#8361;<br />
-				등록일 ${product.sellDate}<br />
-				조회수 ${product.sellReadCount}<br />		
+			<article class="top-card" >
+				<a href="${pageContext.request.contextPath }/product/productView.do?productNo=${product.sellNo}" style="text-decoration: none;">
+					<c:forEach items="${attachList }" var="attach">
+						<c:if test="${attach.boardName eq 's' && attach.boardNo eq product.sellNo}">
+							<img id="product-img" src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}" alt="" /><br />
+						</c:if>
+					</c:forEach>
+				<div id="info">
+					<br />
+					<h5>${product.sellTitle}</h5>
+					<div class="auction-content">
+						${product.sellAddress }
+					</div>
+					<div class="auction-price">
+						<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />원
+					</div>
+				</div>
+				</a>
 				
-		
-		</li>
+				<br /><br />
+			</article>
 		</c:forEach>
-	</ul>
-</div>
+		<div onclick="moreResult(this, 'flea_market', 'flea-market-wrap');" class="more-btn" data-o-keyword="자전거" data-page="1"  data-total-pages="11412">
+      <span class="more-text">더보기</span>
+      <div class="more-loading">
+        <div class="loader"></div>
+      </div>
+    </div>
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+    <br />
+	</section>
+
+
 
 <script>
 $(()=>{
-	$("li[productNo]").click(function() {
+	$("div[productNo]").click(function() {
 		var productNo = $(this).attr("productNo");
 		location.href = "${pageContext.request.contextPath}/product/productView.do?productNo="+productNo;
 	} )

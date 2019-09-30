@@ -16,7 +16,7 @@
 *{margin:0; padding:0; list-style:none;}
 a{text-decoration:none; color:#666;}
 a:hover{color:#1bc1a3;}
-body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;}
+body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 
 
 #wrapper{

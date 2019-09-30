@@ -71,7 +71,7 @@ h2, section{
 	<section>
 		<c:forEach items="${myBasketList}" var="b">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/basket/basketDetailView.do?sellNo=${b.sellNo}&sellWriter=${b.sellWriter}" style="text-decoration: none;">
+				<a href="${pageContext.request.contextPath}/basket/basketDetailView.do?sellNo=${b.sellNo}&sellWriter=${b.sellWriter}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					  	<img src="http://placehold.it/700x400" style="width:100%">
 					<div>
 					  	<br />

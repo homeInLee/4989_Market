@@ -9,7 +9,7 @@
 	</select>
 	<insert id="insertMember">
 		insert into member values
-		(#{memberId},#{memberName},#{memberPassword},#{memberPhone},#{memberEmail},#{memberAddress},default,default,default)
+		(#{memberId},#{memberName},#{memberPassword},#{memberPhone},#{memberEmail},#{memberAddress},default,default,default,seq_member_no.nextval)
 	</insert>
 	<update id="memberUpdate">
 		update member
@@ -42,4 +42,8 @@
 	
 	
 	</update>
+	<select id="memberList" resultType="member">
+		select * from member
+		order by member_deltype, member_no
+	</select>
 </mapper>

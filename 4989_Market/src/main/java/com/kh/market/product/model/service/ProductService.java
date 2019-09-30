@@ -29,4 +29,6 @@ public interface ProductService {
 
 	List<Product> memberBuyView(String memberId);
 
+	List<Attachment> attachSelectOne(String productNo);
+
 }

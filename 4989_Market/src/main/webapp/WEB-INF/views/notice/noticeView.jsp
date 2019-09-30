@@ -6,22 +6,102 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
-#noticeViewTable{
-margin-left: 150px;
-text-align: center;}
+#noticeViewTable {
+	margin-left: 150px;
+	text-align: center;
+}
 
-#noticeViewTable tr{
-border: 1px solid;
-width: 800px;
+#noticeViewTable tr {
+	border: 1px solid;
+	width: 800px;
 }
-#noticeViewTable th{
-border: 1px solid;
-width: 100px;
+
+#noticeViewTable th {
+	border: 1px solid;
+	width: 100px;
 }
-#noticeViewTable td{
-border: 1px solid;
-width: 100px;
-padding: 10px;
+
+#noticeViewTable td {
+	border: 1px solid;
+	width: 100px;
+	padding: 10px;
+}
+
+table#noticeViewTable td#drop {
+	cursor: pointer;
+}
+
+.zeta-menu-bar {
+	display: inline-block;
+	width: 100%;
+}
+
+.zeta-menu {
+	margin: 0;
+	padding: 0;
+}
+
+.zeta-menu li {
+	float: left;
+	list-style: none;
+	position: relative;
+}
+
+/* .zeta-menu li:hover { */
+/* 	background: black; */
+/* } */
+
+/* .zeta-menu li.expand { */
+/* 	background: white; */
+/* } */
+
+.zeta-menu li.expand>a {
+	color: black;
+}
+
+.zeta-menu a {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+}
+
+/* .zeta-menu li.expand #declaration:hover{ */
+/* background: lightgray;}  */
+
+/* .zeta-menu li.expand>a:hover{ */
+/* background: white;}  */
+
+.zeta-menu ul {
+	background: #fff;
+	border: 1px solid silver;
+	display: none;
+	padding: 0;
+	position: absolute;
+/* 	여기부터 위치 조정 */
+	left: -11;
+	top: -99;
+	width: 115px;
+}
+
+.zeta-menu ul li {
+	float: none;
+}
+
+.zeta-menu ul li.expand {
+	background: #ddd;
+}
+
+.zeta-menu ul li.expand a {
+	color: black;
+}
+
+.zeta-menu ul a {
+	color: black;
+}
+
+.zeta-menu ul ul {
+	left: 100%;
+	top: 0;
 }
 </style>
 
@@ -33,7 +113,20 @@ padding: 10px;
 		<th>조회수</th>
 		<td>${notice.noticeReadCount}</td>
 		<th>글쓴이</th>
-		<td>${notice.noticeWriter }</td>
+		<td>
+		<div class='zeta-menu-bar'>
+  		<ul class="zeta-menu">	
+		<li><a href="#">${notice.noticeWriter }</a>
+	   		<ul>
+		      <li><a id="memberNotice">회원정보</a></li>
+		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=m" 
+		      		onclick="window.open(this.href,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); return false;">신고</a></li>
+	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li>
+	        </ul>
+		</li>
+		</ul>
+	     </div>   
+		</td>
 	</tr>
 	<tr>
 		<th>제목</th>
@@ -72,6 +165,7 @@ padding: 10px;
 <%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 <input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
 <input type="button" id="noticeDelete" value="삭제" />
+<input type="button" id="noticeDeclaration" onclick="goDeclaration()" value="신고" />
 <input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
 <%-- </c:if> --%>
 <script>
@@ -85,7 +179,49 @@ $("#noticeDelete").click(function(){
 		return true;    	
     }
 });
+
+$(function(){
+	$(document).mouseup(function(e) {
+		if ($(e.target).parents('.zeta-menu').length == 0) {
+			$('.zeta-menu li').removeClass('expand');
+			$('.zeta-menu ul').hide();
+		}
+	});
+	$(".zeta-menu>li:has(ul)>a").each( function() {
+		$(this).html( $(this).html());
+	});
+	$(".zeta-menu ul li:has(ul)")
+		.find("a:first")
+		.append("<p style='float:right;margin:-3px'>&#9656;</p>");
+
+	$(".zeta-menu li>a").click(function(){
+		var li = $(this).parent();
+		var ul = li.parent()
+		ul.find('li').removeClass('expand');
+		ul.find('ul').not(li.find('ul')).hide();
+		li.children('ul').toggle();
+		if( li.children('ul').is(':visible') || li.has('ul')) {
+			li.addClass('expand');
+		}
+	});
+});
+
+console.log($("[name=declarationReceiver]").val());
+
+// $("#noticeDeclaration").click(()=>{
+// // 	window.open();
+// 	var url='${pageContext.request.contextPath}/declaration/memberDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
+// 	window.open(url,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); 
+// 	return false;
 	
+// });
+
+function goDeclaration() {
+	var url='${pageContext.request.contextPath}/declaration/connectDeclaration?declarationReceiver=${notice.noticeWriter}&declarationDivision=w';
+	window.open(url,'글신고','width=500,height=500,location=no,status=no,scrollbars=yes'); 
+	return false;
+}
+
 </script>
 
 

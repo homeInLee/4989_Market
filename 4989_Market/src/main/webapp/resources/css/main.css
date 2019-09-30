@@ -123,14 +123,14 @@ a:visited {
 	/* border: 1px solid #e9e9e9;*/
 	box-sizing: border-box;
 	position: absolute;
-	left: 50%;
-	top: 0;
+	left: 47%;
+	top: 10px;
 	transform: translateX(-50%);
 }
 
 #search-text {
 	height: 40px;
-	width: 460px;
+	width: 400px;
 	border: 1px solid #1b5ac2;
 	background: #ffffff;
 }

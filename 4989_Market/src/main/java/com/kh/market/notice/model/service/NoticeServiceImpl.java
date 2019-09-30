@@ -103,8 +103,27 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public int noticeUpdateEnd(Notice notice) {
-		return noticeDAO.noticeUpdateEnd(notice);
+	public int noticeUpdateEnd(Notice notice, List<Attachment> attachList) {
+		 logger.info("Notice={}",notice);
+		 int result = noticeDAO.noticeUpdateEnd(notice);
+		 
+		 if(result == 0) {
+				throw new NoticeException("게시글 등록 오류");
+			}
+		 System.out.println(notice.getNoticeNo()); // 게시물번호
+		 
+		 if(attachList.size() > 0) {
+			 for(Attachment a : attachList) {
+				 a.setBoardNo(notice.getNoticeNo());//생성된 게시물 번호 대입
+				 result = noticeDAO.insertAttachment(a);
+				 if(result == 0) {
+						throw new NoticeException("첨부파일 등록 오류");
+				 }
+				 
+			 }
+		 }
+		 System.out.println("attachment_service@result="+result);
+		return result;
 	}
 
 	@Override

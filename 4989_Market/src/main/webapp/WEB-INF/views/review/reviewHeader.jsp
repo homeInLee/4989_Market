@@ -28,6 +28,6 @@ margin: 35px;
   	<a id="menubtn" href="${pageContext.request.contextPath }/member/memberView.do?memberId=${memberLoggedIn.memberId}">회원정보</a>
   	<a id="menubtn" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}">쪽지함</a>
   	<a id="menubtn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의거래</a>
-  	<a id="menubtn">나의경매</a>
+  	<a id="menubtn" href="${pageContext.request.contextPath }/auction/memberAuctionSellView.do?memberId=${memberLoggedIn.memberId}">나의경매</a>
   </div>
   

@@ -92,10 +92,14 @@ cursor: pointer;
 			<tr>
 				<th>첨부파일</th>
 				<td>
+					<div id="attachFile" style="margin-left: 0.5px;">
 					<input type="file" name="upFile" id="upFile" />
+					<input type="button" value="추가"  onclick="attachFile.add()"/>
+					</div>
+					<div id="attachFileDiv"></div>
 					<c:forEach items="${attachMap}" var="a" varStatus="status">
 					<div>
-					<input type="text" name="oldOName" id="oldOName${status.index}" value="${a['originalfileName']}"/>
+					<input type="text" readonly="readonly" name="oldOName" id="oldOName${status.index}" value="${a['originalfileName']}"/>
 					<input type="hidden" name="oldRName" id="oldRName${status.index}" value="${a['renamedfileName']}"/>
 					<input type="button" id="btn-attachDel${status.index}" value="삭제" />
 					<br />
@@ -133,7 +137,55 @@ $("input:button[id^=btn-attachDel]").on("click",(e)=>{
 		$("table").before($("<input type='hidden' name='delRName' value="+delRName+">"));
 	}
 });
+var cnt = 0;
+attachFile = {
+       idx:1,
+       add:function(){ // 파일필드 추가
+       	if(cnt>1){
+       		alert("사진은 세장까지만 추가가 가능합니다.")
+       		return;
+       	}
+       	cnt = cnt+1;
+           var o = this;
+           var idx = o.idx;
+           
+           var div = document.createElement('div');
+           div.style.marginTop = '3px';
+           div.id = 'file' + o.idx;
+           div.className = "filebox";
 
+           var dv = document.createElement('dv');
+           dv.style.marginTop = '3px';
+           dv.id = 'dv' + o.idx;
+           
+           var file = document.all ? document.createElement('<input name="upFile"') : document.createElement('input');
+           file.type = 'file';
+           file.name = 'upFile';
+           file.size = '40';
+           file.id = 'upFile' + (o.idx+1);
+           file.onchange = function(){o.prev(this,'dv'+idx)};
+
+           var btn = document.createElement('input');
+           btn.type = 'button';
+           btn.value = '삭제';
+           btn.onclick = function(){o.del(idx)};
+           btn.style.marginLeft = '5px';
+
+
+           div.appendChild(file);
+           div.appendChild(btn);
+           document.getElementById('attachFileDiv').appendChild(div);
+           document.getElementById('attachFileDiv').appendChild(dv);
+
+           o.idx++;
+       }
+}
+
+$("#plusFile").click(()=>{
+	var html = '<input type="file" name="upFile" id="upFile';
+	html += '+zeroFill(i,5)+" />';
+	$("div #plusFile").html(html);
+})
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

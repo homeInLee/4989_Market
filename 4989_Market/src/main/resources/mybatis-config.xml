@@ -22,5 +22,6 @@
   			   alias="strArrTypeHandler"/>
   	<typeAlias type="com.kh.market.notice.model.vo.Attachment" alias="noticeAttachement"/>
   	<typeAlias type="com.kh.market.product.model.vo.Attachment" alias="productAttch"/>
+  	<typeAlias type="com.kh.market.declaration.model.vo.Declaration" alias="declaration"/>
   </typeAliases>
 </configuration>

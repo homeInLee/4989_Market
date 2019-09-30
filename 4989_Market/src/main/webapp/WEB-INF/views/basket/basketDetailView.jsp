@@ -16,7 +16,7 @@
 *{margin:0; padding:0; list-style:none;}
 a{text-decoration:none; color:#666;}
 a:hover{color:#1bc1a3;}
-body, hmtl{background: #ecf0f1; font-family: 'Anton', sans-serif;}
+body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 
 
 #wrapper{
@@ -187,8 +187,56 @@ a{
 
 
 </style>
-<script>
 
+
+<script>
+//장바구니 기능 코드 나중에 옮기자
+function basketCheck(check,sellNo,memberId){
+	var basket={};
+	basket.sellNo = sellNo;
+    basket.memberId = memberId;
+	
+    if(check==0){	
+		//장바구니에 담기
+		$.ajax({
+		    url: "${pageContext.request.contextPath}/basket/basketInsert",
+		    data:basket,
+		    contentType:"application/json; charset=utf-8",
+		    type: "GET",
+		    dataType: "json",
+		    success: function(data) {
+		      alert("장바구니에 담겼습니다");
+		    },
+		    error: function(xhr,txtStatus,err){
+		      console.log("ajax실패",xhr,txtStatus,err);
+		    }
+		});
+	
+		$("#image").attr("src","${pageContext.request.contextPath}/resources/images/redheart.PNG");
+		$("#image").attr("onclick","basketCheck(1,"+sellNo+",'"+memberId+"')");
+	}else{
+		//장바구니에 삭제
+		console.log(sellNo);
+		console.log(memberId);
+		$.ajax({
+		    url: "${pageContext.request.contextPath}/basket/basketDelete",
+		    data:basket,
+		    contentType:"application/json; charset=utf-8",
+		    type: "GET",
+		    dataType: "json",
+		    success: function(data) {
+		      alert("장바구니에서 삭제되었습니다")
+		    },
+		    error: function(xhr,txtStatus,err){
+		      console.log("ajax실패",xhr,txtStatus,err);
+		    }
+		});
+		
+		$("#image").attr("src","${pageContext.request.contextPath}/resources/images/whiteheart.PNG");
+		$("#image").attr("onclick","basketCheck(0,"+sellNo+",'"+memberId+"')");
+	}
+}
+//
 </script>
 <div class="submenu">
 	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
@@ -232,6 +280,17 @@ a{
 </div>
 
 <div id="memberInfo">
+	<!-- 장바구니 기능 코드 -->
+	
+	<c:if test="${empty basket}">
+		<div style="text-align: right;"><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+	</c:if>
+	
+	<c:if test="${not empty basket}">
+		<div style="text-align: right;"><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+	</c:if>
+	
+	<!--  -->
 	<hr />
 		<a href="">
 			<h6>${p.sellWriter }</h6>
@@ -247,6 +306,7 @@ a{
 	</div>
 	
 	<hr />
+	
 </div>
 <script>
 //current position

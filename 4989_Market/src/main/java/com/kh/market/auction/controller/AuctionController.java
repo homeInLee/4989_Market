@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.auction.model.exception.AuctionException;
 import com.kh.market.auction.model.service.AuctionService;
@@ -165,5 +166,9 @@ public class AuctionController {
 	
 	}
 	
-
+	@RequestMapping("/memberAuctionSellView.do")
+	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId) {
+		mav.setViewName("member/memberAutionSellView");
+		return mav;
+	}
 }

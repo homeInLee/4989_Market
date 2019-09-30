@@ -1,6 +1,6 @@
 package com.kh.market.member.model.vo;
 
-import java.sql.Date;
+import java.util.Date;
 
 public class Member {
 	private String memberId;
@@ -12,12 +12,13 @@ public class Member {
 	private Date memberEnrolldate;
 	private Date memberDeldate;
 	private String memberDeltype;
+	private int memberNo;
 	public Member() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
 	public Member(String memberId, String memberName, String memberPassword, String memberPhone, String memberEmail,
-			String memberAddress, Date memberEnrolldate, Date memberDeldate, String memberDeltype) {
+			String memberAddress, Date memberEnrolldate, Date memberDeldate, String memberDeltype, int memberNo) {
 		super();
 		this.memberId = memberId;
 		this.memberName = memberName;
@@ -28,6 +29,7 @@ public class Member {
 		this.memberEnrolldate = memberEnrolldate;
 		this.memberDeldate = memberDeldate;
 		this.memberDeltype = memberDeltype;
+		this.memberNo = memberNo;
 	}
 	public String getMemberId() {
 		return memberId;
@@ -83,13 +85,20 @@ public class Member {
 	public void setMemberDeltype(String memberDeltype) {
 		this.memberDeltype = memberDeltype;
 	}
+	public int getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
 	@Override
 	public String toString() {
 		return "Member [memberId=" + memberId + ", memberName=" + memberName + ", memberPassword=" + memberPassword
 				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberAddress=" + memberAddress
 				+ ", memberEnrolldate=" + memberEnrolldate + ", memberDeldate=" + memberDeldate + ", memberDeltype="
-				+ memberDeltype + "]";
+				+ memberDeltype + ", memberNo=" + memberNo + "]";
 	}
+	
 	
 	
 }

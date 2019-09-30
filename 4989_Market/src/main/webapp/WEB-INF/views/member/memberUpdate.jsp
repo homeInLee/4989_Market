@@ -34,7 +34,7 @@ div#enroll-container table td{text-align: left;}
 				<th>아이디</th>
 				<td>
 					<div id="memberId-container">
-						<input type="text" class="form-control" value="${memberLoggedIn.memberId }" name="memberId" id="memberId_" disabled="disabled">
+						<input type="text" class="form-control" value="${member.memberId }" id="memberId_" disabled="disabled">
 					</div>
 				</td>
 			</tr>
@@ -47,30 +47,40 @@ div#enroll-container table td{text-align: left;}
 			<tr>
 				<th>이름</th>
 				<td>	
-				<input type="text" class="form-control" value="${memberLoggedIn.memberName }" name="memberName" id="memberName" required>
+				<input type="text" class="form-control" value="${member.memberName }" name="memberName" id="memberName" required>
 				</td>
 			</tr>
 			<tr>
 				<th>이메일</th>
 				<td>	
-					<input type="email" class="form-control" value="${memberLoggedIn.memberEmail }" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail">
+					<input type="email" class="form-control" value="${member.memberEmail }" placeholder="abc@xyz.com" name="memberEmail" id="memberEmail">
 				</td>
 			</tr>
 			<tr>
 				<th>휴대폰</th>
 				<td>	
-					<input type="tel" class="form-control" value="${memberLoggedIn.memberPhone }" name="memberPhone" id="memberPhone" maxlength="11" required>
+					<input type="tel" class="form-control" value="${member.memberPhone }" name="memberPhone" id="memberPhone" maxlength="11" required>
 				</td>
 			</tr>
 			<tr>
 				<th>주소</th>
 				<td>	
-					<input type="text" class="form-control" value="${memberLoggedIn.memberAddress }" name="memberAddress" id="memberAddress">
+					<input type="text" class="form-control" value="${member.memberAddress }" name="memberAddress" id="memberAddress">
+				</td>
+			</tr>
+			<tr>
+				<th>프로필 사진</th>
+				<td>
+					<div id="attachFile" style="margin-left: 0.5px;">
+					<input type="file" name="upFile" id="upFile" onchange="checkFile(this)" accept="image/*"/>
+					</div>
 				</td>
 			</tr>
 		</table>
+		<input type="hidden" name="memberId" value="${member.memberId }"/>
+		<input type="hidden" name="loginId" value="${memberLoggedIn.memberId }"/>
 		<input class="log" type="submit" value="수정" >
-		<input class="log" type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${memberLoggedIn.memberId }'">
+		<input class="log" type="button" value="취소" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${member.memberId }'">
 	</form>
 </div>
 
