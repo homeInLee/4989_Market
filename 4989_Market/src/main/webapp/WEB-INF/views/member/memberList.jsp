@@ -23,7 +23,42 @@ border-bottom: 1px solid #dcd7d7;
 height: 34px;
 }
 </style>
+<script>
 
+//이전 버튼 이벤트
+
+function fn_prev(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/member/memberList.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/member/memberList.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/member/memberList.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+</script>
 <input type="button" value="회원목록" />
 <input type="button" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'"/>
 	<div id="">
@@ -49,6 +84,22 @@ height: 34px;
 			</tr>
 			</c:forEach>
 		</table>
+		<!-- pagination{s} -->
+	<div>
+		<ul>
+			<c:if test="${paging.prev}">
+				<li><a href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">Previous</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li"<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li ><a href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >Next</a></li>
+			</c:if>
+		</ul>
+	</div>
 	</c:if>
 	</div>
 	

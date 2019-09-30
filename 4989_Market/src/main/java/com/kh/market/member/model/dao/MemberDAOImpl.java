@@ -6,9 +6,8 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.market.common.vo.Attachment;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.member.model.vo.Member;
-import com.kh.market.product.model.vo.Product;
 
 @Repository
 public class MemberDAOImpl implements MemberDAO {
@@ -42,8 +41,18 @@ public class MemberDAOImpl implements MemberDAO {
 	}
 
 	@Override
-	public List<Member> memberList() {
-		return sqlSession.selectList("member.memberList");
+	public List<Member> memberList(Paging paging) {
+		return sqlSession.selectList("member.memberList",paging);
+	}
+
+	@Override
+	public int memberDeleteCancle(Member member) {
+		return sqlSession.update("member.memberDeleteCancle",member);
+	}
+
+	@Override
+	public int memberListCnt() {
+		return sqlSession.selectOne("member.memberListCnt");
 	}
 
 }
