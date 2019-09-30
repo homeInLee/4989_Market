@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 import com.kh.market.review.model.service.ReviewService;
 
@@ -103,9 +104,14 @@ public class ProductDAOImpl implements ProductDAO {
 
 	@Override
 	public List<Product> memberSellSize(String memberId) {
-		
 		return sqlSession.selectList("product.memberSellSize",memberId);
 	}
+	
+	public List<Product> moreResult(Page p) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.moreResult", p);
+	}
+
 	
 	
 }

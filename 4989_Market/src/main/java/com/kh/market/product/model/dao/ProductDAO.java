@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.kh.market.product.model.vo.Attachment;
+import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 public interface ProductDAO {
@@ -35,6 +36,8 @@ public interface ProductDAO {
 	List<Attachment> attachSelectOne(String productNo);
 
 	List<Product> memberSellSize(String memberId);
+
+	List<Product> moreResult(Page p);
 	
 
 }
