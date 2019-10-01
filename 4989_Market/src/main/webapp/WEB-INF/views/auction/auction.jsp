@@ -45,7 +45,7 @@ h2, section{
 		<c:forEach items="${auctionList }" var="a">
 				<c:if test="${a.boardName eq 'A' and a.attachmentMainImage eq 'Y'}">
 					<article class="top-card" >
-						<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}" style="text-decoration: none;">
+						<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 							  			<img src="${pageContext.request.contextPath }/resources/upload/auction/${a.renamedfileName }" style="width:100%; height:160px; position: relative;">
 							<div>
 							  	<br />

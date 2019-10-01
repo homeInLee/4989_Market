@@ -6,6 +6,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.basket.model.dao.BasketDAO;
 import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.product.model.vo.Product;
@@ -44,5 +45,11 @@ public class BasketServiceImpl implements BasketService {
 	public Basket basketCheck(Basket b) {
 		
 		return basketDAO.basketCheck(b);
+	}
+
+	@Override
+	public List<Auction> basketAuctionView(Map<Object, Object> map) {
+		
+		return basketDAO.basketAuctionView(map);
 	}
 }

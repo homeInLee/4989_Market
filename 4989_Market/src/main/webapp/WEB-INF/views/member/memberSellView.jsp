@@ -68,13 +68,17 @@ div#pageBar a {
 	<section>
 		<c:forEach items="${list}" var="l">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/product/memberSellDetailView.do?sellNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
-					  	<img src="http://placehold.it/700x400" style="width:100%">
+				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+					  	<c:forEach items="${attachmentList }" var="a">
+					  		<c:if test="${l.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
+					  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:220px; height: 200px;">
+					  		</c:if>
+					  	</c:forEach>
 					<div>
 					  	<br />
 					  	<h5>${l.sellTitle }</h5>
 						<div class="auction-content">
-							${l.sellContent }
+							${l.sellAddress }
 						</div>
 						<div class="auction-price">
 							<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원

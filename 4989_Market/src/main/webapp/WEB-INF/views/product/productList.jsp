@@ -84,10 +84,10 @@ h2, section {
 <section>
 	<c:forEach items="${plist }" var="product">
 		<article class="top-card">
-			<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}"
+			<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}&memberId=${memberLoggedIn.memberId}"
 			    class="productImgBox"> 
 			   <c:forEach items="${attachList }" var="attach">
-					<c:if test="${attach.boardName eq 's' && attach.boardNo eq product.sellNo}">
+					<c:if test="${attach.boardName eq 'S' && attach.boardNo eq product.sellNo}">
 						<img id="product-img"
 							src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}"
 							alt="" />

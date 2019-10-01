@@ -30,6 +30,8 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Auction;
+import com.kh.market.basket.model.service.BasketService;
+import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
@@ -41,7 +43,6 @@ import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 import com.kh.market.review.model.service.ReviewService;
 import com.kh.market.review.model.vo.Review;
-
 
 
 @RequestMapping("/product")
@@ -62,6 +63,9 @@ public class ProductController {
 	
 	@Autowired
 	MessageService messageService;
+	
+	@Autowired
+	BasketService basketService;
 	@RequestMapping("/productList.do")
 	public String productList(Model model) {
 		
@@ -184,9 +188,13 @@ public class ProductController {
 
 	
 	@GetMapping("/productView.do")
-	public String productSelectOne(@RequestParam String productNo, Model model) {
+	public String productSelectOne(@RequestParam String productNo, Model model , @RequestParam("memberId") String memberId) {
 		logger.info(productNo);
-		
+		String boardName="S";
+		//장바구니 여부 검사 코드
+		Basket b=new Basket(Integer.parseInt(productNo), memberId,boardName);
+		Basket basket=basketService.basketCheck(b);
+		//
 		
 		Product p = productService.productSelectOne(productNo);
 		
@@ -196,6 +204,7 @@ public class ProductController {
 //		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(1).getOriginalfileName());
 //		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(2).getOriginalfileName());
 		/* attach.get(1).getRenamedfileName(); */
+		model.addAttribute("basket",basket);
 		model.addAttribute("p", p);
 		model.addAttribute("attach", attach);
 		return "/product/productView";
@@ -296,6 +305,7 @@ public class ProductController {
 		map.put("cPage", cPage);
 		
 		List<Product> list=productService.memberSellView(map);
+		List<Attachment> attachmentList=productService.attachList();
 		
 		//2.2 전체게시글수, 전체페이지수 구하기
 		List<Product> memberSellSize=productService.memberSellSize(memberId);
@@ -344,7 +354,7 @@ public class ProductController {
 			pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>";
 		}
 		
-		
+		mav.addObject("attachmentList",attachmentList);
 		mav.addObject("pageBar",pageBar);
 		mav.addObject("list",list);
 		mav.setViewName("member/memberSellView");
@@ -387,8 +397,10 @@ public class ProductController {
 	
 	@RequestMapping("/memberbuyView.do")
 	public ModelAndView memberbuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
-
+		
 		List<Product> list=productService.memberBuyView(memberId);
+		List<Attachment> attachmentList=productService.attachList();
+		mav.addObject("attachmentList",attachmentList);
 		mav.addObject("list",list);
 		mav.setViewName("member/memberBuyView");
 		return mav;

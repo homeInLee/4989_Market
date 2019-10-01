@@ -23,6 +23,8 @@ import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Attachment;
 import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.auction.model.vo.AuctionForList;
+import com.kh.market.basket.model.service.BasketService;
+import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.comment.model.service.CommentService;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
@@ -41,6 +43,9 @@ public class AuctionController {
 	
 	@Autowired
 	CommentService commentService;
+	
+	@Autowired
+	BasketService basketService;
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -63,7 +68,13 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionSelectOne.do")
-	public String auctionSelectOne(Model model, @RequestParam int auctionNo ) {
+	public String auctionSelectOne(Model model, @RequestParam int auctionNo,@RequestParam("memberId") String memberId ) {
+		
+		String boardName="A";
+		//장바구니 여부 검사 코드
+		Basket b=new Basket(auctionNo, memberId,boardName);
+		Basket basket=basketService.basketCheck(b);
+		//
 		
 		List<AuctionForList> auctionSelectOne = auctionService.auctionSelectOne(auctionNo);
 		
@@ -73,6 +84,7 @@ public class AuctionController {
 		
 		logger.info(auctionSelectOne.toString());
 		
+		model.addAttribute("basket",basket);
 		model.addAttribute("auctionSelectOne",auctionSelectOne);
 		model.addAttribute("member",member);
 		

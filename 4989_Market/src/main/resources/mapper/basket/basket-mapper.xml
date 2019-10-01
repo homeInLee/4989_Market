@@ -7,7 +7,7 @@
 		select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype,filecount from sell S join (select A.*,
 		(select count(*) from basket 
 		where basket_sell_no=A.basket_sell_no) filecount
-		from basket A where basket_member_id=#{basketMemberId} order by basket_sell_no desc) B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
+		from basket A where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
 	</select>
 	
 	<select id="totalBasketCount" resultType="basket">
@@ -15,14 +15,21 @@
 	</select>
 	
 	<insert id="basketInsert" parameterType="basket">
-		insert into basket values(#{basketSellNo},#{basketMemberId})
+		insert into basket values(#{basketSellNo},#{basketMemberId},#{boardName})
 	</insert>
 	
 	<delete id="basketDelete" parameterType="basket">
-		delete from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId}
+		delete from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId} and board_name=#{boardName}
 	</delete>
 	
 	<select id="basketCheck" resultType="basket">
-		select * from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId}
+		select * from basket where basket_sell_no=#{basketSellNo} and basket_member_id=#{basketMemberId} and board_name=#{boardName}
+	</select>
+	
+	<select id="basketAuctionView" resultType="auction">
+		select A.* from auction A join (select B.*,
+		(select count(*) from basket 
+		where basket_sell_no=B.basket_sell_no) filecount
+		from basket B where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B on A.auction_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId} and B.board_name=#{boardName}
 	</select>
 </mapper>

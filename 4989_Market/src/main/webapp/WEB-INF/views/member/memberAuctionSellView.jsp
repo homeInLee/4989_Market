@@ -66,10 +66,10 @@ div#pageBar a {
 	<section>
 		<c:forEach items="${auctionList}" var="l">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/auction/memberAuctionSellDetailView.do?sellNo=${l.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+				<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${l.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					  	<!-- <img src="http://placehold.it/700x400" style="width:100%"> -->
 					  	<c:forEach items="${attachmentList }" var="a">
-					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y'}">				
+					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='A'}">				
 					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:220px; height: 200px;">
 					  		</c:if>
 					  	</c:forEach>

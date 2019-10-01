@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.basket.model.service.BasketService;
 import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.product.model.vo.Product;
@@ -50,5 +51,15 @@ public class BasketDAOImpl implements BasketDAO {
 	public Basket basketCheck(Basket b) {
 		
 		return sqlSession.selectOne("basket.basketCheck",b);
+	}
+
+	@Override
+	public List<Auction> basketAuctionView(Map<Object, Object> map) {
+		int cPage=(int)map.get("cPage");
+		int offset = (cPage-1)*BasketService.NUM_PER_PAGE;
+		int limit = BasketService.NUM_PER_PAGE;
+		RowBounds rowBounds=new RowBounds(offset, limit);
+		
+		return sqlSession.selectList("basket.basketAuctionView",map,rowBounds);
 	}
 }

@@ -39,54 +39,61 @@ h2, section{
 	top: -2px;
 }
 	
+div#pageBar {
+	margin-top: 10px;
+	text-align: center;	
+}
 
+div#pageBar span.cPage {	
+	margin-right: 5px;
+}
+
+div#pageBar a {
+	margin-right: 5px;
+}
 </style>
+
 <div class="submenu">
-	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}">거래 후기</a>
-  	<a id="review-btn" href="${pageContext.request.contextPath}/review/reviewMannerForm.do?memberId=${memberLoggedIn.memberId}">매너 칭찬</a>
-  	
+	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketView.do?memberId=${memberLoggedIn.memberId}">중고물품 장바구니</a>
+  	<a id="review-btn" href="${pageContext.request.contextPath }/basket/basketAuctionView.do?memberId=${memberLoggedIn.memberId}">경매물품 장바구니</a>
 </div>
 
-<h2 style="display:block">나의 구매 물품</h2>
+<h2 style="display:block">경매물품 장바구니</h2>
 	<br />
-	<c:if test="${empty list}">
-		<div style="text-align: center;">나의 구매 물품이 비어있습니다</div>
+	<c:if test="${empty auctionList}">
+		<div style="text-align: center;">경매물품 장바구니가 비어있습니다</div>
 	</c:if>
 	<section>
-		<c:forEach items="${list}" var="l">
+		<c:forEach items="${auctionList}" var="l">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
-					  	<c:forEach items="${attachmentList }" var="a">
-					  		<c:if test="${l.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:220px; height: 200px;">
+				<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${l.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+					  	<!-- <img src="http://placehold.it/700x400" style="width:100%"> -->
+					  	<c:forEach items="${attachment}" var="a">
+
+					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='A'}">				
+					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:220px; height: 200px;">
 					  		</c:if>
 					  	</c:forEach>
 					<div>
 					  	<br />
-					  	<h5>${l.sellTitle }</h5>
+					  	<h5>${l.auctionTitle }</h5>
 						<div class="auction-content">
-							${l.sellAddress }
+							${l.auctionAddress }
 						</div>
 						<div class="auction-price">
-							<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원
+							<fmt:formatNumber value="${l.auctionDirectPrice }" pattern="#,###" />원
 						</div>
-						<c:if test="${'sale' eq fn:trim(l.sellState)}">
-							<div>
-								구매중
-							</div>
-						</c:if>
-						<c:if test="${'soldout' eq fn:trim(l.sellState)}">
-							<div>
-								구매완료
-							</div>
-						</c:if>
+						<div class="auction-content">경매물품</div>
+						<div>기간</div>
+						<div class="auction-content">
+							${l.auctionDate}~${l.auctionEndDate}
+						</div>
 					</div>
 				</a>
 				<br /><br />
 			</article>
 		</c:forEach>
 	</section>
+
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
