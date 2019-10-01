@@ -44,27 +44,36 @@
 				<th>처리</th>
 			</tr>
 			<c:forEach items="${list}" var="d" varStatus="status">
-				<tr class="bottom">
+				<tr class="bottom" declarationNo=${d.declarationNo } declarationWriter=${d.declarationWriter }>
 					<td>${d.declarationNo}</td>
-					<td id="division${status.index }"><c:if test="${d.declarationDivision eq 'w'}">작성글</c:if>
-						<c:if test="${d.declarationDivision eq 'm'}">회원</c:if> <c:if
-							test="${d.declarationDivision eq 's'}">쪽지</c:if> <c:if
-							test="${d.declarationDivision eq 'c'}">댓글</c:if></td>
+					<td id="division${status.index }">
+					<c:if test="${d.declarationDivision eq 'w'}">작성글</c:if>
+					<c:if test="${d.declarationDivision eq 'm'}">회원</c:if>
+					<c:if test="${d.declarationDivision eq 's'}">쪽지</c:if> 
+					<c:if test="${d.declarationDivision eq 'c'}">댓글</c:if>
+					</td>
 					<td>${d.declarationTitle}</td>
 					<td>${d.declarationContent}</td>
 					<td>${d.declarationWriter}</td>
 
-					<td><c:if test="${d.declarationReason eq 'a'}">욕설 및 비방</c:if>
-						<c:if test="${d.declarationReason eq 's'}">부적절한 내용</c:if> <c:if
-							test="${d.declarationReason eq 'd'}">광고글</c:if> <c:if
-							test="${d.declarationReason eq 'f'}">불법 거래 유도</c:if></td>
+					<td>
+					<c:if test="${d.declarationReason eq 'a'}">욕설 및 비방</c:if>
+					<c:if test="${d.declarationReason eq 's'}">부적절한 내용</c:if> 
+					<c:if test="${d.declarationReason eq 'd'}">광고글</c:if> 
+					<c:if test="${d.declarationReason eq 'f'}">불법 거래 유도</c:if>
+					</td>
 
 					<td>${d.declarationDate.substring(2,10)}</td>
-					<td style="color: red;"><c:if
-							test="${d.declarationState eq 'N'}">처리중</c:if></td>
-					<td><input type="button" id="dec${status.index}" value="처리" /> <input
-						type="hidden" name="${not empty d.boardName}" /> <input
-						type="hidden" name="${not empty d.boardNo}" /></td>
+					<c:if test="${d.declarationState eq 'N'}">
+					<td style="color: red;">처리중</td>
+					</c:if>
+					<c:if test="${d.declarationState eq 'Y'}">
+					<td style="color: blue;">처리완료</td>
+					</c:if>
+					<td>
+					<input type="button" onclick="event.cancelBubble=true" id="dec" value="알림" /> 
+					<input type="hidden" name="declarationNo" value="${d.declarationNo}"/>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>
@@ -72,14 +81,16 @@
 </div>
 
 <script>
-
-$("input:button[id^=dec]").click(()=>{
-// 	testEle = $("#bottom").find("#division");
-	
-// 	alert($(this).html());
-	
-// 	location.href='${pageContext.request.contextPath}/';
+$("#dec").click(function(){
+	var declarationWriter = $(this).attr("declarationWriter");
+	location.href='${pageContext.request.contextPath}/declaration/declarationCheck?declarationWriter='+declarationWriter;
 });
+
+$("tr.bottom").click(function(){
+	var declarationNo = $(this).attr("declarationNo");
+	location.href='${pageContext.request.contextPath}/declaration/selectOneDeclaration?declarationNo='+declarationNo;
+});
+
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 

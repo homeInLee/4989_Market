@@ -11,14 +11,19 @@ DECLARATION_WRITER,
 DECLARATION_RECEIVER,
 DECLARATION_REASON,
 DECLARATION_CONTENT,
-DECLARATION_DIVISION) values(
+DECLARATION_DIVISION,
+board_name,
+board_no
+) values(
 seq_declaration_no.nextval,
 #{declarationTitle},
 #{declarationWriter},
 #{declarationReceiver},
 #{declarationReason},
 #{declarationContent},
-#{declarationDivision}
+#{declarationDivision},
+#{boardName},
+#{boardNo}
 )
 </insert>
 <select id="declarationList" resultType="declaration">
@@ -26,6 +31,24 @@ seq_declaration_no.nextval,
 	where declaration_deltype = 'N'
 	order by declaration_no desc
 </select>
+
+<select id="selectOneDeclaration" resultType="declaration">
+	select * from declaration
+	where declaration_no = #{declarationNo}
+
+</select>
+<update id="declarationProcess">
+	update member set declaration_count = declaration_count+1
+	where member_Id = #{memberId}
+</update>
+<update id="declarationStateUpdate">
+	update declaration set declaration_state = 'Y'
+	where declaration_no = #{decNo}
+
+</update>
+
+
+
 
 
 

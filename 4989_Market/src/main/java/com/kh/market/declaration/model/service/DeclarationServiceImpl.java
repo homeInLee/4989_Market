@@ -23,4 +23,19 @@ public class DeclarationServiceImpl implements DeclarationService {
 	public List<Declaration> declarationList(int cPage) {
 		return declarationDAO.declarationList(cPage);
 	}
+
+	@Override
+	public Declaration selectOneDeclaration(int declarationNo) {
+		return declarationDAO.selectOneDeclaration(declarationNo);
+	}
+
+	@Override
+	public int declarationProcess(String memberId) {
+		return declarationDAO.declarationProcess(memberId);
+	}
+
+	@Override
+	public int declarationStateUpdate(int decNo) {
+		return declarationDAO.declarationStateUpdate(decNo);
+	}
 }

@@ -157,24 +157,27 @@ table#noticeViewTable td#drop {
 		<br />
 	</c:forEach>
 		<br />
+		<input type="hidden" id="decNo" name="decNo" value="${decNo}"/>
 		${notice.noticeContent }
 		</td>
 	</tr>
 
+
 </table>
 <form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 <input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
-<input type="hidden" id="declarationDivision" name="declarationDivision" value="m" />
+<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
 <input type="hidden" id="declarationReceiver" name="declarationReceiver" value="${notice.noticeWriter }" />
 <input type="hidden" id="boardName" name="boardName" value="n" />
 <input type="hidden" id="boardNo" name="boardNo" value="${notice.noticeNo}" />
 </form>
-<%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 <input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
 <input type="button" id="noticeDelete" value="삭제" />
+<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+<input type="button" id="declarationProcess" value="신고처리" />
+</c:if>
 <input type="button" id="noticeDeclaration" onclick="goDeclaration();" value="신고" />
 <input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
-<%-- </c:if> --%>
 <script>
 $("#noticeDelete").click(function(){
     if(!confirm("정말 삭제하시겠습니까?")){
@@ -213,6 +216,7 @@ $(function(){
 	});
 });
 
+console.log($("[name=decNo]").val());
 console.log($("[name=declarationReceiver]").val());
 
 $("#noticeDeclaration").click(()=>{
@@ -241,6 +245,10 @@ $("#noticeDeclaration").click(()=>{
 // // 	console.log(a);
 // });
 
+$("#declarationProcess").click(()=>{
+// 	alert($("input:hidden#decNo").val());
+	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${notice.noticeWriter}&decNo=${decNo}";
+});
 
 
 </script>

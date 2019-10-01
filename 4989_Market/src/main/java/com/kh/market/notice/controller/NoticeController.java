@@ -200,13 +200,16 @@ public class NoticeController {
 	
 	@RequestMapping("/noticeView")
 	public ModelAndView noticeView(ModelAndView mav,
-									@RequestParam("noticeNo") int noticeNo) {
-		System.out.println("noticeNo="+noticeNo);
+									@RequestParam("noticeNo") int noticeNo,
+									@RequestParam(value="decNo", defaultValue="0", required=false)int decNo ){
+		System.out.println("decNo="+decNo);
+//		System.out.println("noticeNo="+noticeNo);
 		logger.debug("noticeView 이동");
 		
 		Notice notice = noticeService.selectNoticeOne(noticeNo);
 		List<Map<Attachment, String>> attachMap = noticeService.selectAttachmentOne(noticeNo);
 		
+		mav.addObject("decNo",decNo);
 		mav.addObject("attachMap", attachMap);
 		mav.addObject("notice", notice);
 		mav.addObject("noticeNo", noticeNo);
