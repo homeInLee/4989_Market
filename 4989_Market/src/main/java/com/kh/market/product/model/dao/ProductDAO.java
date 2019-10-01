@@ -38,6 +38,8 @@ public interface ProductDAO {
 	List<Product> memberSellSize(String memberId);
 
 	List<Product> moreResult(Page p);
+
+	List<Attachment> moreAttach();
 	
 
 }

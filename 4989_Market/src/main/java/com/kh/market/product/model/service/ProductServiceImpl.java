@@ -128,5 +128,11 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.moreResult(p);
 	}
 
+	@Override
+	public List<Attachment> moreAttach() {
+		// TODO Auto-generated method stub
+		return productDAO.moreAttach();
+	}
+
 
 }

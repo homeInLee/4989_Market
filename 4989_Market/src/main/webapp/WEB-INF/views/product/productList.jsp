@@ -36,7 +36,7 @@ h2, section {
 	top: -2px;
 }
 
-#product-img {
+.product-img {
 	width: 90px;
 	height: 90px;
 	width: 100%;
@@ -44,7 +44,7 @@ h2, section {
 	position: relative;
 }
 
-#info {
+.info {
 	text-align: center;
 }
 
@@ -72,7 +72,8 @@ h2, section {
 	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	top: -2px;
 }
-.productImgBox{
+
+.productImgBox {
 	text-decoration: none;
 }
 </style>
@@ -81,38 +82,42 @@ h2, section {
 	<jsp:param value="상품목록" name="pageTitle" />
 </jsp:include>
 
-<section>
-	<c:forEach items="${plist }" var="product">
-		<article class="top-card">
-			<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}"
-			    class="productImgBox"> 
-			   <c:forEach items="${attachList }" var="attach">
-					<c:if test="${attach.boardName eq 's' && attach.boardNo eq product.sellNo}">
-						<img id="product-img"
-							src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}"
-							alt="" />
+<section id="section">
+	<div id="plist">
+		<c:forEach items="${plist }" var="product">
+			<article class="top-card">
+				<a
+					href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}"
+					class="productImgBox" style="text-decoration: none;"> <c:forEach
+						items="${attachList }" var="attach">
+						<c:if
+							test="${attach.boardName eq 'S' && attach.boardNo eq product.sellNo}">
+							<img class="product-img"
+								src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}"
+								alt="" />
+							<br />
+						</c:if>
+					</c:forEach>
+					<div class="info">
 						<br />
-					</c:if>
-				</c:forEach>
-				<div id="info">
-					<br />
-					<h5>${product.sellTitle}</h5>
-					<div class="auction-content">${product.sellAddress }</div>
-					<div class="auction-price">
-						<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
-						원
+						<h5>${product.sellTitle}</h5>
+						<div class="auction-content">${product.sellAddress }</div>
+						<div class="auction-price">
+							<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
+							원
+						</div>
 					</div>
-				</div>
-			</a> <br /> <br />
-		</article>
-	</c:forEach>
+				</a> <br /> <br />
+			</article>
+		</c:forEach>
+	</div>
 
 
 
 
 	<form action="moreResultForm" name="moreResultForm" id="moreResultForm">
-		<input type="hidden" id="startCount" name="startCount" value="1" /> <input
-			type="hidden" id="endCount" name="endCount" value="8" />
+		<input type="hidden" id="startCount" name="startCount" value="9" /> <input
+			type="hidden" id="endCount" name="endCount" value="16" />
 		<div onclick="moreResult();" class="more-btn">
 			<span class="more-text">더보기</span>
 			<div class="more-loading">
@@ -140,7 +145,10 @@ function moreResult() {
 	var moreResultForm = $("#moreResultForm").serialize();
 	var values = [];
 	var html = "";
-	<%-- var rootContext = "<%=request.getContextPath()%>" --%>
+	var attach = [] 
+	var contentCount = 8; //한 페이지당 게시물 수
+
+
 	 $.ajax({
 	        type    :   "post",
 	        url     :   "${pageContext.request.contextPath}/product/moreResult.do",
@@ -149,40 +157,40 @@ function moreResult() {
 	        success :   function(retnVal) {
 			        					        				
 	        						values = retnVal.moreList;
-	        						
-/*         							console.log(values[i].sellTitle);
-        							console.log(values[i].sellAddress);
-        							console.log(values[i].sellPrice); */
-	        						
-	        						for(var i=0; values.length>i; i++ ){
-	        							html += "<article class="top-card">";
-	        							html += "<a href='"+<%=request.getContextPath()%>+"/product/productView.do?productNo="+values[i].sellNo+"'>";
+	        						attach = retnVal.attachList;
+
+        							
+        							
+	        						for(var i=0; contentCount>i; i++ ){
+	        								
+	        							html += "<article class='top-card'>";
+	        							html += "<a href='<%=request.getContextPath()%>/product/productView.do?productNo="+values[i].sellNo+ "' style='text-decoration: none;'>";
+										console.log("게시물 번호="+values[i].sellNo);
+	        							for(var idxx = 0; attach.length>idxx; idxx++){
+
+	        								console.log("사진 for문 "+idxx+"번 실행중");
+											if(attach[idxx].boardNo == values[i].sellNo){
+	        								html += "<img class='product-img' src='<%=request.getContextPath()%>/resources/upload/product/"+attach[idxx].renamedfileName+"'/> <br/>"
+	        								
+											}
+	        							}
+	        							
+	        							html += "<div class='info'>";
+	        							html += "<br/>";
+	        							html += "<h5>"+values[i].sellTitle+"</h5>";
+	        							html += "<div class='auction-content'>"+values[i].sellAddress+"</div>";
+	        							html += "<div class='auction-price'>"+values[i].sellPrice+"원";
+	        							html += "</div>";
+	        							html += "</div>";
+	        							html += "</a> <br /> <br />";
+	        							html += "</article>";
+										$("#plist").append(html);
+										html = "";
 
 
-	        							<article class="top-card">
-	        							<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}"
-	        							   style="text-decoration: none;"> 
-	        							   <c:forEach items="${attachList }" var="attach">
-	        									<c:if test="${attach.boardName eq 's' && attach.boardNo eq product.sellNo}">
-	        										<img id="product-img"
-	        											src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}"
-	        											alt="" />
-	        										<br />
-	        									</c:if>
-	        								</c:forEach>
-	        								<div id="info">
-	        									<br />
-	        									<h5>${product.sellTitle}</h5>
-	        									<div class="auction-content">${product.sellAddress }</div>
-	        									<div class="auction-price">
-	        										<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
-	        										원
-	        									</div>
-	        								</div>
-	        							</a> <br /> <br />
-	        						</article>
 	        						}
-	        						
+
+	        			
 	        						
 	        						
         				
@@ -196,12 +204,7 @@ function moreResult() {
 	        error   :   function(request,status,error){
 	                    alert("에러 코드 = "+ request.status + " 내용 = " + request.responseText + " 에러메세지 = " + error); // 실패 시 처리
 	                    }
-	    });
-
-
-	
-	
-	
+	    });	
 } 
 </script>
 
