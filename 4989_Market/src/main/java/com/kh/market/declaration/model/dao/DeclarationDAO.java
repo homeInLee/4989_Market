@@ -2,13 +2,14 @@ package com.kh.market.declaration.model.dao;
 
 import java.util.List;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.declaration.model.vo.Declaration;
 
 public interface DeclarationDAO {
 
 	int insertMemberDeclaration(Declaration declaration);
 
-	List<Declaration> declarationList(int cPage);
+	List<Declaration> declarationList(Paging paging);
 
 	Declaration selectOneDeclaration(int declarationNo);
 
@@ -19,5 +20,7 @@ public interface DeclarationDAO {
 	int declarationCheck(String declarationWriter);
 
 	int declarationReceiveCheck(String memberId);
+
+	int declarationListCnt();
 
 }

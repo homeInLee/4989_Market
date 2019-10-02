@@ -1,18 +1,19 @@
 package com.kh.market.message.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.message.model.service.MessageService;
 import com.kh.market.message.model.vo.Message;
 
@@ -26,28 +27,42 @@ public class MessageController {
 	MessageService messageService;
 	
 	@RequestMapping("/messageList.do")
-	public ModelAndView messageList(ModelAndView mav, @RequestParam(value="memberId")String memberId, 
-									@RequestParam(defaultValue="1") int curPage) {
+	public ModelAndView messageList(ModelAndView mav, @RequestParam(value="memberId")String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
 		logger.debug("messageService={}", messageService.getClass());
 		logger.info("memberId="+memberId);
 		
-		List<Message> messageList = messageService.selectMessageList(memberId);
+		int listCnt = messageService.messageListCnt1(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> idPageMap = new HashMap<>();
+		idPageMap.put("memberId", memberId);
+		idPageMap.put("paging", paging);
+		List<Message> messageList = messageService.selectMessageList(idPageMap);
 		logger.info("messageList="+messageList);
 		
 		mav.addObject("messageList", messageList);
+		mav.addObject("paging", paging);
 		mav.setViewName("message/messageList");
 		
 		return mav;
 	}
 	@RequestMapping("/messageList2.do")
-	public ModelAndView messageList2(ModelAndView mav, @RequestParam(value="memberId")String memberId ) {
+	public ModelAndView messageList2(ModelAndView mav, @RequestParam(value="memberId")String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range ) {
 		logger.debug("messageService={}", messageService.getClass());
 		logger.info("memberId="+memberId);
 		
-		List<Message> messageList = messageService.selectMessageList2(memberId);
+		int listCnt = messageService.messageListCnt2(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> idPageMap = new HashMap<>();
+		idPageMap.put("memberId", memberId);
+		idPageMap.put("paging", paging);
+		List<Message> messageList = messageService.selectMessageList2(idPageMap);
+		logger.info("messageList="+messageList);
 		
 		mav.addObject("messageList", messageList);
-		mav.setViewName("message/messageList");
+		mav.addObject("paging", paging);
+		mav.setViewName("message/messageList2");
 		
 		return mav;
 	}

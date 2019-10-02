@@ -155,7 +155,7 @@ ul li a:hover, ul li a:focus {
 function fn_prev(page, range, rangeSize) {
 	var page = ((range - 2) * rangeSize) + 1;
 	var range = range - 1;
-	var url = "${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}";
+	var url = "${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}";
 	url = url + "&page=" + page;
 	url = url + "&range=" + range;
 	
@@ -164,7 +164,7 @@ function fn_prev(page, range, rangeSize) {
 
 //페이지 번호 클릭
 function fn_pagination(page, range, rangeSize, searchType, keyword) {
-	var url = "${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}";
+	var url = "${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}";
 	url = url + "&page=" + page;
 	url = url + "&range=" + range;
 
@@ -176,7 +176,7 @@ function fn_next(page, range, rangeSize) {
 	var page = parseInt((range * rangeSize)) + 1;
 	var range = parseInt(range) + 1;
 	
-	var url = "${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}";
+	var url = "${pageContext.request.contextPath}/message/messageList2.do?memberId=${memberLoggedIn.memberId}";
 	url = url + "&page=" + page;
 	url = url + "&range=" + range;
 	

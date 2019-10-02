@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.declaration.model.dao.DeclarationDAO;
 import com.kh.market.declaration.model.vo.Declaration;
 
@@ -20,8 +21,8 @@ public class DeclarationServiceImpl implements DeclarationService {
 	}
 
 	@Override
-	public List<Declaration> declarationList(int cPage) {
-		return declarationDAO.declarationList(cPage);
+	public List<Declaration> declarationList(Paging paging) {
+		return declarationDAO.declarationList(paging);
 	}
 
 	@Override
@@ -47,5 +48,10 @@ public class DeclarationServiceImpl implements DeclarationService {
 	@Override
 	public int declarationReceiveCheck(String memberId) {
 		return declarationDAO.declarationReceiveCheck(memberId);
+	}
+	
+	@Override
+	public int declarationListCnt() {
+		return declarationDAO.declarationListCnt();
 	}
 }

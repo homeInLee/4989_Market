@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.declaration.model.service.DeclarationService;
 import com.kh.market.declaration.model.vo.Declaration;
 
@@ -51,16 +52,16 @@ public class DeclarationController {
 	}
 	
 	@RequestMapping("/declarationList")
-	public ModelAndView declarationList(ModelAndView mav,
-										@RequestParam(value="cPage",
-													  defaultValue="1",
-													  required=false)int cPage) {
-		
+	public ModelAndView declarationList(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
+		int listCnt = declarationService.declarationListCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
 		logger.info("declarationList 요청");
-		List<Declaration> list = declarationService.declarationList(cPage);
+		List<Declaration> list = declarationService.declarationList(paging);
 		
 		logger.info("list={}",list);
 		mav.addObject("list",list);
+		mav.addObject("paging", paging);
 		mav.setViewName("declaration/declarationList");
 		
 		return mav;

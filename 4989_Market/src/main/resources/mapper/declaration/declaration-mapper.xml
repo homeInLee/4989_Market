@@ -27,9 +27,10 @@ seq_declaration_no.nextval,
 )
 </insert>
 <select id="declarationList" resultType="declaration">
-	select * from declaration 
-	where declaration_deltype = 'N'
-	order by declaration_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from declaration A where declaration_deltype = 'N' order by declaration_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 
 <select id="selectOneDeclaration" resultType="declaration">
@@ -81,6 +82,10 @@ seq_declaration_no.nextval,
 	sysdate
 	)
 </insert>
+<select id="declarationListCnt" resultType="int">
+	select count(*) cnt from declaration
+</select>
+
 
 
 

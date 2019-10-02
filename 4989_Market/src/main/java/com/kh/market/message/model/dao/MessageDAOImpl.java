@@ -1,11 +1,13 @@
 package com.kh.market.message.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.message.model.vo.Message;
 
 @Repository
@@ -15,8 +17,8 @@ public class MessageDAOImpl implements MessageDAO {
 	SqlSessionTemplate session;
 
 	@Override
-	public List<Message> selectMessageList( String memberId) {
-		return session.selectList("message.selectMessageList", memberId);
+	public List<Message> selectMessageList(Map<String, Object> idPageMap) {
+		return session.selectList("message.selectMessageList", idPageMap);
 	}
 
 	@Override
@@ -35,8 +37,8 @@ public class MessageDAOImpl implements MessageDAO {
 	}
 
 	@Override
-	public List<Message> selectMessageList2(String memberId) {
-		return session.selectList("message.selectMessageList2", memberId);
+	public List<Message> selectMessageList2(Map<String, Object> idPageMap) {
+		return session.selectList("message.selectMessageList2", idPageMap);
 	}
 
 	@Override
@@ -54,6 +56,18 @@ public class MessageDAOImpl implements MessageDAO {
 	public int messageReviewUpdate(int messageNo) {
 		
 		return session.update("message.messageReviewUpdate",messageNo);
+	}
+
+	@Override
+	public int messageListCnt1(String memberId) {
+		
+		return session.selectOne("message.messageListCnt1",memberId);
+	}
+
+	@Override
+	public int messageListCnt2(String memberId) {
+		
+		return session.selectOne("message.messageListCnt2",memberId);
 	}
 
 }

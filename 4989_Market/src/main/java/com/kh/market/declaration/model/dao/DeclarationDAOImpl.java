@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.declaration.model.service.DeclarationService;
 import com.kh.market.declaration.model.vo.Declaration;
 
@@ -22,13 +23,13 @@ public class DeclarationDAOImpl implements DeclarationDAO {
 	}
 
 	@Override
-	public List<Declaration> declarationList(int cPage) {
-		int offset = (cPage-1)*DeclarationService.NUM_PER_PAGE;
-		int limit = DeclarationService.NUM_PER_PAGE;
+	public List<Declaration> declarationList(Paging paging) {
+//		int offset = (paging.getPage()-1)*DeclarationService.NUM_PER_PAGE;
+//		int limit = DeclarationService.NUM_PER_PAGE;
+//		
+//		RowBounds rowbounds = new RowBounds(offset,limit);
 		
-		RowBounds rowbounds = new RowBounds(offset,limit);
-		
-		return sqlSession.selectList("declaration.declarationList",cPage,rowbounds);
+		return sqlSession.selectList("declaration.declarationList",paging);
 	}
 
 	@Override
@@ -54,5 +55,10 @@ public class DeclarationDAOImpl implements DeclarationDAO {
 	@Override
 	public int declarationReceiveCheck(String memberId) {
 		return sqlSession.insert("declaration.declarationReceiveCheck", memberId);
+	}
+	
+	@Override	
+	public int declarationListCnt() {
+		return sqlSession.selectOne("declaration.declarationListCnt");
 	}
 }

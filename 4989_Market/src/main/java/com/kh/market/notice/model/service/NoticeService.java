@@ -3,6 +3,7 @@ package com.kh.market.notice.model.service;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
 
@@ -26,7 +27,7 @@ public interface NoticeService {
 
 	int deleteNotice(int noticeNo);
 
-	List<Notice> selectNoticeAll(int cPage);
+	List<Notice> selectNoticeAll(Paging paging);
 
 	int totalContents();
 
@@ -37,6 +38,8 @@ public interface NoticeService {
 	List<String> selectOldFile(int noticeNo);
 
 	int noticeDelFile(Map<Object, Object> map);
+
+	int noticeListCnt();
 
 
 

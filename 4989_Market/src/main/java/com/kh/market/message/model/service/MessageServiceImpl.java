@@ -1,11 +1,13 @@
 package com.kh.market.message.model.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.message.model.dao.MessageDAO;
 import com.kh.market.message.model.vo.Message;
 
@@ -16,8 +18,8 @@ public class MessageServiceImpl implements MessageService {
 	MessageDAO messageDAO;
 
 	@Override
-	public List<Message> selectMessageList(String memberId) {
-		return messageDAO.selectMessageList(memberId);
+	public List<Message> selectMessageList(Map<String, Object> idPageMap) {
+		return messageDAO.selectMessageList(idPageMap);
 	}
 
 	@Override
@@ -36,8 +38,8 @@ public class MessageServiceImpl implements MessageService {
 	}
 
 	@Override
-	public List<Message> selectMessageList2(String memberId) {
-		return messageDAO.selectMessageList2(memberId);
+	public List<Message> selectMessageList2(Map<String, Object> idPageMap) {
+		return messageDAO.selectMessageList2(idPageMap);
 	}
 
 	@Override
@@ -55,6 +57,18 @@ public class MessageServiceImpl implements MessageService {
 	public int messageReviewUpdate(int messageNo) {
 		
 		return messageDAO.messageReviewUpdate(messageNo);
+	}
+
+	@Override
+	public int messageListCnt1(String memberId) {
+		
+		return messageDAO.messageListCnt1(memberId);
+	}
+
+	@Override
+	public int messageListCnt2(String memberId) {
+		
+		return messageDAO.messageListCnt2(memberId);
 	}
 
 }

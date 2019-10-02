@@ -4,9 +4,10 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="message">
   <select id="selectMessageList" resultType="message">
-  	select * from message 
-  	where message_reciver = #{memberId} and message_deltype = 'N' 
-  	order by message_no desc
+  	select * from 
+		( select rownum rnum, A.* from
+		( select * from message A where message_reciver = #{memberId} and  message_deltype = 'N' order by message_no desc) A) A 
+		where rnum between #{paging.startList}+1 and #{paging.startList}+#{paging.listSize}
   </select>
   <insert id="insertMessage">
  	insert into message (message_no, message_title, message_writer,message_reciver,message_content) values(
@@ -21,9 +22,10 @@
 		where message_no = #{messageNo}
   </update>
   <select id="selectMessageList2" resultType="message">
-  	select * from message
-  	where message_writer = #{memberId} and message_deltype = 'N'
-  	order by message_no desc
+  	select * from 
+		( select rownum rnum, A.* from
+		( select * from message A where message_writer = #{memberId} and  message_deltype = 'N' order by message_no desc) A) A 
+		where rnum between #{paging.startList}+1 and #{paging.startList}+#{paging.listSize}
   </select>
   <update id="messageRead">
   	update message set message_read_state = 'Y' where message_no = #{messageNo}
@@ -35,4 +37,10 @@
   <update id="messageReviewUpdate">
   	update message set message_review='N' where message_no=#{messageNo}
   </update>
+  <select id="messageListCnt1" resultType="int">
+  	select count(*) cnt from message where message_reciver = #{memberId} and message_deltype = 'N' 
+  </select>
+  <select id="messageListCnt2" resultType="int">
+  	select count(*) cnt from message where message_writer = #{memberId} and message_deltype = 'N' 
+  </select>
 </mapper>
