@@ -47,6 +47,16 @@ public class CommentController {
 		return map;
 	}
 	
+	@ResponseBody
+	@RequestMapping("/commentInsert2")
+	public Map<String, String> commentInsert2(Comment comment){
+		logger.info("comment2={}", comment);
+		int result = commentService.commentInsert2(comment);
+		Map<String, String> map = new HashMap<>();
+		map.put("mag", result>0?"성공":"실패");
+		return map;
+	}
+	
 	@RequestMapping("/commentList")
 	@ResponseBody
 	public List<Comment> selectCommentList(@RequestParam("auctionNo") int auctionNo) {
@@ -64,11 +74,14 @@ public class CommentController {
 		
 		
 		  Map<String, String> resultMap = new HashMap<String, String>();  
+		
 		  if(result>0) {
 			  resultMap.put("msg", "성공"); 
-		  } else { 
-			  resultMap.put("msg", "실패"); 
 		  }
+		  else {
+			  resultMap.put("msg","실패"); 
+		  }
+		 
 		 
 		
 		//model.addAttribute("msg", result>0?"성곡적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
