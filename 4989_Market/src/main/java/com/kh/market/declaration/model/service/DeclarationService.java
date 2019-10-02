@@ -18,4 +18,8 @@ public interface DeclarationService {
 
 	int declarationStateUpdate(int decNo);
 
+	int declarationCheck(String declarationWriter);
+
+	int declarationReceiveCheck(String memberId);
+
 }

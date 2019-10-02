@@ -38,4 +38,14 @@ public class DeclarationServiceImpl implements DeclarationService {
 	public int declarationStateUpdate(int decNo) {
 		return declarationDAO.declarationStateUpdate(decNo);
 	}
+
+	@Override
+	public int declarationCheck(String declarationWriter) {
+		return declarationDAO.declarationCheck(declarationWriter);
+	}
+
+	@Override
+	public int declarationReceiveCheck(String memberId) {
+		return declarationDAO.declarationReceiveCheck(memberId);
+	}
 }

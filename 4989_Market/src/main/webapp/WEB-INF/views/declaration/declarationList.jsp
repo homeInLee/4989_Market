@@ -44,7 +44,7 @@
 				<th>처리</th>
 			</tr>
 			<c:forEach items="${list}" var="d" varStatus="status">
-				<tr class="bottom" declarationNo=${d.declarationNo } declarationWriter=${d.declarationWriter }>
+				<tr class="bottom" declarationNo=${d.declarationNo } onclick="event.cancelBubble=true">
 					<td>${d.declarationNo}</td>
 					<td id="division${status.index }">
 					<c:if test="${d.declarationDivision eq 'w'}">작성글</c:if>
@@ -54,7 +54,7 @@
 					</td>
 					<td>${d.declarationTitle}</td>
 					<td>${d.declarationContent}</td>
-					<td>${d.declarationWriter}</td>
+					<td id="writer">${d.declarationWriter}</td>
 
 					<td>
 					<c:if test="${d.declarationReason eq 'a'}">욕설 및 비방</c:if>
@@ -71,7 +71,7 @@
 					<td style="color: blue;">처리완료</td>
 					</c:if>
 					<td>
-					<input type="button" onclick="event.cancelBubble=true" id="dec" value="알림" /> 
+					<input type="button" declarationWriter=${d.declarationWriter } onclick="event.cancelBubble=true" id="dec${status.index}" value="알림" /> 
 					<input type="hidden" name="declarationNo" value="${d.declarationNo}"/>
 					</td>
 				</tr>
@@ -81,15 +81,16 @@
 </div>
 
 <script>
-$("#dec").click(function(){
-	var declarationWriter = $(this).attr("declarationWriter");
-	location.href='${pageContext.request.contextPath}/declaration/declarationCheck?declarationWriter='+declarationWriter;
-});
-
 $("tr.bottom").click(function(){
 	var declarationNo = $(this).attr("declarationNo");
 	location.href='${pageContext.request.contextPath}/declaration/selectOneDeclaration?declarationNo='+declarationNo;
 });
+$("[id^=dec]").click(function() {
+	var writer = $(this).attr("declarationWriter");
+// 	console.log(writer);
+	location.href="${pageContext.request.contextPath}/declaration/declarationCheck?declarationWriter="+writer;
+});
+
 
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
