@@ -40,4 +40,6 @@ public interface ProductService {
 
 	List<Product> moreResult(Page p);
 
+	List<Attachment> moreAttach();
+
 }

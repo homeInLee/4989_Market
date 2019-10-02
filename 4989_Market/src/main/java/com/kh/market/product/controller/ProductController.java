@@ -478,18 +478,18 @@ public class ProductController {
 		
 		
 		List<Product> moreProductList = productService.moreResult(p);
-		
+		List<Attachment> attachList = productService.moreAttach();
 		
 		Map<String, Object> returnVal = new HashMap<String, Object>();
 		
 		returnVal.put("moreList", moreProductList);
-
+		returnVal.put("attachList", attachList);
 		
 		
 		
 		logger.info("시작 값={}", startCount);
 		logger.info("끝나는  값={}", endCount);
-
+		logger.info("가져온 사진 목록={}",attachList);
 		
 		return returnVal;
 		

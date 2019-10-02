@@ -112,6 +112,12 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.moreResult", p);
 	}
 
+	@Override
+	public List<Attachment> moreAttach() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.moreAttach");
+	}
+
 	
 	
 }

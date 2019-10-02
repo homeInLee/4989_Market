@@ -152,11 +152,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 						<textarea rows="30" cols="113" id="content" name="content" class="form-control" required="required"></textarea>
 						</td>			
 					</tr>
-					<tr>
-						<th></th>
-						<td><input type="file" class="imageUpload" /></td>			
 
-					</tr>
 		</table>
 			<br />
 
@@ -166,23 +162,6 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 		</form>
 		
 </div>
-
-	<div>
-        <h2><b>이미지 미리보기</b></h2>
-        <div class="input_wrap">
-            <a href="javascript:" onclick="fileUploadAction();" class="my_button">파일 업로드</a>
-            <input type="file" id="input_imgs" multiple/>
-        </div>
-    </div>
-
-    <div>
-        <div class="imgs_wrap">
-            <!-- <img id="img" /> -->
-        </div>
-    </div>
-
-
-
 
 
 <script>
