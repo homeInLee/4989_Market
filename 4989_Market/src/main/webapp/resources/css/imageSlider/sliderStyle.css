@@ -82,6 +82,7 @@
     right:35px; 
     width:auto;
     position:absolute;
+    
 }
 
 #slider-wrap.active #next{right:0px;}

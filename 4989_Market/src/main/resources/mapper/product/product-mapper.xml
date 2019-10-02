@@ -109,5 +109,4 @@
         where rnum between #{startCount} and #{endCount}
     </select>
 	
-	
 </mapper>

@@ -32,6 +32,25 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 }
 
 #goToList {
+	border: 1px solid green;
+	height: 56px;
+	background-color: green;
+	font-size: 18px;
+	font-weight: 700;
+	color: #fff;
+	cursor: pointer;
+	
+	
+}
+#wrapper{
+	margin: 0 auto;
+	width: 700px;
+}
+#productControl{
+	text-align: right;
+	
+}
+#editProductBtn{
 	border: 1px solid #f39614;
 	height: 56px;
 	background-color: #f39614;
@@ -40,8 +59,21 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 	color: #fff;
 	cursor: pointer;
 }
+
+#deleteProductBtn{
+	border: 1px solid #da1519;
+	height: 56px;
+	background-color: #e81e22;
+	font-size: 18px;
+	font-weight: 700;
+	color: white;
+	cursor: pointer;
+}
+#memberInfo{
+	margin-left: 0px;
+	text-align: left;
+}
 </style>
-<<<<<<< HEAD
 <script>
 //장바구니 기능 코드
 function basketCheck(check,sellNo,memberId){
@@ -104,6 +136,8 @@ function sellComplete(sellNo,sellBuyer){
 </jsp:include>
 <!-- content 영역 -->
 <div id="wrapper">
+
+<hr />
 	<div id="slider-wrap">
 		<ul id="slider">
 			<li data-color="#1abc9c"><img
@@ -137,10 +171,8 @@ function sellComplete(sellNo,sellBuyer){
 		<!--image slider controls end-->
 
 	</div>
-</div>
 <!-- image slider section end -->
 <br />
-<<<<<<< HEAD
 <button type="button" id="purchase">&nbsp;&nbsp;구매하기&nbsp;&nbsp;</button>
 <!-- 장바구니 기능 코드 -->	
 <hr />
@@ -152,33 +184,55 @@ function sellComplete(sellNo,sellBuyer){
 	<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
 </c:if>
 <!--  -->
-=======
->>>>>>> refs/remotes/origin/beomseok
 
 <button type="button" id="purchase" onclick="buyThisProduct();">&nbsp;&nbsp;구매하기&nbsp;&nbsp;</button>
-<button type="button" id="goToList" onclick="goToList();">&nbsp;목록으로
-	돌아가기&nbsp;</button>
+<button type="button" id="goToList" onclick="goToList();">&nbsp;목록으로 돌아가기&nbsp;</button>
 <br />
 <br />
 <br />
 <br />
 <br />
-<h4>번호: ${p.sellNo}</h4>
-<h4>제목: ${p.sellTitle}</h4>
-<h4>작성자: ${p.sellWriter}</h4>
 
-<h4>
+<div id="memberInfo">
+	<hr />
+		<a href="">
+			<h6>${p.sellWriter}</h6>
+   		</a>
+	   		<span>${p.sellAddress}</span>	
+	<hr />
+</div>
+<div id="productInfo">
+	<div>
+		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
+		<p>거래 가능 지역 : ${p.sellAddress }</p>
+		<p>${p.sellContent}</p>
+		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+		<jsp:include page="/WEB-INF/views/comment/comment.jsp"></jsp:include>
+	</div>
+</div>
+<hr />
+
+
+<div>
+	<h3 style="padding: 32px 0">중고물품</h3>
+	<div>
+	<span>가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/>원</span></span> &nbsp;&nbsp;
+	</div>
+	<br />			
+</div>
+
+
+
+<p>
 	구매자:
 	<c:choose>
-		<c:when test="${not empty p.sellBuyer}">${p.sellBuyer}</c:when>
-		<c:when test="${empty p.sellBuyer}">없음</c:when>
+		<c:when test="${not empty p.sellBuyer}"><p>${p.sellBuyer}</p></c:when>
+		<c:when test="${empty p.sellBuyer}"><p>없음</p></c:when>
 	</c:choose>
-</h4>
+<p>
 
 
-<h4>내용: ${p.sellContent}</h4>
-<h4>상태: ${p.sellState}</h4>
-<h4>가격: ${p.sellPrice}</h4>
+
 <h4>등록일: ${p.sellDate}</h4>
 <h4>조회수: ${p.sellReadCount}</h4>
 <button onclick="updateProduct();">수정하기</button>
@@ -195,6 +249,14 @@ function sellComplete(sellNo,sellBuyer){
 	<button onclick="updateProduct();">수정하기</button>
 	<button onclick="deleteProduct();">삭제</button>
 </c:if> --%>
+	<div id="productControl">
+		<c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
+			<button onclick="updateProduct();" id="editProductBtn">&nbsp;수정하기&nbsp;</button>
+			<button onclick="deleteProduct();" id="deleteProductBtn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</c:if>
+	</div>
+</div>
+
 <script>
 function updateProduct() {
 	location.href = "${pageContext.request.contextPath}/product/productEdit.do?productNo=${p.sellNo}";
