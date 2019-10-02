@@ -104,14 +104,6 @@
 		select * from sell where sell_writer=#{memberId}
 	</select>
 	<select id="moreResult" resultType="product" parameterType="page">
-		select *
-		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
-		where rnum between #{startCount} and #{endCount}
-	
 	</select>
 	
-	<select id="moreAttach" resultType="productAttch" parameterType="page">
-		select * from attachment where board_Name = 'S' and ATTACHMENT_MAIN_IMAGE = 'Y'
-	
-	</select>
 </mapper>
