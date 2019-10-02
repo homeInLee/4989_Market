@@ -108,4 +108,6 @@
         from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
         where rnum between #{startCount} and #{endCount}
     </select>
+	
+	
 </mapper>
