@@ -10,4 +10,10 @@ public interface DeclarationDAO {
 
 	List<Declaration> declarationList(int cPage);
 
+	Declaration selectOneDeclaration(int declarationNo);
+
+	int declarationProcess(String memberId);
+
+	int declarationStateUpdate(int decNo);
+
 }

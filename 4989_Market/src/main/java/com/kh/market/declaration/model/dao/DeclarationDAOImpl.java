@@ -30,4 +30,19 @@ public class DeclarationDAOImpl implements DeclarationDAO {
 		
 		return sqlSession.selectList("declaration.declarationList",cPage,rowbounds);
 	}
+
+	@Override
+	public Declaration selectOneDeclaration(int declarationNo) {
+		return sqlSession.selectOne("declaration.selectOneDeclaration", declarationNo);
+	}
+
+	@Override
+	public int declarationProcess(String memberId) {
+		return sqlSession.update("declaration.declarationProcess", memberId);
+	}
+
+	@Override
+	public int declarationStateUpdate(int decNo) {
+		return sqlSession.update("declaration.declarationStateUpdate",decNo);
+	}
 }

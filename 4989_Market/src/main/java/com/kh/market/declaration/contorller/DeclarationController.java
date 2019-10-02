@@ -67,4 +67,59 @@ public class DeclarationController {
 		
 	}
 	
+	@RequestMapping("/selectOneDeclaration")
+	public ModelAndView selectOneDeclaration(ModelAndView mav,
+											@RequestParam("declarationNo")int declarationNo){
+		System.out.println("declarationNo="+declarationNo);
+		logger.info("declarationView 이동");
+		
+		Declaration declaration = declarationService.selectOneDeclaration(declarationNo);
+		
+		int decNo = declarationNo;
+		
+		mav.addObject("declaration", declaration);
+		mav.addObject("decNo",decNo);
+		mav.setViewName("/declaration/declarationView");
+		
+		
+		return mav;
+		
+	}
+	
+	@RequestMapping("/declarationProcess")
+	public String declarationProcess(Model model,
+										@RequestParam("memberId")String memberId,
+										@RequestParam("decNo")int decNo
+										) {
+		logger.info("declarationProcess 시작");		
+		
+		System.out.println("memberId="+memberId);
+		
+		int result = declarationService.declarationProcess(memberId);
+		
+		String msg = "신고처리 실패";
+		if(result > 0) {
+			int state = declarationService.declarationStateUpdate(decNo);
+			msg = "신고처리 성공";
+		}
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/declaration/declarationList");
+		
+		return "common/msg";
+	}
+	
+	@RequestMapping("/declarationCheck")
+	public String declarationCheck(Model model,
+									@RequestParam("declarationWriter")String declarationWriter) {
+		
+		System.out.println("declarationWriter="+declarationWriter);
+//		int result = declarationService.declarationCheck(declarationWriter);
+		
+//		String msg = result > 0?"신고 알림 성공":"신고 알림 실패";
+//		model.addAttribute("msg",msg);
+//		model.addAttribute("loc","redirect:/declaration/declarationList");
+		
+		return "common/msg";
+	}
 }
