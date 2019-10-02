@@ -100,6 +100,7 @@ public class DeclarationController {
 		String msg = "신고처리 실패";
 		if(result > 0) {
 			int state = declarationService.declarationStateUpdate(decNo);
+			int massage = declarationService.declarationReceiveCheck(memberId);
 			msg = "신고처리 성공";
 		}
 		
@@ -111,14 +112,16 @@ public class DeclarationController {
 	
 	@RequestMapping("/declarationCheck")
 	public String declarationCheck(Model model,
-									@RequestParam("declarationWriter")String declarationWriter) {
+									@RequestParam("declarationWriter")String declarationWriter
+//									@RequestParam("declarationReceiver")String declarationReceiver
+									) {
 		
 		System.out.println("declarationWriter="+declarationWriter);
-//		int result = declarationService.declarationCheck(declarationWriter);
+		int result = declarationService.declarationCheck(declarationWriter);
 		
-//		String msg = result > 0?"신고 알림 성공":"신고 알림 실패";
-//		model.addAttribute("msg",msg);
-//		model.addAttribute("loc","redirect:/declaration/declarationList");
+		String msg = result > 0?"신고 알림 성공":"신고 알림 실패";
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/declaration/declarationList");
 		
 		return "common/msg";
 	}

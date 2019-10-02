@@ -121,7 +121,7 @@ table#noticeViewTable td#drop {
 	   		<ul>
 		      <li><a id="memberNotice">회원정보</a></li>
 		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?noticeNo?${notice.noticeNo}" id="id-declaration"
-		      		onclick="window.open(this.href,'팝업','width=500,height=500,location=no,status=no,scrollbars=yes'); return false;">신고</a>
+		      		>신고</a>
 		      		</li>
 	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li>
 	        </ul>

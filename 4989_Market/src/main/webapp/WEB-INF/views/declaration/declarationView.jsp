@@ -75,7 +75,9 @@
 <input type="button" id="declarationCheck" onclick="${pageContext.request.contextPath}/sell/" value="신고글 확인" />
 </c:if>
 </c:if>
-<input type="button" id="declarationState" value="처리" />
+<c:if test="${declaration.declarationDivision eq 'm'}">
+<input type="button" id="declarationCheck" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${declaration.declarationReceiver}'" value="회원 확인" />
+</c:if>
 <input type="button" id="declarationList" value="목록" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList.do'"/>
 
 <script>

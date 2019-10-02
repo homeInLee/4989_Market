@@ -16,4 +16,8 @@ public interface DeclarationDAO {
 
 	int declarationStateUpdate(int decNo);
 
+	int declarationCheck(String declarationWriter);
+
+	int declarationReceiveCheck(String memberId);
+
 }
