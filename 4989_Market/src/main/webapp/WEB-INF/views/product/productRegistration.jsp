@@ -14,17 +14,17 @@
 	<jsp:param value="물품 등록하기" name="pageTitle"/>
 </jsp:include>
 <style>
-#Registration{
-	margin: 0 auto;
-}
+
 
 /* /*Header*/
 h1, h2{text-shadow:none; text-align:center;}
 h1{ color: #666; text-transform:uppercase;  font-size:36px;}
 h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; margin-bottom:30px;} 
  */
+ 
 #preview{
-	display: inline;
+
+	margin: 0 auto;
 }
 
 .preimg{
@@ -34,135 +34,138 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 	height: 100px;
 	float: left;
 }
+
+
 </style>
-<!-- 컨텐츠 영역 시작-->
-
-
-<!-- 이미지 슬라이더 -->
-
-<div id="wrapper">
-	<div id="slider-wrap">
-		<ul id="slider">
-			<li data-color="#1abc9c">		                             
-				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images0">
-			</li>		
-			             
-			<li data-color="#3498db">
-				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images1">
-			</li>	
+	<section id="cotentArea">
+	<!-- 컨텐츠 영역 시작-->
+	
+	
+	<!-- 이미지 슬라이더 -->
+	
+	<div id="wrapper">
+		<div id="slider-wrap">
+			<ul id="slider">
+				<li data-color="#1abc9c">		                             
+					<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images0">
+				</li>		
 				             
-			<li data-color="#9b59b6">
-				<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images2">
-			</li>         
-		</ul>
-          
-		<!--controls-->
-		<div class="btns" id="next">
-			<i class="fa fa-arrow-right">&gt;</i>
-		</div>
-		
-		<div class="btns" id="previous">
-			<i class="fa fa-arrow-left">&lt;</i>
-		</div>
-		
-		<div id="counter"></div>		          
-		<div id="pagination-wrap">
-			<ul>
+				<li data-color="#3498db">
+					<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images1">
+				</li>	
+					             
+				<li data-color="#9b59b6">
+					<img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" class="images2">
+				</li>         
+			</ul>
+	          
+			<!--controls-->
+			<div class="btns" id="next">
+				<i class="fa fa-arrow-right">&gt;</i>
+			</div>
 			
+			<div class="btns" id="previous">
+				<i class="fa fa-arrow-left">&lt;</i>
+			</div>
+			
+			<div id="counter"></div>		          
+			<div id="pagination-wrap">
+				<ul>
+				
+				</ul>
+			</div>
+			<!--controls-->  
+	                 
+		</div> 
+	</div>
+	
+		<p>미리보기</p>
+		<div id="preview">
+			<ul>
+				<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images0" /></li>
+				<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images1" /></li>
+				<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images2" /></li>
 			</ul>
 		</div>
-		<!--controls-->  
-                 
-	</div> 
-</div>
-
-	<p>미리보기</p>
-	<div id="preview">
-		<ul>
-			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images0" /></li>
-			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images1" /></li>
-			<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images2" /></li>
-		</ul>
-	</div>
-	<br />
-	<br />
-	<br />
-	<br />
-	<br />
-<!-- 정보 입력 폼 -->
-<div id="Registration">
-
-	<form name="productFrm" action="${pageContext.request.contextPath }/product/productRegistrationEnd.do"  
-		  method="post" 
-		  enctype="multipart/form-data">
+		<br />
+		<br />
+		<br />
+		<br />
+		<br />
+	<!-- 정보 입력 폼 -->
+	<div id="Registration">
 	
-        
-        <div class="input-group mb-3" style="padding:0px;">
-		  <div class="input-group-prepend" style="padding:0px;">
-		    <span class="input-group-text">첨부파일</span>		    
-		  </div>
-		  <div class="custom-file">
-		    <input type="file" multiple="multiple" class="custom-file-input imageUpload" 
-		    	   name="upFile" id="upFile1" >
-		    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-		  </div>
-		</div>
-
-    <br />
-    <br />
-    <br />
-
-	<table id="tbl-Registration">
-					<tr style="padding-bottom: 1px;">
-						
-						<th>작성자 정보</th>
-						
-						<td>
-							<div id="userinfo">
-							<input type="text"  id="writer" disabled="disabled" value="admin" class="form-control"/>
-							<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
-							<input type="text"  id="phone" disabled="disabled" value="01015412215" class="form-control"/>
-							<input type="text"  id="email" disabled="disabled" value="" placeholder="이메일 없음" class="form-control"/>
-							<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
-							<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
-							<button type="button" onclick="editable();">변경</button>
-							</div>
-						</td>
-					
-					
-					</tr>
-					<tr>
-						<th>제목</th>
-						<td>		
-							<input type="text" id="title" name="productTitle" class="form-control" required="required"/>
-						</td>			
-					</tr>		
-				
-				
-					<tr>
-						<th>가격</th>
-						<td>		
-						<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required" />
-						</td>			
-					</tr>
-					
-					<tr>
-						<th>내용</th>
-						<td>		
-						<textarea rows="30" cols="113" id="content" name="content" class="form-control" required="required"></textarea>
-						</td>			
-					</tr>
-
-		</table>
-			<br />
-
-			<p align="right" id="btnP">
-			<button type="submit" onclick="return checkYN();" class="btn btn-primary" >등록하기</button>
-			</p>
-		</form>
+		<form name="productFrm" action="${pageContext.request.contextPath }/product/productRegistrationEnd.do"  
+			  method="post" 
+			  enctype="multipart/form-data">
 		
-</div>
-
+	        
+	        <div class="input-group mb-3" style="padding:0px;">
+			  <div class="input-group-prepend" style="padding:0px;">
+			    <span class="input-group-text">첨부파일</span>		    
+			  </div>
+			  <div class="custom-file">
+			    <input type="file" multiple="multiple" class="custom-file-input imageUpload" 
+			    	   name="upFile" id="upFile1" >
+			    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+			  </div>
+			</div>
+	
+	    <br />
+	    <br />
+	    <br />
+	
+		<table id="tbl-Registration">
+						<tr style="padding-bottom: 1px;">
+							
+							<th>작성자 정보</th>
+							
+							<td>
+								<div id="userinfo">
+								<input type="text"  id="writer" disabled="disabled" value="admin" class="form-control"/>
+								<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
+								<input type="text"  id="phone" disabled="disabled" value="01015412215" class="form-control"/>
+								<input type="text"  id="email" disabled="disabled" value="" placeholder="이메일 없음" class="form-control"/>
+								<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
+								<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
+								<button type="button" onclick="editable();">변경</button>
+								</div>
+							</td>
+						
+						
+						</tr>
+						<tr>
+							<th>제목</th>
+							<td>		
+								<input type="text" id="title" name="productTitle" class="form-control" required="required"/>
+							</td>			
+						</tr>		
+					
+					
+						<tr>
+							<th>가격</th>
+							<td>		
+							<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required" />
+							</td>			
+						</tr>
+						
+						<tr>
+							<th>내용</th>
+							<td>		
+							<textarea rows="30" cols="113" id="content" name="content" class="form-control" required="required"></textarea>
+							</td>			
+						</tr>
+	
+			</table>
+				<br />
+	
+				<p align="right" id="btnP">
+				<button type="submit" onclick="return checkYN();" class="btn btn-primary" >등록하기</button>
+				</p>
+			</form>
+			
+	</div>
+</section>
 
 <script>
 function checkYN() {
