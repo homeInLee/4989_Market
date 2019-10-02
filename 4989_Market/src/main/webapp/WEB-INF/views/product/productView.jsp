@@ -184,6 +184,8 @@ function sellComplete(sellNo,sellBuyer){
 <button onclick="updateProduct();">수정하기</button>
 <button onclick="deleteProduct();">삭제</button>
 
+<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
+
 <!-- 판매완료하기 기능 -->
 <c:if test="${not empty p.sellBuyer and memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
 	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
@@ -221,7 +223,7 @@ function goToList() {
 
 
 <!-- 이미지 슬라이더 기본이미지에서 실제 이미지로 변경하는 스크립트 -->
-<script>
+<%-- <script>
 var index = 0;
 
 $(()=>{
@@ -232,7 +234,7 @@ $(()=>{
 
 
 
-</script>
+</script> --%>
 
 
 
