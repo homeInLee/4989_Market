@@ -103,12 +103,12 @@
 	<select id="memberSellSize" resultType="product">
 		select * from sell where sell_writer=#{memberId}
 	</select>
-	<select id="moreResult" resultType="product" parameterType="page">
+<!-- 	<select id="moreResult" resultType="product" parameterType="page">
 		select *
 		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
 		where rnum between #{startCount} and #{endCount}
 	
-	</select>
+	</select> -->
 <!-- 	<select id="moreResult" parameterType="page" resultType="product">
 		select *
 		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
