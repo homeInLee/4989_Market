@@ -54,7 +54,12 @@ h2, section{
 									${a.auctionAddress }
 								</div>
 								<div class="auction-price">
-									<fmt:formatNumber value="${a.auctionPrice }" pattern="#,###" />원
+									<c:if test="${a.auctionIngPrice eq 0 }">
+										<fmt:formatNumber value="${a.auctionPrice}" pattern="#,###" />원
+									</c:if>
+									<c:if test="${a.auctionIngPrice ne 0 }">
+										<fmt:formatNumber value="${a.auctionIngPrice}" pattern="#,###" />원
+									</c:if>
 								</div>
 							</div>
 						</a>
