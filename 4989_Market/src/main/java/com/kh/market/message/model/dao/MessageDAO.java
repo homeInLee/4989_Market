@@ -1,12 +1,14 @@
 package com.kh.market.message.model.dao;
 
 import java.util.List;
+import java.util.Map;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.message.model.vo.Message;
 
 public interface MessageDAO {
 
-	List<Message> selectMessageList(String memberId);
+	List<Message> selectMessageList(Map<String, Object> idPageMap);
 
 	int insertMessage(Message message);
 
@@ -14,12 +16,16 @@ public interface MessageDAO {
 
 	int messageDelete(String messageNo);
 
-	List<Message> selectMessageList2(String memberId);
+	List<Message> selectMessageList2(Map<String, Object> idPageMap);
 
 	int messageRead(String messageNo);
 
 	int messageReview(Message m);
 
 	int messageReviewUpdate(int messageNo);
+
+	int messageListCnt1(String memberId);
+
+	int messageListCnt2(String memberId);
 
 }

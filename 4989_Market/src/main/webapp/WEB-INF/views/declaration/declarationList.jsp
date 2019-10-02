@@ -27,6 +27,50 @@
 	border-bottom: 1px solid #dcd7d7;
 	height: 34px;
 }
+ul.pageUl {
+	text-align:center;
+	top: 2px;
+}
+ul li.pageLi {
+	display:inline;
+	vertical-align:middle;
+}
+ul li a.pageA {
+	display:-moz-inline-stack;
+	display:inline-block;
+	vertical-align:top;
+	padding:4px;
+	margin-left: 3px;
+	width:30px !important;
+	color:#000;
+	font:bold 14px tahoma;
+	border:1px solid #eee;
+	text-decoration:none;
+	margin-top: 17px;
+}
+ul li a.pageB{
+	display:-moz-inline-stack;
+	display:inline-block;
+	vertical-align:top;
+	padding:4px;
+	margin-left: 3px;
+	width:50px !important;
+	color:#000;
+	font:bold 14px tahoma;
+	border:1px solid #eee;
+	text-decoration:none;
+	margin-top: 17px;
+}
+ul li a.now {
+	color:#fff;
+	background-color:#1b5ac2;
+	border:1px solid #1b5ac2;
+}
+ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid #1b5ac2;
+	background-color:#1b5ac2;
+}
 </style>
 <div id="">
 	<h2 style="text-align: center;">신고목록</h2>
@@ -77,9 +121,23 @@
 				</tr>
 			</c:forEach>
 		</table>
+	<div>
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+	</div>
 	</c:if>
 </div>
-
 <script>
 $("#dec").click(function(){
 	var declarationWriter = $(this).attr("declarationWriter");
@@ -90,7 +148,39 @@ $("tr.bottom").click(function(){
 	var declarationNo = $(this).attr("declarationNo");
 	location.href='${pageContext.request.contextPath}/declaration/selectOneDeclaration?declarationNo='+declarationNo;
 });
+//이전 버튼 이벤트
 
+function fn_prev(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/declaration/declarationList";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/declaration/declarationList";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/declaration/declarationList";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
 </script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 

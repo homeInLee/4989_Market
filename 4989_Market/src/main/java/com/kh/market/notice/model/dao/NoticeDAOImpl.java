@@ -3,12 +3,11 @@ package com.kh.market.notice.model.dao;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
-import com.kh.market.notice.model.service.NoticeService;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
 
@@ -59,12 +58,8 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public List<Notice> selectNoticeAll(int cPage) {
-		int offset = (cPage -1)*NoticeService.NUM_PER_PAGE;
-		int limit = NoticeService.NUM_PER_PAGE;
-		
-		RowBounds rowBounds = new RowBounds(offset, limit);
-		return session.selectList("notice.selectNoticeAll", null, rowBounds);
+	public List<Notice> selectNoticeAll(Paging paging) {
+		return session.selectList("notice.selectNoticeAll", paging);
 	}
 
 	@Override
@@ -109,6 +104,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public int noticeDelFile(Map<Object, Object> map) {
 		return session.update("notice.noticeDelFile",map);
+	}
+
+	@Override
+	public int noticeListCnt() {
+		return session.selectOne("notice.noticeListCnt");
 	}
 	
 }

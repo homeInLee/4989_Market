@@ -22,6 +22,50 @@ background-color: #f5f5f5;
 border-bottom: 1px solid #dcd7d7;
 height: 34px;
 }
+ul.pageUl {
+	text-align:center;
+	top: 2px;
+}
+ul li.pageLi {
+	display:inline;
+	vertical-align:middle;
+}
+ul li a.pageA {
+	display:-moz-inline-stack;
+	display:inline-block;
+	vertical-align:top;
+	padding:4px;
+	margin-left: 3px;
+	width:30px !important;
+	color:#000;
+	font:bold 14px tahoma;
+	border:1px solid #eee;
+	text-decoration:none;
+	margin-top: 17px;
+}
+ul li a.pageB{
+	display:-moz-inline-stack;
+	display:inline-block;
+	vertical-align:top;
+	padding:4px;
+	margin-left: 3px;
+	width:50px !important;
+	color:#000;
+	font:bold 14px tahoma;
+	border:1px solid #eee;
+	text-decoration:none;
+	margin-top: 17px;
+}
+ul li a.now {
+	color:#fff;
+	background-color:#1b5ac2;
+	border:1px solid #1b5ac2;
+}
+ul li a:hover, ul li a:focus {
+	color:#fff;
+	border:1px solid #1b5ac2;
+	background-color:#1b5ac2;
+}
 </style>
 <script>
 
@@ -63,7 +107,7 @@ function fn_next(page, range, rangeSize) {
 <input type="button" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'"/>
 	<div id="">
 	<h2 style="text-align: center;">회원목록</h2>
-	<c:if test="${memberLoggedIn != null }">
+	<c:if test="${memberLoggedIn != null}">
 		<table id="messageList">
 			<tr>
 				<th>아이디</th>
@@ -86,17 +130,17 @@ function fn_next(page, range, rangeSize) {
 		</table>
 		<!-- pagination{s} -->
 	<div>
-		<ul>
+		<ul class="pageUl">
 			<c:if test="${paging.prev}">
-				<li><a href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">Previous</a></li>
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
 			</c:if>
 				
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
-				<li"<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
 			</c:forEach>
 				
 			<c:if test="${paging.next}">
-				<li ><a href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >Next</a></li>
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
 			</c:if>
 		</ul>
 	</div>

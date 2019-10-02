@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.notice.model.dao.NoticeDAO;
 import com.kh.market.notice.model.exception.NoticeException;
 import com.kh.market.notice.model.vo.Attachment;
@@ -88,8 +89,8 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 
 	@Override
-	public List<Notice> selectNoticeAll(int cPage) {
-		return noticeDAO.selectNoticeAll(cPage);
+	public List<Notice> selectNoticeAll(Paging paging) {
+		return noticeDAO.selectNoticeAll(paging);
 	}
 
 	@Override
@@ -134,6 +135,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int noticeDelFile(Map<Object, Object> map) {
 		return noticeDAO.noticeDelFile(map);
+	}
+
+	@Override
+	public int noticeListCnt() {
+		return noticeDAO.noticeListCnt();
 	}
 
 	

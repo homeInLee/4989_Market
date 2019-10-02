@@ -3,6 +3,7 @@ package com.kh.market.notice.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
 
@@ -24,7 +25,7 @@ public interface NoticeDAO {
 
 	int deleteNotice(int noticeNo);
 
-	List<Notice> selectNoticeAll(int cPage);
+	List<Notice> selectNoticeAll(Paging paging);
 
 	int totalContents();
 
@@ -41,5 +42,7 @@ public interface NoticeDAO {
 	List<String> selectOldFile(int noticeNo);
 
 	int noticeDelFile(Map<Object, Object> map);
+
+	int noticeListCnt();
 
 }

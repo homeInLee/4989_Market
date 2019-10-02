@@ -23,7 +23,9 @@ import com.kh.market.notice.model.exception.NoticeException;
 import com.kh.market.notice.model.service.NoticeService;
 import com.kh.market.notice.model.vo.Attachment;
 import com.kh.market.notice.model.vo.Notice;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.common.util.HelloSpringUtils;
+import com.kh.market.member.model.vo.Member;
 
 
 @Controller
@@ -36,34 +38,18 @@ public class NoticeController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/noticeList.do")
-	public ModelAndView noticeList(@RequestParam(value="cPage",
-												defaultValue="1",
-												required=false)int cPage) {
+	public ModelAndView noticeList(@RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
 		
 		ModelAndView mav = new ModelAndView();
 		
 		logger.debug("/notice/noticeList.do 연결.");
-		List<Notice> list = noticeService.selectNoticeAll(cPage);
-		
-		int totalContents = noticeService.totalContents();
-//		logger.info("totalContents="+totalContents);
-		
-		int totalPage = (int)Math.ceil((double)totalContents/NoticeService.NUM_PER_PAGE);
-//		logger.info("totalPage="+totalPage);
-		
-		String pageBar = "";
-		int pageBarSize = 5;
-		
-		int pageStart = ((cPage-1)/pageBarSize) * pageBarSize +1 ;
-		int pageEnd = pageStart+pageBarSize-1;
-		int pageNo = pageStart;
-//		logger.info("pageStart["+pageStart+"] ~ pageEnd["+pageEnd+"]");
-		
-//		logger.info("pageBar="+pageBar);
+		int listCnt = noticeService.noticeListCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticeAll(paging);
 		
 		mav.addObject("list",list);
-		mav.addObject("cPage",cPage);
-		mav.addObject("totalContents",totalContents);
+		mav.addObject("paging",paging);
 		mav.setViewName("notice/noticeList");
 		
 		return mav;

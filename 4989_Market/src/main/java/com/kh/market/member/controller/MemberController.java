@@ -227,17 +227,6 @@ public class MemberController {
 		Paging paging = new Paging();
 		paging.pageInfo(page, range, listCnt);
 		List<Member> mList = memberService.memberList(paging);
-		logger.info("mList="+mList);
-		logger.info("paging.getEndPage="+paging.getEndPage());
-		logger.info("paging.getListCnt="+paging.getListCnt());
-		logger.info("paging.getListSize="+paging.getListSize());
-		logger.info("paging.getPage="+paging.getPage());
-		logger.info("paging.getRange="+paging.getRange());
-		logger.info("paging.getRangeSize="+paging.getRangeSize());
-		logger.info("paging.getStartList="+paging.getStartList());
-		logger.info("paging.getStartPage="+paging.getStartPage());
-		logger.info("paging.getStartPage="+paging.getEndPage());
-		logger.info("paging.getPageCnt="+paging.getPageCnt());
         model.addAttribute("paging", paging);
 		model.addAttribute("mList", mList);
 		return "member/memberList";

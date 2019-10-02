@@ -50,9 +50,10 @@
 	where notice_no = #{noticeNo}
 </update>
 <select id="selectNoticeAll" resultType="notice">
-	select * from notice
-	where notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <select id="totalContents" resultType="_int">
 	select (select count(*) from notice) from dual
@@ -91,5 +92,8 @@
 	where board_name = 'N' and
 	board_no = #{noticeNo} and renamedfile_name = #{del}
 </update>
-
+<select id="noticeListCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N'	
+</select>
+	
 </mapper>
