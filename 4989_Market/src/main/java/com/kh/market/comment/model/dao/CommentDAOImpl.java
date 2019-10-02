@@ -29,5 +29,13 @@ public class CommentDAOImpl implements CommentDAO {
 		return session.update("comment.commentDelete", commentNo);
 	}
 
+	@Override
+	public int commentInsert2(Comment comment) {
+		return session.insert("comment.commentInsert2", comment);
+	}
+	
+	//messageInsert
+	//session.insert("message.messageInsert");
+
 	
 }
