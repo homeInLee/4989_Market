@@ -214,7 +214,7 @@ public class AuctionController {
 			int result = auctionService.ingPrice(ingMap);
 		
 		
-			return "auction/auction";
+			return "redirect:/auction/auctionSelectOne.do";
 		}
 	
 	
