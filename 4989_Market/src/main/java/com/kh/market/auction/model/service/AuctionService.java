@@ -27,6 +27,8 @@ public interface AuctionService {
 
 	List<Auction> memberAuctionBuyView(String memberId);
 
+	int ingPrice(Map<String, Object> ingMap);
+
 
 
 }

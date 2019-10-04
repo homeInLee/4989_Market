@@ -71,6 +71,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 		
 		return sqlSession.selectList("auction.memberAuctionBuyView",memberId);
 	}
+
+	@Override
+	public int ingPrice(Map<String, Object> ingMap) {
+		return sqlSession.update("auction.ingPrice", ingMap);
+	}
 	
 
 }
