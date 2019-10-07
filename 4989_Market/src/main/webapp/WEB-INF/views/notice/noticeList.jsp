@@ -5,7 +5,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-
 <style>
 input.btn.btn{
 width:200px;
@@ -27,6 +26,7 @@ color: #fff;
 }
 div#result.result{
 border-collapse: none;
+height: 230px;
 }
 
 div#result.result tr:nth-child(n):not(:nth-child(1)):hover {
@@ -62,9 +62,6 @@ text-align: center;
 /* div#result td:nth-child(1){ */
 /* width: 200px; */
 /* } */
-div#pageBar{margin-top:10px; text-align:center;}
-div#pageBar span.cPage{color: gray; margin-right: 5px;}
-div#pageBar a{margin-right: 5px;}
 
 
 
@@ -83,7 +80,7 @@ cursor: pointer;
 }
 
 .hide, .accordion_banner{display:none;}
-div#noticeList-container{margin:0 auto;}
+div#noticeListView-container{margin:0 auto;}
 ul.pageUl {
 	text-align:center;
 	top: 2px;
@@ -133,9 +130,9 @@ ul li a:hover, ul li a:focus {
 
 <br />
 <br />
-<h2 style="text-align: center;">공지사항</h2>
+<h2 style="text-align: center;">noticeListView</h2>
 <br />
-<div id="noticeList-container">
+<div id="noticeListView-container">
 <section id="header-bottom">
 	<div id="header-catagory">
 			<input type="button" 
@@ -156,8 +153,8 @@ ul li a:hover, ul li a:focus {
 	</div>
 	<br />
 	<div class="result" id="result">
-	<table class=table>
-		<colgroup><col width='5%'><col width='15%'><col width='45%'><col width='10%'><col width='15%'><col width='15%'></colgroup>
+		<table class=table>
+		<colgroup><col width='5%'><col width='15%'><col width='45%'><col width='10%'><col width='15%'><col width='10%'></colgroup>
 		<tr><th>번호</th><th>구분</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>
 		<c:if test="${empty list }">
 			<tr>
@@ -166,7 +163,7 @@ ul li a:hover, ul li a:focus {
 		</c:if>
 		<c:if test="${not empty list }">
 		<c:forEach items="${list }" var="n">
-			<tr noticeNo="${n.noticeNo}" class="${n.noticeType }">
+			<tr noticeNo="${n.noticeNo}">
 				<td>${n.noticeNo }</td>
 				<c:if test="${not empty n.noticeType}">
 				<c:choose>
@@ -194,37 +191,161 @@ ul li a:hover, ul li a:focus {
 			</tr>
 		</c:forEach>
 		</c:if>
-	</table>
-	</div>
-	<div>
+			<tr id="hide">
+			<td>${n.noticeContent}</td>
+			</tr>
+		</table>
+		</div>
+		<c:if test='${"e"  == type}'>
+		<div id="everyDiv">
 		<ul class="pageUl">
 			<c:if test="${paging.prev}">
-				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_e('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
 			</c:if>
 				
 			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
-				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_e('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
 			</c:forEach>
 				
 			<c:if test="${paging.next}">
-				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_e('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
 			</c:if>
 		</ul>
-	</div>
+		</div>
+		</c:if>
+		<c:if test='${"m"  == type}'>
+		<div id="memberDiv">
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_m('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_m('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_m('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		</c:if>
+		<c:if test='${"p"  == type}'>
+		<div id="paymentDiv">
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_p('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_p('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_p('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		</c:if>
+		<c:if test='${"s"  == type}'>
+		<div id="sellDiv">
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_s('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_s('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_s('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		</c:if>
+		<c:if test='${"a"  == type}'>
+		<div id="auctionDiv">
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_a('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_a('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_a('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		</c:if>
+		<c:if test='${"o"  == type}'>
+		<div id="otherDiv">
+		<ul class="pageUl">
+			<c:if test="${paging.prev}">
+				<li class="pageLi"><a class="pageB" href="#" onClick="fn_prev_o('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+			</c:if>
+				
+			<c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+				<li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination_o('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+			</c:forEach>
+				
+			<c:if test="${paging.next}">
+				<li class="pageLi" ><a class="pageB" href="#" onClick="fn_next_o('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+			</c:if>
+		</ul>
+		</div>
+		</c:if>
 <%-- 	<c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
 <%-- 	</c:if> --%>
 </section>
 </div>
-
 <script>
 $(()=>{
 	$("tr[noticeNo]").click(function(){
 		var noticeNo = $(this).attr("noticeNo")
+// 		$("#accordian ul ul").slideUp();
+// 			if (!$(this).next().is(":visible")) {
+// 				$(this).next().slideDown();
+// 			}
 		location.href = "${pageContext.request.contextPath}/notice/noticeView.do?noticeNo="+noticeNo;
+// 		$.ajax({
+// 		url: "${pageContext.request.contextPath}/notice/noticeMember",
+// 		dataType: "json",
+// 		type: "GET",
+// 		success: (data)=>{
+// 			console.log(data);
+// 			var html = "<table class=table>";
+// 			html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
+// 			html += "<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
+// 			html += "<hr/>"
+// 			if(data.length == 0){
+// 				  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
+// 		            html += '</table>'
+// 		            $("#result").html(html);
+// 		            return;
+// 			}else{
+// 				for(var i in data){
+// 				html += "<tr><td>"+data[i].noticeNo+"</td>";
+// 				html += "<td>"+data[i].noticeTitle+"</td>";
+// 				html += "<td>"+data[i].noticeWriter+"</td>";
+// 				html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
+// 				html += "<td>"+data[i].noticeReadCount+"</td>";
+// 			}
+// 			html+="</table>";
+// 			$("#result").html(html);
+// 			}
+// 		},
+// 		error: (xhr,textStatus,err)=>{
+// 			console.log("ajax 처리 실패!", xhr, textStatus, err);
+// 		}
+		
+// 		});
 	});
-	});
-
+});
 // $("#header-bottom .member").on("click",()=>{
 // 	$.ajax({
 // 		url: "${pageContext.request.contextPath}/notice/noticeMember",
@@ -326,7 +447,7 @@ $(()=>{
 			
 // 		});
 // });
-// $("#header-bottom .Auction").on("click",()=>{
+// $("#header-bottom .auction").on("click",()=>{
 // 		$.ajax({
 // 			url: "${pageContext.request.contextPath}/notice/noticeAuction",
 // 			dataType: "json",
@@ -397,22 +518,27 @@ $(()=>{
 <script>
 $("#header-bottom .member").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeMember";
+// alert("member");
 });
 $("#header-bottom .payment").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticePayment";
+// alert("payment");
 });
 $("#header-bottom .sell").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeSell";
+// alert("sell");
 });
 $("#header-bottom .auction").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeAuction";
+// alert("auction");
 });
 $("#header-bottom .other").click(()=>{
 	location.href="${pageContext.request.contextPath}/notice/noticeOther";
+// alert("other");
 });
 //이전 버튼 이벤트
 
-function fn_prev(page, range, rangeSize) {
+function fn_prev_e(page, range, rangeSize) {
 	var page = ((range - 2) * rangeSize) + 1;
 	var range = range - 1;
 	
@@ -424,7 +550,7 @@ function fn_prev(page, range, rangeSize) {
 }
 
 //페이지 번호 클릭
-function fn_pagination(page, range, rangeSize, searchType, keyword) {
+function fn_pagination_e(page, range, rangeSize, searchType, keyword) {
 	var url = "${pageContext.request.contextPath}/notice/noticeList.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
@@ -433,11 +559,176 @@ function fn_pagination(page, range, rangeSize, searchType, keyword) {
 }
 
 //다음 버튼 이벤트
-function fn_next(page, range, rangeSize) {
+function fn_next_e(page, range, rangeSize) {
 	var page = parseInt((range * rangeSize)) + 1;
 	var range = parseInt(range) + 1;
 	
 	var url = "${pageContext.request.contextPath}/notice/noticeList.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+//이전 버튼 이벤트
+
+function fn_prev_m(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeMember.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination_m(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/notice/noticeMember.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next_m(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeMember.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+//이전 버튼 이벤트
+
+function fn_prev_p(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticePayment.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination_p(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/notice/noticePayment.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next_p(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticePayment.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+//이전 버튼 이벤트
+
+function fn_prev_s(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeSell.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination_s(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/notice/noticeSell.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next_s(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeSell.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+//이전 버튼 이벤트
+
+function fn_prev_a(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeAuction.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination_a(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/notice/noticeAuction.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next_a(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeAuction.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+//이전 버튼 이벤트
+
+function fn_prev_o(page, range, rangeSize) {
+	var page = ((range - 2) * rangeSize) + 1;
+	var range = range - 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeOther.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+	
+	location.href = url;
+}
+
+//페이지 번호 클릭
+function fn_pagination_o(page, range, rangeSize, searchType, keyword) {
+	var url = "${pageContext.request.contextPath}/notice/noticeOther.do";
+	url = url + "?page=" + page;
+	url = url + "&range=" + range;
+
+	location.href = url;	
+}
+
+//다음 버튼 이벤트
+function fn_next_o(page, range, rangeSize) {
+	var page = parseInt((range * rangeSize)) + 1;
+	var range = parseInt(range) + 1;
+	
+	var url = "${pageContext.request.contextPath}/notice/noticeOther.do";
 	url = url + "?page=" + page;
 	url = url + "&range=" + range;
 	

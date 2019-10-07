@@ -84,7 +84,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> memberSellView(Map<Object, Object> map) {
+	public List<Product> memberSellView(Map<String, Object> map) {
 		
 		return productDAO.memberSellView(map);
 	}
@@ -101,9 +101,9 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> memberBuyView(String memberId) {
+	public List<Product> memberBuyView(Map<String, Object> map) {
 		
-		return productDAO.memberBuyView(memberId);
+		return productDAO.memberBuyView(map);
 	}
 	public List<Attachment> attachList() {
 		// TODO Auto-generated method stub
@@ -117,7 +117,7 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-	public List<Product> memberSellSize(String memberId) {
+	public int memberSellSize(String memberId) {
 		
 		return productDAO.memberSellSize(memberId);
 	}
@@ -132,6 +132,12 @@ public class ProductServiceImpl implements ProductService {
 	public List<Attachment> moreAttach() {
 		// TODO Auto-generated method stub
 		return productDAO.moreAttach();
+	}
+
+	@Override
+	public int memberBuySize(String memberId) {
+		// TODO Auto-generated method stub
+		return productDAO.memberBuySize(memberId);
 	}
 
 

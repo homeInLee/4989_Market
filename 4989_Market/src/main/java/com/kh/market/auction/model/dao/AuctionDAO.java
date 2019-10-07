@@ -24,12 +24,16 @@ public interface AuctionDAO {
 
 	List<Map<String, String>> mainImage();
 
-	List<Auction> memberAuctionSellView(String memberId);
+//	List<Auction> memberAuctionSellView(Map<String, Object> map);
 
 	List<Attachment> auctionAttachment(String boardName);
 
-	List<Auction> memberAuctionBuyView(String memberId);
+//	List<Auction> memberAuctionBuyView(Map<String, Object> map);
 
 	int ingPrice(Map<String, Object> ingMap);
+
+//	int auctionSellCnt(String memberId);
+//
+//	int auctionBuyCnt(String memberId);
 
 }

@@ -27,9 +27,11 @@ import com.kh.market.auction.model.vo.AuctionForList;
 import com.kh.market.basket.model.service.BasketService;
 import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.comment.model.service.CommentService;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.review.model.vo.Review;
 
 @Controller
 @RequestMapping("/auction")
@@ -179,25 +181,39 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/memberAuctionSellView.do")
-	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId) {
-		String boardName="A";
-		List<Auction> auctionList=auctionService.memberAutionSellView(memberId);
-		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
-		
-		mav.addObject("attachmentList",attachmentList);
-		mav.addObject("auctionList",auctionList);
+	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
+//		String boardName="A";
+//		int listCnt = auctionService.auctionSellCnt(memberId);
+//		Paging paging = new Paging();
+//		paging.pageInfo(page, range, listCnt);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("memberId", memberId);
+//		map.put("paging", paging);
+//		List<Auction> auctionList=auctionService.memberAutionSellView(map);
+//		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+//		
+//		mav.addObject("attachmentList",attachmentList);
+//		mav.addObject("auctionList",auctionList);
+//		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionSellView");
 		return mav;
 	}
 	
 	@RequestMapping("/memberAuctionBuyView.do")
-	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
-		String boardName="A";
-		List<Auction> auctionList=auctionService.memberAuctionBuyView(memberId);
-		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
-		
-		mav.addObject("attachmentList",attachmentList);
-		mav.addObject("auctionList",auctionList);
+	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
+//		String boardName="A";
+//		int listCnt = auctionService.auctionBuyCnt(memberId);
+//		Paging paging = new Paging();
+//		paging.pageInfo(page, range, listCnt);
+//		Map<String, Object> map = new HashMap<>();
+//		map.put("memberId", memberId);
+//		map.put("paging", paging);
+//		List<Auction> auctionList=auctionService.memberAuctionBuyView(map);
+//		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+//		
+//		mav.addObject("attachmentList",attachmentList);
+//		mav.addObject("auctionList",auctionList);
+//		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionBuyView");
 		return mav;
 	}

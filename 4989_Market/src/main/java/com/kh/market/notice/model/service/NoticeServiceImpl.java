@@ -23,28 +23,28 @@ public class NoticeServiceImpl implements NoticeService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public List<Notice> selectNoticeMember() {
-		return noticeDAO.selectNoticeMember();
+	public List<Notice> selectNoticeMember(Paging paging) {
+		return noticeDAO.selectNoticeMember(paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticePayment() {
-		return noticeDAO.selectNoticePayment();
+	public List<Notice> selectNoticePayment(Paging paging) {
+		return noticeDAO.selectNoticePayment(paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeSell() {
-		return noticeDAO.selectNoticeSell();
+	public List<Notice> selectNoticeSell(Paging paging) {
+		return noticeDAO.selectNoticeSell(paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeAuction() {
-		return noticeDAO.selectNoticeAuction();
+	public List<Notice> selectNoticeAuction(Paging paging) {
+		return noticeDAO.selectNoticeAuction(paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeOther() {
-		return noticeDAO.selectNoticeOther();
+	public List<Notice> selectNoticeOther(Paging paging) {
+		return noticeDAO.selectNoticeOther(paging);
 	}
 
 	@Override
@@ -140,6 +140,31 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int noticeListCnt() {
 		return noticeDAO.noticeListCnt();
+	}
+
+	@Override
+	public int noticeMemberCnt() {
+		return noticeDAO.noticeMemberCnt();
+	}
+
+	@Override
+	public int noticePaymentCnt() {
+		return noticeDAO.noticePaymentCnt();
+	}
+
+	@Override
+	public int noticeSellCnt() {
+		return noticeDAO.noticeSellCnt();
+	}
+
+	@Override
+	public int noticeAuctionCnt() {
+		return noticeDAO.noticeAuctionCnt();
+	}
+
+	@Override
+	public int noticeOtherCnt() {
+		return noticeDAO.noticeOtherCnt();
 	}
 
 	

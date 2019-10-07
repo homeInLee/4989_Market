@@ -9,15 +9,15 @@ import com.kh.market.notice.model.vo.Notice;
 
 public interface NoticeDAO {
 
-	List<Notice> selectNoticeMember();
+	List<Notice> selectNoticeMember(Paging paging);
 
-	List<Notice> selectNoticePayment();
+	List<Notice> selectNoticePayment(Paging paging);
 
-	List<Notice> selectNoticeSell();
+	List<Notice> selectNoticeSell(Paging paging);
 
-	List<Notice> selectNoticeAuction();
+	List<Notice> selectNoticeAuction(Paging paging);
 
-	List<Notice> selectNoticeOther();
+	List<Notice> selectNoticeOther(Paging paging);
 
 	int insertNotice(Notice notice);
 
@@ -44,5 +44,15 @@ public interface NoticeDAO {
 	int noticeDelFile(Map<Object, Object> map);
 
 	int noticeListCnt();
+
+	int noticeMemberCnt();
+
+	int noticePaymentCnt();
+
+	int noticeSellCnt();
+
+	int noticeAuctionCnt();
+
+	int noticeOtherCnt();
 
 }

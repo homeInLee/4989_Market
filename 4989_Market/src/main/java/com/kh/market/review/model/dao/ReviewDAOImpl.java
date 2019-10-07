@@ -24,18 +24,19 @@ public class ReviewDAOImpl implements ReviewDAO {
 	}
 
 	@Override
-	public List<Review> reviewContentForm(Map<Object, Object> map) {
-		int cPage=(int)map.get("cPage");
-		int offset = (cPage-1)*ReviewService.NUM_PER_PAGE;
-		int limit = ReviewService.NUM_PER_PAGE;
-		RowBounds rowBounds=new RowBounds(offset, limit);
+	public List<Review> reviewContentForm(Map<String, Object> map) {
 		
-		return sqlSession.selectList("review.reviewContentForm",map,rowBounds);
+		return sqlSession.selectList("review.reviewContentForm",map);
 	}
 
 	@Override
 	public List<Review> reviewMannerForm(String memberId) {
 		
 		return sqlSession.selectList("review.reviewMannerForm",memberId);
+	}
+
+	@Override
+	public int reivewCnt(String memberId) {
+		return sqlSession.selectOne("review.reviewCnt",memberId);
 	}
 }

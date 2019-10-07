@@ -4,34 +4,34 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="notice">
 <select id="selectNoticeMember" resultType="notice">
-	select * from notice 
-	where notice_type = 'm'
-	and notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_type = 'm' and notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <select id="selectNoticePayment" resultType="notice">
-	select * from notice 
-	where notice_type = 'p' 
-	and notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_type = 'p' and notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <select id="selectNoticeSell" resultType="notice">
-	select * from notice 
-	where notice_type = 's' 
-	and notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_type = 's' and notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <select id="selectNoticeAuction" resultType="notice">
-	select * from notice 
-	where notice_type = 'a' 
-	and notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_type = 'a' and notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <select id="selectNoticeOther" resultType="notice">
-	select * from notice 
-	where notice_type = 'o' 
-	and notice_deltype = 'N'
-	order by notice_no desc
+	select * from 
+		( select rownum rnum, A.* from
+		( select * from notice A where notice_type = 'o' and notice_deltype = 'N' order by notice_no desc) A) A 
+		where rnum between #{startList}+1 and #{startList}+#{listSize}
 </select>
 <insert id="insertNotice">
 	insert into notice(notice_no, notice_title, notice_writer, notice_content, notice_type) values(
@@ -94,6 +94,21 @@
 </update>
 <select id="noticeListCnt" resultType="int">
 	select count(*) cnt from notice where notice_deltype = 'N'	
+</select>
+<select id="noticeMemberCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N' and notice_type = 'm'
+</select>
+<select id="noticePaymentCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N' and notice_type = 'p'
+</select>
+<select id="noticeSellCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N' and notice_type = 's'
+</select>
+<select id="noticeAuctionCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N' and notice_type = 'a'
+</select>
+<select id="noticeOtherCnt" resultType="int">
+	select count(*) cnt from notice where notice_deltype = 'N' and notice_type = 'o'
 </select>
 	
 </mapper>
