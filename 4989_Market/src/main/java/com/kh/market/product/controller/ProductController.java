@@ -238,10 +238,11 @@ public class ProductController {
 		int result = productService.updateProduct(p);
 		
 		
-		model.addAttribute("msg", result>0?"수정 성공":"수정 실패");
-		model.addAttribute("loc", "/product/productView.do?productNo="+productNo);
+//		model.addAttribute("msg", result>0?"수정 성공":"수정 실패");
+//		model.addAttribute("loc", "/product/productView.do?productNo="+productNo);
 		
-		return "redirect:productView.do?productNo="+productNo;
+		return "redirect:productView.do?productNo="+productNo+"&memberId=null";
+//		return "redirect:/product/productList.do";
 		
 		
 	
@@ -482,10 +483,11 @@ public class ProductController {
 		
 		p.setStartCount(Integer.parseInt(startCount));
 		p.setEndCount(Integer.parseInt(endCount));
-		
+
 		
 		List<Product> moreProductList = productService.moreResult(p);
 		List<Attachment> attachList = productService.moreAttach();
+		logger.info("여기까지 실행");
 		
 		Map<String, Object> returnVal = new HashMap<String, Object>();
 		

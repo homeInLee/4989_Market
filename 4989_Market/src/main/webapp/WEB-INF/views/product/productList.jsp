@@ -1,3 +1,4 @@
+<%@page import="com.kh.market.member.model.vo.Member"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -83,13 +84,13 @@ h2, section {
 </jsp:include>
 
 
+
 <section id="section">
 	<div id="plist">
 		<c:forEach items="${plist }" var="product">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}&memberId=${memberLoggedIn.memberId}"
-					class="productImgBox" style="text-decoration: none;"> <c:forEach
-						items="${attachList }" var="attach">
+				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}&memberId=${memberLoggedIn.memberId}"class="productImgBox" style="text-decoration: none;"> 
+					<c:forEach items="${attachList }" var="attach">
 						<c:if
 							test="${attach.boardName eq 'S' && attach.boardNo eq product.sellNo}">
 							<img class="product-img"
@@ -164,11 +165,9 @@ function moreResult() {
 	        						for(var i=0; contentCount>i; i++ ){
 	        								
 	        							html += "<article class='top-card'>";
-	        							html += "<a href='<%=request.getContextPath()%>/product/productView.do?productNo="+values[i].sellNo+ "' style='text-decoration: none;'>";
-										console.log("게시물 번호="+values[i].sellNo);
+	        							html += "<a href='<%=request.getContextPath()%>/product/productView.do?productNo="+values[i].sellNo+"&memberId=null' style='text-decoration: none;'>";
 	        							for(var idxx = 0; attach.length>idxx; idxx++){
 
-	        								console.log("사진 for문 "+idxx+"번 실행중");
 											if(attach[idxx].boardNo == values[i].sellNo){
 	        								html += "<img class='product-img' src='<%=request.getContextPath()%>/resources/upload/product/"+attach[idxx].renamedfileName+"'/> <br/>"
 	        								
@@ -180,6 +179,7 @@ function moreResult() {
 	        							html += "<h5>"+values[i].sellTitle+"</h5>";
 	        							html += "<div class='auction-content'>"+values[i].sellAddress+"</div>";
 	        							html += "<div class='auction-price'>"+values[i].sellPrice+"원";
+	        							/* <fmt:formatNumber value="${product.sellPrice}" pattern="#,###" /> */
 	        							html += "</div>";
 	        							html += "</div>";
 	        							html += "</a> <br /> <br />";
@@ -209,16 +209,16 @@ function moreResult() {
 </script>
 
 
-<script>
+<!-- <script>
 $(()=>{
 	$("div[productNo]").click(function() {
 		var productNo = $(this).attr("productNo");
-		location.href = "${pageContext.request.contextPath}/product/productView.do?productNo="+productNo;
+		location.href = "${pageContext.request.contextPath}/product/productView.do?productNo=";
 	} )
 })
 
 
-</script>
+</script> -->
 
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

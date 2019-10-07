@@ -112,4 +112,8 @@
 	<update id="productBuyerUpdate">
 		update sell set sell_buyer=#{sellBuyer} where sell_no=#{sellNo}
 	</update>
+	<select id="moreAttach" resultType="productAttch">
+		select * from attachment where board_name = 'S' and attachment_main_image = 'Y'
+	
+	</select>
 </mapper>

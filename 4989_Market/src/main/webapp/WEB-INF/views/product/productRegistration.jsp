@@ -79,7 +79,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 		</div> 
 	</div>
 	
-		<p>미리보기</p>
+		<h3>미리보기</h3>
 		<div id="preview">
 			<ul>
 				<li><img src="${pageContext.request.contextPath }/resources/images/product/noimage.png" alt="" class="preimg images0" /></li>
@@ -107,7 +107,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 			  <div class="custom-file">
 			    <input type="file" multiple="multiple" class="custom-file-input imageUpload" 
 			    	   name="upFile" id="upFile1" >
-			    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
+			    <label class="custom-file-label" for="upFile1">파일을 선택하세요(사진은 최대 3장까지 업로드됩니다.)</label>
 			  </div>
 			</div>
 	
@@ -122,14 +122,14 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 							
 							<td>
 								<div id="userinfo">
-								<input type="text"  id="writer" disabled="disabled" value="admin" class="form-control"/>
+								<input type="text"  id="writer" disabled="disabled" value="${memberLoggedIn.memberId}" class="form-control"/>
 								<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
-								<input type="text"  id="phone" disabled="disabled" value="01015412215" class="form-control"/>
-								<input type="text"  id="email" disabled="disabled" value="" placeholder="이메일 없음" class="form-control"/>
+								<input type="text"  id="phone" disabled="disabled" value="${memberLoggedIn.memberPhone }" class="form-control"/>
+								<input type="text"  id="email" disabled="disabled" value="${memberLoggedIn.memberEmail }"  class="form-control"/>
 								<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
 								<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
-								<button type="button" onclick="editable();">변경</button>
-								</div>
+<!-- 								<button type="button" onclick="editable();">변경</button>
+ -->								</div>
 							</td>
 						
 						
@@ -254,85 +254,6 @@ function deleteImageAction(index) {
 
 
 
-
-
-
-
-
-
-
-<!-- 
-<!-- 미리보기 이미지 삽입 스크립트(@@@@@@@구버전@@@@@)
-<script type="text/javascript">
-/*     var a = 1;
-    function addNum() {
-
-		alert(a);
-        a++;
-    }    */
-	
-    
-    var imgIndex = 0
-    function readURL(input) {
-
-    	
-        if (input.files && input.files[0] && imgIndex <= 2) {
-            var reader = new FileReader();
-            reader.onload = function(e) {
-            	console.log(imgIndex);
-                $('.images'+imgIndex).attr('src', e.target.result);
-                imgIndex++;
-            }
-            reader.readAsDataURL(input.files[0]);
-        }
-        else if(imgIndex = 3){
-            	
-            	imgIndex = 0;
-                console.log(imgIndex);
-                console.log("이미지 인덱스 초기화");
-
-        }
-
-
-
-    }
-
-    $("#upFile1").change(function() {
-        readURL(this);
-    });
-</script> 
- -->
-
-<!-- 컨텐츠 영역 끝  -->
-
-<!-- 
-주소변경 스크립트 (보류)
-<script>
-
-	function editable() {
-		window.open("${pageContext.request.contextPath}/product/editAddress.do","주소 변경하기", "width=400, height=300,left=100,top=50")
-		/* $("#sell-address").removeAttr('disabled'); */
-		window.location.reload('#sell-address');
-	}
-
-
-	
-
-
-
-$(()=>{
-	//부트스트랩bug : input:file변경시 파일명보이기
-	$("[name=upFile]").on("change", function(){
-		if($(this).prop('files')[0] === undefined){
-			$(this).next(".custom-file-label").html('파일을 선택하세요');			
-		}
-		
-		var fileName = $(this).prop('files')[0].name;
-		$(this).next(".custom-file-label").html(fileName);
-	});
-	
-});
-</script> -->
 
 
 <%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include> --%>
