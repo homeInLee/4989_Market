@@ -207,7 +207,6 @@ function sellComplete(sellNo,sellBuyer){
 		<p>거래 가능 지역 : ${p.sellAddress }</p>
 		<p>${p.sellContent}</p>
 		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
-		<jsp:include page="/WEB-INF/views/comment/comment.jsp"></jsp:include>
 	</div>
 </div>
 <hr />
