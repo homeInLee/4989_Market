@@ -215,14 +215,24 @@ function getcommentList() {
                     if(data[i].commentLevel==1){
 	                    html += "<tr><td colspan='2'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } else if(data[i].commentLevel == 2){
 	                    html += "<tr><td colspan='2' style='padding-left : 30px;'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td style='padding-left : 30px;'>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } 
                     html += "</table>";
