@@ -5,11 +5,11 @@
 <mapper namespace="comment">
 	<insert id="commentInsert">
 		insert into market_comment (COMMENT_NO, COMMENT_WRITER, COMMENT_CONTENT, CO_BOARD_NO, co_board_name)
-		values(seq_comment_no.nextval, #{commentWriter}, #{commentContent}, #{coBoardNo}, a)
+		values(seq_comment_no.nextval, #{commentWriter}, #{commentContent}, #{coBoardNo}, 'a')
 	</insert>
  	<insert id="commentInsert2">
 		insert into market_comment (COMMENT_NO, COMMENT_LEVEL, COMMENT_WRITER, COMMENT_CONTENT, COMMENT_REF,CO_BOARD_NO, co_board_name)
-		values(seq_comment_no.nextval,2, #{commentWriter}, #{commentContent}, #{commentREF},#{coBoardNo}, a)
+		values(seq_comment_no.nextval,2, #{commentWriter}, #{commentContent}, #{commentREF},#{coBoardNo}, 'a')
 	</insert>
 	<select id="selectCommentList" resultType="comment">
 	select lpad(' ',(level-1)*5,' ')||comment_content as text, A.* 
@@ -23,5 +23,31 @@
   		update market_comment set
 		COMMENT_DELTYPE = 'Y', COMMENT_DATE = DEFAULT
 		where comment_no = #{commentNo}
+  </update>
+  
+  <!-- PRODUCT -->
+  <insert id="commentProductInsert">
+		insert into market_comment (COMMENT_NO, COMMENT_WRITER, COMMENT_CONTENT, CO_BOARD_NO, co_board_name)
+		values(seq_comment_no.nextval, #{commentWriter}, #{commentContent}, #{coBoardNo}, 's')
+	</insert>
+	
+	<insert id="commentProductInsert2">
+		insert into market_comment (COMMENT_NO, COMMENT_LEVEL, COMMENT_WRITER, COMMENT_CONTENT, COMMENT_REF,CO_BOARD_NO, co_board_name)
+		values(seq_comment_no.nextval,2, #{commentWriter}, #{commentContent}, #{commentREF},#{coBoardNo}, 's')
+	</insert>
+	
+	<select id="commentProductList" resultType="comment">
+	select lpad(' ',(level-1)*5,' ')||comment_content as text, A.* 
+	from market_comment A 
+	where co_board_no = #{auctionNo} and COMMENT_DELTYPE ='N'
+		start with comment_level = 1
+		connect by prior comment_no = comment_ref
+	order siblings by comment_no asc
+	</select>
+	
+	<update id="commentProductDelete">
+  		update market_comment set
+		COMMENT_DELTYPE = 'Y', COMMENT_DATE = DEFAULT
+		where comment_no = #{commentNo} 
   </update>
 </mapper>

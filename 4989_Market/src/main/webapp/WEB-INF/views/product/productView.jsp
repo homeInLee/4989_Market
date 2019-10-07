@@ -239,7 +239,6 @@ function sellComplete(sellNo,sellBuyer){
 <button onclick="updateProduct();">수정하기</button>
 <button onclick="deleteProduct();">삭제</button>
 
-<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
 <!-- 판매완료하기 기능 -->
 <c:if test="${not empty p.sellBuyer and memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">

@@ -81,13 +81,59 @@ public class CommentController {
 		  else {
 			  resultMap.put("msg","실패"); 
 		  }
-		 
-		 
 		
-		//model.addAttribute("msg", result>0?"성곡적으로 삭제되었습니다.":"삭제가 실패하였습니다.");
-		//model.addAttribute("loc", "/comment/commentDelete?commentNo="+commentNo);
-		//model.addAttribute("loc", "/");
 		return resultMap;
 	}
+	
+	//productComment
+	@ResponseBody
+	@RequestMapping("/commentProductInsert")
+	public Map<String, String> commentProductInsert( Comment comment){
+		logger.info("comment={}", comment);
+		int result = commentService.commentProductInsert(comment);
+		
+		Map<String, String> map = new HashMap<>();
+		map.put("msg", result>0?"성공!":"실패");
+		
+		return map;
+	}
+	
+	@ResponseBody
+	@RequestMapping("/commentProductInsert2")
+	public Map<String, String> commentProductInsert2(Comment comment){
+		logger.info("comment2={}", comment);
+		int result = commentService.commentProductInsert2(comment);
+		Map<String, String> map = new HashMap<>();
+		map.put("mag", result>0?"성공":"실패");
+		return map;
+	}
+	
+	@RequestMapping("/commentProductList")
+	@ResponseBody
+	public List<Comment> commentProductList(@RequestParam("sellNo") int sellNo) {
+		List<Comment> comment = commentService.commentProductList(sellNo);
+		
+		return comment;
+	}
+	
+	@RequestMapping("/commentProductDelete")
+	@ResponseBody
+	public Map<String, String> commentProductDelete(@RequestParam(value="commentNo") int commentNo){
+		int result = commentService.commentProductDelete(commentNo);
+		logger.info("commentNO={}", commentNo);
+		
+		
+		  Map<String, String> resultMap = new HashMap<String, String>();  
+		
+		  if(result>0) {
+			  resultMap.put("msg", "성공"); 
+		  }
+		  else {
+			  resultMap.put("msg","실패"); 
+		  }
+		
+		return resultMap;
+	}
+	
 	
 }
