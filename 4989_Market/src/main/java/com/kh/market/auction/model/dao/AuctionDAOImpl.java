@@ -54,11 +54,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 		return sqlSession.selectList("auction.mainImage");
 	}
 
-	@Override
-	public List<Auction> memberAuctionSellView(String memberId) {
-		
-		return sqlSession.selectList("auction.memberAuctionSellView",memberId);
-	}
+//	@Override
+//	public List<Auction> memberAuctionSellView(Map<String, Object> map) {
+//		
+//		return sqlSession.selectList("auction.memberAuctionSellView",map);
+//	}
 
 	@Override
 	public List<Attachment> auctionAttachment(String boardName) {
@@ -66,11 +66,11 @@ public class AuctionDAOImpl implements AuctionDAO {
 		return sqlSession.selectList("auction.auctionAttachment",boardName);
 	}
 
-	@Override
-	public List<Auction> memberAuctionBuyView(String memberId) {
-		
-		return sqlSession.selectList("auction.memberAuctionBuyView",memberId);
-	}
+//	@Override
+//	public List<Auction> memberAuctionBuyView(Map<String, Object> map) {
+//		
+//		return sqlSession.selectList("auction.memberAuctionBuyView",map);
+//	}
 
 	@Override
 	public int ingPrice(Map<String, Object> ingMap) {
@@ -87,6 +87,18 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public int directPrice(Map<String, Object> directMap) {
 		return sqlSession.update("auction.directPrice", directMap);
 	}
+
+//	@Override
+//	public int auctionSellCnt(String memberId) {
+//		return sqlSession.selectOne("auction.auctionSellCnt", memberId);
+//		return 1;
+//	}
+
+//	@Override
+//	public int auctionBuyCnt(String memberId) {
+//		return sqlSession.selectOne("auction.auctionBuyCnt", memberId);
+//		return 1;
+//	}
 	
 
 }

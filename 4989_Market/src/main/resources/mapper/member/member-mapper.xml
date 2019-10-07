@@ -9,7 +9,7 @@
 	</select>
 	<insert id="insertMember">
 		insert into member values
-		(#{memberId},#{memberName},#{memberPassword},#{memberPhone},#{memberEmail},#{memberAddress},default,default,default,seq_member_no.nextval)
+		(#{memberId},#{memberName},#{memberPassword},#{memberPhone},#{memberEmail},#{memberAddress},default,default,default,seq_member_no.nextval,default)
 	</insert>
 	<update id="memberUpdate">
 		update member
