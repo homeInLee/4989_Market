@@ -188,18 +188,19 @@ public class ProductController {
 
 	
 	@GetMapping("/productView.do")
-	public String productSelectOne(@RequestParam String productNo, Model model , @RequestParam("memberId") String memberId) {
+	public String productSelectOne(@RequestParam String productNo, @RequestParam String memberId,Model model) {
 		logger.info(productNo);
 		String boardName="S";
 		//장바구니 여부 검사 코드
 		Basket b=new Basket(Integer.parseInt(productNo), memberId,boardName);
 		Basket basket=basketService.basketCheck(b);
-		//
+
 		
 		Product p = productService.productSelectOne(productNo);
 		
 		List<Attachment> attach = productService.attachSelectOne(productNo);
 
+		logger.info("{}님이 장바구니에 추가",memberId);
 //		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(0).getOriginalfileName());
 //		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(1).getOriginalfileName());
 //		logger.info("게시글 하나에 가져온 첨부파일{}",attach.get(2).getOriginalfileName());

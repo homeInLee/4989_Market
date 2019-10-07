@@ -82,21 +82,12 @@ h2, section {
 	<jsp:param value="상품목록" name="pageTitle" />
 </jsp:include>
 
-<%-- <section>
-	<c:forEach items="${plist }" var="product">
-		<article class="top-card">
-			<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}&memberId=${memberLoggedIn.memberId}"
-			    class="productImgBox"> 
-			   <c:forEach items="${attachList }" var="attach">
-					<c:if test="${attach.boardName eq 'S' && attach.boardNo eq product.sellNo}">
-						<img id="product-img"
-							src="${pageContext.request.contextPath}/resources/upload/product/${attach.renamedfileName}"
-							alt="" /> --%>
+
 <section id="section">
 	<div id="plist">
 		<c:forEach items="${plist }" var="product">
 			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}"
+				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${product.sellNo}&memberId=${memberLoggedIn.memberId}"
 					class="productImgBox" style="text-decoration: none;"> <c:forEach
 						items="${attachList }" var="attach">
 						<c:if
