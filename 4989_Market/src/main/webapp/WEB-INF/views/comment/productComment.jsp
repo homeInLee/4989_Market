@@ -9,6 +9,7 @@
 	border: 1px solid #fff;
 }
 </style>
+${p.sellNo}
 <div id="container">
 	<form action="" id="commentFrm_pro" method="post">
 	<br />

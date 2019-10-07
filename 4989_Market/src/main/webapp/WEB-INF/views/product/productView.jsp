@@ -173,19 +173,19 @@ function sellComplete(sellNo,sellBuyer){
 	</div>
 <!-- image slider section end -->
 <br />
-<button type="button" id="purchase">&nbsp;&nbsp;구매하기&nbsp;&nbsp;</button>
 <!-- 장바구니 기능 코드 -->	
 <hr />
+<br />
 <c:if test="${empty basket}">
 	<div ><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
 </c:if>
 	
 <c:if test="${not empty basket}">
 	<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-</c:if>
-<!--  -->
+</c:if> 
+<br />	
 
-<button type="button" id="purchase" onclick="buyThisProduct();">&nbsp;&nbsp;구매하기&nbsp;&nbsp;</button>
+<button type="button" id="purchase" onclick="buyThisProduct();">&nbsp;&nbsp;연락하기&nbsp;&nbsp;</button>
 <button type="button" id="goToList" onclick="goToList();">&nbsp;목록으로 돌아가기&nbsp;</button>
 <br />
 <br />
@@ -207,6 +207,7 @@ function sellComplete(sellNo,sellBuyer){
 		<p>거래 가능 지역 : ${p.sellAddress }</p>
 		<p>${p.sellContent}</p>
 		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+
 		<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 	</div>
 </div>
@@ -285,7 +286,7 @@ function goToList() {
 
 
 <!-- 이미지 슬라이더 기본이미지에서 실제 이미지로 변경하는 스크립트 -->
-<%-- <script>
+<script>
 var index = 0;
 
 $(()=>{
@@ -296,7 +297,7 @@ $(()=>{
 
 
 
-</script> --%>
+</script> 
 
 
 
