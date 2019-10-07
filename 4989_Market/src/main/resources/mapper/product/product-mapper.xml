@@ -109,4 +109,7 @@
         where rnum between #{startCount} and #{endCount}
     </select>
 	
+	<update id="productBuyerUpdate">
+		update sell set sell_buyer=#{sellBuyer} where sell_no=#{sellNo}
+	</update>
 </mapper>

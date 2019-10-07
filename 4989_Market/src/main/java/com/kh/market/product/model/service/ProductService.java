@@ -42,4 +42,6 @@ public interface ProductService {
 
 	List<Attachment> moreAttach();
 
+	int productBuyerUpdate(Map<Object, Object> map);
+
 }

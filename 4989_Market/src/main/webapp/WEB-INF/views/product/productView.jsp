@@ -122,14 +122,7 @@ function basketCheck(check,sellNo,memberId){
 		$("#image").attr("onclick","basketCheck(0,"+sellNo+",'"+memberId+"')");
 	}
 }
-//판매완료하기 기능
-function sellComplete(sellNo,sellBuyer){
-	if(confirm("정말 완료 하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/product/sellComplete.do?sellNo="+sellNo+"&sellWriter=${memberLoggedIn.memberId}&sellBuyer="+sellBuyer;
-	}else{
-		return;
-	}
-}
+
 </script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="" />
@@ -241,11 +234,6 @@ function sellComplete(sellNo,sellBuyer){
 
 <jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
-<!-- 판매완료하기 기능 -->
-<c:if test="${not empty p.sellBuyer and memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
-	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
-</c:if>
-<!--  -->
 <%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
 	<button onclick="updateProduct();">수정하기</button>
 	<button onclick="deleteProduct();">삭제</button>

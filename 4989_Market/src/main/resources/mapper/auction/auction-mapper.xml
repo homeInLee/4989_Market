@@ -68,4 +68,7 @@
 		update auction set auction_ing_price = #{auctionIngPrice}, auction_buyer = #{auctionBuyer} where auction_no = #{auctionNo}
 	</update>
 	
+	<update id="auctionComplete">
+		update auction set auction_type='C' where auction_no = #{auctionNo}
+	</update>
 </mapper>

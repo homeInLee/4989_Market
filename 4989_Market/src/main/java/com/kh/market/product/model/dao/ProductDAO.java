@@ -40,6 +40,8 @@ public interface ProductDAO {
 	List<Product> moreResult(Page p);
 
 	List<Attachment> moreAttach();
+
+	int productBuyerUpdate(Map<Object, Object> map);
 	
 
 }

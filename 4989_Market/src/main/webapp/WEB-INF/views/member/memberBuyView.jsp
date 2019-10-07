@@ -56,36 +56,38 @@ h2, section{
 	</c:if>
 	<section>
 		<c:forEach items="${list}" var="l">
-			<article class="top-card">
-				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
-					  	<c:forEach items="${attachmentList }" var="a">
-					  		<c:if test="${l.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:220px; height: 200px;">
-					  		</c:if>
-					  	</c:forEach>
-					<div>
-					  	<br />
-					  	<h5>${l.sellTitle }</h5>
-						<div class="auction-content">
-							${l.sellAddress }
-						</div>
-						<div class="auction-price">
-							<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원
-						</div>
-						<c:if test="${'sale' eq fn:trim(l.sellState)}">
-							<div>
-								구매중
+			<c:if test="${l.sellDelType=='N'}">
+				<article class="top-card">
+					<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+						  	<c:forEach items="${attachmentList }" var="a">
+						  		<c:if test="${l.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
+						  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:220px; height: 200px;">
+						  		</c:if>
+						  	</c:forEach>
+						<div>
+						  	<br />
+						  	<h5>${l.sellTitle }</h5>
+							<div class="auction-content">
+								${l.sellAddress }
 							</div>
-						</c:if>
-						<c:if test="${'soldout' eq fn:trim(l.sellState)}">
-							<div>
-								구매완료
+							<div class="auction-price">
+								<fmt:formatNumber value="${l.sellPrice }" pattern="#,###" />원
 							</div>
-						</c:if>
-					</div>
-				</a>
-				<br /><br />
-			</article>
+							<c:if test="${'sale' eq fn:trim(l.sellState)}">
+								<div>
+									구매중
+								</div>
+							</c:if>
+							<c:if test="${'soldout' eq fn:trim(l.sellState)}">
+								<div>
+									구매완료
+								</div>
+							</c:if>
+						</div>
+					</a>
+					<br /><br />
+				</article>
+			</c:if>
 		</c:forEach>
 	</section>
 

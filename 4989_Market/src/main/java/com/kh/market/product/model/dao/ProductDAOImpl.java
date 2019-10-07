@@ -118,6 +118,12 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.moreAttach");
 	}
 
+	@Override
+	public int productBuyerUpdate(Map<Object, Object> map) {
+		
+		return sqlSession.update("product.productBuyerUpdate",map);
+	}
+
 	
 	
 }

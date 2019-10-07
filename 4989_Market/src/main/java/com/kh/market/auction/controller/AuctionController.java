@@ -30,6 +30,9 @@ import com.kh.market.comment.model.service.CommentService;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
+import com.kh.market.product.model.vo.Product;
 
 @Controller
 @RequestMapping("/auction")
@@ -47,6 +50,9 @@ public class AuctionController {
 	
 	@Autowired
 	BasketService basketService;
+	
+	@Autowired
+	MessageService messageService;
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -217,6 +223,27 @@ public class AuctionController {
 			return "redirect:/auction/auctionSelectOne.do";
 		}
 	
+	@RequestMapping("/auctionComplete.do")
+	public ModelAndView sellComplete(ModelAndView mav,@RequestParam("auctionNo") int auctionNo,@RequestParam("auctionWriter") String auctionWriter,@RequestParam("auctionBuyer") String auctionBuyer) {
+		
+		int result1=auctionService.auctionComplete(auctionNo);
+		List<AuctionForList> a=auctionService.auctionSelectOne(auctionNo);
+		Message m=new Message(0, auctionWriter+"님과의 거래가 완료되었습니다", auctionWriter, auctionBuyer, "구매물품 제목:"+a.get(0).getAuctionTitle()+",가격:"+a.get(0).getAuctionPrice(), null,"Y" ,null, null, null);
+		int result2=messageService.messageReview(m);
+	
+		String msg="";
+		String loc="/auction/memberAuctionSellView.do?memberId="+auctionWriter;
+		if(result1>0&&result2>0) {
+			msg="판매완료확정 성공";
+			
+		}else {
+			msg="판매완료확정 실패";
+		}
+		mav.addObject("msg",msg);
+		mav.addObject("loc",loc);
+		mav.setViewName("common/msg");
+		return mav;
+	}
 	
 	
 	

@@ -98,5 +98,11 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.ingPrice(ingMap);
 	}
 
+	@Override
+	public int auctionComplete(int auctionNo) {
+		
+		return auctionDAO.auctionComplete(auctionNo);
+	}
+
 
 }

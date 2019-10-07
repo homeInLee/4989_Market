@@ -52,7 +52,16 @@ div#pageBar a {
 	margin-right: 5px;
 }
 </style>
-
+<script>
+//판매완료하기 기능
+function auctionComplete(auctionNo,auctionBuyer){
+	if(confirm("판매완료하시겠습니까?")){
+		location.href="${pageContext.request.contextPath}/auction/auctionComplete.do?auctionNo="+auctionNo+"&auctionWriter=${memberLoggedIn.memberId}&auctionBuyer="+auctionBuyer;
+	}else{
+		return;
+	}
+}
+</script>
 <div class="submenu">
   	<a id="review-btn" href="${pageContext.request.contextPath }/auction/memberAuctionBuyView.do?memberId=${memberLoggedIn.memberId}">구매경매물품</a>	
 	<a id="review-btn" href="${pageContext.request.contextPath }/auction/memberAuctionSellView.do?memberId=${memberLoggedIn.memberId}">판매경매물품</a>
@@ -89,8 +98,16 @@ div#pageBar a {
 						</div>
 					</div>
 				</a>
+				<!-- 판매완료하기 기능 -->
+				<c:if test="${'Y' eq fn:trim(l.auctionDeltype) and l.auctionBuyer!=null and 'H' eq fn:trim(l.auctionType)}">
+					<button class="badge badge-light" onclick="auctionComplete(${l.auctionNo},'${l.auctionBuyer}')">판매완료하기</button>
+				</c:if>
+				<c:if test="${'Y' eq fn:trim(l.auctionDeltype) and l.auctionBuyer!=null and 'C' eq fn:trim(l.auctionType)}">
+					판매완료
+				</c:if>
 				<br /><br />
 			</article>
+			
 		</c:forEach>
 	</section>
 

@@ -52,6 +52,17 @@ div#pageBar a {
 	margin-right: 5px;
 }
 </style>
+<script>
+//판매완료하기 기능
+function sellComplete(sellNo){
+	var sellBuyer="";
+	if(sellBuyer=prompt("상품구매자 아이디를 입력해주세요")){
+		location.href="${pageContext.request.contextPath}/product/sellComplete.do?sellNo="+sellNo+"&sellWriter=${memberLoggedIn.memberId}&sellBuyer="+sellBuyer;
+	}else{
+		return;
+	}
+}
+</script>
 <div class="submenu">
 	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberbuyView.do?memberId=${memberLoggedIn.memberId}">나의구매물품</a>
   	<a id="review-btn" href="${pageContext.request.contextPath }/product/memberSellView.do?memberId=${memberLoggedIn.memberId}">나의판매물품</a>
@@ -67,7 +78,8 @@ div#pageBar a {
 	</c:if>
 	<section>
 		<c:forEach items="${list}" var="l">
-			<article class="top-card">
+			<c:if test="${l.sellDelType=='N'}">
+				<article class="top-card">
 				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${l.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					  	<c:forEach items="${attachmentList }" var="a">
 					  		<c:if test="${l.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
@@ -95,8 +107,14 @@ div#pageBar a {
 						</c:if>
 					</div>
 				</a>
+				<!-- 판매완료하기 기능 -->
+				<c:if test="${'sale' eq fn:trim(l.sellState)}">
+					<button class="badge badge-light" onclick="sellComplete(${l.sellNo})">판매완료하기</button>
+				</c:if>
 				<br /><br />
 			</article>
+			</c:if>
+			
 		</c:forEach>
 	</section>
 <div id='pageBar'>

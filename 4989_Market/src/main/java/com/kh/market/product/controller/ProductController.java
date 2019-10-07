@@ -381,9 +381,15 @@ public class ProductController {
 		Message m=new Message(0, sellWriter+"님과의 거래가 완료되었습니다", sellWriter, sellBuyer, "구매물품 제목:"+p.getSellTitle()+",가격:"+p.getSellPrice(), null,"Y" ,null, null, null);
 		int result2=messageService.messageReview(m);
 		
+		Map<Object, Object> map=new HashMap<Object, Object>();
+		
+		map.put("sellNo", sellNo);
+		map.put("sellBuyer", sellBuyer);
+		int result3=productService.productBuyerUpdate(map);
+		
 		String msg="";
 		String loc="";
-		if(result1>0&&result2>0) {
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			loc="/product/memberSellView.do?memberId="+sellWriter;
 		}else {

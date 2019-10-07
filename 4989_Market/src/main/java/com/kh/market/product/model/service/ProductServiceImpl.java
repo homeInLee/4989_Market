@@ -134,5 +134,10 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.moreAttach();
 	}
 
+	@Override
+	public int productBuyerUpdate(Map<Object, Object> map) {
+		
+		return productDAO.productBuyerUpdate(map);
+	}
 
 }

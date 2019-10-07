@@ -32,4 +32,6 @@ public interface AuctionDAO {
 
 	int ingPrice(Map<String, Object> ingMap);
 
+	int auctionComplete(int auctionNo);
+
 }
