@@ -21,7 +21,7 @@ a:hover{color:#1bc1a3;}
 body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 
 
-#purchase {
+#call {
 	border: 1px solid #da1519;
 	height: 56px;
 	background-color: #e81e22;
@@ -184,8 +184,10 @@ function sellComplete(sellNo,sellBuyer){
 	<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
 </c:if> 
 <br />	
+<c:if test="${memberLoggedIn.memberId ne p.sellWriter }">
+<button type="button" id="call" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${memberLoggedIn.memberId}&messageReciver=${p.sellWriter }'">&nbsp;&nbsp;연락하기&nbsp;&nbsp;</button>
 
-<button type="button" id="purchase" onclick="buyThisProduct();">&nbsp;&nbsp;연락하기&nbsp;&nbsp;</button>
+</c:if>
 <button type="button" id="goToList" onclick="goToList();">&nbsp;목록으로 돌아가기&nbsp;</button>
 <br />
 <br />
@@ -204,45 +206,31 @@ function sellComplete(sellNo,sellBuyer){
 <div id="productInfo">
 	<div>
 		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
-		<p>거래 가능 지역 : ${p.sellAddress }</p>
-		<p>${p.sellContent}</p>
-		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+		<hr />
+		<br />		
+		<br />
 
+		<p>거래 가능 지역 : ${p.sellAddress }</p>
+		<br />
+		<hr />
+		<p>${p.sellContent}</p>
+		<hr />
+		<br />
+		<br />
+		<span style="color:#ff8a3d; font-size:32px;"><fmt:formatNumber value="${p.sellPrice }" pattern="#,###"/>원</span>
+		<hr />
+		<br />
+<%-- 		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+ --%>
 		<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 	</div>
 </div>
 <hr />
 
 
-<div>
-	<h3 style="padding: 32px 0">중고물품</h3>
-	<div>
-	<span>가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/>원</span></span> &nbsp;&nbsp;
-	</div>
-	<br />			
-</div>
-
-
-
-<p>
-	구매자:
-	<c:choose>
-		<c:when test="${not empty p.sellBuyer}"><p>${p.sellBuyer}</p></c:when>
-		<c:when test="${empty p.sellBuyer}"><p>없음</p></c:when>
-	</c:choose>
-<p>
-
-
-
-<h4>등록일: ${p.sellDate}</h4>
-<h4>조회수: ${p.sellReadCount}</h4>
-<button onclick="updateProduct();">수정하기</button>
-<button onclick="deleteProduct();">삭제</button>
-
-<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
 <!-- 판매완료하기 기능 -->
-<c:if test="${not empty p.sellBuyer and memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
+<c:if test="${memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
 	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
 </c:if>
 <!--  -->
@@ -268,13 +256,7 @@ function deleteProduct() {
 
 }
 
-function buyThisProduct() {
-	var customer =
-	
-	
-	
-	alert(customer+"구매요청");
-}
+
 
 function goToList() {
 	location.href = "${pageContext.request.contextPath}/product/productList.do"

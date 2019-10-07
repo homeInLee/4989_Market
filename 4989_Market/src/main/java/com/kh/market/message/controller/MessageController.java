@@ -74,6 +74,8 @@ public class MessageController {
 		 mav.addObject("messageWriter", messageWriter);
 		 mav.addObject("messageReciver", messageReciver);
 		 mav.setViewName("message/messageInsert");
+//		 , @RequestParam("sellWriter") String sellWriter
+//		 mav.addObject("sellWriter", sellWriter);
 		 return mav; 
 	 }
 
