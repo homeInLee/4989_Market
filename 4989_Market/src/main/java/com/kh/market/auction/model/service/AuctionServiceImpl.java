@@ -98,5 +98,10 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.ingPrice(ingMap);
 	}
 
+	@Override
+	public int directPrice(Map<String, Object> directMap) {
+		return auctionDAO.directPrice(directMap);
+	}
+
 
 }

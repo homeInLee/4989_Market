@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -73,7 +74,7 @@ public class AuctionController {
 		
 		String boardName="A";
 		//장바구니 여부 검사 코드
-		Basket b=new Basket(auctionNo, memberId,boardName);
+		Basket b=new Basket(auctionNo, memberId, boardName);
 		Basket basket=basketService.basketCheck(b);
 		//
 		
@@ -203,19 +204,38 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/ingPrice.do")
-		public String ingPrice(@RequestParam("auctionNo") int auctionNo, @RequestParam("auctionIngPrice") int auctionIngPrice, @RequestParam("auctionBuyer") String auctionBuyer) {
+		public String ingPrice(@RequestParam("auctionNo") int auctionNo, 
+								@RequestParam("auctionIngPrice") int auctionIngPrice, 
+								@RequestParam("auctionBuyer") String auctionBuyer,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
 			Map<String, Object> ingMap = new HashMap<>();
 			ingMap.put("auctionNo", auctionNo);
 			ingMap.put("auctionIngPrice", auctionIngPrice);
 			ingMap.put("auctionBuyer", auctionBuyer);
 			
-			logger.info("ingPrice.do");
-			
 			int result = auctionService.ingPrice(ingMap);
 		
 		
-			return "redirect:/auction/auctionSelectOne.do";
+			return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 		}
+	
+	@RequestMapping("/directPrice.do")
+		public String directPrice(@RequestParam("auctionNo") int auctionNo, 
+								@RequestParam("auctionDirectPrice") int auctionDirectPrice, 
+								@RequestParam("auctionBuyer") String auctionBuyer,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+		
+			Map<String, Object> directMap = new HashMap<>();
+			directMap.put("auctionNo", auctionNo);
+			directMap.put("auctionDirectPrice", auctionDirectPrice);
+			directMap.put("auctionBuyer", auctionBuyer);
+			
+			int result = auctionService.directPrice(directMap);
+		
+		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
+	}
+		
+	
 	
 	
 	

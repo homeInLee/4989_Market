@@ -29,6 +29,8 @@ public interface AuctionService {
 
 	int ingPrice(Map<String, Object> ingMap);
 
+	int directPrice(Map<String, Object> directMap);
+
 
 
 }
