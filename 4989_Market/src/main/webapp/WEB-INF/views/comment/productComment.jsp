@@ -5,11 +5,61 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
 <style>
-#container{
-	border: 1px solid #fff;
+tbody, tr{
+display: block;
+}
+#commentFrm_pro{
+	border: 1px solid #9999;
+	margin: 0px;
+	padding: 5px;
+}
+strong{
+padding: 0 0 10px;
+}
+#sbtn, #rbtn{
+text-align: right;
+}
+#btn-send, #btn-resend{
+padding: 8px 9px 8px;
+border: 2px solid #1b5ac2;
+border-radius: 4px;
+background: #fff;
+margin: 5px;
+}
+#re-send, #re-delete{
+ padding: 0 3px 3px;
+border: 2px solid #1b5ac2;
+border-radius: 4px;
+background: #fff;
+margin: 5px;
+ }
+#re-send{
+ margin-left: 50px;
+ }
+textarea{
+border:1px solid #F2F2F2;
+padding: 8px 11.2px;
+display: block;
+resize: none;
+}
+textarea::placeholder{
+color: #1b5ac2;
+font-weight: bold;
+}
+#reply{
+margin-left : 35px;
+display: block;
+padding: 10px;
+}
+#commentList{
+padding: 15px;
+}
+.commentList_table{
+border-bottom:1px solid #F2F2F2;
+padding: 5px;
 }
 </style>
-${p.sellNo}
+<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
 	<form action="" id="commentFrm_pro" method="post">
 	<br />
@@ -21,11 +71,13 @@ ${p.sellNo}
 				<tr>
 					<td>
 						<input type="hidden" name="commentWriter" value="${memberLoggedIn.memberId}">
-						<textarea style="width: 800px" rows="3" cols="30" name="commentContent" id="comment" placeholder="댓글을 입력하세요"></textarea>
+						<textarea style="width: 650px" rows="3" cols="30" name="commentContent" id="comment" placeholder="댓글을 입력하세요"></textarea>
 						<input type="hidden" id="productNo" name="productNo" value="${p.sellNo}">
 						<br />
 						<c:if test="${memberLoggedIn != null }">
-						<input type="button" id="btn-send" value="등록">
+						<div id="sbtn">
+							<input type="button" id="btn-send" value="등록">
+						</div>
 						</c:if>
 					</td>
 				</tr>
@@ -49,27 +101,28 @@ function replyComment(btn) {
 	"<input type='hidden' name='commentWriter' value='${memberLoggedIn.memberId}'>"+
 	"<input type='hidden' name='commentREF' value='"+param.commentNo+"'>"+
 	"<input type='hidden' name='coBoardNo' name='productNo' value='${p.sellNo }'/>"+
-	"<textarea rows='3' cols='30' name='commentContent_' placeholder='답글을 입력하세요'></textarea>"+
-	"<input type='button' id='btn-resend' value='등록'></td></tr></table>";
+	"<textarea  rows='3' cols='30' name='commentContent_' placeholder='답글을 입력하세요'></textarea>"+
+	"<div id='rbtn'><input type='button' id='btn-resend' value='등록'></div></td></tr></table>";
 	$("#reply").html(reply);
 }
  $(()=>{
 	//댓글 등록
-	$("#commentFrm #btn-send").on("click", ()=>{
+	$("#commentFrm_pro #btn-send").on("click", ()=>{
+		console.log("!!");
 		var comment = {};
-		comment.commentWriter = $("#commentFrm [name=commentWriter]").val();
-		comment.commentContent = $("#commentFrm [name=commentContent]").val();
+		comment.commentWriter = $("#commentFrm_pro [name=commentWriter]").val();
+		comment.commentContent = $("#commentFrm_pro [name=commentContent]").val();
 		comment.coBoardNo = '${p.sellNo}';
 		console.log(comment);		
 		$.ajax({
-			url: "${pageContext.request.contextPath}/comment/commentInsert",
+			url: "${pageContext.request.contextPath}/comment/commentProductInsert",
 			data: comment,
 			dataType: "json",
 			type: "POST",
 			success: (data)=>{
 				console.log(data);
 				getcommentList();
-				$("#commentFrm [name=commentContent]").val("");
+				$("#commentFrm_pro [name=commentContent]").val("");
 			},
 			error: (xhr, txtStatus, err)=>{
 				console.log("ajax처리실패!", xhr, txtStatus, err);
@@ -86,7 +139,7 @@ function replyComment(btn) {
 		comment.coBoardNo = '${p.sellNo}';
 		console.log(comment);		
 		$.ajax({
-			url: "${pageContext.request.contextPath}/comment/commentInsert2",
+			url: "${pageContext.request.contextPath}/comment/commentProductInsert2",
 			data: comment,
 			dataType: "json",
 			type: "POST",
@@ -119,14 +172,13 @@ function deleteComment(btn){
 	console.log(param);
 	
 	$.ajax({
-		url: "${pageContext.request.contextPath}/comment/commentDelete",
+		url: "${pageContext.request.contextPath}/comment/commentProductDelete",
 		dataType: "json",
 		type: "POST",
 		data: param,
 		success: function(data){
-                
                 alert(data.msg);
-
+                location.reload(); 
 		},
 		error: function(jqxhr, textStatus, errorThrown){
             console.log("ajax 처리 실패 : ",jqxhr,textStatus,errorThrown);
@@ -141,12 +193,12 @@ $(function() {
 });
 function getcommentList() {
 	var param = {
-			auctionNo : '${auctionSelectOne.get(0).auctionNo}'
+			sellNo : '${p.sellNo}'
 	}
 	
 	$.ajax({
 		type:'GET',
-		url: "${pageContext.request.contextPath}/comment/commentList",
+		url: "${pageContext.request.contextPath}/comment/commentProductList",
 		dataType: "json",
 		data: param,
 		contentType: "application/x-www-form-urlencoded; charset=UTF-8", 
@@ -162,14 +214,24 @@ function getcommentList() {
                     if(data[i].commentLevel==1){
 	                    html += "<tr><td colspan='2'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
-	                    html += "<input type='button' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == p.sellWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
+	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } else if(data[i].commentLevel == 2){
 	                    html += "<tr><td colspan='2' style='padding-left : 30px;'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td style='padding-left : 30px;'>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
-	                    html += "<input type='button' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == p.sellWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
+	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } 
                     html += "</table>";
@@ -184,11 +246,11 @@ function getcommentList() {
                 html += "</div>";
             }
             
-            $("#cCnt").html(cCnt);
+            $("#cCnt, #cCnt_").html(cCnt);
             $("#commentList").html(html);
             
         },
-        error:function(request,status,error){
+        error:function(jqxhr,textStatus,errorThrown){
         	console.log("ajax 처리 실패 : ",jqxhr,textStatus,errorThrown);
        }
 	});

@@ -5,10 +5,63 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <fmt:requestEncoding value="utf-8"/>
 <style>
-#container{
-	border: 1px solid #fff;
+tbody, tr{
+display: block;
 }
+#commentFrm{
+	border: 1px solid #9999;
+	margin: 0px;
+	padding: 5px;
+}
+strong{
+padding: 0 0 10px;
+}
+#sbtn, #rbtn{
+text-align: right;
+}
+#btn-send, #btn-resend{
+padding: 8px 9px 8px;
+border: 2px solid #1b5ac2;
+border-radius: 4px;
+background: #fff;
+margin: 5px;
+}
+#re-send, #re-delete{
+ padding: 0 3px 3px;
+border: 2px solid #1b5ac2;
+border-radius: 4px;
+background: #fff;
+margin: 5px;
+ }
+#re-send{
+ margin-left: 50px;
+ }
+textarea{
+border:1px solid #F2F2F2;
+padding: 8px 11.2px;
+display: block;
+resize: none;
+}
+textarea::placeholder{
+color: #1b5ac2;
+font-weight: bold;
+}
+#reply{
+margin-left : 35px;
+padding: 10px;
+display: block;
+}
+
+#commentList{
+padding: 15px;
+}
+.commentList_table{
+border-bottom:1px solid #F2F2F2;
+padding: 5px;
+}
+
 </style>
+<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
 	<form action="" id="commentFrm" method="post">
 	<br />
@@ -24,7 +77,9 @@
 						<input type="hidden" id="auctionNo" name="auctionSelectOne.auctionNo" value="${auctionSelectOne.get(0).auctionNo }">
 						<br />
 						<c:if test="${memberLoggedIn != null }">
-						<input type="button" id="btn-send" value="등록">
+						<div id="sbtn">
+							<input type="button" id="btn-send" value="등록">
+						</div>
 						</c:if>
 					</td>
 				</tr>
@@ -49,7 +104,7 @@ function replyComment(btn) {
 	"<input type='hidden' name='commentREF' value='"+param.commentNo+"'>"+
 	"<input type='hidden' name='coBoardNo' name='auctionSelectOne.auctionNo' value='${auctionSelectOne.get(0).auctionNo }'/>"+
 	"<textarea rows='3' cols='30' name='commentContent_' placeholder='답글을 입력하세요'></textarea>"+
-	"<input type='button' id='btn-resend' value='등록'></td></tr></table>";
+	"<div id='rbtn'><input type='button' id='btn-resend' value='등록'></div></td></tr></table>";
 	$("#reply").html(reply);
 }
  $(()=>{
@@ -123,9 +178,8 @@ function deleteComment(btn){
 		type: "POST",
 		data: param,
 		success: function(data){
-                
                 alert(data.msg);
-
+                location.reload(); 
 		},
 		error: function(jqxhr, textStatus, errorThrown){
             console.log("ajax 처리 실패 : ",jqxhr,textStatus,errorThrown);
@@ -161,14 +215,24 @@ function getcommentList() {
                     if(data[i].commentLevel==1){
 	                    html += "<tr><td colspan='2'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
-	                    html += "<input type='button' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
+	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } else if(data[i].commentLevel == 2){
 	                    html += "<tr><td colspan='2' style='padding-left : 30px;'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
 	                    html += "<tr><td style='padding-left : 30px;'>"+data[i].commentContent+"</td>";
-	                    html += "<td><input type='button' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
-	                    html += "<input type='button' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "<td>";
+	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
+	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
+	                    html += "</c:if>";
+	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
+	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
+	                    html += "</c:if>";
 	                    html += "</td></tr>";
                     } 
                     html += "</table>";
@@ -183,11 +247,11 @@ function getcommentList() {
                 html += "</div>";
             }
             
-            $("#cCnt").html(cCnt);
+            $("#cCnt, #cCnt_").html(cCnt);
             $("#commentList").html(html);
             
         },
-        error:function(request,status,error){
+        error:function(jqxhr,textStatus,errorThrown){
         	console.log("ajax 처리 실패 : ",jqxhr,textStatus,errorThrown);
        }
 	});

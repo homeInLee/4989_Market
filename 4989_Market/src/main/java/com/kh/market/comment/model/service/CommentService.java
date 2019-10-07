@@ -14,4 +14,13 @@ public interface CommentService {
 
 	int commentInsert2(Comment comment);
 
+	//productComment
+	int commentProductInsert(Comment comment);
+
+	int commentProductInsert2(Comment comment);
+
+	List<Comment> commentProductList(int sellNo);
+
+	int commentProductDelete(int commentNo);
+
 }

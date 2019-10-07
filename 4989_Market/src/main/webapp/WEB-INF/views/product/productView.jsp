@@ -199,7 +199,7 @@ function basketCheck(check,sellNo,memberId){
 		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
 		<p>거래 가능 지역 : ${p.sellAddress }</p>
 		<p>${p.sellContent}</p>
-		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+		
 
 		<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 	</div>
@@ -234,6 +234,12 @@ function basketCheck(check,sellNo,memberId){
 
 <jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
+
+<!-- 판매완료하기 기능 -->
+<c:if test="${not empty p.sellBuyer and memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
+	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
+</c:if>
+<!--  -->
 <%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
 	<button onclick="updateProduct();">수정하기</button>
 	<button onclick="deleteProduct();">삭제</button>

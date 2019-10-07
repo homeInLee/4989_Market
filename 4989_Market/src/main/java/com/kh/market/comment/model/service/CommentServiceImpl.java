@@ -41,4 +41,25 @@ public class CommentServiceImpl implements CommentService {
 		return commentDAO.commentInsert2(comment);
 	}
 
+	//productComment
+	@Override
+	public int commentProductInsert(Comment comment) {
+		return commentDAO.commentProductInsert(comment);
+	}
+
+	@Override
+	public int commentProductInsert2(Comment comment) {
+		return commentDAO.commentProductInsert2(comment);
+	}
+
+	@Override
+	public List<Comment> commentProductList(int sellNo) {
+		return commentDAO.commentProductList(sellNo);
+	}
+
+	@Override
+	public int commentProductDelete(int commentNo) {
+		return commentDAO.commentProductDelete(commentNo);
+	}
+
 }

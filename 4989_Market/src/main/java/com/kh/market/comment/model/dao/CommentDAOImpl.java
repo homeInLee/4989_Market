@@ -33,6 +33,27 @@ public class CommentDAOImpl implements CommentDAO {
 	public int commentInsert2(Comment comment) {
 		return session.insert("comment.commentInsert2", comment);
 	}
+
+	//productComment
+	@Override
+	public int commentProductInsert(Comment comment) {
+		return session.insert("comment.commentProductInsert", comment);
+	}
+
+	@Override
+	public int commentProductInsert2(Comment comment) {
+		return session.insert("comment.commentProductInsert2", comment);
+	}
+
+	@Override
+	public List<Comment> commentProductList(int sellNo) {
+		return session.selectList("comment.commentProductList", sellNo);
+	}
+
+	@Override
+	public int commentProductDelete(int commentNo) {
+		return session.update("comment.commentProductDelete", commentNo);
+	}
 	
 	//messageInsert
 	//session.insert("message.messageInsert");

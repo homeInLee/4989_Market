@@ -284,7 +284,7 @@ function basketCheck(check,sellNo,memberId){
 		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
 		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
 		<p>${auctionSelectOne.get(0).auctionContent}</p>
-		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+		
 		<jsp:include page="/WEB-INF/views/comment/auctionComment.jsp"></jsp:include>
 	</div>
 	
