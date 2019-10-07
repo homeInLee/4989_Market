@@ -43,7 +43,7 @@ h2, section{
 	<br />
 	<section>
 		<c:forEach items="${auctionList }" var="a">
-				<c:if test="${a.boardName eq 'A' and a.attachmentMainImage eq 'Y'}">
+				<c:if test="${a.boardName eq 'A' and a.attachmentMainImage eq 'Y' and a.auctionDeltype eq 'N'}">
 					<article class="top-card" >
 						<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 							  			<img src="${pageContext.request.contextPath }/resources/upload/auction/${a.renamedfileName }" style="width:100%; height:160px; position: relative;">
@@ -63,7 +63,25 @@ h2, section{
 								</div>
 							</div>
 						</a>
-				<br /><br />
+						<br /><br />
+				</article>
+	  		</c:if>
+	  		<c:if test="${a.boardName eq 'A' and a.attachmentMainImage eq 'Y' and a.auctionDeltype eq 'Y'}">
+					<article class="top-card" >
+						<a href="${pageContext.request.contextPath }/auction/auctionSelectOne.do?auctionNo=${a.auctionNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
+							  			<img src="${pageContext.request.contextPath }/resources/upload/auction/${a.renamedfileName }" style="width:100%; height:160px; position: relative;">
+							<div>
+							  	<br />
+							  	<h5>${a.auctionTitle }</h5>
+								<div class="auction-content">
+									${a.auctionAddress }
+								</div>
+								<div class="auction-price" style="color:red;">
+									경매종료!
+								</div>
+							</div>
+						</a>
+						<br /><br />
 				</article>
 	  		</c:if>
 		</c:forEach>

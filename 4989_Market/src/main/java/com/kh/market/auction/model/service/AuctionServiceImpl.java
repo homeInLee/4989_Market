@@ -103,6 +103,11 @@ public class AuctionServiceImpl implements AuctionService {
 		
 		return auctionDAO.auctionComplete(auctionNo);
 	}
+	
+	@Override
+	public int directPrice(Map<String, Object> directMap) {
+		return auctionDAO.directPrice(directMap);
+	}
 
 
 }

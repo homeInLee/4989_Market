@@ -31,6 +31,8 @@ public interface AuctionService {
 
 	int auctionComplete(int auctionNo);
 
+	int directPrice(Map<String, Object> directMap);
+
 
 
 }

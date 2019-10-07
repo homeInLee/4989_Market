@@ -83,5 +83,10 @@ public class AuctionDAOImpl implements AuctionDAO {
 		return sqlSession.update("auction.auctionComplete",auctionNo);
 	}
 	
+	@Override
+	public int directPrice(Map<String, Object> directMap) {
+		return sqlSession.update("auction.directPrice", directMap);
+	}
+	
 
 }
