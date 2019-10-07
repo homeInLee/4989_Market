@@ -248,11 +248,6 @@ function basketCheck(check,sellNo,memberId){
 <jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
 
-<!-- 판매완료하기 기능 -->
-<c:if test="${memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
-	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
-</c:if>
-<!--  -->
 <%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
 	<button onclick="updateProduct();">수정하기</button>
 	<button onclick="deleteProduct();">삭제</button>
