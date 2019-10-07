@@ -42,10 +42,8 @@ public interface ProductService {
 
 	List<Attachment> moreAttach();
 
-<<<<<<< HEAD
 	int productBuyerUpdate(Map<Object, Object> map);
-=======
+
 	int memberBuySize(String memberId);
->>>>>>> refs/remotes/origin/homin
 
 }

@@ -135,17 +135,16 @@ public class ProductServiceImpl implements ProductService {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int productBuyerUpdate(Map<Object, Object> map) {
 		
 		return productDAO.productBuyerUpdate(map);
 	}
-=======
+	
+	@Override
 	public int memberBuySize(String memberId) {
 		// TODO Auto-generated method stub
 		return productDAO.memberBuySize(memberId);
 	}
 
->>>>>>> refs/remotes/origin/homin
 
 }

@@ -115,14 +115,13 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-<<<<<<< HEAD
 	public int productBuyerUpdate(Map<Object, Object> map) {
 		
 		return sqlSession.update("product.productBuyerUpdate",map);
-=======
+	}
+	@Override
 	public int memberBuySize(String memberId) {
 		return sqlSession.selectOne("product.memberBuySize",memberId);
->>>>>>> refs/remotes/origin/homin
 	}
 
 	
