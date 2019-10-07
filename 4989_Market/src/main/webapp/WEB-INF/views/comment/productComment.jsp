@@ -19,16 +19,28 @@ padding: 0 0 10px;
 #sbtn, #rbtn{
 text-align: right;
 }
-#btn-send, #btn-resend, #re-send, #re-delete{
+#btn-send, #btn-resend{
 padding: 8px 9px 8px;
 border: 2px solid #1b5ac2;
 border-radius: 4px;
 background: #fff;
+margin: 5px;
 }
+#re-send, #re-delete{
+ padding: 0 3px 3px;
+border: 2px solid #1b5ac2;
+border-radius: 4px;
+background: #fff;
+margin: 5px;
+ }
+#re-send{
+ margin-left: 50px;
+ }
 textarea{
 border:1px solid #F2F2F2;
 padding: 8px 11.2px;
 display: block;
+resize: none;
 }
 textarea::placeholder{
 color: #1b5ac2;
@@ -37,16 +49,17 @@ font-weight: bold;
 #reply{
 margin-left : 35px;
 display: block;
+padding: 10px;
 }
 #commentList{
-padding: 5px;
+padding: 15px;
 }
 .commentList_table{
 border-bottom:1px solid #F2F2F2;
 padding: 5px;
 }
 </style>
-
+<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
 	<form action="" id="commentFrm_pro" method="post">
 	<br />
@@ -223,7 +236,7 @@ function getcommentList() {
                 html += "</div>";
             }
             
-            $("#cCnt").html(cCnt);
+            $("#cCnt, #cCnt_").html(cCnt);
             $("#commentList").html(html);
             
         },
