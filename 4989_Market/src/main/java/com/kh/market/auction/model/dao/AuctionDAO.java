@@ -30,4 +30,6 @@ public interface AuctionDAO {
 
 	List<Auction> memberAuctionBuyView(String memberId);
 
+	int ingPrice(Map<String, Object> ingMap);
+
 }

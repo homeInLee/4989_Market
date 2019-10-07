@@ -63,4 +63,9 @@
 	<select id="memberAuctionBuyView" resultType="auction">
 		select * from auction where auction_buyer=#{memberId}
 	</select>
+	
+	<update id="ingPrice" parameterType="map">
+		update auction set auction_ing_price = #{auctionIngPrice}, auction_buyer = #{auctionBuyer} where auction_no = #{auctionNo}
+	</update>
+	
 </mapper>

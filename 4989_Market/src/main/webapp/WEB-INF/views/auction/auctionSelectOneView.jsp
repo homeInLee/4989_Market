@@ -292,6 +292,7 @@ function basketCheck(check,sellNo,memberId){
 	
 	<div>
 		<h3 style="padding: 32px 0">경매</h3>
+		<input type="hidden" name="auctionNoFromView" value="${auctionSelectOne.get(0).auctionNo}" />
 			<div>
 				<c:if test="${auctionSelectOne.get(0).auctionIngPrice == 0 }">
 				<span>현재가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionPrice }" pattern="#,###"/>원</span></span> 
@@ -304,6 +305,8 @@ function basketCheck(check,sellNo,memberId){
 				<span style="font-size:13px">시작가격 : <fmt:formatNumber value="${auctionSelectOne.get(0).auctionPrice }" pattern="#,###"/>원</span>
 				&nbsp; -> &nbsp;
 				<span>즉시구매가격 : <span style="color:red; font-size:24px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionDirectPrice }" pattern="#,###"/>원</span></span>
+				&nbsp;
+				<span><button type="button" class="btn btn-danger" onclick="kakao2();">즉시구매가로 구매하기</button></span>
 			</div>
 			<br />
 			
@@ -314,16 +317,55 @@ function basketCheck(check,sellNo,memberId){
 				경매 시작 날짜 : <fmt:formatDate value="${auctionSelectOne.get(0).auctionDate }" pattern="yyyy-MM-dd"/> 
 				&nbsp;/&nbsp;
 				경매 종료 날짜 : <fmt:formatDate value="${auctionSelectOne.get(0).auctionEndDate }" pattern="yyyy-MM-dd"/>
+				&nbsp;&nbsp;
+				<span style="color:red; font-size: 12px;">남은시간 : <span id="timer" style="color:red; font-size: 12px;"></span></span>
+			</p>
+			
+			<p>
+				원하는 입찰 가격 : <input type="number" name="auctionIngPriceFromView" id="ingPrice" style="border:1px solid;"/>&nbsp;원
+				&nbsp;
+				<span>
+					<c:if test="${auctionSelectOne.get(0).auctionIngPrice == 0 }">
+					<span>(최소 시작 금액 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionPrice + auctionSelectOne.get(0).auctionUnitPrice}" pattern="#,###"/>원</span>)</span> 
+					&nbsp;
+					</c:if>
+					<c:if test="${auctionSelectOne.get(0).auctionIngPrice != 0 }">
+					<span>(최소 시작 금액 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${auctionSelectOne.get(0).auctionIngPrice + auctionSelectOne.get(0).auctionUnitPrice}" pattern="#,###"/>원</span>)</span> 
+					&nbsp;
+					</c:if> 
+				</span>
+				<button type="button" class="btn btn-warning" id="auctionPrice" onclick="kakao1();">입찰하기</button>
 			</p>
 		 
-		 <button type="button" class="btn btn-warning" id="auctionPrice" onclick="kakao1();">현재가 낙찰하기</button>
 		 
-		 <button type="button" class="btn btn-danger" onclick="kakao2();">즉시구매가로 구매하기</button>
-		
 	</div>
-		
-		
-   
+		<!-- 시간 관련 코드 -->    
+	  <!-- <p style="color:red; font-size: 12px;">남은시간 : <span id="timer" style="color:red; font-size: 12px;"></span></p> -->
+	  
+  <script>
+  $(document).ready(function(){
+       tid=setInterval('msg_time()',1000); // 타이머 1초간격으로 수행
+     });
+  var stDate = new Date().getTime();
+  var edDate = new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime(); // 종료날짜
+  var RemainDate = edDate - stDate;
+  function msg_time() {
+     var day = Math.floor((RemainDate % (1000 * 60 * 60 * 24 * 60)) / (1000*60*60*24));
+    var hours = Math.floor((RemainDate % (1000 * 60 * 60 * 24)) / (1000*60*60));
+    var miniutes = Math.floor((RemainDate % (1000 * 60 * 60)) / (1000*60));
+    var seconds = Math.floor((RemainDate % (1000 * 60)) / 1000);
+    m = day + "일 " + hours + "시 " +  miniutes + "분 " + seconds +"초"; // 남은 시간 text형태로 변경
+    document.all.timer.innerHTML = m;   // div 영역에 보여줌
+    if (RemainDate < 0) {
+      // 시간이 종료 되었으면..
+      clearInterval(tid);   // 타이머 해제
+      //여기서 타이머종료되면 작업한다
+    }else{
+      RemainDate = RemainDate - 1000; // 남은시간 -1초
+    }
+  }
+  </script>
+  <!--  -->
 	</div>
 <script>
 //current position
@@ -436,7 +478,10 @@ function pagination(){
 
 <script>
 function kakao1(){
-	
+		
+var ingPrice = $("#ingPrice").val();
+var auctionNo = ${auctionSelectOne.get(0).auctionNo};		
+		
 		var IMP = window.IMP; // 생략가능
 	   IMP.init('imp45289348');  // 가맹점 식별 코드
 	
@@ -444,14 +489,15 @@ function kakao1(){
 	      pg : 'kakao', // 결제방식
 	       pay_method : 'card',	// 결제 수단
 	       merchant_uid : 'merchant_' + new Date().getTime(),
-	      name : '${auctionSelectOne.get(0).auctionTitle}',	// order 테이블에 들어갈 주문명 혹은 주문 번호
-	       amount : '${auctionSelectOne.get(0).auctionIngPrice == 0 ? auctionSelectOne.get(0).auctionPrice : auctionSelectOne.get(0).auctionIngPrice}',	// 결제 금액
+	       name : '${auctionSelectOne.get(0).auctionTitle}',	// order 테이블에 들어갈 주문명 혹은 주문 번호
+	       amount : ingPrice,
+	       /* amount : '${auctionSelectOne.get(0).auctionIngPrice == 0 ? auctionSelectOne.get(0).auctionPrice : auctionSelectOne.get(0).auctionIngPrice}',	// 결제 금액 */
 	       buyer_email : '',	// 구매자 email
 	      buyer_name :  '${auctionSelectOne.get(0).auctionWriter}',	// 구매자 이름
 	       buyer_tel :  '',	// 구매자 전화번호
 	       buyer_addr :  '',	// 구매자 주소
 	       buyer_postcode :  '',	// 구매자 우편번호
-	       m_redirect_url : '/khx/payEnd.action'	// 결제 완료 후 보낼 컨트롤러의 메소드명
+	       /* m_redirect_url : '${pageContext.request.contextPath }/auction/ingPrice.do' */	// 결제 완료 후 보낼 컨트롤러의 메소드명
 	   }, function(rsp) {
 		if ( rsp.success ) { // 성공시
 			var msg = '결제가 완료되었습니다.';
@@ -459,6 +505,7 @@ function kakao1(){
 			msg += '상점 거래ID : ' + rsp.merchant_uid;
 			msg += '결제 금액 : ' + rsp.paid_amount;
 			msg += '카드 승인번호 : ' + rsp.apply_num;
+			location.href='${pageContext.request.contextPath }/auction/ingPrice.do?auctionNo='+auctionNo+'&auctionIngPrice='+ingPrice+'&auctionBuyer=${memberLoggedIn.memberId}';
 		} else { // 실패시
 			var msg = '결제에 실패하였습니다.';
 			msg += '에러내용 : ' + rsp.error_msg;

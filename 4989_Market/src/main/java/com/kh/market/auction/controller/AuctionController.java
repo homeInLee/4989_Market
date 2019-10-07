@@ -2,6 +2,7 @@ package com.kh.market.auction.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -200,4 +201,28 @@ public class AuctionController {
 		mav.setViewName("member/memberAuctionBuyView");
 		return mav;
 	}
+	
+	@RequestMapping("/ingPrice.do")
+		public String ingPrice(@RequestParam("auctionNo") int auctionNo, @RequestParam("auctionIngPrice") int auctionIngPrice, @RequestParam("auctionBuyer") String auctionBuyer) {
+			Map<String, Object> ingMap = new HashMap<>();
+			ingMap.put("auctionNo", auctionNo);
+			ingMap.put("auctionIngPrice", auctionIngPrice);
+			ingMap.put("auctionBuyer", auctionBuyer);
+			
+			logger.info("ingPrice.do");
+			
+			int result = auctionService.ingPrice(ingMap);
+		
+		
+			return "redirect:/auction/auctionSelectOne.do";
+		}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

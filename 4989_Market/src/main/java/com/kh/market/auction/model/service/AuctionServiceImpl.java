@@ -93,5 +93,10 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.memberAuctionBuyView(memberId);
 	}
 
+	@Override
+	public int ingPrice(Map<String, Object> ingMap) {
+		return auctionDAO.ingPrice(ingMap);
+	}
+
 
 }
