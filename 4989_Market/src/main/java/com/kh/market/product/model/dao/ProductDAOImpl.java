@@ -8,9 +8,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.kh.market.common.model.vo.Page;
 import com.kh.market.product.model.service.ProductService;
 import com.kh.market.product.model.vo.Attachment;
-import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 import com.kh.market.review.model.service.ReviewService;
 
@@ -123,6 +123,13 @@ public class ProductDAOImpl implements ProductDAO {
 	public int memberBuySize(String memberId) {
 		return sqlSession.selectOne("product.memberBuySize",memberId);
 	}
+
+	@Override
+	public List<Product> srchMoreResult(Map<String, String> sendMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.srchMoreResult", sendMap);
+	}
+
 
 	
 	

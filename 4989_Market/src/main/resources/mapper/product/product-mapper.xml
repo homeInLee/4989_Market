@@ -55,10 +55,11 @@
 	</update>
 	
 	<select id="productSearch" resultType="product" parameterType="String">
-		select * 
-		from sell 
-		where sell_deltype in ('N') and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%')
-		order by sell_no desc
+		select*
+		from(
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%') order by sell_no desc) a) rownumsell
+		where rnum between 1 and 8) aa		
 	</select>
 	
 	<select id="memberSellView" resultType="product">
@@ -124,4 +125,12 @@
 	<select id="memberBuySize" resultType="int">
 		select count(*) cnt from sell where sell_buyer=#{memberId}
 	</select>
+	<select id="srchMoreResult" resultType="product" >
+		select*
+		from(
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%') order by sell_no desc) a) rownumsell
+		where rnum between #{startCount} and #{endCount}) aa		
+	</select>
+
 </mapper>

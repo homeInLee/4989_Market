@@ -144,7 +144,8 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 					
 						<tr>
 							<th>가격</th>
-							<td>		
+							<td>
+							<input type="checkbox" onclick="freeProductClick();" id="freeProductCHK"/>		
 							<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required" />
 							</td>			
 						</tr>
@@ -184,6 +185,15 @@ function checkYN() {
 
 
 <script>
+function freeProductClick() {
+	
+	var isChecked = $("#freeProductCHK").is(":checked");
+	console.log($("#freeProductCHK").val());
+	confirm("무료나눔으로 등록 하시겠습니까?");
+	
+}
+
+
 var sel_files = [];
 
 
