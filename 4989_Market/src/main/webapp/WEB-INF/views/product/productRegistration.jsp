@@ -43,7 +43,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 	
 	<!-- 이미지 슬라이더 -->
 	
-	<div id="wrapper">
+	<div id="wrapper" class="col-sm-9">
 		<div id="slider-wrap">
 			<ul id="slider">
 				<li data-color="#1abc9c">		                             
@@ -229,7 +229,7 @@ function handleImgFileSelect(e) {
             $('.images'+index).attr('id', "img_id_"+index);
             $('.images'+index).attr('title', '클릭 시 삭제됩니다.');
             /* <img src=\"" + e.target.result + "\" data-file='"+f.name+"' class='selProductFile' title='Click to remove'> */
-/*             $('.images'+imgIndex).attr('src', e.target.result); */
+			/* $('.images'+imgIndex).attr('src', e.target.result); */
             $(".imgs_wrap").append(html);
             index++;
 
