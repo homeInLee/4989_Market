@@ -21,4 +21,12 @@ public interface BasketDAO {
 
 	List<Auction> basketAuctionView(Map<Object, Object> map);
 
+	List<Basket> basketSelectCnt(int sellNo);
+
+	List<Basket> basketSelectAuctionCnt(int auctionNo);
+
+	int basketSellCompleteDelete(int sellNo);
+
+	int basketAuctionCompleteDelete(int auctionNo);
+
 }

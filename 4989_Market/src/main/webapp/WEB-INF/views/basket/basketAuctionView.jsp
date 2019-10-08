@@ -88,6 +88,12 @@ div#pageBar a {
 						<div class="auction-content">
 							${l.auctionDate}~${l.auctionEndDate}
 						</div>
+						<c:if test="${'Y' eq fn:trim(l.auctionDeltype)}">
+							판매완료된 물품
+						</c:if>
+						<c:if test="${'N' eq fn:trim(l.auctionDeltype)}">
+							판매중
+						</c:if>
 					</div>
 				</a>
 				<br /><br />

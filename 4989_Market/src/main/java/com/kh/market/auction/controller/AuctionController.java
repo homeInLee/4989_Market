@@ -251,7 +251,10 @@ public class AuctionController {
 	
 		String msg="";
 		String loc="/auction/memberAuctionSellView.do?memberId="+auctionWriter;
-		if(result1>0&&result2>0) {
+		
+		int result3=basketService.basketAuctionCompleteDelete(auctionNo);
+		
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			
 		}else {

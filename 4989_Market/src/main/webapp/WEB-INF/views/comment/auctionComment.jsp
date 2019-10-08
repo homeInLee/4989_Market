@@ -61,7 +61,7 @@ padding: 5px;
 }
 
 </style>
-<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 <span id="aCnt_"></span> ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
 	<form action="" id="commentFrm" method="post">
 	<br />
@@ -256,5 +256,24 @@ function getcommentList() {
        }
 	});
 }
-
+//관심 수
+$(function(){
+	
+	var param = {
+			auctionNo : '${auctionSelectOne.get(0).auctionNo}'
+	}
+	$.ajax({
+	    url: "${pageContext.request.contextPath}/basket/basketSelectAuctionCnt",
+	    data:param,
+	    contentType:"application/json; charset=utf-8",
+	    type: "GET",
+	    dataType: "json",
+	    success: function(data) {
+	      $("#aCnt_").html(data);
+	    },
+	    error: function(xhr,txtStatus,err){
+	      console.log("ajax실패",xhr,txtStatus,err);
+	    }
+	});
+});
 </script>

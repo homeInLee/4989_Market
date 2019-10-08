@@ -32,4 +32,20 @@
 		where basket_sell_no=B.basket_sell_no) filecount
 		from basket B where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B on A.auction_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId} and B.board_name=#{boardName}
 	</select>
+	
+	<select id="basketSelectCnt" resultType="basket">
+		select * from basket where basket_sell_no=#{sellNo} and board_name='S'
+	</select>
+	
+	<select id="basketSelectAuctionCnt" resultType="basket">
+		select * from basket where basket_sell_no=#{auctionNo} and board_name='A'
+	</select>
+	
+	<delete id="basketSellCompleteDelete">
+		delete from basket where basket_sell_no=#{sellNo} and board_name='S'
+	</delete>
+	
+	<delete id="basketAuctionCompleteDelete">
+		delete from basket where basket_sell_no=#{auctionNo} and board_name='A'
+	</delete>
 </mapper>

@@ -62,4 +62,28 @@ public class BasketDAOImpl implements BasketDAO {
 		
 		return sqlSession.selectList("basket.basketAuctionView",map,rowBounds);
 	}
+
+	@Override
+	public List<Basket> basketSelectCnt(int sellNo) {
+		
+		return sqlSession.selectList("basket.basketSelectCnt",sellNo);
+	}
+
+	@Override
+	public List<Basket> basketSelectAuctionCnt(int auctionNo) {
+		
+		return sqlSession.selectList("basket.basketSelectAuctionCnt",auctionNo);
+	}
+
+	@Override
+	public int basketSellCompleteDelete(int sellNo) {
+		
+		return sqlSession.delete("basket.basketSellCompleteDelete",sellNo);
+	}
+
+	@Override
+	public int basketAuctionCompleteDelete(int auctionNo) {
+		
+		return sqlSession.delete("basket.basketAuctionCompleteDelete",auctionNo);
+	}
 }

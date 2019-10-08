@@ -175,4 +175,25 @@ public class BasketController {
 		int result=basketService.basketDelete(b);
 		return result;
 	}
+	
+	@GetMapping("/basketSelectCnt")
+	public int basketSelectCnt(@RequestParam("sellNo") int sellNo) {
+		int result=0;
+		List<Basket> b=basketService.basketSelectCnt(sellNo);
+		
+		if(b.size()!=0) {
+			result=b.size();
+		}
+		return result;
+	}
+	@GetMapping("/basketSelectAuctionCnt")
+	public int basketSelectAuctionCnt(@RequestParam("auctionNo") int auctionNo) {
+		int result=0;
+		List<Basket> b=basketService.basketSelectAuctionCnt(auctionNo);
+		
+		if(b.size()!=0) {
+			result=b.size();
+		}
+		return result;
+	}
 }

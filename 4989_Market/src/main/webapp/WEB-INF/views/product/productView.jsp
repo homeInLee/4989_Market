@@ -91,6 +91,23 @@ function basketCheck(check,sellNo,memberId){
 		    dataType: "json",
 		    success: function(data) {
 		      alert("장바구니에 담겼습니다");
+		      //location.href="${pageContext.request.contextPath}/product/productView.do?productNo=${p.sellNo}&memberId=${memberLoggedIn.memberId}";
+		      var param = {
+		  			sellNo : '${p.sellNo}'
+		  	  }
+			  	$.ajax({
+			  	    url: "${pageContext.request.contextPath}/basket/basketSelectCnt",
+			  	    data:param,
+			  	    contentType:"application/json; charset=utf-8",
+			  	    type: "GET",
+			  	    dataType: "json",
+			  	    success: function(data) {
+			  	      $("#bCnt_").html(data);
+			  	    },
+			  	    error: function(xhr,txtStatus,err){
+			  	      console.log("ajax실패",xhr,txtStatus,err);
+			  	    }
+			  	});
 		    },
 		    error: function(xhr,txtStatus,err){
 		      console.log("ajax실패",xhr,txtStatus,err);
@@ -110,8 +127,24 @@ function basketCheck(check,sellNo,memberId){
 		    type: "GET",
 		    dataType: "json",
 		    success: function(data) {
-		      alert("장바구니에서 삭제되었습니다")
-		      
+		      alert("장바구니에서 삭제되었습니다");
+		      //location.href="${pageContext.request.contextPath}/product/productView.do?productNo=${p.sellNo}&memberId=${memberLoggedIn.memberId}";
+		      var param = {
+		  			sellNo : '${p.sellNo}'
+		  	  }
+			  	$.ajax({
+			  	    url: "${pageContext.request.contextPath}/basket/basketSelectCnt",
+			  	    data:param,
+			  	    contentType:"application/json; charset=utf-8",
+			  	    type: "GET",
+			  	    dataType: "json",
+			  	    success: function(data) {
+			  	      $("#bCnt_").html(data);
+			  	    },
+			  	    error: function(xhr,txtStatus,err){
+			  	      console.log("ajax실패",xhr,txtStatus,err);
+			  	    }
+			  	});
 		    },
 		    error: function(xhr,txtStatus,err){
 		      console.log("ajax실패",xhr,txtStatus,err);
@@ -169,12 +202,14 @@ function basketCheck(check,sellNo,memberId){
 <!-- 장바구니 기능 코드 -->	
 <hr />
 <br />
-<c:if test="${empty basket}">
-	<div ><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-</c:if>
-	
-<c:if test="${not empty basket}">
-	<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+<c:if test="${'sale' eq fn:trim(p.sellState)}">
+	<c:if test="${empty basket}">
+		<div ><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+	</c:if>
+		
+	<c:if test="${not empty basket}">
+		<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+	</c:if>
 </c:if> 
 <br />	
 <c:if test="${memberLoggedIn.memberId ne p.sellWriter }">

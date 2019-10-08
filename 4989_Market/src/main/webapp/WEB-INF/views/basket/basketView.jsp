@@ -66,7 +66,7 @@ h2, section{
 	</c:if>
 	<section>
 		<c:forEach items="${myBasketList}" var="b">
-			
+		  <c:if test="${b.sellDelType=='N'}">
 			<article class="top-card">
 				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${b.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					<c:forEach items="${attachment}" var="a">					
@@ -90,13 +90,14 @@ h2, section{
 						</c:if>
 						<c:if test="${'soldout' eq fn:trim(b.sellState)}">
 							<div>
-								판매완료
+								판매완료된 물품
 							</div>
 						</c:if>
 					</div>
 				</a>
 				<br /><br />
 			</article>
+		  </c:if>
 		</c:forEach>
 	</section>
 
