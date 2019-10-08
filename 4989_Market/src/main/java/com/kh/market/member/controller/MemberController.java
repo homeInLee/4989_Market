@@ -46,7 +46,7 @@ public class MemberController {
 		//member/memberEnroll -> ViewNameTranslator view단을 자동으로 찾음.
 	}
 	@RequestMapping("memberEnrollEnd.do")
-	public String memberEnrollEnd(Member member, Model model) {
+	public String memberEnrollEnd(@RequestParam String sido, @RequestParam String gugun,Member member, Model model) {
 		
 		logger.debug("회원가입 처리요청");
 		//0.비밀번호 암호화
@@ -56,6 +56,7 @@ public class MemberController {
 		logger.debug("암호화전: "+encodedPassword);
 		//member객체 대임
 		member.setMemberPassword(encodedPassword);
+		member.setMemberAddress(sido+" "+gugun+" "+member.getMemberAddress());
 		int	result = memberService.insertMember(member);
         model.addAttribute("msg", result>0?"회원가입성공":"회원가입실패");
         model.addAttribute("loc", "/");

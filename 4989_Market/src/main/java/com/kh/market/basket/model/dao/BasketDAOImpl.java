@@ -20,19 +20,14 @@ public class BasketDAOImpl implements BasketDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Product> basketView(Map<Object, Object> map) {
-		int cPage=(int)map.get("cPage");
-		int offset = (cPage-1)*BasketService.NUM_PER_PAGE;
-		int limit = BasketService.NUM_PER_PAGE;
-		RowBounds rowBounds=new RowBounds(offset, limit);
-				
-		return sqlSession.selectList("basket.basketView",map,rowBounds);
+	public List<Product> basketView(Map<String, Object> map) {
+		return sqlSession.selectList("basket.basketView",map);
 	}
 
 	@Override
-	public List<Basket> totalBasketCount(String basketMemberId) {
+	public int totalBasketCount(String basketMemberId) {
 		
-		return sqlSession.selectList("basket.totalBasketCount",basketMemberId);
+		return sqlSession.selectOne("basket.totalBasketCount",basketMemberId);
 	}
 
 	@Override
@@ -54,13 +49,14 @@ public class BasketDAOImpl implements BasketDAO {
 	}
 
 	@Override
-	public List<Auction> basketAuctionView(Map<Object, Object> map) {
-		int cPage=(int)map.get("cPage");
-		int offset = (cPage-1)*BasketService.NUM_PER_PAGE;
-		int limit = BasketService.NUM_PER_PAGE;
-		RowBounds rowBounds=new RowBounds(offset, limit);
+	public List<Auction> basketAuctionView(Map<String, Object> map) {
 		
-		return sqlSession.selectList("basket.basketAuctionView",map,rowBounds);
+		return sqlSession.selectList("basket.basketAuctionView",map);
+	}
+
+	@Override
+	public int auctionBasketCnt(String basketMemberId) {
+		return sqlSession.selectOne("basket.auctionBasketCnt",basketMemberId);
 	}
 
 	@Override

@@ -9,9 +9,9 @@ import com.kh.market.product.model.vo.Product;
 
 public interface BasketDAO {
 
-	List<Product> basketView(Map<Object, Object> map);
+	List<Product> basketView(Map<String, Object> map);
 
-	List<Basket> totalBasketCount(String basketMemberId);
+	int totalBasketCount(String basketMemberId);
 
 	int basketInsert(Basket b);
 
@@ -19,7 +19,9 @@ public interface BasketDAO {
 
 	Basket basketCheck(Basket b);
 
-	List<Auction> basketAuctionView(Map<Object, Object> map);
+	List<Auction> basketAuctionView(Map<String, Object> map);
+
+	int auctionBasketCnt(String basketMemberId);
 
 	List<Basket> basketSelectCnt(int sellNo);
 
