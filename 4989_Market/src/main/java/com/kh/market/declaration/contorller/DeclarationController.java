@@ -36,6 +36,30 @@ public class DeclarationController {
 		mav.setViewName("declaration/declarationWrite");
 		return mav;
 	}
+	@RequestMapping("/commentDeclaration")
+	public ModelAndView commentDeclaration(ModelAndView mav,
+											@RequestParam("boardNo") String boardNo,
+											@RequestParam("declarationReceiver") String declarationReceiver,
+											@RequestParam("declarationWriter") String declarationWriter,
+											@RequestParam("declarationContent") String declarationContent,
+											@RequestParam("boardName") String boardName
+											) {
+		System.out.println("boardNo="+boardNo);
+		System.out.println("declarationReceiver="+declarationReceiver);
+		System.out.println("declarationWriter="+declarationWriter);
+		System.out.println("declarationContent="+declarationContent);
+		System.out.println("boardName="+boardName);
+		Declaration declaration = new Declaration();
+		declaration.setBoardNo(Integer.parseInt(boardNo));
+		declaration.setDeclarationReceiver(declarationReceiver);
+		declaration.setDeclarationWriter(declarationWriter);
+		declaration.setDeclarationDivision("c");
+		declaration.setDeclarationContent(declarationContent);
+		declaration.setBoardName(boardName);
+		mav.addObject("declaration",declaration);
+		mav.setViewName("declaration/declarationWrite");
+		return mav;
+	}
 	@RequestMapping("/insertMemberDeclaration")
 	public String insertMemberDeclaration(Model model,
 										Declaration declaration) {
@@ -114,7 +138,6 @@ public class DeclarationController {
 	@RequestMapping("/declarationCheck")
 	public String declarationCheck(Model model,
 									@RequestParam("declarationWriter")String declarationWriter
-//									@RequestParam("declarationReceiver")String declarationReceiver
 									) {
 		
 		System.out.println("declarationWriter="+declarationWriter);

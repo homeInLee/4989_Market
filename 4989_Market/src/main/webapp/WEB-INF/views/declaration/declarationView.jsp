@@ -69,11 +69,25 @@
 <input type="button" id="declarationCheckN" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.boardName eq 'a'}">
-<input type="button" id="declarationCheck" onclick="${pageContext.request.contextPath}/auction/" value="신고글 확인" />
+<input type="button" id="declarationCheckA" value="신고글 확인" />
 </c:if>
-<c:if test="${declaration.boardName eq 's'}">
-<input type="button" id="declarationCheck" onclick="${pageContext.request.contextPath}/sell/" value="신고글 확인" />
+<c:if test="${declaration.boardName eq 'p'}">
+<input type="button" id="declarationCheckP" value="신고글 확인" />
 </c:if>
+</c:if>
+<c:if test="${declaration.declarationDivision eq 'c'}">
+<c:if test="${declaration.boardName eq 'a'}">
+<input type="button" id="declarationCheckA" value="신고글 확인" />
+</c:if>
+<c:if test="${declaration.boardName eq 'p'}">
+<input type="button" id="declarationCheckP" value="신고글 확인" />
+</c:if>
+
+
+
+</c:if>
+<c:if test="${declaration.declarationDivision eq 's'}">
+<input type="button" id="declarationCheckS" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.declarationDivision eq 'm'}">
 <input type="button" id="declarationCheck" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${declaration.declarationReceiver}'" value="회원 확인" />
@@ -81,12 +95,58 @@
 <input type="button" id="declarationList" value="목록" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList.do'"/>
 
 <script>
-$("#declarationCheckN").click(()=>{
-location.href="${pageContext.request.contextPath}/notice/noticeView.do?noticeNo=${declaration.boardNo}&decNo=${decNo}";
+// $("#declarationCheckN").click(()=>{
+// location.href="${pageContext.request.contextPath}/notice/noticeView.do?noticeNo=${declaration.boardNo}&decNo=${decNo}";
 	
-});
+// });
+// $("#declarationCheckA").click(()=>{
+// location.href="${pageContext.request.contextPath}/auction/auctionSelectOne.do?auctionNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+	
+// });
+// $("#declarationCheckS").click(()=>{
+// location.href="${pageContext.request.contextPath}/message/messageSelect.do?messageNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+	
+// });
+// $("#declarationCheckP").click(()=>{
+// location.href="${pageContext.request.contextPath}/product/productView.do?productNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+	
+// });
 </script>
+<script>
+// 신고기능관련 script
+$("#declarationProcess").click(()=>{
+	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${auctionSelectOne.get(0).auctionWriter}&decNo=${decNo}";
+});
+$("#acutionDeclaration").click(()=>{
+	$("#frmPop").submit();
+});
 
+$(function(){
+	$(document).mouseup(function(e) {
+		if ($(e.target).parents('.zeta-menu').length == 0) {
+			$('.zeta-menu li').removeClass('expand');
+			$('.zeta-menu ul').hide();
+		}
+	});
+	$(".zeta-menu>li:has(ul)>a").each( function() {
+		$(this).html( $(this).html());
+	});
+	$(".zeta-menu ul li:has(ul)")
+		.find("a:first")
+		.append("<p style='float:right;margin:-3px'>&#9656;</p>");
+
+	$(".zeta-menu li>a").click(function(){
+		var li = $(this).parent();
+		var ul = li.parent()
+		ul.find('li').removeClass('expand');
+		ul.find('ul').not(li.find('ul')).hide();
+		li.children('ul').toggle();
+		if( li.children('ul').is(':visible') || li.has('ul')) {
+			li.addClass('expand');
+		}
+	});
+});
+</script> 
 
 
 

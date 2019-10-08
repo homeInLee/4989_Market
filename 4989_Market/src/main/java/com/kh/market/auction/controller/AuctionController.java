@@ -78,7 +78,9 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionSelectOne.do")
-	public String auctionSelectOne(Model model, @RequestParam int auctionNo,@RequestParam("memberId") String memberId ) {
+	public String auctionSelectOne(Model model, 
+			@RequestParam int auctionNo,@RequestParam("memberId") String memberId, 
+			@RequestParam(value="decNo", defaultValue="0", required=false)int decNo){
 		
 		String boardName="A";
 		//장바구니 여부 검사 코드
@@ -93,7 +95,7 @@ public class AuctionController {
 		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		
 		logger.info(auctionSelectOne.toString());
-		
+		model.addAttribute("decNo",decNo);
 		model.addAttribute("basket",basket);
 		model.addAttribute("auctionSelectOne",auctionSelectOne);
 		model.addAttribute("member",member);
