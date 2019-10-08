@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -151,6 +152,9 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
   top:3px;
     opacity:1;
     box-shadow:rgba(0,0,0,0.1) 1px 1px 0px; 
+}
+button[name=fixButton]{
+	padding: 3px 10px;
 }
 
 
@@ -421,6 +425,15 @@ function basketCheck(check,sellNo,memberId){
 		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
 		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
 		<p>${auctionSelectOne.get(0).auctionContent}</p>
+		
+					
+		<c:if test="${memberLoggedIn.memberId eq auctionSelectOne.get(0).auctionWriter }">
+		<p style="text-align: right;">
+			<button type="button" class="btn btn-primary btn-lg" name="fixButton" onclick="updateAuction();" >수정하기</button>
+			<button type="button" class="btn btn-secondary btn-lg" name="fixButton">삭제하기</button>
+		</p>
+		</c:if>
+		
 		<jsp:include page="/WEB-INF/views/comment/auctionComment.jsp"></jsp:include>
 	</div>
 	
@@ -494,16 +507,36 @@ function basketCheck(check,sellNo,memberId){
 				</span>
 				<button type="button" class="btn btn-warning" id="auctionPrice" onclick="tender();">입찰하기</button>
 			</p>
-				<button type="button" class="btn btn-warning" id="trade" onclick="trade();" style="display:none;">거래하기</button>
+				<button type="button" class="btn btn-warning" id="trade" onclick="trade();" style="display:none;">거래 진행하기</button>
 		 
 	</div>
 		<!-- 시간 관련 코드 -->    
 	  <!-- <p style="color:red; font-size: 12px;">남은시간 : <span id="timer" style="color:red; font-size: 12px;"></span></p> -->
 	  
   <script>
+  /* (function(){
+	  var stDate1 = new Date().getTime();
+	  var edDate1 = new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime(); // 종료날짜
+	  var RemainDate1 = edDate1 - stDate1;
+	  
+	  int RemainDate5 = new Date().getTime() - new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime();
+	  
+	  if(RemainDate1 < 0){
+		  $("#mainTimer").attr("style","display:none");
+	      $("#finishAuction").attr("style","display:none");
+	      $("#kakao2").attr("style","display:none");
+	      $("#finishNotice").prop("style","display:inline-block");
+	  }
+	  
+  })() */
+	  
+ 
+  
+  
   $(document).ready(function(){
        tid=setInterval('msg_time()',1000); // 타이머 1초간격으로 수행
      });
+  
   var stDate = new Date().getTime();
   var edDate = new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime(); // 종료날짜
   var RemainDate = edDate - stDate;
@@ -530,14 +563,30 @@ function basketCheck(check,sellNo,memberId){
     	  $("#finishNotice").prop("style","none");
       }
       
-    }else if(RemainDate > 0 && ${auctionSelectOne.get(0).auctionIngPrice == auctionSelectOne.get(0).auctionDirectPrice}){
-    	
+    }
+    else if(${auctionSelectOne.get(0).auctionDirectPrice == auctionSelectOne.get(0).auctionIngPrice}){
+    	if(${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionBuyer}){
+	    	$("#mainTimer").attr("style","display:none");
+	        $("#finishAuction").attr("style","display:none");
+	        $("#kakao2").attr("style","display:none");
+	        $("#trade").prop("style","display:inline-block");	
+    	}
+    	else{
+    		$("#mainTimer").attr("style","display:none");
+   	        $("#finishAuction").attr("style","display:none");
+   	        $("#kakao2").attr("style","display:none");
+   	        $("#finishNotice").prop("style","display:inline-block");
+    	}
     }
     
-    else{
+     else{
       RemainDate = RemainDate - 1000; // 남은시간 -1초
-    }
+    } 
   }
+  
+  function updateAuction(){
+	  location.href='${pageContext.request.contextPath }/auction/updateAuction.do?auctionNo=${auctionSelectOne.get(0).auctionNo}';
+  };
   </script>
   <!--  -->
 	</div>

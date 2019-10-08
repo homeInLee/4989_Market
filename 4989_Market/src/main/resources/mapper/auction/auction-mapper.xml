@@ -77,15 +77,26 @@
 	<update id="auctionComplete">
 		update auction set auction_type='C' where auction_no = #{auctionNo}
 	</update>
+	
 	<update id="directPrice" parameterType="map">
-		update auction set auction_ing_price = #{auctionDirectPrice}, auction_buyer = #{auctionBuyer} where auction_no = #{auctionNo}
+		update auction set auction_ing_price = #{auctionDirectPrice}, auction_buyer = #{auctionBuyer}, auction_deltype = 'Y' where auction_no = #{auctionNo}
 	</update>
 	
 	<select id="auctionSellCnt" resultType="int">
 		select count(*) cnt from auction where auction_writer = #{memberId}
 	</select>
+	
 	<select id="auctionBuyCnt" resultType="int">
 		select count(*) cnt from auction where auction_buyer = #{memberId}
 	</select>
+	
+	<select id="updateAuction" resultType="auction">
+		select * from auction where auction_no = #{auctionNo}
+	</select>
+	
+	<select id="updateAttachment" resultType="attachment">
+		select * from attachment where board_no = #{auctionNo}
+	</select>
+	
 	
 </mapper>

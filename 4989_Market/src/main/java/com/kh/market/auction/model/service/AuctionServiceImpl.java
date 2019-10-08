@@ -119,5 +119,15 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.auctionBuyCnt(memberId);
 	}
 
+	@Override
+	public Auction updateAuction(int auctionNo) {
+		return auctionDAO.updateAuction(auctionNo);
+	}
+
+	@Override
+	public List<Map<String, String>> updateAttachment(int auctionNo) {
+		return auctionDAO.updateAttachment(auctionNo);
+	}
+
 
 }
