@@ -39,7 +39,7 @@ h2, section{
 	top: -2px;
 }
 	
-/* ul.pageUl {
+ul.pageUl {
     text-align:center;
     top: 2px;
 }
@@ -82,7 +82,7 @@ ul li a:hover, ul li a:focus {
     color:#fff;
     border:1px solid #1b5ac2;
     background-color:#1b5ac2;
-} */
+}
 </style>
 <script>
 //판매완료하기 기능
@@ -141,7 +141,7 @@ function auctionComplete(auctionNo,auctionBuyer){
 			</article>
 			
 		</c:forEach>
-		<%-- <div>
+		<div>
 		    <ul class="pageUl">
 		        <c:if test="${paging.prev}">
 		            <li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
@@ -155,10 +155,10 @@ function auctionComplete(auctionNo,auctionBuyer){
 		            <li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
 		        </c:if>
 		    </ul>
-		</div> --%>
+		</div>
 	</section>
 
-<!-- <script>
+<script>
 //이전 버튼 이벤트
 function fn_prev(page, range, rangeSize) {
     var page = ((range - 2) * rangeSize) + 1;
@@ -188,5 +188,5 @@ function fn_next(page, range, rangeSize) {
     
     location.href = url;
 }
-</script> -->
+</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

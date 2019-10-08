@@ -75,11 +75,11 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.mainImage();
 	}
 
-//	@Override
-//	public List<Auction> memberAutionSellView(Map<String, Object> map) {
-//		
-//		return auctionDAO.memberAuctionSellView(map);
-//	}
+	@Override
+	public List<Auction> memberAutionSellView(Map<String, Object> map) {
+		
+		return auctionDAO.memberAuctionSellView(map);
+	}
 
 	@Override
 	public List<Attachment> auctionAttachment(String boardName) {
@@ -87,11 +87,11 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.auctionAttachment(boardName);
 	}
 
-//	@Override
-//	public List<Auction> memberAuctionBuyView(Map<String, Object> map) {
-//		
-//		return auctionDAO.memberAuctionBuyView(map);
-//	}
+	@Override
+	public List<Auction> memberAuctionBuyView(Map<String, Object> map) {
+		
+		return auctionDAO.memberAuctionBuyView(map);
+	}
 
 	@Override
 	public int ingPrice(Map<String, Object> ingMap) {
@@ -109,15 +109,15 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.directPrice(directMap);
 	}
 	
-//	@Override
-//	public int auctionSellCnt(String memberId) {
-//		return auctionDAO.auctionSellCnt(memberId);
-//	}
-//
-//	@Override
-//	public int auctionBuyCnt(String memberId) {
-//		return auctionDAO.auctionBuyCnt(memberId);
-//	}
+	@Override
+	public int auctionSellCnt(String memberId) {
+		return auctionDAO.auctionSellCnt(memberId);
+	}
+
+	@Override
+	public int auctionBuyCnt(String memberId) {
+		return auctionDAO.auctionBuyCnt(memberId);
+	}
 
 
 }

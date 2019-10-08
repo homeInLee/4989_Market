@@ -38,7 +38,7 @@ h2, section{
 	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	top: -2px;
 }
-/* 	
+ 	
 ul.pageUl {
     text-align:center;
     top: 2px;
@@ -82,7 +82,7 @@ ul li a:hover, ul li a:focus {
     color:#fff;
     border:1px solid #1b5ac2;
     background-color:#1b5ac2;
-} */
+}
 </style>
 
 <div class="submenu">
@@ -124,7 +124,7 @@ ul li a:hover, ul li a:focus {
 				<br /><br />
 			</article>
 		</c:forEach>
-		<%-- <div>
+		<div>
 		    <ul class="pageUl">
 		        <c:if test="${paging.prev}">
 		            <li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
@@ -138,10 +138,10 @@ ul li a:hover, ul li a:focus {
 		            <li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
 		        </c:if>
 		    </ul>
-		</div> --%>
+		</div>
 	</section>
 
-<!-- <script>
+<script>
 //이전 버튼 이벤트
 function fn_prev(page, range, rangeSize) {
     var page = ((range - 2) * rangeSize) + 1;
@@ -171,6 +171,6 @@ function fn_next(page, range, rangeSize) {
     
     location.href = url;
 }
-</script> -->
+</script>
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
