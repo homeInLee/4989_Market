@@ -52,23 +52,23 @@
 		order by auction_no desc
 	</select>
 	
-	<!-- <select id="memberAuctionSellView" resultType="auction">
+	<select id="memberAuctionSellView" resultType="auction">
 		select * from
         ( select rownum rnum, A.* from
         ( select * from auction A where auction_writer=#{memberId} order by auction_no desc) A) A
         where rnum between #{paging.startList}+1 and #{paging.startList} + #{paging.listSize}
-	</select> -->
+	</select>
 	
 	<select id="auctionAttachment" resultType="attachment">
 		select * from attachment where board_name=#{boardName}
 	</select>
 	
-	<!-- <select id="memberAuctionBuyView" resultType="auction">
+	<select id="memberAuctionBuyView" resultType="auction">
 		select * from
         ( select rownum rnum, A.* from
         ( select * from auction A where auction_buyer=#{memberId} order by auction_no desc) A) A
         where rnum between #{paging.startList} + 1 and #{paging.startList} + #{paging.listSize}
-	</select> -->
+	</select>
 	
 	<update id="ingPrice" parameterType="map">
 		update auction set auction_ing_price = #{auctionIngPrice}, auction_buyer = #{auctionBuyer} where auction_no = #{auctionNo}
@@ -81,11 +81,11 @@
 		update auction set auction_ing_price = #{auctionDirectPrice}, auction_buyer = #{auctionBuyer} where auction_no = #{auctionNo}
 	</update>
 	
-	<!-- <select id="auctionSellCnt" resultType="int">
+	<select id="auctionSellCnt" resultType="int">
 		select count(*) cnt from auction where auction_writer = #{memberId}
 	</select>
 	<select id="auctionBuyCnt" resultType="int">
 		select count(*) cnt from auction where auction_buyer = #{memberId}
-	</select> -->
+	</select>
 	
 </mapper>

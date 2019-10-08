@@ -191,38 +191,38 @@ public class AuctionController {
 	
 	@RequestMapping("/memberAuctionSellView.do")
 	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
-//		String boardName="A";
-//		int listCnt = auctionService.auctionSellCnt(memberId);
-//		Paging paging = new Paging();
-//		paging.pageInfo(page, range, listCnt);
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("memberId", memberId);
-//		map.put("paging", paging);
-//		List<Auction> auctionList=auctionService.memberAutionSellView(map);
-//		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
-//		
-//		mav.addObject("attachmentList",attachmentList);
-//		mav.addObject("auctionList",auctionList);
-//		mav.addObject("paging",paging);
+		String boardName="A";
+		int listCnt = auctionService.auctionSellCnt(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("paging", paging);
+		List<Auction> auctionList=auctionService.memberAutionSellView(map);
+		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+		
+		mav.addObject("attachmentList",attachmentList);
+		mav.addObject("auctionList",auctionList);
+		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionSellView");
 		return mav;
 	}
 	
 	@RequestMapping("/memberAuctionBuyView.do")
 	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
-//		String boardName="A";
-//		int listCnt = auctionService.auctionBuyCnt(memberId);
-//		Paging paging = new Paging();
-//		paging.pageInfo(page, range, listCnt);
-//		Map<String, Object> map = new HashMap<>();
-//		map.put("memberId", memberId);
-//		map.put("paging", paging);
-//		List<Auction> auctionList=auctionService.memberAuctionBuyView(map);
-//		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
-//		
-//		mav.addObject("attachmentList",attachmentList);
-//		mav.addObject("auctionList",auctionList);
-//		mav.addObject("paging",paging);
+		String boardName="A";
+		int listCnt = auctionService.auctionBuyCnt(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("paging", paging);
+		List<Auction> auctionList=auctionService.memberAuctionBuyView(map);
+		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
+		
+		mav.addObject("attachmentList",attachmentList);
+		mav.addObject("auctionList",auctionList);
+		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionBuyView");
 		return mav;
 	}

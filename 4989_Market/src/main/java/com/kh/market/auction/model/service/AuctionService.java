@@ -21,11 +21,11 @@ public interface AuctionService {
 
 	List<Map<String, String>> mainImage();
 
-//	List<Auction> memberAutionSellView(Map<String, Object> map);
+	List<Auction> memberAutionSellView(Map<String, Object> map);
 
 	List<Attachment> auctionAttachment(String boardName);
 
-//	List<Auction> memberAuctionBuyView(Map<String, Object> map);
+	List<Auction> memberAuctionBuyView(Map<String, Object> map);
 
 	int ingPrice(Map<String, Object> ingMap);
 
@@ -33,9 +33,9 @@ public interface AuctionService {
 
 	int directPrice(Map<String, Object> directMap);
 
-//	int auctionSellCnt(String memberId);
+	int auctionSellCnt(String memberId);
 
-//	int auctionBuyCnt(String memberId);
+	int auctionBuyCnt(String memberId);
 
 
 
