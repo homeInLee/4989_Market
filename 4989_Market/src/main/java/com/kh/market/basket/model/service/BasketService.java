@@ -12,9 +12,9 @@ public interface BasketService {
 	//페이지당 게시물수
 	int NUM_PER_PAGE=8;
 	
-	List<Product> basketView(Map<Object, Object> map);
+	List<Product> basketView(Map<String, Object> map);
 
-	List<Basket> totalBasketCount(String basketMemberId);
+	int totalBasketCount(String basketMemberId);
 
 	int basketInsert(Basket b);
 
@@ -22,6 +22,8 @@ public interface BasketService {
 
 	Basket basketCheck(Basket b);
 
-	List<Auction> basketAuctionView(Map<Object, Object> map);
+	List<Auction> basketAuctionView(Map<String, Object> map);
+
+	int auctionBasketCnt(String basketMemberId);
 
 }

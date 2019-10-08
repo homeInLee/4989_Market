@@ -15,8 +15,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
-<style>
-</style>
+
 
 </head>
 <script>
@@ -73,14 +72,6 @@ $(()=>{
 					    </ul>
 				    </li>
 					<li>
-						<a href="#">무료나눔</a>
-						<ul>
-						    <li><a href="#">menu1</a></li>
-						    <li><a href="#">menu2</a></li>
-						    <li><a href="#">menu3</a></li>
-					    </ul>
-					</li>
-					<li>
 						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a>
 						<ul>
 						    <li><a href="#">menu1</a></li>
@@ -89,11 +80,10 @@ $(()=>{
 					    </ul>
 					</li>
 					<li>
-						<a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a>
+						<a href="">등록하기</a>
 						<ul>
-						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
-						    <li><a href="#">menu2</a></li>
-						    <li><a href="#">menu3</a></li>
+						    <li><a href="${pageContext.request.contextPath }/product/productRegistration.do">중고물품</a></li>
+						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품</a></li>
 					    </ul>
 					</li>
                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
@@ -126,3 +116,5 @@ $(()=>{
 			</div>
 		</div>
 	</div>
+	
+	

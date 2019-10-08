@@ -4,14 +4,17 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="basket">
 	<select id="basketView" resultType="product">
-		select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype,filecount from sell S join (select A.*,
-		(select count(*) from basket 
-		where basket_sell_no=A.basket_sell_no) filecount
-		from basket A where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}
+	
+		select * from
+        ( select rownum rnum, X.* from
+        (select S.sell_no,S.sell_title,S.sell_writer,S.sell_buyer,S.sell_content,S.sell_state,S.sell_price,S.sell_date,S.sell_readcount,S.sell_deldate,S.sell_deltype from sell S join 
+        (select A.* from basket A where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B 
+        on S.sell_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId}) X) X
+        where rnum between #{paging.startList} + 1 and #{paging.startList} + #{paging.listSize}
 	</select>
 	
-	<select id="totalBasketCount" resultType="basket">
-		select * from basket where basket_member_id=#{basketMemberId}
+	<select id="totalBasketCount" resultType="int">
+		select count(*) cnt from basket where basket_member_id=#{basketMemberId} and board_name = 'S'
 	</select>
 	
 	<insert id="basketInsert" parameterType="basket">
@@ -27,9 +30,14 @@
 	</select>
 	
 	<select id="basketAuctionView" resultType="auction">
-		select A.* from auction A join (select B.*,
-		(select count(*) from basket 
-		where basket_sell_no=B.basket_sell_no) filecount
-		from basket B where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) B on A.auction_no=B.basket_sell_no where B.basket_member_id=#{basketMemberId} and B.board_name=#{boardName}
+		select * from
+        ( select rownum rnum, X.* from
+        (select A.* from auction A join 
+        (select B.* from basket B where basket_member_id=#{basketMemberId} and board_name=#{boardName} order by basket_sell_no desc) C
+        on A.auction_no=C.basket_sell_no where C.basket_member_id=#{basketMemberId} and C.board_name=#{boardName}) X) X
+        where rnum between #{paging.startList} + 1 and #{paging.startList} + #{paging.listSize}
+	</select>
+	<select id="auctionBasketCnt" resultType="int">
+		select count(*) cnt from basket where basket_member_id=#{basketMemberId} and board_name = 'A'
 	</select>
 </mapper>
