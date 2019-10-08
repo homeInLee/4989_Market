@@ -122,14 +122,7 @@ function basketCheck(check,sellNo,memberId){
 		$("#image").attr("onclick","basketCheck(0,"+sellNo+",'"+memberId+"')");
 	}
 }
-//판매완료하기 기능
-function sellComplete(sellNo,sellBuyer){
-	if(confirm("정말 완료 하시겠습니까?")){
-		location.href="${pageContext.request.contextPath}/product/sellComplete.do?sellNo="+sellNo+"&sellWriter=${memberLoggedIn.memberId}&sellBuyer="+sellBuyer;
-	}else{
-		return;
-	}
-}
+
 </script>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value="" name="" />
@@ -227,13 +220,34 @@ function sellComplete(sellNo,sellBuyer){
 </div>
 <hr />
 
+<div>
+	<h3 style="padding: 32px 0">중고물품</h3>
+	<div>
+	<span>가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/>원</span></span> &nbsp;&nbsp;
+	</div>
+	<br />			
+</div>
 
 
-<!-- 판매완료하기 기능 -->
-<c:if test="${memberLoggedIn.memberId==p.sellWriter and 'sale' eq fn:trim(p.sellState)}">
-	<button class="badge badge-light" onclick="sellComplete(${p.sellNo},'${p.sellBuyer}')">판매완료하기</button>
-</c:if>
-<!--  -->
+
+<p>
+	구매자:
+	<c:choose>
+		<c:when test="${not empty p.sellBuyer}"><p>${p.sellBuyer}</p></c:when>
+		<c:when test="${empty p.sellBuyer}"><p>없음</p></c:when>
+	</c:choose>
+<p>
+
+
+
+<h4>등록일: ${p.sellDate}</h4>
+<h4>조회수: ${p.sellReadCount}</h4>
+<button onclick="updateProduct();">수정하기</button>
+<button onclick="deleteProduct();">삭제</button>
+
+<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
+
+
 <%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
 	<button onclick="updateProduct();">수정하기</button>
 	<button onclick="deleteProduct();">삭제</button>

@@ -21,13 +21,13 @@ public interface ProductDAO {
 
 	List<Product> productSearch(String searchWord);
 
-	List<Product> memberSellView(Map<Object, Object> map);
+	List<Product> memberSellView(Map<String, Object> map);
 
 	Product memberSellDetailView(int sellNo);
 
 	int sellComplete(int sellNo);
 
-	List<Product> memberBuyView(String memberId);
+	List<Product> memberBuyView(Map<String, Object> map);
 	
 	int insertImg(Attachment a);
 
@@ -35,11 +35,15 @@ public interface ProductDAO {
 
 	List<Attachment> attachSelectOne(String productNo);
 
-	List<Product> memberSellSize(String memberId);
+	int memberSellSize(String memberId);
 
 	List<Product> moreResult(Page p);
 
 	List<Attachment> moreAttach();
+
+	int productBuyerUpdate(Map<Object, Object> map);
+
+	int memberBuySize(String memberId);
 	
 
 }

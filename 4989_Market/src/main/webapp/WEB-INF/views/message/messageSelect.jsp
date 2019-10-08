@@ -8,6 +8,10 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <jsp:include page="/WEB-INF/views/review/reviewHeader.jsp"></jsp:include>
 <style>
+#containertable input, #containertable textarea{
+display: block;
+width: 500px;
+}
 .submenu{
 	text-align: center;
 	padding-bottom: 30px;
@@ -24,10 +28,14 @@ border: none;
 text-align: center;
 margin-left: 80px;
 }
+#containertable th{
+width: 209px;
+}
 #containertable td{
 border-bottom: 2px solid #403E8C;
 text-align: left;
 padding: 15px;
+width: 591px;
 }
 
 #containertable textarea:disabled,

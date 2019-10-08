@@ -47,63 +47,113 @@ public class NoticeController {
 		Paging paging = new Paging();
 		paging.pageInfo(page, range, listCnt);
 		List<Notice> list = noticeService.selectNoticeAll(paging);
-		
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		mav.addObject("list",list);
 		mav.addObject("paging",paging);
+		mav.addObject("type", "e");
 		mav.setViewName("notice/noticeList");
 		
 		return mav;
 	}
 	
 	@RequestMapping("/noticeMember")
-	public ModelAndView noticeMember(ModelAndView mav){
-
-		List<Notice> list = noticeService.selectNoticeMember();
+	public ModelAndView noticeMember(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range){
+		int listCnt = noticeService.noticeMemberCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticeMember(paging);
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		
 		mav.addObject("list",list);
-		mav.setViewName("notice/noticeListView");
+		mav.addObject("paging",paging);
+		mav.addObject("type", "m");
+		mav.setViewName("notice/noticeList");
 		
 		return mav;
 		
 	}
 	
 	@RequestMapping("/noticePayment")
-	public ModelAndView noticePayment(ModelAndView mav){
-		
-		List<Notice> list = noticeService.selectNoticePayment();
+	public ModelAndView noticePayment(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range){
+		int listCnt = noticeService.noticePaymentCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticePayment(paging);
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		
 		mav.addObject("list",list);
-		mav.setViewName("notice/noticeListView");
+		mav.addObject("paging",paging);
+		mav.addObject("type", "p");
+		mav.setViewName("notice/noticeList");
 		
 		return mav;
 	}
 	@RequestMapping("/noticeSell")
-	public ModelAndView noticeSell(ModelAndView mav){
-		
-		List<Notice> list = noticeService.selectNoticeSell();
+	public ModelAndView noticeSell(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range){
+		int listCnt = noticeService.noticeSellCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticeSell(paging);
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		
 		mav.addObject("list",list);
-		mav.setViewName("notice/noticeListView");
+		mav.addObject("paging",paging);
+		mav.addObject("type", "s");
+		mav.setViewName("notice/noticeList");
 		
 		return mav;
 	}
 	@RequestMapping("/noticeAuction")
-	public ModelAndView noticeAuction(ModelAndView mav){
-		
-		List<Notice> list = noticeService.selectNoticeAuction();
+	public ModelAndView noticeAuction(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range){
+		int listCnt = noticeService.noticeAuctionCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticeAuction(paging);
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		
 		mav.addObject("list",list);
-		mav.setViewName("notice/noticeListView");
+		mav.addObject("paging",paging);
+		mav.addObject("type", "a");
+		mav.setViewName("notice/noticeList");
 		
 		return mav;
 	}
 	@RequestMapping("/noticeOther")
-	public ModelAndView noticeOther(ModelAndView mav){
-		
-		List<Notice> list = noticeService.selectNoticeOther();
+	public ModelAndView noticeOther(ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range){
+		int listCnt = noticeService.noticeOtherCnt();
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		List<Notice> list = noticeService.selectNoticeOther(paging);
+		logger.info("list="+list);
+		for(int i=0; i<list.size(); i++) {
+			logger.info("noticeType="+list.get(i).getNoticeType());
+		}
+		logger.info("listCnt="+listCnt);
 		
 		mav.addObject("list",list);
-		mav.setViewName("notice/noticeListView");
+		mav.addObject("paging",paging);
+		mav.addObject("type", "o");
+		mav.setViewName("notice/noticeList");
 		
 		return mav;
 	}

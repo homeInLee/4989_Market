@@ -24,7 +24,7 @@ public interface ProductService {
 
 	List<Product> productSearch(String searchWord);
 
-	List<Product> memberSellView(Map<Object, Object> map);
+	List<Product> memberSellView(Map<String, Object> map);
 	
 	List<Attachment> attachList();
 
@@ -32,14 +32,18 @@ public interface ProductService {
 
 	int sellComplete(int sellNo);
 
-	List<Product> memberBuyView(String memberId);
+	List<Product> memberBuyView(Map<String, Object> map);
 
 	List<Attachment> attachSelectOne(String productNo);
 
-	List<Product> memberSellSize(String memberId);
+	int memberSellSize(String memberId);
 
 	List<Product> moreResult(Page p);
 
 	List<Attachment> moreAttach();
+
+	int productBuyerUpdate(Map<Object, Object> map);
+
+	int memberBuySize(String memberId);
 
 }

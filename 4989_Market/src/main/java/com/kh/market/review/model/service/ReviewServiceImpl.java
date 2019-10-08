@@ -22,7 +22,7 @@ public class ReviewServiceImpl implements ReviewService {
 	}
 
 	@Override
-	public List<Review> reviewContentForm(Map<Object, Object> map) {
+	public List<Review> reviewContentForm(Map<String, Object> map) {
 		
 		return reviewDAO.reviewContentForm(map);
 	}
@@ -31,5 +31,10 @@ public class ReviewServiceImpl implements ReviewService {
 	public List<Review> reviewMannerForm(String memberId) {
 		
 		return reviewDAO.reviewMannerForm(memberId);
+	}
+
+	@Override
+	public int reviewCnt(String memberId) {
+		return reviewDAO.reivewCnt(memberId);
 	}
 }

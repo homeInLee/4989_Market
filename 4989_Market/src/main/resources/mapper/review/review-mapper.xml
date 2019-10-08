@@ -13,17 +13,19 @@
 	</insert>
 	
 	<select id="reviewContentForm" resultMap="reviewMap">
-		select A.*,
-		(select count(*) from review 
-		where review_no=A.review_no) filecount
-		from review A where review_receiver=#{memberId} order by review_no desc	
+		select * from
+        ( select rownum rnum, A.* from
+        ( select * from review A where review_receiver=#{memberId} order by review_no desc) A) A
+        where rnum between #{paging.startList}+1 and #{paging.startList}+#{paging.listSize}
 	</select>
 	
 	<select id="reviewMannerForm" resultMap="reviewMap">
 		select * from review
 		where review_receiver=#{memberId}
 	</select>
-	
+	<select id="reviewCnt" resultType="int">
+		select count(*) cnt from review where review_receiver=#{memberId}
+	</select>
 	<resultMap type="review" id="reviewMap">
 		<result column="review_point" property="reviewPoint"
 				typeHandler="strArrTypeHandler"/>

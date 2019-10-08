@@ -32,6 +32,7 @@ import com.kh.market.auction.model.service.AuctionService;
 import com.kh.market.auction.model.vo.Auction;
 import com.kh.market.basket.model.service.BasketService;
 import com.kh.market.basket.model.vo.Basket;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
@@ -300,64 +301,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/memberSellView.do")
-	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav,@RequestParam(value="cPage",defaultValue="1", required=false) int cPage,HttpServletRequest request) {
-		
-		Map<Object, Object> map=new HashMap<Object, Object>();
+	public ModelAndView memberSellView(@RequestParam String memberId,ModelAndView mav, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range ,HttpServletRequest request) {
+
+		int listCnt = productService.memberSellSize(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
-		map.put("cPage", cPage);
-		
+		map.put("paging", paging);
 		List<Product> list=productService.memberSellView(map);
 		List<Attachment> attachmentList=productService.attachList();
-		
-		//2.2 전체게시글수, 전체페이지수 구하기
-		List<Product> memberSellSize=productService.memberSellSize(memberId);
-		int totalBoardCount = memberSellSize.size();
-				
-		//(공식2)전체페이지수 구하기
-		int totalPage = (int)Math.ceil((double)totalBoardCount/ProductService.NUM_PER_PAGE);
-		
-		//2.3 페이지바구성
-		String pageBar = "";	
-		int pageBarSize = 5;
-		//(공식3)시작페이지 번호 세팅
-		//cPage=5,pageBarSize=5 -> 1
-		//cPage=6,pageBarSize=5 -> 6
-		int pageStart = ((cPage - 1)/pageBarSize) * pageBarSize +1;
-		//종료페이지 번호 세팅
-		int pageEnd = pageStart+pageBarSize-1;
-		int pageNo = pageStart;
-				
-		//[이전] section
-		if(pageNo == 1 ){
-			//pageBar += "<span>[이전]</span>"; 
-		}
-		else {
-			pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+(pageNo-1)+"'>[이전]</a> ";
-			
-		}
-					
-		// pageNo section
-		// 보통 !(빠져나가는 조건식)으로 많이 쓴다.
-		while(!(pageNo>pageEnd || pageNo > totalPage)){
-					
-		if(cPage == pageNo ){
-				pageBar += "<span class='cPage'>"+pageNo+"</span> ";
-		} 
-		else {
-				pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+pageNo+"'>"+pageNo+"</a> ";
-		}
-				pageNo++;
-		}
-				
-		//[다음] section
-		if(pageNo > totalPage){
-			//pageBar += "<span>[다음]</span>";
-		} else {
-			pageBar += "<a href='"+request.getContextPath()+"/product/memberSellView.do?memberId="+memberId+"&cPage="+pageNo+"'>[다음]</a>";
-		}
-		
 		mav.addObject("attachmentList",attachmentList);
-		mav.addObject("pageBar",pageBar);
+		mav.addObject("paging",paging);
 		mav.addObject("list",list);
 		mav.setViewName("member/memberSellView");
 		return mav;
@@ -382,9 +337,15 @@ public class ProductController {
 		Message m=new Message(0, sellWriter+"님과의 거래가 완료되었습니다", sellWriter, sellBuyer, "구매물품 제목:"+p.getSellTitle()+",가격:"+p.getSellPrice(), null,"Y" ,null, null, null);
 		int result2=messageService.messageReview(m);
 		
+		Map<Object, Object> map=new HashMap<Object, Object>();
+		
+		map.put("sellNo", sellNo);
+		map.put("sellBuyer", sellBuyer);
+		int result3=productService.productBuyerUpdate(map);
+		
 		String msg="";
 		String loc="";
-		if(result1>0&&result2>0) {
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			loc="/product/memberSellView.do?memberId="+sellWriter;
 		}else {
@@ -398,12 +359,18 @@ public class ProductController {
 	}
 	
 	@RequestMapping("/memberbuyView.do")
-	public ModelAndView memberbuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
-		
-		List<Product> list=productService.memberBuyView(memberId);
+	public ModelAndView memberbuyView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
+		int listCnt = productService.memberBuySize(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("paging", paging);
+		List<Product> list=productService.memberBuyView(map);
 		List<Attachment> attachmentList=productService.attachList();
 		mav.addObject("attachmentList",attachmentList);
 		mav.addObject("list",list);
+		mav.addObject("paging", paging);
 		mav.setViewName("member/memberBuyView");
 		return mav;
 	}

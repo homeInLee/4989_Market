@@ -18,28 +18,28 @@ public class NoticeDAOImpl implements NoticeDAO {
 	SqlSessionTemplate session;
 
 	@Override
-	public List<Notice> selectNoticeMember() {
-		return session.selectList("notice.selectNoticeMember");
+	public List<Notice> selectNoticeMember(Paging paging) {
+		return session.selectList("notice.selectNoticeMember", paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticePayment() {
-		return session.selectList("notice.selectNoticePayment");
+	public List<Notice> selectNoticePayment(Paging paging) {
+		return session.selectList("notice.selectNoticePayment", paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeSell() {
-		return session.selectList("notice.selectNoticeSell");
+	public List<Notice> selectNoticeSell(Paging paging) {
+		return session.selectList("notice.selectNoticeSell", paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeAuction() {
-		return session.selectList("notice.selectNoticeAuction");
+	public List<Notice> selectNoticeAuction(Paging paging) {
+		return session.selectList("notice.selectNoticeAuction", paging);
 	}
 
 	@Override
-	public List<Notice> selectNoticeOther() {
-		return session.selectList("notice.selectNoticeOther");
+	public List<Notice> selectNoticeOther(Paging paging) {
+		return session.selectList("notice.selectNoticeOther", paging);
 	}
 
 	@Override
@@ -109,6 +109,31 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public int noticeListCnt() {
 		return session.selectOne("notice.noticeListCnt");
+	}
+
+	@Override
+	public int noticeMemberCnt() {
+		return session.selectOne("notice.noticeMemberCnt");
+	}
+
+	@Override
+	public int noticePaymentCnt() {
+		return session.selectOne("notice.noticePaymentCnt");
+	}
+
+	@Override
+	public int noticeSellCnt() {
+		return session.selectOne("notice.noticeSellCnt");
+	}
+
+	@Override
+	public int noticeAuctionCnt() {
+		return session.selectOne("notice.noticeAuctionCnt");
+	}
+
+	@Override
+	public int noticeOtherCnt() {
+		return session.selectOne("notice.noticeOtherCnt");
 	}
 	
 }

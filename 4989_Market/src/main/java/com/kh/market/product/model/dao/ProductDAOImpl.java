@@ -59,13 +59,9 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> memberSellView(Map<Object, Object> map) {
-		int cPage=(int)map.get("cPage");
-		int offset = (cPage-1)*ProductService.NUM_PER_PAGE;
-		int limit = ProductService.NUM_PER_PAGE;
-		RowBounds rowBounds=new RowBounds(offset, limit);
+	public List<Product> memberSellView(Map<String, Object> map) {
 		
-		return sqlSession.selectList("product.memberSellView",map,rowBounds);
+		return sqlSession.selectList("product.memberSellView",map);
 	}
 	public int insertImg(Attachment a) {
 		return sqlSession.insert("product.insertImg", a);
@@ -91,9 +87,9 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> memberBuyView(String memberId) {
+	public List<Product> memberBuyView(Map<String, Object> map) {
 		
-		return sqlSession.selectList("product.memberBuyView",memberId);
+		return sqlSession.selectList("product.memberBuyView",map);
 	}
 
 	@Override
@@ -103,8 +99,8 @@ public class ProductDAOImpl implements ProductDAO {
 	}
 
 	@Override
-	public List<Product> memberSellSize(String memberId) {
-		return sqlSession.selectList("product.memberSellSize",memberId);
+	public int memberSellSize(String memberId) {
+		return sqlSession.selectOne("product.memberSellSize",memberId);
 	}
 	
 	public List<Product> moreResult(Page p) {
@@ -116,6 +112,16 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<Attachment> moreAttach() {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.moreAttach");
+	}
+
+	@Override
+	public int productBuyerUpdate(Map<Object, Object> map) {
+		
+		return sqlSession.update("product.productBuyerUpdate",map);
+	}
+	@Override
+	public int memberBuySize(String memberId) {
+		return sqlSession.selectOne("product.memberBuySize",memberId);
 	}
 
 	

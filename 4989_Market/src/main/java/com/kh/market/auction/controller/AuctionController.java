@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.SessionAttributes;
@@ -27,9 +28,14 @@ import com.kh.market.auction.model.vo.AuctionForList;
 import com.kh.market.basket.model.service.BasketService;
 import com.kh.market.basket.model.vo.Basket;
 import com.kh.market.comment.model.service.CommentService;
+import com.kh.market.common.model.vo.Paging;
 import com.kh.market.common.util.HelloSpringUtils;
 import com.kh.market.member.model.service.MemberService;
 import com.kh.market.member.model.vo.Member;
+import com.kh.market.message.model.service.MessageService;
+import com.kh.market.message.model.vo.Message;
+import com.kh.market.product.model.vo.Product;
+import com.kh.market.review.model.vo.Review;
 
 @Controller
 @RequestMapping("/auction")
@@ -47,6 +53,9 @@ public class AuctionController {
 	
 	@Autowired
 	BasketService basketService;
+	
+	@Autowired
+	MessageService messageService;
 	
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
@@ -73,7 +82,7 @@ public class AuctionController {
 		
 		String boardName="A";
 		//장바구니 여부 검사 코드
-		Basket b=new Basket(auctionNo, memberId,boardName);
+		Basket b=new Basket(auctionNo, memberId, boardName);
 		Basket basket=basketService.basketCheck(b);
 		//
 		
@@ -179,44 +188,96 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/memberAuctionSellView.do")
-	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId) {
+	public ModelAndView memberAutionSellView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
 		String boardName="A";
-		List<Auction> auctionList=auctionService.memberAutionSellView(memberId);
+		int listCnt = auctionService.auctionSellCnt(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("paging", paging);
+		List<Auction> auctionList=auctionService.memberAutionSellView(map);
 		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
 		
 		mav.addObject("attachmentList",attachmentList);
 		mav.addObject("auctionList",auctionList);
+		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionSellView");
 		return mav;
 	}
 	
 	@RequestMapping("/memberAuctionBuyView.do")
-	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId) {
+	public ModelAndView memberAuctionBuyView(ModelAndView mav,@RequestParam("memberId") String memberId, @RequestParam(required = false, defaultValue = "1") int page, @RequestParam(required = false, defaultValue = "1") int range) {
 		String boardName="A";
-		List<Auction> auctionList=auctionService.memberAuctionBuyView(memberId);
+		int listCnt = auctionService.auctionBuyCnt(memberId);
+		Paging paging = new Paging();
+		paging.pageInfo(page, range, listCnt);
+		Map<String, Object> map = new HashMap<>();
+		map.put("memberId", memberId);
+		map.put("paging", paging);
+		List<Auction> auctionList=auctionService.memberAuctionBuyView(map);
 		List<Attachment> attachmentList=auctionService.auctionAttachment(boardName);
 		
 		mav.addObject("attachmentList",attachmentList);
 		mav.addObject("auctionList",auctionList);
+		mav.addObject("paging",paging);
 		mav.setViewName("member/memberAuctionBuyView");
 		return mav;
 	}
 	
 	@RequestMapping("/ingPrice.do")
-		public String ingPrice(@RequestParam("auctionNo") int auctionNo, @RequestParam("auctionIngPrice") int auctionIngPrice, @RequestParam("auctionBuyer") String auctionBuyer) {
+		public String ingPrice(@RequestParam("auctionNo") int auctionNo, 
+								@RequestParam("auctionIngPrice") int auctionIngPrice, 
+								@RequestParam("auctionBuyer") String auctionBuyer,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
 			Map<String, Object> ingMap = new HashMap<>();
 			ingMap.put("auctionNo", auctionNo);
 			ingMap.put("auctionIngPrice", auctionIngPrice);
 			ingMap.put("auctionBuyer", auctionBuyer);
 			
-			logger.info("ingPrice.do");
-			
 			int result = auctionService.ingPrice(ingMap);
 		
 		
-			return "redirect:/auction/auctionSelectOne.do";
+			return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 		}
 	
+	@RequestMapping("/auctionComplete.do")
+	public ModelAndView sellComplete(ModelAndView mav,@RequestParam("auctionNo") int auctionNo,@RequestParam("auctionWriter") String auctionWriter,@RequestParam("auctionBuyer") String auctionBuyer) {
+		
+		int result1=auctionService.auctionComplete(auctionNo);
+		List<AuctionForList> a=auctionService.auctionSelectOne(auctionNo);
+		Message m=new Message(0, auctionWriter+"님과의 거래가 완료되었습니다", auctionWriter, auctionBuyer, "구매물품 제목:"+a.get(0).getAuctionTitle()+",가격:"+a.get(0).getAuctionPrice(), null,"Y" ,null, null, null);
+		int result2=messageService.messageReview(m);
+	
+		String msg="";
+		String loc="/auction/memberAuctionSellView.do?memberId="+auctionWriter;
+		if(result1>0&&result2>0) {
+			msg="판매완료확정 성공";
+			
+		}else {
+			msg="판매완료확정 실패";
+		}
+		mav.addObject("msg",msg);
+		mav.addObject("loc",loc);
+		mav.setViewName("common/msg");
+		return mav;
+	}
+	@RequestMapping("/directPrice.do")
+		public String directPrice(@RequestParam("auctionNo") int auctionNo, 
+								@RequestParam("auctionDirectPrice") int auctionDirectPrice, 
+								@RequestParam("auctionBuyer") String auctionBuyer,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+		
+			Map<String, Object> directMap = new HashMap<>();
+			directMap.put("auctionNo", auctionNo);
+			directMap.put("auctionDirectPrice", auctionDirectPrice);
+			directMap.put("auctionBuyer", auctionBuyer);
+			
+			int result = auctionService.directPrice(directMap);
+		
+		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
+	}
+		
 	
 	
 	
