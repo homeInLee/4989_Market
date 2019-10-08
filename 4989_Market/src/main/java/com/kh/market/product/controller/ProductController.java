@@ -189,7 +189,10 @@ public class ProductController {
 
 	
 	@GetMapping("/productView.do")
-	public String productSelectOne(@RequestParam String productNo, @RequestParam String memberId,Model model) {
+	public String productSelectOne(@RequestParam String productNo, 
+			@RequestParam String memberId,
+			@RequestParam(value="decNo", defaultValue="0", required=false)int decNo,
+			Model model) {
 		logger.info(productNo);
 		String boardName="S";
 		//장바구니 여부 검사 코드
@@ -209,6 +212,7 @@ public class ProductController {
 		model.addAttribute("basket",basket);
 		model.addAttribute("p", p);
 		model.addAttribute("attach", attach);
+		model.addAttribute("decNo",decNo);
 		return "/product/productView";
 		
 	}

@@ -93,7 +93,8 @@ public class MessageController {
 	}
 	
 	@RequestMapping("/messageSelect.do")
-	public String messageSelect(Model model, @RequestParam("messageNo") String messageNo, @RequestParam("memberId") String memberId) {
+	public String messageSelect(Model model, @RequestParam("messageNo") String messageNo, @RequestParam("memberId") String memberId,
+								@RequestParam(value="decNo", defaultValue="0", required=false)int decNo) {
 		logger.info("messageNo="+messageNo);
 		Message message = messageService.messageSelect(messageNo);
 		if(memberId.equals(message.getMessageReciver())) {
@@ -101,6 +102,7 @@ public class MessageController {
 		}
 		logger.info("message="+message);
 		model.addAttribute("message", message);
+		model.addAttribute("decNo",decNo);
 		return("message/messageSelect");
 	}
 	

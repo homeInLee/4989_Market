@@ -69,10 +69,30 @@ width: 591px;
 		<input class="log" type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${message.messageReciver }&messageReciver=${message.messageWriter }'"/>
 		<input class="log" type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/message/messageDelete.do?messageNo=${message.messageNo}&memberId=${message.messageReciver }'" />
 		</c:if>
+		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+			<input type="button" id="declarationProcess" value="신고처리" />
+			</c:if>
+			<button id="messageDeclaration">신고</button>
+			<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
+				<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
+				<input type="hidden" id="declarationDivision" name="declarationDivision" value="s" />
+				<input type="hidden" id="declarationReceiver" name="declarationReceiver" value="${message.messageWriter}" />
+				<input type="hidden" id="boardName" name="boardName" value="s" />
+				<input type="hidden" id="boardNo" name="boardNo" value="${message.messageNo}" />
+			</form>	
 		<c:if test="${message.messageReview eq 'Y'}">
 			<!-- 여기서부터 하자 -->
 			<input class="log" type="button" value="설문조사" onclick="location.href='${pageContext.request.contextPath}/review/reviewCheckForm.do?messageWriter=${message.messageWriter}&messageNo=${message.messageNo}'"/>
 		</c:if>
 	</div>
 	
+<!-- 	신고처리 -->
+	<script>
+	$("#declarationProcess").click(()=>{
+		location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${message.messageReciver}&decNo=${decNo}";
+	});
+	$("#messageDeclaration").click(()=>{
+		$("#frmPop").submit();
+	});
+	</script>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

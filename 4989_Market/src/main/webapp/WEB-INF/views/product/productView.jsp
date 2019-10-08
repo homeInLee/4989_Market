@@ -73,6 +73,78 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 	margin-left: 0px;
 	text-align: left;
 }
+.zeta-menu-bar {
+	display: inline-block;
+	width: 100%;
+}
+
+.zeta-menu {
+	margin: 0;
+	padding: 0;
+}
+
+.zeta-menu li {
+	float: left;
+	list-style: none;
+	position: relative;
+}
+
+/* .zeta-menu li:hover { */
+/* 	background: black; */
+/* } */
+
+/* .zeta-menu li.expand { */
+/* 	background: white; */
+/* } */
+
+.zeta-menu li.expand>a {
+	color: black;
+}
+
+.zeta-menu a {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+}
+
+/* .zeta-menu li.expand #declaration:hover{ */
+/* background: lightgray;}  */
+
+/* .zeta-menu li.expand>a:hover{ */
+/* background: white;}  */
+
+.zeta-menu ul {
+	background: #fff;
+	border: 1px solid silver;
+	display: none;
+	padding: 0;
+	position: absolute;
+/* 	여기부터 위치 조정 */
+	left: -11;
+	top: -99;
+	width: 115px;
+}
+
+.zeta-menu ul li {
+	float: none;
+}
+
+.zeta-menu ul li.expand {
+	background: #ddd;
+}
+
+.zeta-menu ul li.expand a {
+	color: black;
+}
+
+.zeta-menu ul a {
+	color: black;
+}
+
+.zeta-menu ul ul {
+	left: 100%;
+	top: 0;
+}
 </style>
 <script>
 //장바구니 기능 코드
@@ -225,10 +297,39 @@ function basketCheck(check,sellNo,memberId){
 
 <div id="memberInfo">
 	<hr />
-		<a href="">
-			<h6>${p.sellWriter}</h6>
-   		</a>
+		<div class='zeta-menu-bar'>
+  		<ul class="zeta-menu">	
+		<li><a href="#"><h6>${p.sellWriter}</h6></a>
+	   		<ul>
+		      <li><a id="memberNotice">회원정보</a></li>
+		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationWriter=${memberLoggedIn.memberId }&declarationReceiver=${p.sellWriter}&declarationDivision=m" id="id-declaration"
+		      		>신고</a>
+		      		</li>
+	          <li><input type="hidden" name="declarationReceiver" value="${p.sellWriter}"/></li>
+	          <li><input type="hidden" name="declarationDivision" value="m"/></li>
+	        </ul>
+		</li>
+		</ul>
+	     </div>  
+<!-- 		<a href=""> -->
+<%-- 			<h6>${p.sellWriter}</h6> --%>
+<!--    		</a> -->
 	   		<span>${p.sellAddress}</span>	
+	   		<!-- 	신고 버튼	 -->
+
+		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+		<input type="button" id="declarationProcess" value="신고처리" />
+		</c:if>
+		<input type="button" id="acutionDeclaration" value="신고" />		
+		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
+		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
+		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
+		<input type="hidden" id="declarationReceiver" name="declarationReceiver" value="${p.sellWriter}" />
+		<input type="hidden" id="boardName" name="boardName" value="p" />
+		<input type="hidden" id="boardNo" name="boardNo" value="${p.sellNo }" />
+		</form>	 
+<!-- 신고 -->
+	   		
 	<hr />
 </div>
 <div id="productInfo">
@@ -280,7 +381,6 @@ function basketCheck(check,sellNo,memberId){
 <button onclick="updateProduct();">수정하기</button>
 <button onclick="deleteProduct();">삭제</button>
 
-<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
 
 
 <%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
@@ -315,6 +415,41 @@ function goToList() {
 
 
 
+<!-- 신고기능관련 script -->
+<script>
+$("#declarationProcess").click(()=>{
+	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${p.sellWriter}&decNo=${decNo}";
+});
+$("#acutionDeclaration").click(()=>{
+	$("#frmPop").submit();
+});
+
+$(function(){
+	$(document).mouseup(function(e) {
+		if ($(e.target).parents('.zeta-menu').length == 0) {
+			$('.zeta-menu li').removeClass('expand');
+			$('.zeta-menu ul').hide();
+		}
+	});
+	$(".zeta-menu>li:has(ul)>a").each( function() {
+		$(this).html( $(this).html());
+	});
+	$(".zeta-menu ul li:has(ul)")
+		.find("a:first")
+		.append("<p style='float:right;margin:-3px'>&#9656;</p>");
+
+	$(".zeta-menu li>a").click(function(){
+		var li = $(this).parent();
+		var ul = li.parent()
+		ul.find('li').removeClass('expand');
+		ul.find('ul').not(li.find('ul')).hide();
+		li.children('ul').toggle();
+		if( li.children('ul').is(':visible') || li.has('ul')) {
+			li.addClass('expand');
+		}
+	});
+});
+</script> 
 
 <!-- 이미지 슬라이더 기본이미지에서 실제 이미지로 변경하는 스크립트 -->
 <script>
@@ -329,7 +464,6 @@ $(()=>{
 
 
 </script> 
-
 
 
 

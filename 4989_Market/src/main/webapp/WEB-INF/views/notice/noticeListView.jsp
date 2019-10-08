@@ -7,7 +7,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 input.btn.btn{
-width:200px;
+width:180px;
 background-color: white; 
 border: 1px solid #1b5ac2;
 color: navy;
@@ -16,7 +16,7 @@ text-align: center;
 text-decoration: none;
 display: inline;
 font-size: 15px;
-margin: 50px 0 0 0;
+margin: 30px 0 0 0;
 cursor: pointer;
 }
 
@@ -35,7 +35,7 @@ cursor: pointer;
 border: 1px solid #1b5ac2;
 }
 div#result.result th{
-border: none;
+/* border: none; */
 width: 800px;
 height: 50px;
 margin: auto;
@@ -130,7 +130,7 @@ ul li a:hover, ul li a:focus {
 
 <br />
 <br />
-<h2 style="text-align: center;">noticeListView</h2>
+<h2 style="text-align: center;">공지사항</h2>
 <br />
 <div id="noticeListView-container">
 <section id="header-bottom">
