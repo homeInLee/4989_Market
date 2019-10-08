@@ -277,6 +277,21 @@ public class AuctionController {
 		
 		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 	}
+	
+	@RequestMapping("/updateAuction.do")
+		public String updateAuction(@RequestParam("auctionNo") int auctionNo, Model model) {
+			
+			Auction updateAuction = auctionService.updateAuction(auctionNo);
+			List<Map<String,String>> updateAttachment = auctionService.updateAttachment(auctionNo);
+			
+			int attachmentIndex = 5 - updateAttachment.size();
+			
+			model.addAttribute("updateAuction", updateAuction);
+			model.addAttribute("updateAttachment", updateAttachment);
+			model.addAttribute("attachmentIndex", attachmentIndex);
+		
+		return "auction/auctionUpdate";
+	}
 		
 	
 	

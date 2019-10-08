@@ -37,6 +37,10 @@ public interface AuctionService {
 
 	int auctionBuyCnt(String memberId);
 
+	Auction updateAuction(int auctionNo);
+
+	List<Map<String, String>> updateAttachment(int auctionNo);
+
 
 
 }

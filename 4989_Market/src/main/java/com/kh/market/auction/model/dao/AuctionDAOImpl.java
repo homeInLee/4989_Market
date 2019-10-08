@@ -97,6 +97,16 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public int auctionBuyCnt(String memberId) {
 		return sqlSession.selectOne("auction.auctionBuyCnt", memberId);
 	}
+
+	@Override
+	public Auction updateAuction(int auctionNo) {
+		return sqlSession.selectOne("auction.updateAuction",auctionNo);
+	}
+
+	@Override
+	public List<Map<String, String>> updateAttachment(int auctionNo) {
+		return sqlSession.selectList("auction.updateAttachment",auctionNo);
+	}
 	
 
 }

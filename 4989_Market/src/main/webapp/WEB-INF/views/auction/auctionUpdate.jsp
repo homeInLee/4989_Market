@@ -6,7 +6,7 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
-	<jsp:param value= "경매물품 등록" name="pageTitle"/>
+	<jsp:param value= "경매물품 수정" name="pageTitle"/>
 </jsp:include>
 
 <style>
@@ -25,7 +25,7 @@ div#memberId-container span.error{color:red;}
 <br />
 <br />
 <div style="text-align: center;">
-	<h2 style="padding: 30px 0;">경매물품 등록</h2>
+	<h2 style="padding: 30px 0;">경매물품 수정</h2>
 </div>
 
 <hr style="background-color:orange; height:5px;" width="70px;"/>
@@ -41,7 +41,7 @@ div#memberId-container span.error{color:red;}
 				<th>경매 물품명</th>
 				<td>
 					<div id="auction-container">
-						<input type="text" class="form-control"  name="auctionTitle" id="auctionTitle_" required>
+						<input type="text" class="form-control"  name="auctionTitle" id="auctionTitle_" value="${updateAuction.auctionTitle }" required>
 	           			<input type="hidden" name="auctionWriter" id="auctionWriter" value="${memberLoggedIn.memberId }"/>
 					</div>
 				</td>
@@ -50,98 +50,94 @@ div#memberId-container span.error{color:red;}
 				<th>거래 지역</th>
 				<td>
 					<div id="auction-container">
-						<input type="text" class="form-control"  name="auctionAddress" id="auctionAddress" required>
+						<input type="text" class="form-control"  name="auctionAddress" id="auctionAddress" value="${updateAuction.auctionAddress}" required>
 					</div>
 				</td>
 			</tr>
 			<tr>
 				<th>경매시작 가격</th>
 				<td>
-					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" required>
+					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" value="${updateAuction.auctionPrice}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>경매금액 단위</th>
 				<td>	
-					<input type="number" class="form-control" name="auctionUnitPrice" id="auctionUnitPrice" min=100 step=100 required>
+					<input type="number" class="form-control" name="auctionUnitPrice" id="auctionUnitPrice" min=100 step=100 value="${updateAuction.auctionUnitPrice}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>즉시구매 가격</th>
 				<td>	
-					<input type="number" class="form-control" name="auctionDirectPrice" id="auctionDirectPrice" min=100 step=100 required>
+					<input type="number" class="form-control" name="auctionDirectPrice" id="auctionDirectPrice" min=100 step=100 value="${updateAuction.auctionDirectPrice}" required>
 				</td>
 			</tr>  
 			<tr>
 				<th>상품분류</th>
 				<td>
-					<input type="text" class="form-control" name="auctionCategory"/>
+					<input type="text" class="form-control" name="auctionCategory" value="${updateAuction.auctionCategory}" />
 				</td>
 			</tr>
 			<tr>
 				<th>경매종료 날짜</th>
 				<td>	
-					<input type="date" class="form-control" placeholder="1900-00-00" name="auctionEndDate" id="auctionEndDate" required>
+					<input type="date" class="form-control" placeholder="1900-00-00" name="auctionEndDate" id="auctionEndDate" value="${updateAuction.auctionEndDate}" required>
 				</td>
 			</tr>
 			<tr>
 				<th>상품 이미지</th>
 				<td>
+					<c:forEach items="${updateAttachment}" var="u" varStatus="vs">
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">대표 이미지</span>
+					    <span class="input-group-text">${vs.index == 0 ? "대표":""}이미지${vs.index == 0 ? "":vs.index}</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile1" required>
-					    <label class="custom-file-label" for="upFile1">파일을 선택하세요</label>
-					    <input type="hidden" name="attachmentMainImage" value="Y" />
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile${vs.count}" <c:if test="${vs.count == 1 }">required</c:if>  >
+					    <label class="custom-file-label" for="upFile${vs.count}">
+					    	${u.originalfileName }
+				    	</label>
 					  </div>
 					</div>
-					<div class="input-group mb-3" style="padding:0px;">
-					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">이미지1</span>
-					  </div>
-					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile2" >
-					    <label class="custom-file-label" for="upFile2">파일을 선택하세요</label>
-					  </div>
-					</div>
+					</c:forEach> 
 					
+					<c:forEach var="o" varStatus="ovs" begin="${fn:length(updateAttachment)}" end="${attachmentIndex}" >
+					<div class="input-group mb-3" style="padding:0px;">
+					  <div class="input-group-prepend" style="padding:0px;">
+					    <span class="input-group-text">이미지${fn:length(updateAttachment)}</span>
+					  </div>
+					  <div class="custom-file">
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile${ovs.index}" >
+					    <label class="custom-file-label" for="upFile${ovs.index}">
+					    		이미지를 선택하세요.
+					    </label>
+					  </div>
+					</div>
+					</c:forEach>
+					
+					<%-- <c:forEach items="${updateAttachment}" var="a" begin=>
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">이미지2</span>
 					  </div>
 					  <div class="custom-file">
 					    <input type="file" class="custom-file-input" name="upFile" id="upFile3" >
-					    <label class="custom-file-label" for="upFile3">파일을 선택하세요</label>
+					    <label class="custom-file-label" for="upFile3">
+					    		파일을 선택하세요.
+				    	</label>
 					  </div>
 					</div>
+					</c:forEach> --%>
 					
-					<div class="input-group mb-3" style="padding:0px;">
-					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">이미지3</span>
-					  </div>
-					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile4" >
-					    <label class="custom-file-label" for="upFile4">파일을 선택하세요</label>
-					  </div>
-					</div>
 					
-					<div class="input-group mb-3" style="padding:0px;">
-					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">이미지4</span>
-					  </div>
-					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile5" >
-					    <label class="custom-file-label" for="upFile5">파일을 선택하세요</label>
-					  </div>
-					</div>
+					
+					
 				</td>
 			</tr>
 			<tr>
 				<th>상품 설명</th>
 				<td >	
-					<textarea rows="10" style="width:120%; border: 1px solid;" name="auctionContent"></textarea>
+					<textarea rows="10" style="width:120%; border: 1px solid;" name="auctionContent">${updateAuction.auctionContent}</textarea>
 				</td>
 			</tr>
 		</table>
