@@ -3,8 +3,8 @@ package com.kh.market.product.model.dao;
 import java.util.List;
 import java.util.Map;
 
+import com.kh.market.common.model.vo.Page;
 import com.kh.market.product.model.vo.Attachment;
-import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 public interface ProductDAO {
@@ -44,6 +44,10 @@ public interface ProductDAO {
 	int productBuyerUpdate(Map<Object, Object> map);
 
 	int memberBuySize(String memberId);
+
+	List<Product> srchMoreResult(Map<String, String> sendMap);
+
+
 	
 
 }

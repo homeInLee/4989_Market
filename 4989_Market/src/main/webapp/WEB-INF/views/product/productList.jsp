@@ -173,12 +173,13 @@ function moreResult() {
 	        								
 											}
 	        							}
-	        							
+
+
 	        							html += "<div class='info'>";
 	        							html += "<br/>";
 	        							html += "<h5>"+values[i].sellTitle+"</h5>";
 	        							html += "<div class='auction-content'>"+values[i].sellAddress+"</div>";
-	        							html += "<div class='auction-price'>"+values[i].sellPrice+"원";
+	        							html += "<div class='auction-price'>"+values[i].sellPrice.toLocaleString()+"원";
 	        							/* <fmt:formatNumber value="${product.sellPrice}" pattern="#,###" /> */
 	        							html += "</div>";
 	        							html += "</div>";

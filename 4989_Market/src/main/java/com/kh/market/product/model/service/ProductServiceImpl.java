@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.market.common.model.vo.Page;
 import com.kh.market.product.model.dao.ProductDAO;
 import com.kh.market.product.model.vo.Attachment;
-import com.kh.market.product.model.vo.Page;
 import com.kh.market.product.model.vo.Product;
 
 @Service
@@ -145,6 +145,14 @@ public class ProductServiceImpl implements ProductService {
 		// TODO Auto-generated method stub
 		return productDAO.memberBuySize(memberId);
 	}
+
+	@Override
+	public List<Product> srchMoreResult(Map<String, String> sendMap) {
+		// TODO Auto-generated method stub
+		return productDAO.srchMoreResult(sendMap);
+	}
+
+
 
 
 }

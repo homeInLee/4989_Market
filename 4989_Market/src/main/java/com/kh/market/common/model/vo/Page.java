@@ -1,4 +1,4 @@
-package com.kh.market.product.model.vo;
+package com.kh.market.common.model.vo;
 
 public class Page {
 	private int startCount;

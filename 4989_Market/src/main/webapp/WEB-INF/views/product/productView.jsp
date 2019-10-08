@@ -349,6 +349,13 @@ function basketCheck(check,sellNo,memberId){
 		<span style="color:#ff8a3d; font-size:32px;"><fmt:formatNumber value="${p.sellPrice }" pattern="#,###"/>원</span>
 		<hr />
 		<br />
+			<div id="productControl">
+		<c:if test="${memberLoggedIn.memberId eq p.sellWriter || memberLoggedIn.memberId eq 'admin'}">
+			<button onclick="updateProduct();" id="editProductBtn">&nbsp;수정하기&nbsp;</button>
+			<button onclick="deleteProduct();" id="deleteProductBtn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
+		</c:if>
+	</div>
+		
 <%-- 		<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 33 ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
  --%>
 		<jsp:include page="/WEB-INF/views/comment/productComment.jsp"></jsp:include>
@@ -356,23 +363,8 @@ function basketCheck(check,sellNo,memberId){
 </div>
 <hr />
 
-<div>
-	<h3 style="padding: 32px 0">중고물품</h3>
-	<div>
-	<span>가격 : <span style="color:#ff8a3d; font-size:18px;"><fmt:formatNumber value="${p.sellPrice}" pattern="#,###"/>원</span></span> &nbsp;&nbsp;
-	</div>
-	<br />			
-</div>
 
 
-
-<p>
-	구매자:
-	<c:choose>
-		<c:when test="${not empty p.sellBuyer}"><p>${p.sellBuyer}</p></c:when>
-		<c:when test="${empty p.sellBuyer}"><p>없음</p></c:when>
-	</c:choose>
-<p>
 
 
 
@@ -383,16 +375,6 @@ function basketCheck(check,sellNo,memberId){
 
 
 
-<%-- <c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
-	<button onclick="updateProduct();">수정하기</button>
-	<button onclick="deleteProduct();">삭제</button>
-</c:if> --%>
-	<div id="productControl">
-		<c:if test="${memberLoggedIn.memberId eq p.sellWriter}">
-			<button onclick="updateProduct();" id="editProductBtn">&nbsp;수정하기&nbsp;</button>
-			<button onclick="deleteProduct();" id="deleteProductBtn">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;삭제&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button>
-		</c:if>
-	</div>
 </div>
 
 <script>
