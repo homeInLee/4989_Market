@@ -68,11 +68,6 @@ public class NoticeDAOImpl implements NoticeDAO {
 	}
 
 	@Override
-	public int updateReadCount(int noticeNo) {
-		return session.update("notice.updateReadCount", noticeNo);
-	}
-
-	@Override
 	public int insertAttachment(Attachment a) {
 		int result =session.insert("notice.noticeInsertAttachment",a);
 		System.out.println("insertAttachment@result= "+result);
@@ -134,6 +129,11 @@ public class NoticeDAOImpl implements NoticeDAO {
 	@Override
 	public int noticeOtherCnt() {
 		return session.selectOne("notice.noticeOtherCnt");
+	}
+
+	@Override
+	public int noticeViewCount(int noticeNo) {
+		return session.update("notice.noticeViewCount",noticeNo);
 	}
 	
 }

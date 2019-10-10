@@ -119,43 +119,43 @@ $(()=>{
 			</div>
 		</section>		
 		<section id="header-bottom">
-			<div id="header-catagory">
-			<ul id="menu">
-					<li>
-						<a href="${pageContext.request.contextPath }/product/productList.do">상품</a>
-						<ul>
-						    <li><a href="#">상품분류</a></li>
-						    <li><a href="#">지역분류</a></li>
-						    <li><a href="#">menu3</a></li>
-					    </ul>
-				    </li>
-					<li>
-						<a href="${pageContext.request.contextPath }/product/freeProductList.do">무료나눔</a>
-						<ul>
-						    <li><a href="#">menu1</a></li>
-						    <li><a href="#">menu2</a></li>
-						    <li><a href="#">menu3</a></li>
-					    </ul>
-					</li>
-					<li>
-						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a>
-						<ul>
-						    <li><a href="#">menu1</a></li>
-						    <li><a href="#">menu2</a></li>
-						    <li><a href="#">menu3</a></li>
-					    </ul>
-					</li>
-					<li>
-						<a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a>
-						<ul>
-						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
-						    <li><a href="#">menu2</a></li>
-						    <li><a href="#">menu3</a></li>
-					    </ul>
-					</li>
-                    <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
-				</ul>
-			</div>
+<!-- 			<div id="header-catagory"> -->
+<!-- 			<ul id="menu"> -->
+<!-- 					<li> -->
+<%-- 						<a href="${pageContext.request.contextPath }/product/productList.do">상품</a> --%>
+<!-- 						<ul> -->
+<!-- 						    <li><a href="#">상품분류</a></li> -->
+<!-- 						    <li><a href="#">지역분류</a></li> -->
+<!-- 						    <li><a href="#">menu3</a></li> -->
+<!-- 					    </ul> -->
+<!-- 				    </li> -->
+<!-- 					<li> -->
+<%-- 						<a href="${pageContext.request.contextPath }/product/freeProductList.do">무료나눔</a> --%>
+<!-- 						<ul> -->
+<!-- 						    <li><a href="#">menu1</a></li> -->
+<!-- 						    <li><a href="#">menu2</a></li> -->
+<!-- 						    <li><a href="#">menu3</a></li> -->
+<!-- 					    </ul> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<%-- 						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a> --%>
+<!-- 						<ul> -->
+<!-- 						    <li><a href="#">menu1</a></li> -->
+<!-- 						    <li><a href="#">menu2</a></li> -->
+<!-- 						    <li><a href="#">menu3</a></li> -->
+<!-- 					    </ul> -->
+<!-- 					</li> -->
+<!-- 					<li> -->
+<%-- 						<a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a> --%>
+<!-- 						<ul> -->
+<%-- 						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li> --%>
+<!-- 						    <li><a href="#">menu2</a></li> -->
+<!-- 						    <li><a href="#">menu3</a></li> -->
+<!-- 					    </ul> -->
+<!-- 					</li> -->
+<%--                     <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li> --%>
+<!-- 				</ul> -->
+<!-- 			</div> -->
 			<div id="menu">
         <ul class="main1">
             <li><a href="${pageContext.request.contextPath }/product/productList.do">중고거래</a>

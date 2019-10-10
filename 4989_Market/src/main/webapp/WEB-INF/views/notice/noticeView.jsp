@@ -23,7 +23,7 @@
 
 #noticeViewTable td {
 	border: 1px solid lightgray;
-	width: 100px;
+	width: 80px;
 	padding: 10px;
 }
 
@@ -173,10 +173,10 @@ cursor: pointer;
 </style>
 
 <%-- <h2 style="text-align: center; background: #1b5ac2;">${notice.noticeTitle }</h2> --%>
-<c:if test="${memberLoggedIn.memberId eq 'admin' }">
-<input type="button" class="btn-decProcess" id="declarationProcess" value="신고처리" />
+<%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
+<!-- <input type="button" class="btn-decProcess" id="declarationProcess" value="신고처리" /> -->
 <!-- <input type="button" class="btn-noticeDec" id="noticeDeclaration" onclick="goDeclaration();" value="신고" /> -->
-</c:if>
+<%-- </c:if> --%>
 <input type="button" class="btn-list" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
 
 <br />
@@ -211,12 +211,12 @@ cursor: pointer;
 <%-- 		<td  >${notice.noticeTitle }</td> --%>
 <!-- 	</tr> -->
 	<tr style="background: #1b5ac2; color: white; text-align: left; height: 50px;" >
-	<th colspan="2">
+	<th colspan="5">
 	&nbsp;&nbsp;&nbsp;&nbsp;FAQ
 	</th>
 	</tr>
 	<tr>
-	<td style="color: #1b5ac2; text-align: left; border-right-width: 0; width: 500px;">
+	<td colspan="4" style="color: #1b5ac2; text-align: left; border-right-width: 0;">
 	<c:if test="${not empty notice.noticeType}">
 				<c:choose>
 					<c:when test="${notice.noticeType == 'm'}">
@@ -238,10 +238,10 @@ cursor: pointer;
 				</c:if>
 	${notice.noticeTitle }
 	</td>
-	<td style="color: #1b5ac2; text-align: right;  border-collapse: collapse; border-left-width: 0; width: 100px;" >${notice.noticeDate }</td>
+	<td style="color: #1b5ac2; text-align: right;  border-collapse: collapse; border-left-width: 0; width: 200px;" >${notice.noticeDate }</td>
 	</tr>
 	<tr style="height: 300px;">
-		<td colspan="6" >
+		<td style="text-align: left;" colspan="6" >
 	<c:forEach items="${attachMap}" var="a">
 		<img style="width: 200px; height: 200px;" alt="" src="${pageContext.request.contextPath}/resources/upload/notice/${a['renamedfileName']}">
 	</c:forEach>
@@ -252,8 +252,8 @@ cursor: pointer;
 		</td>
 	</tr>
 	<tr>
-		<td style="color: #1b5ac2; background: white; width: 40px;">첨부파일</td>
-		<td style="color: gray; text-align: left; width: 1000px;">
+		<td style="color: #1b5ac2; background: white; width: 100px;">첨부파일</td>
+		<td colspan="4" style="color: gray; text-align: left; ">
 	<c:choose>
 	<c:when test="${not empty attachMap}">
 	<c:forEach items="${attachMap}" var="a" varStatus="status">
@@ -280,7 +280,19 @@ cursor: pointer;
 <input type="button" class="btn-update" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
 <input type="button" class="btn-noticeDel" id="noticeDelete" value="삭제" />
 </c:if>
-
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <script>
 $("#noticeDelete").click(function(){
     if(!confirm("정말 삭제하시겠습니까?")){

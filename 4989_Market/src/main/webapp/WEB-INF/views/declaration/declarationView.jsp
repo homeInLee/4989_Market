@@ -6,7 +6,7 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 #declarationView {
-	margin-left: 150px;
+	margin-left: 170px;
 	text-align: center;
 }
 
@@ -26,7 +26,32 @@
 	padding: 10px;
 	
 }
-
+.btn-check{
+width: 100px;
+height: 40px;
+position: absolute; 
+font-size: 16px;
+margin: 20px 0 0 0;
+margin-left: 36%;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
+#declarationList{
+width: 75px;
+height: 40px;
+position: absolute; 
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+margin-left: 48%;
+}
 /* #declarationView td { */
 /* 	border: 1px solid; */
 /* 	width: 100px; */
@@ -67,51 +92,60 @@
 <%-- <c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
 <c:if test="${declaration.declarationDivision eq 'w'}">
 <c:if test="${declaration.boardName eq 'n'}">
-<input type="button" id="declarationCheckN" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckN" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.boardName eq 'a'}">
-<input type="button" id="declarationCheckA" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckA" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.boardName eq 'p'}">
-<input type="button" id="declarationCheckP" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckP" value="신고글 확인" />
 </c:if>
 </c:if>
 <c:if test="${declaration.declarationDivision eq 'c'}">
 <c:if test="${declaration.boardName eq 'a'}">
-<input type="button" id="declarationCheckA" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckA" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.boardName eq 'p'}">
-<input type="button" id="declarationCheckP" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckP" value="신고글 확인" />
 </c:if>
 
 
 
 </c:if>
 <c:if test="${declaration.declarationDivision eq 's'}">
-<input type="button" id="declarationCheckS" value="신고글 확인" />
+<input type="button" class="btn-check" id="declarationCheckS" value="신고글 확인" />
 </c:if>
 <c:if test="${declaration.declarationDivision eq 'm'}">
-<input type="button" id="declarationCheck" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${declaration.declarationReceiver}'" value="회원 확인" />
+<input type="button" class="btn-check" id="declarationCheck" onclick="location.href='${pageContext.request.contextPath}/member/memberView.do?memberId=${declaration.declarationReceiver}'" value="회원 확인" />
 </c:if>
 <input type="button" id="declarationList" value="목록" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList.do'"/>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 
 <script>
-// $("#declarationCheckN").click(()=>{
-// location.href="${pageContext.request.contextPath}/notice/noticeView.do?noticeNo=${declaration.boardNo}&decNo=${decNo}";
+$("#declarationCheckN").click(()=>{
+location.href="${pageContext.request.contextPath}/notice/noticeView.do?noticeNo=${declaration.boardNo}&decNo=${decNo}";
 	
-// });
-// $("#declarationCheckA").click(()=>{
-// location.href="${pageContext.request.contextPath}/auction/auctionSelectOne.do?auctionNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+});
+$("#declarationCheckA").click(()=>{
+location.href="${pageContext.request.contextPath}/auction/auctionSelectOne.do?auctionNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
 	
-// });
-// $("#declarationCheckS").click(()=>{
-// location.href="${pageContext.request.contextPath}/message/messageSelect.do?messageNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+});
+$("#declarationCheckS").click(()=>{
+location.href="${pageContext.request.contextPath}/message/messageSelect.do?messageNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
 	
-// });
-// $("#declarationCheckP").click(()=>{
-// location.href="${pageContext.request.contextPath}/product/productView.do?productNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
+});
+$("#declarationCheckP").click(()=>{
+location.href="${pageContext.request.contextPath}/product/productView.do?productNo=${declaration.boardNo}&memberId=${memberLoggedIn.memberId}&decNo=${decNo}";
 	
-// });
+});
 </script>
 <script>
 // 신고기능관련 script
