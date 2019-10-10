@@ -57,7 +57,7 @@ public class ReviewController {
 		messageService.messageReviewUpdate(messageNo);
 		
 		String msg="";
-		String loc="/";
+		String loc="/message/messageSelect.do?messageNo="+messageNo+"&memberId="+memberId;
 		if(result1>0) {
 			msg="리뷰작성완료";
 		}else {

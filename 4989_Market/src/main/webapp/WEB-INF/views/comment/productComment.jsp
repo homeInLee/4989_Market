@@ -60,6 +60,7 @@ padding: 5px;
 }
 </style>
 <p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 <span id="bCnt_"></span> ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+
 <div id="container">
 	<form action="" id="commentFrm_pro" method="post">
 	<br />
@@ -85,6 +86,7 @@ padding: 5px;
 		</div>
 	</form>
 </div>
+
 	<form id="commentListFrm" name="commentListFrm_pro" method="post">
 	<div id="commentList">
 	</div>

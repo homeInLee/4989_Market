@@ -95,7 +95,6 @@ padding: 5px;
 <script>
 //대댓글 입력창 보여주기
 function replyComment(btn) {
-	console.log("!!");
 	
 	var param = {commentNo: btn};
 	var  reply =

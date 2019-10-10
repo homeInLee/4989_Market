@@ -65,7 +65,7 @@ ul li a:hover, ul li a:focus {
   <c:if test="${empty reviewList}">
   	<div style="text-align: center;">거래후기가 없습니다.</div>
   </c:if>
-  <div style="height: 450px;">
+  
   <c:forEach items="${reviewList}" var="r">
  	<ul class="list-group list-group-flush">
   	  <li class="list-group-item">
@@ -76,7 +76,7 @@ ul li a:hover, ul li a:focus {
   	  
     </ul> 
   </c:forEach>
-  </div>
+  
 <div>
     <ul class="pageUl">
         <c:if test="${paging.prev}">
@@ -98,7 +98,7 @@ function fn_prev(page, range, rangeSize) {
     var page = ((range - 2) * rangeSize) + 1;
     var range = range - 1;
     
-    var url = "${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}";
+    var url = "${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${memberId}";
     url = url + "&page=" + page;
     url = url + "&range=" + range;
     
@@ -106,7 +106,7 @@ function fn_prev(page, range, rangeSize) {
 }
 //페이지 번호 클릭
 function fn_pagination(page, range, rangeSize, searchType, keyword) {
-    var url = "${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}";
+    var url = "${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${memberId}";
     url = url + "&page=" + page;
     url = url + "&range=" + range;
     location.href = url;    
@@ -116,7 +116,7 @@ function fn_next(page, range, rangeSize) {
     var page = parseInt((range * rangeSize)) + 1;
     var range = parseInt(range) + 1;
     
-    var url = "${pageContext.request.contextPath}/review/reviewContentForm.do?memberId=${memberLoggedIn.memberId}";
+    var url = "${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${memberId}";
     url = url + "&page=" + page;
     url = url + "&range=" + range;
     

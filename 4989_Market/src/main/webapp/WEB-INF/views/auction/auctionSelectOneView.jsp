@@ -374,24 +374,25 @@ function basketCheck(check,sellNo,memberId){
    </div>
    
 <!-- 장바구니 기능 코드 -->	
-<hr />
-<c:if test="${auctionSelectOne.get(0).auctionDeltype=='N' }">
-	<c:if test="${empty basket}">
-		<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-	</c:if>
-		
-	<c:if test="${not empty basket}">
-		<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-	</c:if>
-</c:if>
+
+
 <!--  -->
 	<div id="memberInfo">
+	<c:if test="${auctionSelectOne.get(0).auctionDeltype=='N' }">
+		<c:if test="${empty basket}">
+			<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+		
+		<c:if test="${not empty basket}">
+			<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+	</c:if>
 	<hr />
 	<div class='zeta-menu-bar'>
   		<ul class="zeta-menu">	
 		<li><a href="#"><h6>${auctionSelectOne.get(0).auctionWriter }</h6></a>
 	   		<ul>
-		      <li><a id="memberNotice">회원정보</a></li>
+		      <li><a id="memberNotice" href="${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${auctionSelectOne.get(0).auctionWriter }">회원정보</a></li>
 		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationWriter=${memberLoggedIn.memberId }&declarationReceiver=${auctionSelectOne.get(0).auctionWriter }&declarationDivision=m" id="id-declaration"
 		      		>신고</a>
 		      		</li>
