@@ -104,6 +104,61 @@ a:visited {
 #logo {
 	float: left;
 }
+
+/*공통 css*/
+.clearfix {
+    overflow: hidden;
+}
+
+.fw600 {
+    font-weight: 600;
+}
+
+.fw500 {
+    font-weight: 500;
+}
+
+.fw400 {
+    font-weight: 400;
+}
+
+.fw300 {
+    font-weight: 300;
+}
+
+.dp_block {
+    display: block;
+}
+
+.dp_ib {
+    display: inline-block;
+}
+
+.dp_inline {
+    display: inline;
+}
+
+.txt_center {
+    text-align: center;
+    padding: 75px 0 35px;
+}
+
+.txt_left {
+    text-align: left;
+}
+
+.txt_right {
+    text-align: right;
+}
+
+.w100 {
+    width: 100%;
+}
+
+.h100 {
+    height: 100%;
+}
+
 /*로그인 회원가입*/
 #header-btn {
 	float: right;
@@ -209,44 +264,4 @@ text-decoration:none;
 #header-catagory p{
 clear:left;
 }
-/*body*/
-div.gallery {
-	margin: 5px;
-	border: 1px solid #ccc;
-	float: left;
-	width: 180px;
-}
 
-div.gallery:hover {
-	border: 1px solid #777;
-}
-
-div.gallery img {
-	width: 100%;
-	height: auto;
-}
-
-div.desc {
-	padding: 15px;
-	text-align: center;
-}
-
-/*footer */
-#footer {
-	/* left: 0px; */
-	/* bottom: 0px; */
-	background: rgb(27, 90, 194, 0.5);
-	box-sizing: border-box;
-	border: 1px;
-	clear:both;
-	position: absolute;
-	margin-top: 100px;
-}
-
-#footer article {
-	width: 1024px;
-	margin: auto;
-	padding: 40px 0 67px 0;
-	text-align: center;
-
-}
