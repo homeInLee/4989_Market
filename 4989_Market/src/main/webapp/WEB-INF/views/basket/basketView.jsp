@@ -51,6 +51,50 @@ h2, section{
 	-webkit-box-shadow: 0 6px 10px 0 rgba(0, 0, 0, 0.2);
 	top: -2px;
 }
+ul.pageUl {
+    text-align:center;
+    top: 2px;
+}
+ul li.pageLi {
+    display:inline;
+    vertical-align:middle;
+}
+ul li a.pageA {
+    display:-moz-inline-stack;
+    display:inline-block;
+    vertical-align:top;
+    padding:4px;
+    margin-left: 3px;
+    width:30px !important;
+    color:#000;
+    font:bold 14px tahoma;
+    border:1px solid #eee;
+    text-decoration:none;
+    margin-top: 17px;
+}
+ul li a.pageB{
+    display:-moz-inline-stack;
+    display:inline-block;
+    vertical-align:top;
+    padding:4px;
+    margin-left: 3px;
+    width:50px !important;
+    color:#000;
+    font:bold 14px tahoma;
+    border:1px solid #eee;
+    text-decoration:none;
+    margin-top: 17px;
+}
+ul li a.now {
+    color:#fff;
+    background-color:#1b5ac2;
+    border:1px solid #1b5ac2;
+}
+ul li a:hover, ul li a:focus {
+    color:#fff;
+    border:1px solid #1b5ac2;
+    background-color:#1b5ac2;
+}
 </style>
 
 
@@ -66,7 +110,7 @@ h2, section{
 	</c:if>
 	<section>
 		<c:forEach items="${myBasketList}" var="b">
-			
+		  <c:if test="${b.sellDelType=='N'}">
 			<article class="top-card">
 				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${b.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					<c:forEach items="${attachment}" var="a">					
@@ -90,18 +134,61 @@ h2, section{
 						</c:if>
 						<c:if test="${'soldout' eq fn:trim(b.sellState)}">
 							<div>
-								판매완료
+								판매완료된 물품
 							</div>
 						</c:if>
 					</div>
 				</a>
 				<br /><br />
 			</article>
+		  </c:if>
 		</c:forEach>
+		<div>
+		    <ul class="pageUl">
+		        <c:if test="${paging.prev}">
+		            <li class="pageLi"><a class="pageB" href="#" onClick="fn_prev('${paging.page}', '${paging.range}', '${paging.rangeSize}')">&lt;이전</a></li>
+		        </c:if>
+		            
+		        <c:forEach begin="${paging.startPage}" end="${paging.endPage}" var="idx">
+		            <li class="pageLi" "<c:out value="${paging.page == idx ? 'active' : ''}"/>"><a class="pageA" href="#" onClick="fn_pagination('${idx}', '${paging.range}', '${paging.rangeSize}')"> ${idx} </a></li>
+		        </c:forEach>
+		            
+		        <c:if test="${paging.next}">
+		            <li class="pageLi" ><a class="pageB" href="#" onClick="fn_next('${paging.range}', '${paging.range}', '${paging.rangeSize}')" >다음&gt;</a></li>
+		        </c:if>
+		    </ul>
+		</div>
 	</section>
+<script>
+//이전 버튼 이벤트
+function fn_prev(page, range, rangeSize) {
+    var page = ((range - 2) * rangeSize) + 1;
+    var range = range - 1;
+    
+    var url = "${pageContext.request.contextPath}/basket/basketView.do?memberId=${memberLoggedIn.memberId}";
+    url = url + "&page=" + page;
+    url = url + "&range=" + range;
+    
+    location.href = url;
+}
+//페이지 번호 클릭
+function fn_pagination(page, range, rangeSize, searchType, keyword) {
+    var url = "${pageContext.request.contextPath}/basket/basketView.do?memberId=${memberLoggedIn.memberId}";
+    url = url + "&page=" + page;
+    url = url + "&range=" + range;
+    location.href = url;    
+}
+//다음 버튼 이벤트
+function fn_next(page, range, rangeSize) {
+    var page = parseInt((range * rangeSize)) + 1;
+    var range = parseInt(range) + 1;
+    
+    var url = "${pageContext.request.contextPath}/basket/basketView.do?memberId=${memberLoggedIn.memberId}";
+    url = url + "&page=" + page;
+    url = url + "&range=" + range;
+    
+    location.href = url;
+}
+</script>
 
-
-<div id='pageBar'>
-  ${pageBar}
-</div>
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>

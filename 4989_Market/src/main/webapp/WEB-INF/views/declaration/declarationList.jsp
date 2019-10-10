@@ -80,7 +80,7 @@ ul li a:hover, ul li a:focus {
 				<th>번호</th>
 				<th>분류</th>
 				<th>제목</th>
-				<th>신고내용</th>
+<!-- 				<th>신고내용</th> -->
 				<th>신고자</th>
 				<th>신고사유</th>
 				<th>신고일</th>
@@ -97,7 +97,7 @@ ul li a:hover, ul li a:focus {
 					<c:if test="${d.declarationDivision eq 'c'}">댓글</c:if>
 					</td>
 					<td>${d.declarationTitle}</td>
-					<td>${d.declarationContent}</td>
+<%-- 					<td>${d.declarationContent}</td> --%>
 					<td id="writer">${d.declarationWriter}</td>
 
 					<td>
@@ -115,7 +115,9 @@ ul li a:hover, ul li a:focus {
 					<td style="color: blue;">처리완료</td>
 					</c:if>
 					<td>
-					<input type="button" declarationWriter=${d.declarationWriter } onclick="event.cancelBubble=true" id="dec${status.index}" value="알림" /> 
+					<c:if test="${d.declarationState eq 'Y'}">
+					<input type="button" declarationWriter=${d.declarationWriter } onclick="event.cancelBubble=true;" id="dec${status.index}" value="알림" /> 
+					</c:if>
 					<input type="hidden" name="declarationNo" value="${d.declarationNo}"/>
 					</td>
 				</tr>
@@ -143,12 +145,12 @@ $("tr.bottom").click(function(){
 	var declarationNo = $(this).attr("declarationNo");
 	location.href='${pageContext.request.contextPath}/declaration/selectOneDeclaration?declarationNo='+declarationNo;
 });
+
 $("[id^=dec]").click(function() {
 	var writer = $(this).attr("declarationWriter");
-// 	console.log(writer);
 	location.href="${pageContext.request.contextPath}/declaration/declarationCheck?declarationWriter="+writer;
 });
-
+// 
 //이전 버튼 이벤트
 
 function fn_prev(page, range, rangeSize) {

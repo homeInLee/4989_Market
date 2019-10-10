@@ -129,6 +129,14 @@ public class AuctionServiceImpl implements AuctionService {
 		// TODO Auto-generated method stub
 		return auctionDAO.moreAttach();
 	}
+	public Auction updateAuction(int auctionNo) {
+		return auctionDAO.updateAuction(auctionNo);
+	}
+
+	@Override
+	public List<Map<String, String>> updateAttachment(int auctionNo) {
+		return auctionDAO.updateAttachment(auctionNo);
+	}
 
 
 }

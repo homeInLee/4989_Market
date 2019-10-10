@@ -119,6 +119,16 @@ ul li a:hover, ul li a:focus {
 						<div class="auction-content">
 							${l.auctionDate}~${l.auctionEndDate}
 						</div>
+						<c:if test="${'N' eq fn:trim(l.auctionDeltype)}">
+							<div>
+								구매중
+							</div>
+						</c:if>
+						<c:if test="${'Y' eq fn:trim(l.auctionDeltype)}">
+							<div>
+								구매완료
+							</div>
+						</c:if>
 					</div>
 				</a>
 				<br /><br />

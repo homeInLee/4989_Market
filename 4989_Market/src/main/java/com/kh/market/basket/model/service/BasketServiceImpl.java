@@ -18,13 +18,13 @@ public class BasketServiceImpl implements BasketService {
 	BasketDAO basketDAO;
 
 	@Override
-	public List<Product> basketView(Map<Object, Object> map) {
+	public List<Product> basketView(Map<String, Object> map) {
 		
 		return basketDAO.basketView(map);
 	}
 
 	@Override
-	public List<Basket> totalBasketCount(String basketMemberId) {
+	public int totalBasketCount(String basketMemberId) {
 		
 		return basketDAO.totalBasketCount(basketMemberId);
 	}
@@ -48,8 +48,37 @@ public class BasketServiceImpl implements BasketService {
 	}
 
 	@Override
-	public List<Auction> basketAuctionView(Map<Object, Object> map) {
+	public List<Auction> basketAuctionView(Map<String, Object> map) {
 		
 		return basketDAO.basketAuctionView(map);
+	}
+
+	@Override
+	public List<Basket> basketSelectCnt(int sellNo) {
+		
+		return basketDAO.basketSelectCnt(sellNo);
+	}
+
+	@Override
+	public List<Basket> basketSelectAuctionCnt(int auctionNo) {
+		
+		return basketDAO.basketSelectAuctionCnt(auctionNo);
+	}
+
+	@Override
+	public int basketSellCompleteDelete(int sellNo) {
+		
+		return basketDAO.basketSellCompleteDelete(sellNo);
+	}
+
+	@Override
+	public int basketAuctionCompleteDelete(int auctionNo) {
+		
+		return basketDAO.basketAuctionCompleteDelete(auctionNo);
+	}
+	
+	@Override
+	public int auctionBasketCnt(String basketMemberId) {
+		return basketDAO.auctionBasketCnt(basketMemberId);
 	}
 }

@@ -81,7 +81,9 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionSelectOne.do")
-	public String auctionSelectOne(Model model, @RequestParam int auctionNo,@RequestParam("memberId") String memberId ) {
+	public String auctionSelectOne(Model model, 
+			@RequestParam int auctionNo,@RequestParam("memberId") String memberId, 
+			@RequestParam(value="decNo", defaultValue="0", required=false)int decNo){
 		
 		String boardName="A";
 		//장바구니 여부 검사 코드
@@ -96,7 +98,7 @@ public class AuctionController {
 		/* Comment comment = commentService.commentSelectOne(auctionNo,"A"); */
 		
 		logger.info(auctionSelectOne.toString());
-		
+		model.addAttribute("decNo",decNo);
 		model.addAttribute("basket",basket);
 		model.addAttribute("auctionSelectOne",auctionSelectOne);
 		model.addAttribute("member",member);
@@ -113,7 +115,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionEnrollEnd.do")
-	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
+	public String boardFormEnd(@RequestParam("sido") String sido,@RequestParam("gugun") String gugun,@RequestParam("cate") String cate,@RequestParam("gory") String gory, Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
 		logger.info("경매 등록 요청!!");
 		
 		try {
@@ -173,6 +175,8 @@ public class AuctionController {
 		}
 		
 		//업무로직 auction, Attachment 테이블에 데이터 저장
+		auction.setAuctionCategory(cate+" "+gory);
+		auction.setAuctionAddress(sido+" "+gugun);
 		int result = auctionService.insertAuction(auction, attachList);
 		System.out.println(result);
 		String msg = result>0?"게시물 등록 성공~":"게시물 등록 실패!!";
@@ -254,7 +258,10 @@ public class AuctionController {
 	
 		String msg="";
 		String loc="/auction/memberAuctionSellView.do?memberId="+auctionWriter;
-		if(result1>0&&result2>0) {
+		
+		int result3=basketService.basketAuctionCompleteDelete(auctionNo);
+		
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			
 		}else {
@@ -281,6 +288,7 @@ public class AuctionController {
 		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 	}
 	
+<<<<<<< HEAD
 	@ResponseBody
 	@PostMapping("/moreResult.do")
 	public Map<String, Object> moreResult(@RequestParam String startCount,
@@ -290,6 +298,22 @@ public class AuctionController {
 
 		pageMap.put("startCount", Integer.parseInt(startCount));
 		pageMap.put("endCount", Integer.parseInt(endCount));
+=======
+	@RequestMapping("/updateAuction.do")
+		public String updateAuction(@RequestParam("auctionNo") int auctionNo, Model model) {
+			
+			Auction updateAuction = auctionService.updateAuction(auctionNo);
+			List<Map<String,String>> updateAttachment = auctionService.updateAttachment(auctionNo);
+			
+			int attachmentIndex = 5 - updateAttachment.size();
+			
+			model.addAttribute("updateAuction", updateAuction);
+			model.addAttribute("updateAttachment", updateAttachment);
+			model.addAttribute("attachmentIndex", attachmentIndex);
+		
+		return "auction/auctionUpdate";
+	}
+>>>>>>> branch 'master' of https://github.com/homeInLee/4989_Market.git
 		
 		
 		

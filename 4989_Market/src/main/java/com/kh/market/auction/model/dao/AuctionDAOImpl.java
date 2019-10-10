@@ -99,6 +99,7 @@ public class AuctionDAOImpl implements AuctionDAO {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<Auction> moreResult(Map<String, Integer> pageMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("auction.moreResult", pageMap);
@@ -107,6 +108,15 @@ public class AuctionDAOImpl implements AuctionDAO {
 	@Override
 	public List<Attachment> moreAttach() {
 		return sqlSession.selectList("auction.moreAttach");
+=======
+	public Auction updateAuction(int auctionNo) {
+		return sqlSession.selectOne("auction.updateAuction",auctionNo);
+	}
+
+	@Override
+	public List<Map<String, String>> updateAttachment(int auctionNo) {
+		return sqlSession.selectList("auction.updateAttachment",auctionNo);
+>>>>>>> branch 'master' of https://github.com/homeInLee/4989_Market.git
 	}
 	
 

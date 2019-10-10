@@ -29,11 +29,14 @@
 	</tr>
 	<tr>
 		<th>내용</th>
-		<td><textarea name="declarationContent" id="" cols="30" rows="10"></textarea>
+		<td>
+		<textarea name="declarationContent" id="" cols="30" rows="10" >신고 댓글 내용 : ${declaration.declarationContent }
+신고 댓글 작성자 : ${declaration.declarationReceiver}
+----------------------------------</textarea>
 		<input type="hidden" name="declarationDivision" value="${declaration.declarationDivision }"/>
 		<input type="hidden" name="declarationReceiver" value="${declaration.declarationReceiver}"/>
 		<input type="hidden" name="declarationWriter" value="${memberLoggedIn.memberId}"/>
-		<input type="hidden" name="boardName" value="n"/>
+		<input type="hidden" name="boardName" value="${declaration.boardName}"/>
 		<input type="hidden" name="boardNo" value="${declaration.boardNo}"/>
 		</td>
 	</tr>

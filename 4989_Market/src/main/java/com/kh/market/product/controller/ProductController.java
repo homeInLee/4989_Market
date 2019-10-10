@@ -106,7 +106,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/productRegistrationEnd.do", method = RequestMethod.POST)
-	public String productRegistrationEnd(@RequestParam String productWriter, @RequestParam String productTitle,
+	public String productRegistrationEnd(@RequestParam("sido") String sido,@RequestParam("gugun") String gugun,@RequestParam("cate") String cate,@RequestParam("gory") String gory, @RequestParam String productWriter, @RequestParam String productTitle,
 			@RequestParam String productPrice, @RequestParam String content, @RequestParam String address, Model model,
 			MultipartFile[] upFile, MultipartHttpServletRequest mtfRequest) {
 
@@ -157,7 +157,8 @@ public class ProductController {
 
 		p.setSellPrice(Integer.parseInt(productPrice));
 		p.setSellContent(content);
-		p.setSellAddress(address);
+		p.setSellAddress(sido+" "+gugun);
+		p.setSellCategory(cate+" "+gory);
 		int result = productService.productRegistration(p, attachList);
 
 		model.addAttribute("msg", result > 0 ? "물품 등록 성공" : "물품등록 실패");
@@ -168,7 +169,10 @@ public class ProductController {
 	}
 
 	@GetMapping("/productView.do")
-	public String productSelectOne(@RequestParam String productNo, @RequestParam String memberId, Model model) {
+	public String productSelectOne(@RequestParam String productNo, 
+			@RequestParam String memberId,
+			@RequestParam(value="decNo", defaultValue="0", required=false)int decNo,
+			Model model) {
 		logger.info(productNo);
 		String boardName = "S";
 		// 장바구니 여부 검사 코드
@@ -186,6 +190,7 @@ public class ProductController {
 		model.addAttribute("basket", basket);
 		model.addAttribute("p", p);
 		model.addAttribute("attach", attach);
+		model.addAttribute("decNo",decNo);
 		return "/product/productView";
 
 	}
@@ -315,16 +320,18 @@ public class ProductController {
 
 		map.put("sellNo", sellNo);
 		map.put("sellBuyer", sellBuyer);
-		int result3 = productService.productBuyerUpdate(map);
-
-		String msg = "";
-		String loc = "";
-		if (result1 > 0 && result2 > 0 && result3 > 0) {
-			msg = "판매완료확정 성공";
-			loc = "/product/memberSellView.do?memberId=" + sellWriter;
-		} else {
-			msg = "판매완료확정 실패";
-			loc = "/product/memberSellDetailView.do?sellNo=" + sellNo + "&memberId=" + sellWriter;
+		int result3=productService.productBuyerUpdate(map);
+		
+		int result4=basketService.basketSellCompleteDelete(sellNo);
+		
+		String msg="";
+		String loc="";
+		if(result1>0&&result2>0&&result3>0&&result4>0) {
+			msg="판매완료확정 성공";
+			loc="/product/memberSellView.do?memberId="+sellWriter;
+		}else {
+			msg="판매완료확정 실패";
+			loc="/product/memberSellDetailView.do?sellNo="+sellNo+"&memberId="+sellWriter;
 		}
 		mav.addObject("msg", msg);
 		mav.addObject("loc", loc);

@@ -29,6 +29,7 @@ public class Product {
 	private Date sellDelDate;
 	private String sellDelType;
 	private String sellAddress;
+	private String sellCategory;
 	
 	
 	
@@ -107,7 +108,12 @@ public class Product {
 	public void setSellAddress(String sellAddress) {
 		this.sellAddress = sellAddress;
 	}
-	
+	public String getSellCategory() {
+		return sellCategory;
+	}
+	public void setSellCategory(String sellCategory) {
+		this.sellCategory = sellCategory;
+	}
 	
 	
 	@Override
@@ -115,13 +121,13 @@ public class Product {
 		return "Product [sellNo=" + sellNo + ", sellTitle=" + sellTitle + ", sellWriter=" + sellWriter + ", sellBuyer="
 				+ sellBuyer + ", sellContent=" + sellContent + ", sellState=" + sellState + ", sellPrice=" + sellPrice
 				+ ", sellDate=" + sellDate + ", sellReadCount=" + sellReadCount + ", sellDelDate=" + sellDelDate
-				+ ", sellDelType=" + sellDelType + ", sellAddress=" + sellAddress + "]";
+				+ ", sellDelType=" + sellDelType + ", sellAddress=" + sellAddress +  ", sellCategory=" + sellCategory + "]";
 	}
 	
 	
 	
 	public Product(int sellNo, String sellTitle, String sellWriter, String sellBuyer, String sellContent,
-			String sellState, int sellPrice, Date sellDate, int sellReadCount, Date sellDelDate, String sellDelType, String sellAddress) {
+			String sellState, int sellPrice, Date sellDate, int sellReadCount, Date sellDelDate, String sellDelType, String sellAddress, String sellCategory) {
 		super();
 		this.sellNo = sellNo;
 		this.sellTitle = sellTitle;
@@ -135,6 +141,7 @@ public class Product {
 		this.sellDelDate = sellDelDate;
 		this.sellDelType = sellDelType;
 		this.sellAddress = sellAddress;
+		this.sellCategory = sellCategory;
 	}
 	
 	
@@ -148,6 +155,7 @@ public class Product {
 		int result = 1;
 		result = prime * result + ((sellAddress == null) ? 0 : sellAddress.hashCode());
 		result = prime * result + ((sellBuyer == null) ? 0 : sellBuyer.hashCode());
+		result = prime * result + ((sellCategory == null) ? 0 : sellCategory.hashCode());
 		result = prime * result + ((sellContent == null) ? 0 : sellContent.hashCode());
 		result = prime * result + ((sellDate == null) ? 0 : sellDate.hashCode());
 		result = prime * result + ((sellDelDate == null) ? 0 : sellDelDate.hashCode());
@@ -178,6 +186,11 @@ public class Product {
 			if (other.sellBuyer != null)
 				return false;
 		} else if (!sellBuyer.equals(other.sellBuyer))
+			return false;
+		if (sellCategory == null) {
+			if (other.sellCategory != null)
+				return false;
+		} else if (!sellCategory.equals(other.sellCategory))
 			return false;
 		if (sellContent == null) {
 			if (other.sellContent != null)
@@ -222,6 +235,7 @@ public class Product {
 			return false;
 		return true;
 	}
+	
 	
 	
 	

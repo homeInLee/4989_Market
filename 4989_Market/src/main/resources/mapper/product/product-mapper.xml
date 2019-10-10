@@ -23,8 +23,8 @@
 							default, 
 							default,
 							#{sellAddress},
-							default
-							)
+							default,
+							#{sellCategory})
 		<selectKey keyProperty="sellNo" resultType="_int" order="AFTER">
 			select seq_product_no.currval from dual
 		</selectKey>

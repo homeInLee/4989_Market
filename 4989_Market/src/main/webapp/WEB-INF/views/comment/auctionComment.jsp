@@ -61,7 +61,7 @@ padding: 5px;
 }
 
 </style>
-<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 13 ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
+<p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 <span id="aCnt_"></span> ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
 	<form action="" id="commentFrm" method="post">
 	<br />
@@ -95,7 +95,6 @@ padding: 5px;
 <script>
 //대댓글 입력창 보여주기
 function replyComment(btn) {
-	console.log("!!");
 	
 	var param = {commentNo: btn};
 	var  reply =
@@ -222,6 +221,11 @@ function getcommentList() {
 	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
 	                    html += "</c:if>";
+	                    html += "<input type='button' value='신고'  onclick='goDeclaration();'/>"; 
+	                    html += "<input type='button' value='신고처리'  onclick='declarationProcess();'/>"; 
+	                    html += "<input type='hidden' id='commentNo' name='commentNo' value="+data[i].commentNo+" />"; 
+	                    html += "<input type='hidden' id='co1Receiver' name='co1Receiver' value="+data[i].commentWriter+" />"; 
+	                    html += "<input type='hidden' id='commentContent' name='commentContent' value="+data[i].commentContent+" />"; 
 	                    html += "</td></tr>";
                     } else if(data[i].commentLevel == 2){
 	                    html += "<tr><td colspan='2' style='padding-left : 30px;'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
@@ -233,6 +237,10 @@ function getcommentList() {
 	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
 	                    html += "</c:if>";
+	                    html += "<input type='button' value='신고'  onclick='goDeclaration();'/>"; 
+	                    html += "<input type='hidden' id='commentNo' name='commentNo' value="+data[i].commentNo+" />"; 
+	                    html += "<input type='hidden' id='co2Receiver' name='declarationReceiver' value="+data[i].commentWriter+" />"; 
+	                    html += "<input type='hidden' id='commentContent' name='commentContent' value="+data[i].commentContent+" />"; 
 	                    html += "</td></tr>";
                     } 
                     html += "</table>";
@@ -255,6 +263,39 @@ function getcommentList() {
         	console.log("ajax 처리 실패 : ",jqxhr,textStatus,errorThrown);
        }
 	});
+}
+//관심 수
+$(function(){
+	
+	var param = {
+			auctionNo : '${auctionSelectOne.get(0).auctionNo}'
+	}
+	$.ajax({
+	    url: "${pageContext.request.contextPath}/basket/basketSelectAuctionCnt",
+	    data:param,
+	    contentType:"application/json; charset=utf-8",
+	    type: "GET",
+	    dataType: "json",
+	    success: function(data) {
+	      $("#aCnt_").html(data);
+	    },
+	    error: function(xhr,txtStatus,err){
+	      console.log("ajax실패",xhr,txtStatus,err);
+	    }
+	});
+});
+function goDeclaration(){
+	var declarationReceiver = $("#co1Receiver").val();
+	var boardNo = $("#boardNo").val();
+	var declarationContent = $("#commentContent").val();
+	
+	location.href="${pageContext.request.contextPath}/declaration/commentDeclaration?declarationReceiver="+declarationReceiver+"&boardNo="+boardNo+"&declarationWriter=${memberLoggedIn.memberId}&declarationContent="+declarationContent+"&boardName=a";
+	
+};
+
+function declarationProcess(){
+	var declarationReceiver = $("#co1Receiver").val();
+	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId="+declarationReceiver+"&decNo=${decNo}";
 }
 
 </script>

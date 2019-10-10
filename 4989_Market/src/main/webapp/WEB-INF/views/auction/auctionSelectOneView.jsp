@@ -1,3 +1,4 @@
+<%@page import="java.sql.Date"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
@@ -152,6 +153,9 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
     opacity:1;
     box-shadow:rgba(0,0,0,0.1) 1px 1px 0px; 
 }
+button[name=fixButton]{
+	padding: 3px 10px;
+}
 
 
 
@@ -189,7 +193,78 @@ a{
 	font-size: 25px;
 }
 
+.zeta-menu-bar {
+	display: inline-block;
+	width: 100%;
+}
 
+.zeta-menu {
+	margin: 0;
+	padding: 0;
+}
+
+.zeta-menu li {
+	float: left;
+	list-style: none;
+	position: relative;
+}
+
+/* .zeta-menu li:hover { */
+/* 	background: black; */
+/* } */
+
+/* .zeta-menu li.expand { */
+/* 	background: white; */
+/* } */
+
+.zeta-menu li.expand>a {
+	color: black;
+}
+
+.zeta-menu a {
+	display: block;
+	padding: 10px 20px;
+	text-decoration: none;
+}
+
+/* .zeta-menu li.expand #declaration:hover{ */
+/* background: lightgray;}  */
+
+/* .zeta-menu li.expand>a:hover{ */
+/* background: white;}  */
+
+.zeta-menu ul {
+	background: #fff;
+	border: 1px solid silver;
+	display: none;
+	padding: 0;
+	position: absolute;
+/* 	여기부터 위치 조정 */
+	left: -11;
+	top: -99;
+	width: 115px;
+}
+
+.zeta-menu ul li {
+	float: none;
+}
+
+.zeta-menu ul li.expand {
+	background: #ddd;
+}
+
+.zeta-menu ul li.expand a {
+	color: black;
+}
+
+.zeta-menu ul a {
+	color: black;
+}
+
+.zeta-menu ul ul {
+	left: 100%;
+	top: 0;
+}
 </style>
 <script>
 //장바구니 기능 코드
@@ -208,6 +283,22 @@ function basketCheck(check,sellNo,memberId){
 		    dataType: "json",
 		    success: function(data) {
 		      alert("장바구니에 담겼습니다");
+		      var param = {
+		  			auctionNo : '${auctionSelectOne.get(0).auctionNo}'
+		  	  }
+			  	$.ajax({
+			  	    url: "${pageContext.request.contextPath}/basket/basketSelectAuctionCnt",
+			  	    data:param,
+			  	    contentType:"application/json; charset=utf-8",
+			  	    type: "GET",
+			  	    dataType: "json",
+			  	    success: function(data) {
+			  	      $("#aCnt_").html(data);
+			  	    },
+			  	    error: function(xhr,txtStatus,err){
+			  	      console.log("ajax실패",xhr,txtStatus,err);
+			  	    }
+			  	});
 		    },
 		    error: function(xhr,txtStatus,err){
 		      console.log("ajax실패",xhr,txtStatus,err);
@@ -228,7 +319,22 @@ function basketCheck(check,sellNo,memberId){
 		    dataType: "json",
 		    success: function(data) {
 		      alert("장바구니에서 삭제되었습니다")
-		      
+		      var param = {
+					auctionNo : '${auctionSelectOne.get(0).auctionNo}'
+			  }
+				$.ajax({
+				    url: "${pageContext.request.contextPath}/basket/basketSelectAuctionCnt",
+				    data:param,
+				    contentType:"application/json; charset=utf-8",
+				    type: "GET",
+				    dataType: "json",
+				    success: function(data) {
+				      $("#aCnt_").html(data);
+				    },
+				    error: function(xhr,txtStatus,err){
+				      console.log("ajax실패",xhr,txtStatus,err);
+				    }
+				});
 		    },
 		    error: function(xhr,txtStatus,err){
 		      console.log("ajax실패",xhr,txtStatus,err);
@@ -268,27 +374,66 @@ function basketCheck(check,sellNo,memberId){
    </div>
    
 <!-- 장바구니 기능 코드 -->	
-<hr />
-<c:if test="${empty basket}">
-	<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-</c:if>
-	
-<c:if test="${not empty basket}">
-	<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-</c:if>
+
+
 <!--  -->
 	<div id="memberInfo">
+	<c:if test="${auctionSelectOne.get(0).auctionDeltype=='N' }">
+		<c:if test="${empty basket}">
+			<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+		
+		<c:if test="${not empty basket}">
+			<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+	</c:if>
 	<hr />
-		<a href="">
-			<h6>${auctionSelectOne.get(0).auctionWriter }</h6>
-   		</a>
+	<div class='zeta-menu-bar'>
+  		<ul class="zeta-menu">	
+		<li><a href="#"><h6>${auctionSelectOne.get(0).auctionWriter }</h6></a>
+	   		<ul>
+		      <li><a id="memberNotice" href="${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${auctionSelectOne.get(0).auctionWriter }">회원정보</a></li>
+		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationWriter=${memberLoggedIn.memberId }&declarationReceiver=${auctionSelectOne.get(0).auctionWriter }&declarationDivision=m" id="id-declaration"
+		      		>신고</a>
+		      		</li>
+	          <li><input type="hidden" name="declarationReceiver" value="${auctionSelectOne.get(0).auctionWriter }"/></li>
+	          <li><input type="hidden" name="declarationDivision" value="m"/></li>
+	        </ul>
+		</li>
+		</ul>
+	     </div>  
+<!-- 		<a href=""> -->
+<%-- 			<h6>${auctionSelectOne.get(0).auctionWriter }</h6> --%>
+<!--    		</a> -->
 	   		<span>${member.memberAddress}</span>	
+<!-- 	신고 버튼	 -->
+
+		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+		<input type="button" id="declarationProcess" value="신고처리" />
+		</c:if>
+		<input type="button" id="acutionDeclaration" value="신고" />		
+		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
+		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
+		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
+		<input type="hidden" id="declarationReceiver" name="declarationReceiver" value="${auctionSelectOne.get(0).auctionWriter }" />
+		<input type="hidden" id="boardName" name="boardName" value="a" />
+		<input type="hidden" id="boardNo" name="boardNo" value="${auctionSelectOne.get(0).auctionNo }" />
+		</form>	 
+<!-- 신고 -->
 	<hr />
 	
 	<div>
 		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
 		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
 		<p>${auctionSelectOne.get(0).auctionContent}</p>
+		
+					
+		<c:if test="${memberLoggedIn.memberId eq auctionSelectOne.get(0).auctionWriter }">
+		<p style="text-align: right;">
+			<button type="button" class="btn btn-primary btn-lg" name="fixButton" onclick="updateAuction();" >수정하기</button>
+			<button type="button" class="btn btn-secondary btn-lg" name="fixButton">삭제하기</button>
+		</p>
+		</c:if>
 		
 		<jsp:include page="/WEB-INF/views/comment/auctionComment.jsp"></jsp:include>
 	</div>
@@ -363,17 +508,36 @@ function basketCheck(check,sellNo,memberId){
 				</span>
 				<button type="button" class="btn btn-warning" id="auctionPrice" onclick="tender();">입찰하기</button>
 			</p>
-				<button type="button" class="btn btn-warning" id="trade" onclick="trade();" style="display:none;">거래하기</button>
-		 
+				<button type="button" class="btn btn-warning" id="trade" onclick="trade();" style="display:none;">거래 진행하기</button>
 		 
 	</div>
 		<!-- 시간 관련 코드 -->    
 	  <!-- <p style="color:red; font-size: 12px;">남은시간 : <span id="timer" style="color:red; font-size: 12px;"></span></p> -->
 	  
   <script>
+  /* (function(){
+	  var stDate1 = new Date().getTime();
+	  var edDate1 = new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime(); // 종료날짜
+	  var RemainDate1 = edDate1 - stDate1;
+	  
+	  int RemainDate5 = new Date().getTime() - new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime();
+	  
+	  if(RemainDate1 < 0){
+		  $("#mainTimer").attr("style","display:none");
+	      $("#finishAuction").attr("style","display:none");
+	      $("#kakao2").attr("style","display:none");
+	      $("#finishNotice").prop("style","display:inline-block");
+	  }
+	  
+  })() */
+	  
+ 
+  
+  
   $(document).ready(function(){
        tid=setInterval('msg_time()',1000); // 타이머 1초간격으로 수행
      });
+  
   var stDate = new Date().getTime();
   var edDate = new Date('${auctionSelectOne.get(0).auctionEndDate }').getTime(); // 종료날짜
   var RemainDate = edDate - stDate;
@@ -400,14 +564,30 @@ function basketCheck(check,sellNo,memberId){
     	  $("#finishNotice").prop("style","none");
       }
       
-    }else if(RemainDate > 0 && ${auctionSelectOne.get(0).auctionIngPrice == auctionSelectOne.get(0).auctionDirectPrice}){
-    	
+    }
+    else if(${auctionSelectOne.get(0).auctionDirectPrice == auctionSelectOne.get(0).auctionIngPrice}){
+    	if(${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionBuyer}){
+	    	$("#mainTimer").attr("style","display:none");
+	        $("#finishAuction").attr("style","display:none");
+	        $("#kakao2").attr("style","display:none");
+	        $("#trade").prop("style","display:inline-block");	
+    	}
+    	else{
+    		$("#mainTimer").attr("style","display:none");
+   	        $("#finishAuction").attr("style","display:none");
+   	        $("#kakao2").attr("style","display:none");
+   	        $("#finishNotice").prop("style","display:inline-block");
+    	}
     }
     
-    else{
+     else{
       RemainDate = RemainDate - 1000; // 남은시간 -1초
-    }
+    } 
   }
+  
+  function updateAuction(){
+	  location.href='${pageContext.request.contextPath }/auction/updateAuction.do?auctionNo=${auctionSelectOne.get(0).auctionNo}';
+  };
   </script>
   <!--  -->
 	</div>
@@ -622,7 +802,41 @@ function kakao2(){
 }
 
 </script>
- 
+<script>
+// 신고기능관련 script
+$("#declarationProcess").click(()=>{
+	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${auctionSelectOne.get(0).auctionWriter}&decNo=${decNo}";
+});
+$("#acutionDeclaration").click(()=>{
+	$("#frmPop").submit();
+});
+
+$(function(){
+	$(document).mouseup(function(e) {
+		if ($(e.target).parents('.zeta-menu').length == 0) {
+			$('.zeta-menu li').removeClass('expand');
+			$('.zeta-menu ul').hide();
+		}
+	});
+	$(".zeta-menu>li:has(ul)>a").each( function() {
+		$(this).html( $(this).html());
+	});
+	$(".zeta-menu ul li:has(ul)")
+		.find("a:first")
+		.append("<p style='float:right;margin:-3px'>&#9656;</p>");
+
+	$(".zeta-menu li>a").click(function(){
+		var li = $(this).parent();
+		var ul = li.parent()
+		ul.find('li').removeClass('expand');
+		ul.find('ul').not(li.find('ul')).hide();
+		li.children('ul').toggle();
+		if( li.children('ul').is(':visible') || li.has('ul')) {
+			li.addClass('expand');
+		}
+	});
+});
+</script> 
 
 
 
