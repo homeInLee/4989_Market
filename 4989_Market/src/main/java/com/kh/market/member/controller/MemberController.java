@@ -138,10 +138,13 @@ public class MemberController {
 		return map;
 	}
 	@RequestMapping("/memberView.do")
-	public String memberView(@RequestParam String memberId,Model model) {
+	public String memberView(@RequestParam String memberId,
+							@RequestParam(value="decNo", defaultValue="0", required=false)int decNo,
+							Model model) {
 			logger.info("memberId"+memberId);
 			Member member = memberService.selectOneMember(memberId);			
 			model.addAttribute("member", member);
+			model.addAttribute("decNo",decNo);
 			return "member/memberView";
 	}
 

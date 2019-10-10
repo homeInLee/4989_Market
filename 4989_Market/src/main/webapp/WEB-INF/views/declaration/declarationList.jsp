@@ -4,20 +4,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
-<input type="button" value="회원목록" />
-<input type="button" value="신고관리"
-	onclick="${pageContext.request.contextPath}/declaration/declarationList" />
 <style>
+div{
+	margin-left: -15px;
+}
 #declarationList {
 	width: 800px;
 	margin: auto;
 	text-align: center;
 	padding-top: 30px;
 }
-
 #declarationList th {
 	border-bottom: 1px solid #1b5ac2;
 }
+
 
 #declarationList tr:hover {
 	background-color: #f5f5f5;
@@ -71,21 +71,57 @@ ul li a:hover, ul li a:focus {
 	border:1px solid #1b5ac2;
 	background-color:#1b5ac2;
 }
+
+#goMemList{
+width: 150px;
+height: 50px;
+margin-left: 10px;
+background: white;
+border: 1px solid #1b5ac2;
+color: #1b5ac2;
+cursor: pointer;
+margin-top: -20px; 
+border-radius: 5px;
+}
+#goDecList{
+width: 150px;
+height: 50px;
+margin-left: -5px;
+background: #1b5ac2;
+color: white;
+cursor: pointer;
+border-radius: 5px;
+}
+.btn-alarm{
+background: white;
+color: deepgray;
+border: 1px solid gray;
+border-radius: 5px;
+padding: 1px;
+}
+
 </style>
+<input type="button" id="goMemList" value="회원목록" onclick="location.href='${pageContext.request.contextPath}/member/memberList.do'" />
+<input type="button" id="goDecList" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'" />
+
+<br />
+<br />
+<br />
 <div id="">
 	<h2 style="text-align: center;">신고목록</h2>
+	<br />
+	<br />
 	<c:if test="${memberLoggedIn != null }">
 		<table id="declarationList">
 			<tr>
 				<th>번호</th>
 				<th>분류</th>
 				<th>제목</th>
-<!-- 				<th>신고내용</th> -->
 				<th>신고자</th>
 				<th>신고사유</th>
 				<th>신고일</th>
 				<th>처리여부</th>
-				<th>처리</th>
+				<th>&nbsp;</th>
 			</tr>
 			<c:forEach items="${list}" var="d" varStatus="status">
 				<tr class="bottom" declarationNo=${d.declarationNo } onclick="event.cancelBubble=true">
@@ -97,7 +133,6 @@ ul li a:hover, ul li a:focus {
 					<c:if test="${d.declarationDivision eq 'c'}">댓글</c:if>
 					</td>
 					<td>${d.declarationTitle}</td>
-<%-- 					<td>${d.declarationContent}</td> --%>
 					<td id="writer">${d.declarationWriter}</td>
 
 					<td>
@@ -116,7 +151,7 @@ ul li a:hover, ul li a:focus {
 					</c:if>
 					<td>
 					<c:if test="${d.declarationState eq 'Y'}">
-					<input type="button" declarationWriter=${d.declarationWriter } onclick="event.cancelBubble=true;" id="dec${status.index}" value="알림" /> 
+					<input type="button" class="btn-alarm" declarationWriter=${d.declarationWriter } onclick="event.cancelBubble=true;" id="dec${status.index}" value="알림" /> 
 					</c:if>
 					<input type="hidden" name="declarationNo" value="${d.declarationNo}"/>
 					</td>
@@ -146,9 +181,10 @@ $("tr.bottom").click(function(){
 	location.href='${pageContext.request.contextPath}/declaration/selectOneDeclaration?declarationNo='+declarationNo;
 });
 
-$("[id^=dec]").click(function() {
+$(".btn-alarm").click(function() {
 	var writer = $(this).attr("declarationWriter");
 	location.href="${pageContext.request.contextPath}/declaration/declarationCheck?declarationWriter="+writer;
+	$(this).attr('style','display:none');
 });
 // 
 //이전 버튼 이벤트
