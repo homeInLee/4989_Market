@@ -51,7 +51,7 @@ $(()=>{
 			<div id="banner_wrap" style="width: 100%; overflow: hidden; position: relative; height: 506px;">
 				<ul id="slide_banner" style="width: 100%; overflow: hidden; position: relative; height: 506px;">
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/mac.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/mac.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text"> mac북 사세요</a>
@@ -60,7 +60,7 @@ $(()=>{
 		                </div>
 					</li>
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/iphone.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/iphone.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text"> 명품 핸드폰 팔아요!</a>
@@ -69,7 +69,7 @@ $(()=>{
 		                </div>
 					</li>
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/product/louisvuitton.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/product/louisvuitton.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text">진짜! 명품!!</a>
@@ -78,7 +78,7 @@ $(()=>{
 		                </div>
 					</li>
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/baby.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/baby.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text"> 인기만점! 아기 채육관</a>
@@ -87,7 +87,7 @@ $(()=>{
 		                </div>
 					</li>
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/stroller.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/stroller.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text"> 1번 밖에 안쓴 유모차</a>
@@ -96,7 +96,7 @@ $(()=>{
 		                </div>
 					</li>
 					<li>
-						<a href=""><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/coat.jpg" alt="" /></a>
+						<a href="" class="clearfix"><img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/coat.jpg" alt="" /></a>
 						<div id="info-goods">
 		                    <span id="name">
 		                    	<a href="" id="text"> 깨끗한 버버리 코트</a>
@@ -116,7 +116,7 @@ $(()=>{
                 <div id="sec2-img">
 	                <ul style="width: 1015%; overflow: hidden; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
 	                   <li style="float: left; list-style: none; position: relative; width: 249px; margin-right: 18px;">
-		                    	<a href="" class="dp_block">
+		                    	<a href="" class="dp_block clearfix">
 									<img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/nike.jpg" alt="" />
 		                    	</a>
 		                    	<div id="info-goods">
@@ -128,7 +128,7 @@ $(()=>{
 		                    	</div>
 		                 </li>	                    
 	                   <li style="float: left; list-style: none; position: relative; width: 249px; margin-right: 18px;">
-		                    	<a href="" class="dp_block">
+		                    	<a href="" class="dp_block clearfix">
 									<img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath }/resources/images/iphone.jpg" alt="" />
 		                    	</a>
 		                    	<div id="info-goods">
@@ -188,7 +188,7 @@ $(()=>{
                 <div id="sec3-img">
                 <ul  style="overflow: hidden; width: 1015%; position: relative; transition-duration: 0s; transform: translate3d(0px, 0px, 0px);">
                 	 <li style=" float: left; list-style: none; position: relative; width: 249px; margin-right: 18px;">
-		                    	<a href="" class="dp_block">
+		                    	<a href="" class="dp_block clearfix">
 									<img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath}/resources/images/mac.jpg" alt="" />
 		                    	</a>
 		                    	<div id="info-goods">
@@ -200,7 +200,7 @@ $(()=>{
 		                    	</div>
 		                 </li>	     
                 	 <li style=" float: left; list-style: none; position: relative; width: 249px; margin-right: 18px;">
-		                    	<a href="" class="dp_block">
+		                    	<a href="" class="dp_block clearfix">
 									<img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath}/resources/images/chanel.jpg" alt="" />
 		                    	</a>
 		                    	<div id="info-goods">
@@ -212,7 +212,7 @@ $(()=>{
 		                    	</div>
 		                 </li>	     
                 	 <li style=" float: left; list-style: none; position: relative; width: 249px; margin-right: 18px;">
-		                    	<a href="" class="dp_block">
+		                    	<a href="" class="dp_block clearfix">
 									<img style="width: 249px; height: 320px;" src="${pageContext.request.contextPath}/resources/images/adidas.jpg" alt="" />
 		                    	</a>
 		                    	<div id="info-goods">
