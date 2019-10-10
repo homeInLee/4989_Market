@@ -103,7 +103,7 @@ ul li a:hover, ul li a:focus {
 					  	<c:forEach items="${attachment}" var="a">
 
 					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='A'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:220px; height: 200px;">
+					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:215px; height: 200px;">
 					  		</c:if>
 					  	</c:forEach>
 					<div>

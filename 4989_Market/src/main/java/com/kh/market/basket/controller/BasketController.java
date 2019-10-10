@@ -59,7 +59,7 @@ public class BasketController {
 		map.put("paging", paging);
 		List<Product> myBasketList=basketService.basketView(map);
 		List<Attachment> attachment=auctionService.auctionAttachment(boardName);
-		System.out.println("attachment값은?"+attachment);
+		System.out.println("myBasketList값은?"+myBasketList);
 		//2.2 전체게시글수, 전체페이지수 구하기
 		
 		mav.addObject("attachment",attachment);

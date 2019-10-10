@@ -111,7 +111,7 @@ function auctionComplete(auctionNo,auctionBuyer){
 					  	<!-- <img src="http://placehold.it/700x400" style="width:100%"> -->
 					  	<c:forEach items="${attachmentList }" var="a">
 					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='A'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:220px; height: 200px;">
+					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:215px; height: 200px;">
 					  		</c:if>
 					  	</c:forEach>
 					<div>
