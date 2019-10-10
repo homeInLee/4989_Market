@@ -301,7 +301,7 @@ function basketCheck(check,sellNo,memberId){
   		<ul class="zeta-menu">	
 		<li><a href="#"><h6>${p.sellWriter}</h6></a>
 	   		<ul>
-		      <li><a id="memberNotice">회원정보</a></li>
+		      <li><a id="memberNotice" href="${pageContext.request.contextPath}/review/reviewMemberContent.do?memberId=${p.sellWriter}">회원정보</a></li>
 		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationWriter=${memberLoggedIn.memberId }&declarationReceiver=${p.sellWriter}&declarationDivision=m" id="id-declaration"
 		      		>신고</a>
 		      		</li>
