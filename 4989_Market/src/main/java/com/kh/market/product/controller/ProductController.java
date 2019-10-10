@@ -92,7 +92,7 @@ public class ProductController {
 	}
 
 	@RequestMapping(value = "/productRegistrationEnd.do", method = RequestMethod.POST)
-	public String productRegistrationEnd(@RequestParam String productWriter, @RequestParam String productTitle,
+	public String productRegistrationEnd(@RequestParam("sido") String sido,@RequestParam("gugun") String gugun,@RequestParam("cate") String cate,@RequestParam("gory") String gory, @RequestParam String productWriter, @RequestParam String productTitle,
 			@RequestParam String productPrice, @RequestParam String content, @RequestParam String address, Model model,
 			MultipartFile[] upFile, MultipartHttpServletRequest mtfRequest) {
 
@@ -143,7 +143,8 @@ public class ProductController {
 
 		p.setSellPrice(Integer.parseInt(productPrice));
 		p.setSellContent(content);
-		p.setSellAddress(address);
+		p.setSellAddress(sido+" "+gugun);
+		p.setSellCategory(cate+" "+gory);
 		int result = productService.productRegistration(p, attachList);
 
 		model.addAttribute("msg", result > 0 ? "물품 등록 성공" : "물품등록 실패");

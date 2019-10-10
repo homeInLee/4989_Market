@@ -1,0 +1,74 @@
+@charset "UTF-8";
+/* * @ 초기화용 CSS * ------------------------------- */ 
+html, body, div, p, span, strong, b, em, iframe, pre, 
+h1, h2, h3, h4, h5, h6, img, dl, dt, dd, fieldset, form, legend, 
+label, table, caption, thead, tbody, tfoot, tr, th, td, 
+ul, ol, li, a, input, select, textarea {
+    margin: 0;
+    padding: 0; 
+    border: 0 none; 
+} 
+html {
+    width: 1024px;
+    height: 100%;
+    min-height: 768px;
+}
+body {
+    height: 100%;
+    position: relative;
+    font-family: 'NanumBarunGothic', sans-serif;
+    font-size: 16px; 
+    line-height: 1.5;
+} 
+ul, ol, li {list-style: none;} 
+em, address {font-style: normal;} 
+img {border: 0 none; font-size: 0;line-height: 0;} 
+sup {position: relative;top: 2px;font-size: 11px;line-height: 100%;} 
+table {border-collapse: collapse; border-spacing:0; } 
+caption {overflow: hidden;width: 0;height: 0;font-size: 0; line-height: 0;} 
+th, td { vertical-align: middle;/* white-space: nowrap */} 
+a {color: #333; text-decoration: none; line-height: 1.5;} 
+a:hover, a:focus, a:active {text-decoration: none;} 
+a:visited {color: #333;} 
+*, html {box-sizing: border-box; -webkit-box-sizing: border-box; -moz-box-sizing: border-box; } 
+*, *:before, *:after {box-sizing: border-box;-webkit-box-sizing: border-box; -moz-box-sizing: border-box;}
+#footer {
+    /* background: #ebebeb; */
+    box-sizing: border-box;
+}
+
+#footer article {
+    width: 904px;
+    margin: auto;
+    padding: 40px 0;
+}
+
+#f_logo {
+    font-size: 24px;
+    line-height: 24px;
+}
+
+#f_logo span {
+    color: #2F9D27;
+}
+
+.f_info {
+    padding: 15px 0;
+    font-size: 14px;
+    color: #656565;
+    line-height: 22px;
+}
+
+#footer article > div p {
+    font-size: 13px;
+    color: #3B36CF;
+}
+
+#footer article > div p.f_info2 {
+    float: left;
+}
+
+#footer article > div p.cop {
+    float: right;
+    padding-top: 20px;
+}

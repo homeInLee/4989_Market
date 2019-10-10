@@ -67,7 +67,8 @@ ul li a:hover, ul li a:focus {
   <c:if test="${empty reviewList}">
   	<div style="text-align: center;">거래후기가 없습니다.</div>
   </c:if>
-  <div style="height: 450px;">
+  
+  
   <c:forEach items="${reviewList}" var="r">
  	<ul class="list-group list-group-flush">
   	  <li class="list-group-item">
@@ -78,7 +79,7 @@ ul li a:hover, ul li a:focus {
   	  
     </ul> 
   </c:forEach>
-  </div>
+  
 <div>
     <ul class="pageUl">
         <c:if test="${paging.prev}">
