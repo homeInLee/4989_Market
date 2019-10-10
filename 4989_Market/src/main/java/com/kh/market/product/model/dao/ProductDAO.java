@@ -9,7 +9,7 @@ import com.kh.market.product.model.vo.Product;
 
 public interface ProductDAO {
 
-	List<Product> productList();
+	List<Product> productList(String sellCategory);
 
 	int productRegistration(Product p);
 

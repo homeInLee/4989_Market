@@ -67,9 +67,9 @@ public class ProductController {
 	BasketService basketService;
 
 	@RequestMapping("/productList.do")
-	public String productList(Model model) {
+	public String productList(Model model,@RequestParam(value="sellCategory",required=false,defaultValue="") String sellCategory) {
 
-		List<Product> plist = productService.productList();
+		List<Product> plist = productService.productList(sellCategory);
 		List<Attachment> attachList = productService.attachList();
 
 		Map<List<Product>, List<Attachment>> map = new HashMap<>();

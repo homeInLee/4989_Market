@@ -23,9 +23,9 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Product> productList() {
+	public List<Product> productList(String sellCategory) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.productList");
+		return sqlSession.selectList("product.productList", sellCategory);
 	}
 
 	@Override
