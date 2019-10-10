@@ -19,7 +19,12 @@
 a{text-decoration:none; color:#666;}
 a:hover{color:#1bc1a3;}
 body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
-
+p{
+	color: black;
+}
+h3{
+	color: black;
+}
 
 #call {
 	border: 1px solid #da1519;
@@ -193,12 +198,12 @@ function basketCheck(check,sellNo,memberId){
 		<a href="">
 			<h6>${p.sellWriter}</h6>
    		</a>
-	   		<span>${p.sellAddress}</span>	
+	   		<span style="color: black;">${p.sellAddress}</span>	
 	<hr />
 </div>
 <div id="productInfo">
 	<div>
-		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
+		<h3 style="padding:32px 0; color: black;">${p.sellTitle}</h3>
 		<hr />
 		<br />		
 		<br />
@@ -210,7 +215,14 @@ function basketCheck(check,sellNo,memberId){
 		<hr />
 		<br />
 		<br />
+		<c:if test="${0 ne p.sellPrice  }">
 		<span style="color:#ff8a3d; font-size:32px;"><fmt:formatNumber value="${p.sellPrice }" pattern="#,###"/>원</span>
+		</c:if>
+		
+		<c:if test="${0 eq p.sellPrice  }">
+		<span style="color:#ff8a3d; font-size:32px;">무료나눔</span>
+		</c:if>
+		
 		<hr />
 		<br />
 			<div id="productControl">
@@ -254,7 +266,7 @@ function deleteProduct() {
 
 
 function goToList() {
-	location.href = "${pageContext.request.contextPath}/product/productList.do"
+	window.history.back()
 	
 }
 </script>
@@ -285,5 +297,5 @@ $(()=>{
 
 <!-- 이미지 슬라이더 -->
 <script src="${pageContext.request.contextPath}/resources/js/imageSlider.js"></script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
+<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+ --%>

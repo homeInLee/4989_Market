@@ -48,6 +48,10 @@ public interface ProductService {
 
 	List<Product> srchMoreResult(Map<String, String> sendMap);
 
+	List<Product> freeProductList();
+
+	List<Product> moreFreeResult(Map<String, String> pageMap);
+
 	
 
 

@@ -14,8 +14,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
@@ -36,6 +38,8 @@ import com.kh.market.message.model.service.MessageService;
 import com.kh.market.message.model.vo.Message;
 import com.kh.market.product.model.vo.Product;
 import com.kh.market.review.model.vo.Review;
+
+import oracle.net.aso.a;
 
 @Controller
 @RequestMapping("/auction")
@@ -71,8 +75,7 @@ public class AuctionController {
 		model.addAttribute("auctionList",auctionList);
 		model.addAttribute("mainImage", mainImage);
 		
-		logger.info("auctionList={}",auctionList);
-		logger.info("mainImage={}",mainImage);
+
 		
 		return "auction/auction";
 	}
@@ -277,7 +280,35 @@ public class AuctionController {
 		
 		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 	}
+	
+	@ResponseBody
+	@PostMapping("/moreResult.do")
+	public Map<String, Object> moreResult(@RequestParam String startCount,
+										  @RequestParam String endCount
+										  ){
+		Map<String, Integer> pageMap = new HashMap<>();
+
+		pageMap.put("startCount", Integer.parseInt(startCount));
+		pageMap.put("endCount", Integer.parseInt(endCount));
 		
+		
+		
+		List<Auction> auctionList = auctionService.moreResult(pageMap);
+		
+		
+		
+		List<Attachment> attachList = auctionService.moreAttach();
+
+		logger.info("불러온 사진 파일 null?={}", attachList.isEmpty());
+		logger.info("attachList={}",attachList);
+		System.out.println("["+attachList+"]");
+		
+		
+		Map<String, Object> returnVal = new HashMap<>();
+		returnVal.put("aList", auctionList);
+		returnVal.put("attachList", attachList);
+		return returnVal;
+	}
 	
 	
 	

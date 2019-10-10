@@ -119,5 +119,16 @@ public class AuctionServiceImpl implements AuctionService {
 		return auctionDAO.auctionBuyCnt(memberId);
 	}
 
+	@Override
+	public List<Auction> moreResult(Map<String, Integer> pageMap) {
+		return auctionDAO.moreResult(pageMap);
+	}
+
+	@Override
+	public List<Attachment> moreAttach() {
+		// TODO Auto-generated method stub
+		return auctionDAO.moreAttach();
+	}
+
 
 }

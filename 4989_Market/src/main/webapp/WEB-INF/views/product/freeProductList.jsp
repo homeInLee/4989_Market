@@ -84,7 +84,7 @@ h2, section {
 </jsp:include>
 
 
-<h2 style="display:block">중고상품 목록</h2>
+<h2 style="display:block">무료나눔</h2>
 <br /><br />
 <section id="section">
 	<div id="plist">
@@ -105,8 +105,8 @@ h2, section {
 						<h5>${product.sellTitle}</h5>
 						<div class="auction-content">${product.sellAddress }</div>
 						<div class="auction-price">
-							<fmt:formatNumber value="${product.sellPrice}" pattern="#,###" />
-							원
+							<c:if test="${product.sellPrice eq 0}">무료나눔</c:if>
+							
 						</div>
 					</div>
 				</a> <br /> <br />
@@ -153,12 +153,12 @@ function moreResult() {
 
 	 $.ajax({
 	        type    :   "post",
-	        url     :   "${pageContext.request.contextPath}/product/moreResult.do",
+	        url     :   "${pageContext.request.contextPath}/product/moreFreeResult.do",
 	        data    :   moreResultForm,
 	        dataType:   "json",
 	        success :   function(retnVal) {
 			        					        				
-	        						values = retnVal.moreList;
+	        						values = retnVal.morePList;
 	        						attach = retnVal.attachList;
 
         							
@@ -180,7 +180,10 @@ function moreResult() {
 	        							html += "<br/>";
 	        							html += "<h5>"+values[i].sellTitle+"</h5>";
 	        							html += "<div class='auction-content'>"+values[i].sellAddress+"</div>";
-	        							html += "<div class='auction-price'>"+values[i].sellPrice.toLocaleString()+"원";
+	        							if(values[i].sellPrice == 0){
+	        								html += "<div class='auction-price'>무료나눔";
+	        							}
+	        							
 	        							/* <fmt:formatNumber value="${product.sellPrice}" pattern="#,###" /> */
 	        							html += "</div>";
 	        							html += "</div>";

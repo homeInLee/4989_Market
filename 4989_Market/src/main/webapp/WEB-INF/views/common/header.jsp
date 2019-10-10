@@ -73,7 +73,7 @@ $(()=>{
 					    </ul>
 				    </li>
 					<li>
-						<a href="#">무료나눔</a>
+						<a href="${pageContext.request.contextPath }/product/freeProductList.do">무료나눔</a>
 						<ul>
 						    <li><a href="#">menu1</a></li>
 						    <li><a href="#">menu2</a></li>

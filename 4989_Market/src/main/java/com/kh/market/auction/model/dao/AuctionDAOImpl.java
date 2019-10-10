@@ -97,6 +97,17 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public int auctionBuyCnt(String memberId) {
 		return sqlSession.selectOne("auction.auctionBuyCnt", memberId);
 	}
+
+	@Override
+	public List<Auction> moreResult(Map<String, Integer> pageMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("auction.moreResult", pageMap);
+	}
+
+	@Override
+	public List<Attachment> moreAttach() {
+		return sqlSession.selectList("auction.moreAttach");
+	}
 	
 
 }

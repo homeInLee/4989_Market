@@ -40,5 +40,9 @@ public interface AuctionDAO {
 
 	int auctionBuyCnt(String memberId);
 
+	List<Auction> moreResult(Map<String, Integer> pageMap);
+
+	List<Attachment> moreAttach();
+
 
 }
