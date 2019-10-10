@@ -44,6 +44,8 @@
 				(attachment_no, board_name, board_no, originalfile_name, renamedfile_name, attachment_date, attachment_deltype, attachment_main_image)
 			values(seq_attachment_no.nextval, #{boardName}, #{boardNo}, #{originalfileName}, #{renamedfileName}, default, 'N', #{attachmentMainImage})
 	</insert>
+	
+	
 
 	<select id="productSearch" resultType="auction" parameterType="String">
 		select * 
@@ -98,5 +100,28 @@
 		select * from attachment where board_no = #{auctionNo}
 	</select>
 	
+	<update id="updateAuctionEnd">
+		update auction set auction_title = #{auctionTitle},
+							auction_address = #{auctionAddress},
+							auction_price = #{auctionPrice},
+							auction_unit_price = #{auctionUnitPrice},
+							auction_direct_price = #{auctionDirectPrice},
+							auction_category = #{auctionCategory},
+							auction_date = #{auctionDate},
+							auction_content = #{auctionContent}
+		where auction_no = #{auctionNo}
+	</update>
+	
+	<update id="updateAttachmentEnd" >
+		update attachment set originalfile_name = #{originalfileName}, renamedfile_name = #{renamedfileName} where board_no = #{boardNo}
+	</update>
+	
+	<delete id="updateAttachmentBefore">
+		delete from attachment where board_no = #{boardNo} and board_name = 'A'
+	</delete>
+	
+	<delete id="deleteAuction">
+		delete from auction where auction_no = #{auctionNo}
+	</delete>
 	
 </mapper>

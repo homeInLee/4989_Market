@@ -41,6 +41,10 @@ public interface AuctionService {
 
 	List<Map<String, String>> updateAttachment(int auctionNo);
 
+	int updateAuctionEnd(Auction auction, List<Attachment> attachList);
+
+	int deleteAuction(int auctionNo);
+
 
 
 }

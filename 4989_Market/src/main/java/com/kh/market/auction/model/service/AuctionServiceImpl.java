@@ -34,9 +34,7 @@ public class AuctionServiceImpl implements AuctionService {
 
 	@Override
 	public int insertAuction(Auction auction, List<Attachment> attachList) {
-		System.out.println("------------------------------------------------result-------------------------------");
 		int result = auctionDAO.insertAuction(auction);
-		System.out.println("------------------------------------------------"+result+"-------------------------------");
 		if(result == 0) {
 			throw new AuctionException("게시글 등록 오류!");
 		}
@@ -127,6 +125,41 @@ public class AuctionServiceImpl implements AuctionService {
 	@Override
 	public List<Map<String, String>> updateAttachment(int auctionNo) {
 		return auctionDAO.updateAttachment(auctionNo);
+	}
+
+	@Override
+	public int updateAuctionEnd(Auction auction, List<Attachment> attachList) {
+		int result = auctionDAO.updateAuctionEnd(auction);
+		System.out.println("업데이트 서비스");
+		if(result == 0) {
+			throw new AuctionException("게시글 수정 오류!");
+		}
+//		int boardNo = auctionDAO.selectBoardNo();
+//		logger.info("selectBoardNo={}",boardNo);
+		
+		int delResult = auctionDAO.updateAttachmentBefore(attachList.get(0).getBoardNo());
+		//첨부파일 등록
+		if(attachList.size() > 0) {
+			for(Attachment a: attachList) {
+//				a.setBoardNo(auction.getAuctionNo());//생성된 게시물번호 대입
+				
+//				int result2 = auctionDAO.updateAttachmentEnd(a);
+				int result2 = auctionDAO.insertAttachment(a);
+				
+				logger.info("-------------result={}------------",result);
+				if(result2 ==0) {
+					throw new AuctionException("첨부파일 수정 오류!");
+				}
+			}
+		}
+		
+		return result;
+	}
+
+	@Override
+	public int deleteAuction(int auctionNo) {
+		auctionDAO.updateAttachmentBefore(auctionNo);
+		return auctionDAO.deleteAuction(auctionNo);
 	}
 
 

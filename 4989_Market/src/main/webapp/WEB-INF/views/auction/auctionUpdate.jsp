@@ -35,24 +35,21 @@ div#memberId-container span.error{color:red;}
 
 
 <div id="enroll-container">
-	<form name="auctionEnrollFrm" action="auctionEnrollEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
+	<form name="auctionUpdateFrm" action="auctionUpdateEnd.do" method="post" onsubmit="return validate();" enctype="multipart/form-data">
 		<table>
 			<tr>
 				<th>경매 물품명</th>
 				<td>
 					<div id="auction-container">
 						<input type="text" class="form-control"  name="auctionTitle" id="auctionTitle_" value="${updateAuction.auctionTitle }" required>
-	           			<input type="hidden" name="auctionWriter" id="auctionWriter" value="${memberLoggedIn.memberId }"/>
+	           			<input type="hidden" name="auctionNo" id="auctionNo" value="${updateAuction.auctionNo }"/>
 					</div>
 				</td>
 			</tr>
 			<tr>
-				<th>거래 지역</th>
-				<td>
 					<div id="auction-container">
-						<input type="text" class="form-control"  name="auctionAddress" id="auctionAddress" value="${updateAuction.auctionAddress}" required>
+						<input type="hidden" class="form-control"  name="auctionAddress" id="auctionAddress" value="${updateAuction.auctionAddress}" required>
 					</div>
-				</td>
 			</tr>
 			<tr>
 				<th>경매시작 가격</th>
@@ -73,10 +70,7 @@ div#memberId-container span.error{color:red;}
 				</td>
 			</tr>  
 			<tr>
-				<th>상품분류</th>
-				<td>
-					<input type="text" class="form-control" name="auctionCategory" value="${updateAuction.auctionCategory}" />
-				</td>
+					<input type="hidden" class="form-control" name="auctionCategory" value="${updateAuction.auctionCategory}" />
 			</tr>
 			<tr>
 				<th>경매종료 날짜</th>
@@ -101,37 +95,22 @@ div#memberId-container span.error{color:red;}
 					</div>
 					</c:forEach> 
 					
-					<c:forEach var="o" varStatus="ovs" begin="${fn:length(updateAttachment)}" end="${attachmentIndex}" >
+					<c:if test="${attachmentIndex > 0 }">
+					<c:forEach var="o" varStatus="ovs" begin="0" end="${attachmentIndex-1 }" >
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">이미지${fn:length(updateAttachment)}</span>
+					    <span class="input-group-text">이미지${attachmentSize+ovs.index}</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile${ovs.index}" >
-					    <label class="custom-file-label" for="upFile${ovs.index}">
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile${attachmentSize+ovs.count}" >
+					    <label class="custom-file-label" for="upFile${attachmentSize+ovs.count}">
 					    		이미지를 선택하세요.
 					    </label>
 					  </div>
 					</div>
 					</c:forEach>
-					
-					<%-- <c:forEach items="${updateAttachment}" var="a" begin=>
-					<div class="input-group mb-3" style="padding:0px;">
-					  <div class="input-group-prepend" style="padding:0px;">
-					    <span class="input-group-text">이미지2</span>
-					  </div>
-					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile3" >
-					    <label class="custom-file-label" for="upFile3">
-					    		파일을 선택하세요.
-				    	</label>
-					  </div>
-					</div>
-					</c:forEach> --%>
-					
-					
-					
-					
+					</c:if>
+				
 				</td>
 			</tr>
 			<tr>
@@ -141,7 +120,7 @@ div#memberId-container span.error{color:red;}
 				</td>
 			</tr>
 		</table>
-		<input class="log" type="submit" value="등록하기" >
+		<input class="log" type="submit" value="수정하기" >
 	</form>
 </div>
 
