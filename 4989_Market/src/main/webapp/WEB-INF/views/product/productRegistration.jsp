@@ -35,7 +35,23 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 	float: left;
 }
 
-
+#Registration{
+	text-align: center;
+}
+#Registration input{
+	margin-bottom: 10px;
+}
+#Registration table th{
+	text-align: center; padding-right:15px; width: 125px;
+}
+#Registration table td{
+	text-align: left;
+	width: 500px;
+}
+#Registration table td p{
+	margin-right: 200px;
+	margin-top: 30px;
+}
 </style>
 	<section id="cotentArea">
 	<!-- 컨텐츠 영역 시작-->
@@ -115,25 +131,7 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 	    <br />
 	    <br />
 	
-		<table id="tbl-Registration">
-						<tr style="padding-bottom: 1px;">
-							
-							<th>작성자 정보</th>
-							
-							<td>
-								<div id="userinfo">
-								<input type="text"  id="writer" disabled="disabled" value="${memberLoggedIn.memberId}" class="form-control"/>
-								<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
-								<input type="text"  id="phone" disabled="disabled" value="${memberLoggedIn.memberPhone }" class="form-control"/>
-								<input type="text"  id="email" disabled="disabled" value="${memberLoggedIn.memberEmail }"  class="form-control"/>
-								<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
-								<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
-<!-- 								<button type="button" onclick="editable();">변경</button>
- -->								</div>
-							</td>
-						
-						
-						</tr>
+		<table id="tbl-Registration">						
 						<tr>
 							<th>제목</th>
 							<td>		
@@ -145,8 +143,9 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 						<tr>
 							<th>가격</th>
 							<td>
-							<input type="checkbox" onclick="freeProductClick();" id="freeProductCHK"/>		
-							<input type="number" id="price" name="productPrice" class="form-control" placeholder="0,000,000원" required="required" />
+							<input type="number" id="price" name="productPrice"  class="form-control" placeholder="0,000,000원" required="required" />
+							<input type="checkbox" onclick="freeProductClick();" id="freeProductCHK" />		
+							<label for="freeProductCHK">무료나눔</label>
 							</td>			
 						</tr>
 						
@@ -172,13 +171,31 @@ h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; marg
 							<textarea rows="30" cols="113" id="content" name="content" class="form-control" required="required"></textarea>
 							</td>			
 						</tr>
-	
+						<tr style="padding-bottom: 1px;">							
+							<th>작성자 정보</th>							
+							<td>
+								<div id="userinfo">
+									<input type="text"  id="writer" disabled="disabled" value="${memberLoggedIn.memberId}" class="form-control"/>
+									<input type="hidden" name="productWriter" value="${memberLoggedIn.memberId}"/>
+									<input type="text"  id="phone" disabled="disabled" value="${memberLoggedIn.memberPhone }" class="form-control"/>
+									<input type="text"  id="email" disabled="disabled" value="${memberLoggedIn.memberEmail }"  class="form-control"/>
+									<input type="text"  id="sell-address" disabled="disabled" value="${memberLoggedIn.memberAddress }" class="form-control"  />
+									<input type="hidden" name="address" value="${memberLoggedIn.memberAddress}"/>
+								</div>
+							</td>						
+						</tr>
+						<tr>
+						<th></th>
+						<td>
+							<p align="right" id="btnP">
+							<button type="submit" onclick="return checkYN();" class="btn btn-primary" >등록하기</button>
+							</p>
+						</td>
+						</tr>
+
 			</table>
 				<br />
 	
-				<p align="right" id="btnP">
-				<button type="submit" onclick="return checkYN();" class="btn btn-primary" >등록하기</button>
-				</p>
 			</form>
 			
 	</div>
@@ -205,8 +222,17 @@ function freeProductClick() {
 	
 	var isChecked = $("#freeProductCHK").is(":checked");
 	console.log($("#freeProductCHK").val());
+	console.log(isChecked);
 	confirm("무료나눔으로 등록 하시겠습니까?");
-	
+	console.log($("#price").val)
+	if(isChecked == true){
+		alert("무료나눔으로 설정됨")
+		$("#price").attr('value', 0);
+		$("#price").attr('readonly', 'readonly');
+		console.log($("#price").val());
+		
+		
+	}
 }
 
 

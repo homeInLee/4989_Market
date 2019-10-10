@@ -130,6 +130,18 @@ public class ProductDAOImpl implements ProductDAO {
 		return sqlSession.selectList("product.srchMoreResult", sendMap);
 	}
 
+	@Override
+	public List<Product> freeProductList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.freeProductList");
+	}
+
+	@Override
+	public List<Product> moreFreeResult(Map<String, String> pageMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.moreFreeResult", pageMap);
+	}
+
 
 	
 	

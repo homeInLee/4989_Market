@@ -152,6 +152,18 @@ public class ProductServiceImpl implements ProductService {
 		return productDAO.srchMoreResult(sendMap);
 	}
 
+	@Override
+	public List<Product> freeProductList() {
+		// TODO Auto-generated method stub
+		return productDAO.freeProductList();
+	}
+
+	@Override
+	public List<Product> moreFreeResult(Map<String, String> pageMap) {
+		// TODO Auto-generated method stub
+		return productDAO.moreFreeResult(pageMap);
+	}
+
 
 
 

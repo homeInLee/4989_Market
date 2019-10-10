@@ -84,7 +84,21 @@ public class ProductController {
 
 		return "/product/productList";
 	}
+	
+	@RequestMapping("/freeProductList.do")
+	public String freeProductList(Model model) {
+		List<Product> plist = productService.freeProductList();
+		List<Attachment> attachList = productService.attachList();
+		
+		
+	
 
+		
+		model.addAttribute("plist", plist);
+		model.addAttribute("attachList", attachList);
+		return "/product/freeProductList";
+	}
+	
 	@RequestMapping("/productRegistration.do")
 	public String productRegistration() {
 		logger.debug("상품 등록하기 실행");
@@ -427,6 +441,31 @@ public class ProductController {
 		
 		return returnVal;
 		
+	}
+	
+	@ResponseBody
+	@PostMapping("/moreFreeResult.do")
+	public Map<String, Object> moreFreeResult(
+												  @RequestParam String startCount,							  
+												  @RequestParam String endCount,												  
+												  Model model){
+		Map<String, String> pageMap = new HashMap<>();
+		pageMap.put("startCount", startCount);
+		pageMap.put("endCount", endCount);		
+		logger.info("pageMap={}",pageMap.toString());
+		
+		
+		
+		List<Product> moreFreeList = productService.moreFreeResult(pageMap);
+		List<Attachment> attachList = productService.moreAttach();
+
+		
+		Map<String, Object> freeMap = new HashMap<String, Object>();
+		
+		freeMap.put("morePList", moreFreeList);
+		freeMap.put("attachList", attachList);
+		
+		return freeMap; 
 	}
 
 	@ResponseBody 

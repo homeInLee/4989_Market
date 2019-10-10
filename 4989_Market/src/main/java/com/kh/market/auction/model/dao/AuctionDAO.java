@@ -40,6 +40,11 @@ public interface AuctionDAO {
 
 	int auctionBuyCnt(String memberId);
 
+
+	List<Auction> moreResult(Map<String, Integer> pageMap);
+
+	List<Attachment> moreAttach();
+
 	Auction updateAuction(int auctionNo);
 
 	List<Map<String, String>> updateAttachment(int auctionNo);
