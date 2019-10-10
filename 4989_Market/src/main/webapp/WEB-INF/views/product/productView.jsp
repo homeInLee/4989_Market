@@ -340,6 +340,9 @@ function basketCheck(check,sellNo,memberId){
 		<br />
 
 		<p>거래 가능 지역 : ${p.sellAddress }</p>
+		<br />		
+		<br />
+		<p>상품분류 : ${p.sellCategory }</p>
 		<br />
 		<hr />
 		<p>${p.sellContent}</p>
