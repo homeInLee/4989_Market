@@ -144,25 +144,11 @@ label{
 				</td>
 			</tr>
 			<tr>
-				<th>거래 지역</th>
-				<td>
-					<div id="auction-container">
-						<input type="text" class="form-control"  name="auctionAddress" id="auctionAddress" required value="${p.sellAddress }">
-					</div>
-				</td>
-			</tr>
-			<tr>
 				<th>가격</th>
 				<td>	
 					<input type="number" class="form-control" name="productPrice" id="productPrice" value="${p.sellPrice }">
 				</td>
 			</tr>  
-			<tr>
-				<th>상품분류</th>
-				<td>
-					<input type="text" class="form-control" name="productCategory"/>
-				</td>
-			</tr>
 
 			<tr>
 				<th>상품 설명</th>
@@ -187,6 +173,8 @@ label{
 
 	    
 		<br />
+		<input type="hidden" class="form-control"  name="productAddress" id="productAddress" required value="${p.sellAddress }">
+		<input type="text" class="form-control" name="productCategory" value="${p.sellCategory }"/>
 		<input type="submit" class="btn btn-outline-success" value="저장" >
 		
 		

@@ -112,7 +112,7 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionEnrollEnd.do")
-	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
+	public String boardFormEnd(@RequestParam("sido") String sido,@RequestParam("gugun") String gugun,@RequestParam("cate") String cate,@RequestParam("gory") String gory, Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
 		logger.info("경매 등록 요청!!");
 		
 		try {
@@ -172,6 +172,8 @@ public class AuctionController {
 		}
 		
 		//업무로직 auction, Attachment 테이블에 데이터 저장
+		auction.setAuctionCategory(cate+" "+gory);
+		auction.setAuctionAddress(sido+" "+gugun);
 		int result = auctionService.insertAuction(auction, attachList);
 		System.out.println(result);
 		String msg = result>0?"게시물 등록 성공~":"게시물 등록 실패!!";
