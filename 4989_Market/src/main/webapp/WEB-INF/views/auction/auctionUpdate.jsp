@@ -87,7 +87,7 @@ div#memberId-container span.error{color:red;}
 					    <span class="input-group-text">${vs.index == 0 ? "대표":""}이미지${vs.index == 0 ? "":vs.index}</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile${vs.count}" <c:if test="${vs.count == 1 }">required</c:if> >
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile${vs.count}" <c:if test="${vs.count == 1 }">required</c:if>  >
 					    <label class="custom-file-label" for="upFile${vs.count}">
 					    	${u.originalfileName }
 				    	</label>
@@ -95,6 +95,7 @@ div#memberId-container span.error{color:red;}
 					</div>
 					</c:forEach> 
 					
+					<c:if test="${attachmentIndex > 0 }">
 					<c:forEach var="o" varStatus="ovs" begin="0" end="${attachmentIndex-1 }" >
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
@@ -108,6 +109,7 @@ div#memberId-container span.error{color:red;}
 					  </div>
 					</div>
 					</c:forEach>
+					</c:if>
 				
 				</td>
 			</tr>
