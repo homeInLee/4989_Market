@@ -322,11 +322,11 @@ public class ProductController {
 		map.put("sellBuyer", sellBuyer);
 		int result3=productService.productBuyerUpdate(map);
 		
-		int result4=basketService.basketSellCompleteDelete(sellNo);
+		basketService.basketSellCompleteDelete(sellNo);
 		
 		String msg="";
 		String loc="";
-		if(result1>0&&result2>0&&result3>0&&result4>0) {
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			loc="/product/memberSellView.do?memberId="+sellWriter;
 		}else {

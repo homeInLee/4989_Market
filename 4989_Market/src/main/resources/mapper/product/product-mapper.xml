@@ -12,13 +12,7 @@
 	  	</if>
 		order by sell_no desc) a) rownumsell
 	</select>
-	<select id="productList" resultType="product">
-        		select *
-		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and sell_price not in 0 order by sell_no desc) a) rownumsell
-		where rnum between 1 and 8
 	
-	
-	</select>
 	<insert id="productRegistration" parameterType="product">
 	insert into sell values(seq_product_no.nextval, 
 							#{sellTitle}, 
