@@ -87,7 +87,7 @@ div#memberId-container span.error{color:red;}
 					    <span class="input-group-text">${vs.index == 0 ? "대표":""}이미지${vs.index == 0 ? "":vs.index}</span>
 					  </div>
 					  <div class="custom-file">
-					    <input type="file" class="custom-file-input" name="upFile" id="upFile${vs.count}" <c:if test="${vs.count == 1 }">required</c:if>  >
+					    <input type="file" class="custom-file-input" name="upFile" id="upFile${vs.count}" <c:if test="${vs.count == 1 }">required</c:if> >
 					    <label class="custom-file-label" for="upFile${vs.count}">
 					    	${u.originalfileName }
 				    	</label>
