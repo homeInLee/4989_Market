@@ -161,8 +161,8 @@ button[name=fixButton]{
 
 
 /*Header*/
-h1, h2{text-shadow:none; text-align:center;}
-h1{ color: #666; text-transform:uppercase;  font-size:36px;}
+/* h1, h2{text-shadow:none; text-align:center;} */
+/* h1{ color: #666; text-transform:uppercase;  font-size:36px;} */
 h2{ color: #7f8c8d; font-family: Neucha, Arial, sans serif; font-size:18px; margin-bottom:30px;} 
 
 
@@ -430,7 +430,7 @@ function basketCheck(check,sellNo,memberId){
 		<c:if test="${memberLoggedIn.memberId eq auctionSelectOne.get(0).auctionWriter }">
 		<p style="text-align: right;">
 			<button type="button" class="btn btn-primary btn-lg" name="fixButton" onclick="updateAuction();" >수정하기</button>
-			<button type="button" class="btn btn-secondary btn-lg" name="fixButton">삭제하기</button>
+			<button type="button" class="btn btn-secondary btn-lg" name="fixButton" onclick="deleteAuction();">삭제하기</button>
 		</p>
 		</c:if>
 		
@@ -534,7 +534,7 @@ function basketCheck(check,sellNo,memberId){
   
   
   $(document).ready(function(){
-       tid=setInterval('msg_time()',1000); // 타이머 1초간격으로 수행
+       tid=setInterval('msg_time()',0); // 타이머 1초간격으로 수행
      });
   
   var stDate = new Date().getTime();
@@ -565,6 +565,7 @@ function basketCheck(check,sellNo,memberId){
       
     }
     else if(${auctionSelectOne.get(0).auctionDirectPrice == auctionSelectOne.get(0).auctionIngPrice}){
+    	
     	if(${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionBuyer}){
 	    	$("#mainTimer").attr("style","display:none");
 	        $("#finishAuction").attr("style","display:none");
@@ -580,13 +581,33 @@ function basketCheck(check,sellNo,memberId){
     }
     
      else{
-      RemainDate = RemainDate - 1000; // 남은시간 -1초
+      RemainDate = RemainDate - 4; // 남은시간 -1초
     } 
   }
   
   function updateAuction(){
 	  location.href='${pageContext.request.contextPath }/auction/updateAuction.do?auctionNo=${auctionSelectOne.get(0).auctionNo}';
   };
+  function deleteAuction(){
+  	if (confirm("경매 게시물을 삭제하시겠습니까??") == true){    //확인
+	  location.href='${pageContext.request.contextPath }/auction/deleteAuction.do?auctionNo=${auctionSelectOne.get(0).auctionNo}';
+  		
+	}else{   //취소
+	    return;
+	}
+
+  };
+  
+  function trade(){
+  	if (confirm("거래를 진행 하시겠습니까??") == true){    //확인
+  	  location.href='${pageContext.request.contextPath }/message/messageListEnd.do?messageWriter=${auctionSelectOne.get(0).auctionBuyer}&messageReciver=${auctionSelectOne.get(0).auctionWriter}';
+    		
+  	}else{   //취소
+  	    return;
+  	}
+
+    };	  
+  
   </script>
   <!--  -->
 	</div>
@@ -721,9 +742,18 @@ function tender(){
 	}
 		
 	else{
-	location.href='${pageContext.request.contextPath }/auction/ingPrice.do?auctionNo=${auctionSelectOne.get(0).auctionNo}&auctionIngPrice='+ingPrice+'&auctionBuyer=${memberLoggedIn.memberId}';
+		
+	  	if (confirm("정말 입찰하시겠습니까?") == true){    //확인
+			location.href='${pageContext.request.contextPath }/auction/ingPrice.do?auctionNo=${auctionSelectOne.get(0).auctionNo}&auctionIngPrice='+ingPrice+'&auctionBuyer=${memberLoggedIn.memberId}&auctionTitle=${auctionSelectOne.get(0).auctionTitle}&auctionWriter=${auctionSelectOne.get(0).auctionWriter}';
+	    		
+	  	}else{   //취소
+	  	    return;
+	  	}
+
+    };
+		
 	
-	}
+	
 };
 
 
@@ -768,6 +798,13 @@ location.href='${pageContext.request.contextPath }/auction/ingPrice.do?auctionNo
 }
 function kakao2(){
 	
+	if(${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter}){
+		alert("본인은 경매에 참여할 수 없습니다.");
+		
+	}
+	else{
+		
+	
 		var IMP = window.IMP; // 생략가능
 	   IMP.init('imp45289348');  // 가맹점 식별 코드
 	
@@ -791,13 +828,14 @@ function kakao2(){
 			msg += '결제 금액 : ' + rsp.paid_amount;
 			msg += '카드 승인번호 : ' + rsp.apply_num;
 			
-			location.href='${pageContext.request.contextPath }/auction/directPrice.do?auctionNo=${auctionSelectOne.get(0).auctionNo}&auctionDirectPrice=${auctionSelectOne.get(0).auctionDirectPrice}&auctionBuyer=${memberLoggedIn.memberId}';
+			location.href='${pageContext.request.contextPath }/auction/directPrice.do?auctionNo=${auctionSelectOne.get(0).auctionNo}&auctionDirectPrice=${auctionSelectOne.get(0).auctionDirectPrice}&auctionBuyer=${memberLoggedIn.memberId}&auctionTitle=${auctionSelectOne.get(0).auctionTitle}&auctionWriter=${auctionSelectOne.get(0).auctionWriter}';
 		} else { // 실패시
 			var msg = '결제에 실패하였습니다.';
 			msg += '에러내용 : ' + rsp.error_msg;
 		}
 	});
    
+	}
 }
 
 </script>

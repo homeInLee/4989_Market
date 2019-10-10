@@ -97,6 +97,7 @@ div#memberId-container span.error{color:red;}
 					    <input type="hidden" name="attachmentMainImage" value="Y" />
 					  </div>
 					</div>
+					
 					<div class="input-group mb-3" style="padding:0px;">
 					  <div class="input-group-prepend" style="padding:0px;">
 					    <span class="input-group-text">이미지1</span>
@@ -145,6 +146,7 @@ div#memberId-container span.error{color:red;}
 				</td>
 			</tr>
 		</table>
+		<br />
 		<input class="log" type="submit" value="등록하기" >
 	</form>
 </div>

@@ -44,5 +44,13 @@ public interface AuctionDAO {
 
 	List<Map<String, String>> updateAttachment(int auctionNo);
 
+	int updateAuctionEnd(Auction auction);
+
+	int updateAttachmentEnd(Attachment a);
+
+	int updateAttachmentBefore(int boardNo);
+
+	int deleteAuction(int auctionNo);
+
 
 }

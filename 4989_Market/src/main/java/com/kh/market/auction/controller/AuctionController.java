@@ -112,21 +112,21 @@ public class AuctionController {
 	}
 	
 	@RequestMapping("/auctionEnrollEnd.do")
-	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @RequestParam("attachmentMainImage") String attachmentMainImage) {
+	public String boardFormEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request, @ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
 		logger.info("경매 등록 요청!!");
 		
 		try {
 		
-		logger.info("auction={}", auction);
-		logger.info("upFile={}", upFile);
-		logger.info("upFile.length={}", upFile.length);
-		logger.info("upFile[0].name={}", upFile[0].getName());
-		logger.info("upFile[0].originalFileName={}", upFile[0].getOriginalFilename());
-		logger.info("upFile[0].size={}", upFile[0].getSize());
-		logger.info("upFile[1].name={}", upFile[1].getName());
-		logger.info("upFile[1].originalFileName={}", upFile[1].getOriginalFilename());
-		logger.info("upFile[1].size={}", upFile[1].getSize());
-		
+//		logger.info("auction={}", auction);
+//		logger.info("upFile={}", upFile);
+//		logger.info("upFile.length={}", upFile.length);
+//		logger.info("upFile[0].name={}", upFile[0].getName());
+//		logger.info("upFile[0].originalFileName={}", upFile[0].getOriginalFilename());
+//		logger.info("upFile[0].size={}", upFile[0].getSize());
+//		logger.info("upFile[1].name={}", upFile[1].getName());
+//		logger.info("upFile[1].originalFileName={}", upFile[1].getOriginalFilename());
+//		logger.info("upFile[1].size={}", upFile[1].getSize());
+//		
 		//파일 업로드: 서버에 파일저장.
 		String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/auction");
 		
@@ -177,7 +177,7 @@ public class AuctionController {
 		String msg = result>0?"게시물 등록 성공~":"게시물 등록 실패!!";
 		
 		model.addAttribute("msg",msg);
-		model.addAttribute("loc","/auction/auctionSelectOne.do?auctionNo="+auctionService.selectBoardNo());
+		model.addAttribute("loc","/auction/auctionSelectOne.do?auctionNo="+auctionService.selectBoardNo()+"&memberId="+memberLoggedIn.getMemberId());
 		
 		}catch(Exception e) {
 			logger.error("게시물등록 오류!!!", e);
@@ -231,11 +231,20 @@ public class AuctionController {
 		public String ingPrice(@RequestParam("auctionNo") int auctionNo, 
 								@RequestParam("auctionIngPrice") int auctionIngPrice, 
 								@RequestParam("auctionBuyer") String auctionBuyer,
-								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+								@RequestParam("auctionWriter") String auctionWriter,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn,
+								@RequestParam("auctionTitle") String auctionTitle) {
 			Map<String, Object> ingMap = new HashMap<>();
 			ingMap.put("auctionNo", auctionNo);
 			ingMap.put("auctionIngPrice", auctionIngPrice);
 			ingMap.put("auctionBuyer", auctionBuyer);
+			
+			Message message = new Message();
+			message.setMessageTitle(auctionTitle +"의 입찰건이 있습니다.");
+			message.setMessageWriter(memberLoggedIn.getMemberId());
+			message.setMessageReciver(auctionWriter);
+			message.setMessageContent(auctionBuyer+"님이 "+ auctionTitle +"을/를 "+auctionIngPrice+"원에 입찰 하셨습니다.\n");
+			messageService.insertMessage(message);
 			
 			int result = auctionService.ingPrice(ingMap);
 		
@@ -271,7 +280,9 @@ public class AuctionController {
 		public String directPrice(@RequestParam("auctionNo") int auctionNo, 
 								@RequestParam("auctionDirectPrice") int auctionDirectPrice, 
 								@RequestParam("auctionBuyer") String auctionBuyer,
-								@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+								@RequestParam("auctionWriter") String auctionWriter,
+								@ModelAttribute("memberLoggedIn") Member memberLoggedIn,
+								@RequestParam("auctionTitle") String auctionTitle) {
 		
 			Map<String, Object> directMap = new HashMap<>();
 			directMap.put("auctionNo", auctionNo);
@@ -279,6 +290,14 @@ public class AuctionController {
 			directMap.put("auctionBuyer", auctionBuyer);
 			
 			int result = auctionService.directPrice(directMap);
+			
+			Message message = new Message();
+			message.setMessageTitle(auctionTitle +"을/를 즉시구매 되었습니다.");
+			message.setMessageWriter("admin");
+			message.setMessageReciver(auctionWriter);
+			message.setMessageContent(auctionBuyer+"님이 "+ auctionTitle +"을/를 즉시구매 하셨습니다.\n"
+									+ "경매 물품 거래를 준비해 주세요.");
+			messageService.insertMessage(message);
 		
 		return "redirect:/auction/auctionSelectOne.do?auctionNo="+auctionNo+"&memberId="+memberLoggedIn.getMemberId();
 	}
@@ -289,18 +308,110 @@ public class AuctionController {
 			Auction updateAuction = auctionService.updateAuction(auctionNo);
 			List<Map<String,String>> updateAttachment = auctionService.updateAttachment(auctionNo);
 			
+			int attachmentSize = updateAttachment.size();
 			int attachmentIndex = 5 - updateAttachment.size();
 			
 			model.addAttribute("updateAuction", updateAuction);
 			model.addAttribute("updateAttachment", updateAttachment);
 			model.addAttribute("attachmentIndex", attachmentIndex);
+			model.addAttribute("attachmentSize", attachmentSize);
 		
 		return "auction/auctionUpdate";
 	}
 		
+	@RequestMapping("/auctionUpdateEnd.do")
+	public String auctionUpdateEnd(Auction auction, MultipartFile[] upFile, Model model, HttpServletRequest request,@ModelAttribute("memberLoggedIn") Member memberLoggedIn) {
+		logger.info("경매 수정 요청!!");
+		
+		try {
+		
+//		logger.info("auction={}", auction);
+//		logger.info("upFile={}", upFile);
+//		logger.info("upFile.length={}", upFile.length);
+//		logger.info("upFile[0].name={}", upFile[0].getName());
+//		logger.info("upFile[0].originalFileName={}", upFile[0].getOriginalFilename());
+//		logger.info("upFile[0].size={}", upFile[0].getSize());
+//		logger.info("upFile[1].name={}", upFile[1].getName());
+//		logger.info("upFile[1].originalFileName={}", upFile[1].getOriginalFilename());
+//		logger.info("upFile[1].size={}", upFile[1].getSize());
+//		
+		//파일 업로드: 서버에 파일저장.
+		String saveDirectory = request.getSession().getServletContext().getRealPath("/resources/upload/auction");
+		
+		//db에 파일 메타 정보
+		List<Attachment> attachList = new ArrayList<>();
+		
+		//MultipartFile 다루기
+		for(MultipartFile f : upFile) {
+			//파일 유효성 검사
+			if(!f.isEmpty()) {
+				//renamedFileName
+				String originalFileName = f.getOriginalFilename();
+				String renamedFileName = HelloSpringUtils.getRenamedFileName(originalFileName);
+				
+				logger.info("오리지널파일네임={}", originalFileName);
+				logger.info("리네임드파일네임={}", renamedFileName);
+				
+				try {
+					//파일 실제 저장 코드
+					f.transferTo(new File(saveDirectory+"/"+renamedFileName));
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+				
+				//attachment vo객체 담기
+				Attachment attach = new Attachment();
+				attach.setOriginalfileName(originalFileName);
+				attach.setRenamedfileName(renamedFileName);
+				attach.setBoardNo(auction.getAuctionNo());
+				
+				if(f.equals(upFile[0])) {
+					attach.setAttachmentMainImage("Y");
+				}
+				else
+					attach.setAttachmentMainImage("N");
+				
+				attach.setBoardName("A");
+				attachList.add(attach);
+				
+				logger.info("attach={}", attach);
+				logger.info("attachList={}", attachList);
+				
+			}
+		}
+		
+		//업무로직 auction, Attachment 테이블에 데이터 저장
+		int result = auctionService.updateAuctionEnd(auction, attachList);
+		System.out.println(result);
+		String msg = result>0?"게시물 수정 성공~":"게시물 수정 실패!!";
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/auction/auctionSelectOne.do?auctionNo="+auction.getAuctionNo()+"&memberId="+memberLoggedIn.getMemberId());
+		
+		}catch(Exception e) {
+			logger.error("게시물 수정 오류!!!", e);
+			
+			throw new AuctionException("게시물 수정 오류!@@",e);
+		}
 	
+		return "common/msg";
 	
+	}
 	
+	@RequestMapping("/deleteAuction.do")
+	public String deleteAuction(@RequestParam("auctionNo") int auctionNo, Model model) {
+		
+		int deleteAuction = auctionService.deleteAuction(auctionNo);
+		
+		
+		String msg = deleteAuction>0?"게시물 삭제 성공":"게시물 삭제 실패!!";
+		
+		model.addAttribute("msg",msg);
+		model.addAttribute("loc","/auction/auction.do");
+		
+		return "common/msg";
+		
+	}
 	
 	
 	

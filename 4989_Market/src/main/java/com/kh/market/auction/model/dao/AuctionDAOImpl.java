@@ -34,7 +34,6 @@ public class AuctionDAOImpl implements AuctionDAO {
 
 	@Override
 	public int insertAttachment(Attachment a) {
-		System.out.println("-------------insertAttachment-------------");
 		return sqlSession.insert("auction.insertAttachment",a);
 	}
 
@@ -107,6 +106,27 @@ public class AuctionDAOImpl implements AuctionDAO {
 	public List<Map<String, String>> updateAttachment(int auctionNo) {
 		return sqlSession.selectList("auction.updateAttachment",auctionNo);
 	}
+
+	@Override
+	public int updateAuctionEnd(Auction auction) {
+		return sqlSession.update("auction.updateAuctionEnd",auction);
+	}
+
+	@Override
+	public int updateAttachmentEnd(Attachment a) {
+		return sqlSession.update("auction.updateAttachmentEnd",a);
+	}
+
+	@Override
+	public int updateAttachmentBefore(int boardNo) {
+		return sqlSession.delete("auction.updateAttachmentBefore", boardNo);
+	}
+
+	@Override
+	public int deleteAuction(int auctionNo) {
+		return sqlSession.delete("auction.deleteAuction", auctionNo);
+	}
+
 	
 
 }
