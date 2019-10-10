@@ -127,16 +127,7 @@ ul li a:hover, ul li a:focus {
 						<div class="auction-price">
 							<fmt:formatNumber value="${b.sellPrice }" pattern="#,###" />원
 						</div>
-						<c:if test="${'sale' eq fn:trim(b.sellState)}">
-							<div>
-								판매중
-							</div>
-						</c:if>
-						<c:if test="${'soldout' eq fn:trim(b.sellState)}">
-							<div>
-								판매완료된 물품
-							</div>
-						</c:if>
+						
 					</div>
 				</a>
 				<br /><br />

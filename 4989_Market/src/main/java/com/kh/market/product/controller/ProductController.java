@@ -312,8 +312,8 @@ public class ProductController {
 			@RequestParam("sellWriter") String sellWriter, @RequestParam("sellBuyer") String sellBuyer) {
 		int result1 = productService.sellComplete(sellNo);
 		Product p = productService.memberSellDetailView(sellNo);
-		Message m = new Message(0, sellWriter + "님과의 거래가 완료되었습니다", "admin", sellBuyer,
-				"구매물품 제목:" + p.getSellTitle() + " / 가격:" + p.getSellPrice()+"원", null, "Y", null, null, null);
+		Message m = new Message(0, "("+p.getSellTitle() + ")물품 거래 완료", sellWriter, sellBuyer,
+				"물품 제목:" + p.getSellTitle() + " / 가격:" + p.getSellPrice()+"원", null, "Y", null, null, null);
 		int result2 = messageService.messageReview(m);
 
 		Map<Object, Object> map = new HashMap<Object, Object>();

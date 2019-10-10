@@ -92,7 +92,9 @@ margin-left: 40%;
 		</c:if>
 		<c:if test="${message.messageReview eq 'Y'}">
 			<!-- 여기서부터 하자 -->
+			<c:if test="${message.messageWriter ne memberLoggedIn.memberId}">
 			<input class="log"  type="button" value="설문조사" onclick="location.href='${pageContext.request.contextPath}/review/reviewCheckForm.do?messageWriter=${message.messageWriter}&messageNo=${message.messageNo}'"/>
+			</c:if>
 		</c:if>
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 			<input type="button" id="declarationProcess" value="신고처리" />

@@ -263,7 +263,7 @@ public class AuctionController {
 		
 		int result1=auctionService.auctionComplete(auctionNo);
 		List<AuctionForList> a=auctionService.auctionSelectOne(auctionNo);
-		Message m=new Message(0, auctionWriter+"님과의 거래가 완료되었습니다", "admin", auctionBuyer, "구매물품 제목:"+a.get(0).getAuctionTitle()+" / 가격:"+a.get(0).getAuctionPrice()+"원", null,"Y" ,null, null, null);
+		Message m=new Message(0, "("+a.get(0).getAuctionTitle()+")물품 거래 완료", auctionWriter, auctionBuyer, "물품 제목:"+a.get(0).getAuctionTitle()+" / 가격:"+a.get(0).getAuctionPrice()+"원", null,"Y" ,null, null, null);
 		int result2=messageService.messageReview(m);
 	
 		String msg="";
