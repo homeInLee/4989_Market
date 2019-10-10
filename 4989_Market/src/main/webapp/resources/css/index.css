@@ -1,42 +1,69 @@
 @charset "UTF-8";
-ul{
-	list-style: none;
-	
+a{
+	text-decoration: none;
+	background-color: transparent;
 }
-#main-row{
-	width: 25%;
-	float: left;
-	min-height: 327px;
+/*image - new*/
+.effect {
+    position: relative;
+    display: inline-block;
+    overflow: hidden; /* 불필요한 부분 가리기 */
+    padding: 1px;
 }
-#card-box{
-	background: #fff;
+.effect:after {
+    content: "";
+    position: absolute;
+    z-index: 1;
+    width: 100px;
+    height: auto;
+    background: red;
+    content: "New"; /* 보여주는 텍스트 */
+    text-align: center;
+    color: #fff;
+    font-family: 'Arial';
+    font-weight: bold;
+    padding: 5px 10px;
+    left: -30px;
+    top: 3px;
+    transform: rotate(-30deg);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+/*  */
+#sec1, #sec2, #MD{
+	padding: 30px;	
+}
+#name{
+	overflow: hidden;
+	max-height: 50px;
+	margin-top: 11px;
+}
+#text{
+	font-size: 20px;
+	line-height: 23px;
+	padding-top: 6px;
+}
+#price{
+	font-size:16px;
 	display: block;
-	border: 1px solid #e5e5e5;
-	cursor: pointer;
+	line-height: 20px;
+	padding-top: 6px;
+	font-weight: 700px;
 }
-#proimage{
-	width: 100%;
-	background: #000;
-	position: relative;
-	padding-top: 100%;
-	overflow: hidden;
+#main-sec2{
+	background-color: #f7f7f7;
 }
-img{
-	vertical-align: top;
+
+/*list_catagory*/
+#list_category{
+	width: 1050px;
+	max-width: 1050px;
+	padding: 0 0 20px;
+	margin: 0 auto;
+	text-align: center;
+	display: inline-block;
 }
-#cont{
-	text-overflow: ellipsis;
-	white-space: nowrap;
-	overflow: hidden;
-}
-#item-title{
-	color: #4e4e4c;
-	font-size: 17px;
-	line-height: 22px;
-	margin-top: 14px;
-}
-#item-price{
-	color: #000;
-	font-size: 22px;
-	padding-bottom: 10px;
+#list_category li{
+	list-style-type: none;
+	display: inline-block;
 }
