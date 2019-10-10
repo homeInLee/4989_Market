@@ -3,9 +3,14 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
-	<select id="productList" resultType="product">
+	<select id="productList" resultType="product" parameterType="String">
 		select *
-		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
+		from(select rownum as rnum, a.* from (select * from sell 
+		where sell_deltype in 'N' 
+		<if test="value != ''">
+	    AND sell_category like '%'||#{value}||'%'
+	  	</if>
+		order by sell_no desc) a) rownumsell
 		where rnum between 1 and 8
 	
 	

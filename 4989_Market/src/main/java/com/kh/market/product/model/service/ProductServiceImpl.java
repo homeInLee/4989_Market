@@ -24,9 +24,9 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public List<Product> productList() {
+	public List<Product> productList(String sellCategory) {
 		// TODO Auto-generated method stub
-		return productDAO.productList();
+		return productDAO.productList(sellCategory);
 	}
 
 	@Override
