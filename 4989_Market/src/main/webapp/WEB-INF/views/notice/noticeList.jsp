@@ -137,7 +137,7 @@ ul li a:hover, ul li a:focus {
 	border:1px solid #1b5ac2;
 	background-color:#1b5ac2;
 }
-h2{
+h2#faqlist{
 text-align: center;
 height: 100px;
 padding-top: 30px;
@@ -145,13 +145,14 @@ background: #1b5ac2;
 color:white;
 width: 950px;
 margin-left: 37px;
+cursor: pointer;
 }
 </style>
 
 
 <br />
 <br />
-<h2>FAQ</h2>
+<h2 id=faqlist>FAQ</h2>
 <div id="noticeListView-container">
 <section id="header-bottom">
 	<div id="header-catagory">
@@ -318,222 +319,28 @@ margin-left: 37px;
 		</ul>
 		</div>
 		</c:if>
-	<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+	<c:if test="${memberLoggedIn.memberId eq 'admin'}">
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
 	</c:if>
 </section>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <script>
+$("#faqlist").click(()=>{
+	location.href ="${pageContext.request.contextPath}/notice/noticeList.do";
+});
 $(()=>{
 	$("tr[noticeNo]").click(function(){
 		var noticeNo = $(this).attr("noticeNo")
-// 		$("#accordian ul ul").slideUp();
-// 			if (!$(this).next().is(":visible")) {
-// 				$(this).next().slideDown();
-// 			}
 		location.href = "${pageContext.request.contextPath}/notice/noticeView.do?noticeNo="+noticeNo;
-// 		$.ajax({
-// 		url: "${pageContext.request.contextPath}/notice/noticeMember",
-// 		dataType: "json",
-// 		type: "GET",
-// 		success: (data)=>{
-// 			console.log(data);
-// 			var html = "<table class=table>";
-// 			html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 			html += "<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 			html += "<hr/>"
-// 			if(data.length == 0){
-// 				  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 		            html += '</table>'
-// 		            $("#result").html(html);
-// 		            return;
-// 			}else{
-// 				for(var i in data){
-// 				html += "<tr><td>"+data[i].noticeNo+"</td>";
-// 				html += "<td>"+data[i].noticeTitle+"</td>";
-// 				html += "<td>"+data[i].noticeWriter+"</td>";
-// 				html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 				html += "<td>"+data[i].noticeReadCount+"</td>";
-// 			}
-// 			html+="</table>";
-// 			$("#result").html(html);
-// 			}
-// 		},
-// 		error: (xhr,textStatus,err)=>{
-// 			console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 		}
-		
-// 		});
 	});
 });
-// $("#header-bottom .member").on("click",()=>{
-// 	$.ajax({
-// 		url: "${pageContext.request.contextPath}/notice/noticeMember",
-// 		dataType: "json",
-// 		type: "GET",
-// 		success: (data)=>{
-// 			console.log(data);
-// 			var html = "<table class=table>";
-// 			html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 			html += "<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 			html += "<hr/>"
-// 			if(data.length == 0){
-// 				  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 		            html += '</table>'
-// 		            $("#result").html(html);
-// 		            return;
-// 			}else{
-// 				for(var i in data){
-// 				html += "<tr><td>"+data[i].noticeNo+"</td>";
-// 				html += "<td>"+data[i].noticeTitle+"</td>";
-// 				html += "<td>"+data[i].noticeWriter+"</td>";
-// 				html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 				html += "<td>"+data[i].noticeReadCount+"</td>";
-// 			}
-// 			html+="</table>";
-// 			$("#result").html(html);
-// 			}
-// 		},
-// 		error: (xhr,textStatus,err)=>{
-// 			console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 		}
-		
-// 	});
-// });
-	
-// $("#header-bottom .payment").on("click",()=>{
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticePayment",
-// 			dataType: "json",
-// 			type: "GET",
-// 			success: (data)=>{
-// 				console.log(data);
-// 				var html = "<table class=table>";
-// 				html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 				html+="<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 				if(data.length == 0){
-// 					  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 			            html += '</table>'
-// 			            $("#result").html(html);
-// 			            return;
-// 				} else {
-// 					for(var i in data){
-// 					html += "<tr><td>"+data[i].noticeNo+"</td>";
-// 					html += "<td>"+data[i].noticeTitle+"</td>";
-// 					html += "<td>"+data[i].noticeWriter+"</td>";
-// 					html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 					html += "<td>"+data[i].noticeReadCount+"</td>";
-// 				}
-// 				html+="</table>";
-// 				$("#result").html(html);
-// 				}
-// 			},
-// 			error: (xhr,textStatus,err)=>{
-// 				console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 			}
-			
-// 		});
-// });
-// $("#header-bottom .sell").on("click",()=>{
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticeSell",
-// 			dataType: "json",
-// 			type: "GET",
-// 			success: (data)=>{
-// 				console.log(data);
-// 				var html = "<table class=table>";
-// 				html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 				html+="<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 				if(data.length == 0){
-// 					  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 			            html += '</table>'
-// 			            $("#result").html(html);
-// 			            return;
-// 				}else{
-// 					for(var i in data){
-// 					html += "<tr><td>"+data[i].noticeNo+"</td>";
-// 					html += "<td>"+data[i].noticeTitle+"</td>";
-// 					html += "<td>"+data[i].noticeWriter+"</td>";
-// 					html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 					html += "<td>"+data[i].noticeReadCount+"</td>";
-// 				}
-// 				html+="</table>";
-// 				$("#result").html(html);
-// 				}
-// 			},
-// 			error: (xhr,textStatus,err)=>{
-// 				console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 			}
-			
-// 		});
-// });
-// $("#header-bottom .auction").on("click",()=>{
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticeAuction",
-// 			dataType: "json",
-// 			type: "GET",
-// 			success: (data)=>{
-// 				console.log(data);
-// 				var html = "<table class=table>";
-// 				html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 				html+="<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 				if(data.length == 0){
-// 					  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 			            html += '</table>'
-// 			            $("#result").html(html);
-// 			            return;
-// 				}else{
-// 					for(var i in data){
-// 					html += "<tr><td>"+data[i].noticeNo+"</td>";
-// 					html += "<td>"+data[i].noticeTitle+"</td>";
-// 					html += "<td>"+data[i].noticeWriter+"</td>";
-// 					html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 					html += "<td>"+data[i].noticeReadCount+"</td>";
-// 				}
-// 				html+="</table>";
-// 				$("#result").html(html);
-// 				}
-// 			},
-// 			error: (xhr,textStatus,err)=>{
-// 				console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 			}
-			
-// 		});
-// });
-// $("#header-bottom .other").on("click",()=>{
-// 		$.ajax({
-// 			url: "${pageContext.request.contextPath}/notice/noticeOther",
-// 			dataType: "json",
-// 			type: "GET",
-// 			success: (data)=>{
-// 				console.log(data);
-// 				var html = "<table class=table>";
-// 				html += "<colgroup><col width='5%'><col width='60%'><col width='10%'><col width='15%'><col width='10%'></colgroup>";
-// 				html+="<tr><th>번호</th><th>제목</th><th>글쓴이</th><th>날짜</th><th>조회수</th></tr>";
-// 				if(data.length == 0){
-// 					  html += '<tr><td colspan = "5">데이터가 없습니다.</td></tr>';
-// 			            html += '</table>'
-// 			            $("#result").html(html);
-// 			            return;
-// 				}else{
-// 					for(var i in data){
-// 					html += "<tr noticeNo="+data[i].noticeNo"><td>"+data[i].noticeNo+"</td>";
-// 					html += "<td>"+data[i].noticeTitle+"</td>";
-// 					html += "<td>"+data[i].noticeWriter+"</td>";
-// 					html += "<td>"+data[i].noticeDate.substring(0,10)+"</td>";
-// 					html += "<td>"+data[i].noticeReadCount+"</td>";
-// 					html += '<input type="hidden" name="noticeNo" value='+data[i].noticeNo+'/>'
-// 					}
-// 				html+="</table>";
-// 				$("#result").html(html);
-// 				}
-// 			},
-// 			error: (xhr,textStatus,err)=>{
-// 				console.log("ajax 처리 실패!", xhr, textStatus, err);
-// 			}
-			
-// 		});
-// });
 </script>
 <script>
 $("#header-bottom .member").click(()=>{

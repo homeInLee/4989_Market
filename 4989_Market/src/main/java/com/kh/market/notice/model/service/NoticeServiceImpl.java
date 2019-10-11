@@ -75,12 +75,7 @@ public class NoticeServiceImpl implements NoticeService {
 
 	@Override
 	public Notice selectNoticeOne(int noticeNo) {
-		int result = noticeDAO.updateReadCount(noticeNo);
-		Notice notice = new Notice();
-		if(result > 0) {
-			notice = noticeDAO.selectNoticeOne(noticeNo);
-		}
-		return notice;
+		return noticeDAO.selectNoticeOne(noticeNo);
 	}
 
 	@Override
@@ -165,6 +160,11 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public int noticeOtherCnt() {
 		return noticeDAO.noticeOtherCnt();
+	}
+
+	@Override
+	public int noticeViewCount(int noticeNo) {
+		return noticeDAO.noticeViewCount(noticeNo);
 	}
 
 	

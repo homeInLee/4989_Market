@@ -5,60 +5,88 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
+
 <style>
-textarea {
-border: 1px solid lightgray;
-}
-div#noticeUpdate-container{
-width:500px; 
+
+div#noticeWrite-container{
 margin:0 auto; 
 text-align:center;
-padding: 10px;
-}
-div#noticeUpdate-container table th,tr,td{
-margin-bottom:15px;
-padding:5px;
+/* padding: 0 130px; */
 }
 
-div#noticeUpdate-container input,
-div#noticeUpdate-container textarea{
-margin-bottom:5px;
-margin-top: 5px;
+table,tr,td{
+width: 80%;
+border: 1px solid lightgray;
+height: 50px;
+border-left-width: 0;
+border-right-width: 0;
+text-align: center;
+margin-left: 105px;
 }
 
-div#noticeUpdate-container .log{
+select{
+width: 200px;
+height: 45px;
+border: 0 solid;
+}
+
+th{
+width: 20%;
+text-align: center;
+}
+.btn-updateEnd{
+background: #1b5ac2;
+color: white;
+width: 75px;
+height: 40px;
+cursor: pointer;
+border-radius: 5px;
+margin-left: 40%
+}
+.btn-cancel{
 color: #1b5ac2;
 width: 75px;
 height: 40px;
+cursor: pointer;
+background: white;
+border: 1px solid #1b5ac2;
+border-radius: 5px;
 }
-div#noticeUpdate-container select{
+div#noticeWrite-container select{
 border: 1px solid lightgray;
 }
-input.log{
-cursor: pointer;
+#btn-del{
+background: #1b5ac2; 
+border: 1px solid #1b5ac2; 
+border-radius: 5px; 
+color: white; 
+}
+input#upFile1{
+margin-left: -290px;
+}
+input#upFile2{
+margin-left: -290px;
+}
+input#upFile3{
+margin-left: -290px;
 }
 </style>
 <br />
 <br />
-<h2 style="text-align: center;">공지사항 수정</h2>
+<h2 style="text-align: center; color:#1b5ac2; border: 1px solid #1b5ac2; height: 100px; padding-top: 27px; width: 800px; margin-left:115;">F A Q</h2>
 <br />
 <div id="noticeUpdate-container">
 	<form name="noticeUpdateFrm" action="${pageContext.request.contextPath}/notice/noticeUpdateEnd.do" method="post" enctype="multipart/form-data">
 		<table>
 			<tr>
-				<th>제목</th>
+				<td>제 목</td>
 				<td>
-					<input type="text" 
-					class="form-control" 
-					name="noticeTitle" 
-					id="noticeTitle" 
-					value="${notice.noticeTitle }"
-					required>
+					<input type="text" style="width: 90%;" class="form-control" name="noticeTitle" id="noticeTitle" value="${notice.noticeTitle }" required>
 					<input type="hidden" name="noticeNo" value="${noticeNo}"/>
 				</td>
 			</tr>
 			<tr>
-				<th>분류</th>
+				<td>분 류</td>
 				<td style="text-align: left;">
 				<c:if test="${not empty notice.noticeType}">
 				<select name="noticeType" id="noticeType" >
@@ -72,29 +100,17 @@ cursor: pointer;
 				</td>
 				</tr>
 			<tr>
-				<th>아이디</th>
-				<td>
-					<input type="text" 
-							class="form-control" 
-							readonly 
-							value="${notice.noticeWriter}" 
-							name="noticeWriter" 
-							id="noticeWriter" 
-							required>
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
+			<td>내 용</td>
 				<td>	
-				<textarea name="noticeContent" id="noticeContent" cols="40" rows="10" required>${notice.noticeContent }</textarea>
+				<textarea style="text-align: left;" name="noticeContent" id="noticeContent" cols="78" rows="20" required>${notice.noticeContent }</textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
+				<td>첨부파일</td>
 				<td>
 					<div id="attachFile" style="margin-left: 0.5px;">
-					<input type="file" name="upFile" id="upFile" />
-					<input type="button" value="추가"  onclick="attachFile.add()"/>
+					<input type="file" style="color: black; padding-left: 0;" name="upFile" id="upFile" />
+					<input type="button" style="background: white; border: 1px solid #1b5ac2; border-radius: 5px; color: #1b5ac2; " value="추가"  onclick="attachFile.add()"/>
 					</div>
 					<div id="attachFileDiv"></div>
 					<c:forEach items="${attachMap}" var="a" varStatus="status">
@@ -110,11 +126,22 @@ cursor: pointer;
 			</tr>
 		</table>
 		<br />
-		<input class="log" type="submit" value="등록" >
+		<input class="btn-updateEnd" type="submit" value="등록" >
 		&nbsp;&nbsp;&nbsp;
-		<input class="log" type="button" value="취소" >
+		<input class="btn-cancel" type="button" value="취소" onclick="history.back(-1);">
 	</form>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <script>
 
 $("input:button.log").click(()=>{

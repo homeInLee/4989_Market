@@ -91,12 +91,17 @@ margin-left: 50%;
 	</table>
 	<br />
 	<br />
-	<br />
-	<br />
 	<input type="submit" class="btn-dec" id="btn-dec" value="신고" />
 	<input type="reset" class="btn-cancel" id="btn-cancel" value="취소" onclick="history.back(-1);"/>
 	</form>
-	
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
 <script>
 $("#btn-dec").click(()=>{
 	$("#declarationFrm").submit();

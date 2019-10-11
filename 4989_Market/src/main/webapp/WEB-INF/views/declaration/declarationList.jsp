@@ -175,6 +175,16 @@ padding: 1px;
 	</div>
 	</c:if>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <script>
 $("tr.bottom").click(function(){
 	var declarationNo = $(this).attr("declarationNo");

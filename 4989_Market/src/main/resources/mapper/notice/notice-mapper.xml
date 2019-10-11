@@ -58,7 +58,7 @@
 <select id="totalContents" resultType="_int">
 	select (select count(*) from notice) from dual
 </select>
-<update id="updateReadCount">
+<update id="noticeViewCount">
 	update notice set notice_readcount = notice_readcount+1
 	where notice_no = #{noticeNo}
 </update>

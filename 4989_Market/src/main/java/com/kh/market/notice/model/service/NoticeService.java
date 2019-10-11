@@ -9,8 +9,6 @@ import com.kh.market.notice.model.vo.Notice;
 
 public interface NoticeService {
 	
-	int NUM_PER_PAGE = 10;
-
 	List<Notice> selectNoticeMember(Paging paging);
 
 	List<Notice> selectNoticePayment(Paging paging);
@@ -50,6 +48,8 @@ public interface NoticeService {
 	int noticeAuctionCnt();
 
 	int noticeOtherCnt();
+
+	int noticeViewCount(int noticeNo);
 
 
 
