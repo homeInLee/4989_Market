@@ -64,14 +64,14 @@ public class AuctionController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/auction.do")
-	public String auctionMain(Model model) {
+	public String auctionMain(Model model,@RequestParam(value="auctionCategory",required=false,defaultValue="") String auctionCategory) {
 		
-		List<Map<String,String>> auctionList = auctionService.auctionList();
+		List<Map<String,String>> auctionList = auctionService.auctionList(auctionCategory);
 		
 		
 		List<Map<String,String>> mainImage = auctionService.mainImage();
 		
-
+		logger.info("auctionCategory="+auctionCategory);
 		model.addAttribute("auctionList",auctionList);
 		model.addAttribute("mainImage", mainImage);
 		
@@ -200,6 +200,7 @@ public class AuctionController {
 		String boardName="A";
 		int listCnt = auctionService.auctionSellCnt(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
@@ -219,6 +220,7 @@ public class AuctionController {
 		String boardName="A";
 		int listCnt = auctionService.auctionBuyCnt(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);

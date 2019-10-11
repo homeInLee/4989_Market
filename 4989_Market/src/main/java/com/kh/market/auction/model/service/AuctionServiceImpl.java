@@ -23,8 +23,8 @@ public class AuctionServiceImpl implements AuctionService {
 	Logger logger = LoggerFactory.getLogger(getClass());
 
 	@Override
-	public List<Map<String, String>> auctionList() {
-		return auctionDAO.auctionList();
+	public List<Map<String, String>> auctionList(String auctionCategory) {
+		return auctionDAO.auctionList(auctionCategory);
 	}
 
 	@Override

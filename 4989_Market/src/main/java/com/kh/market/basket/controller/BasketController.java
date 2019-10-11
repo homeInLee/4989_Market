@@ -52,6 +52,7 @@ public class BasketController {
 
 		int basketListSize=basketService.totalBasketCount(basketMemberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, basketListSize);
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardName", boardName);
@@ -75,6 +76,7 @@ public class BasketController {
 		
 		int listCnt=basketService.auctionBasketCnt(basketMemberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardName", boardName);

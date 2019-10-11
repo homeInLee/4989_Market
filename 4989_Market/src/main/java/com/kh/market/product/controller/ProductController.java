@@ -281,6 +281,7 @@ public class ProductController {
 
 		int listCnt = productService.memberSellSize(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
@@ -345,6 +346,7 @@ public class ProductController {
 			@RequestParam(required = false, defaultValue = "1") int range) {
 		int listCnt = productService.memberBuySize(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);

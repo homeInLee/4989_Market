@@ -9,6 +9,9 @@
 		(select board_no, board_name, originalfile_name, renamedfile_name, attachment_main_image
 		from attachment order by board_no desc)a join auction b on a.board_no = b.auction_no
         where rownum between 1 and 8
+        <if test="value != ''">
+	    AND auction_category like '%'||#{value}||'%'
+	  	</if>
 	</select>
 	
 	<select id="mainImage" resultType="attachment">
@@ -51,7 +54,7 @@
 	<select id="productSearch" resultType="auction" parameterType="String">
 		select * 
 		from auction 
-		where auction_deltype in ('N') and (auction_title like '%'||#{searchWord}||'%' or auction_address like '%'||#{searchWord}||'%')
+		where auction_deltype in ('N') and (auction_title like '%'||#{searchWord}||'%' or auction_address like '%'||#{searchWord}||'%') or auction_category like '%'||#{searchWord}||'%'
 		order by auction_no desc
 	</select>
 	
