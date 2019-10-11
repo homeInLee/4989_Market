@@ -158,6 +158,15 @@ border: 2px solid #ca4e4e;
 border-radius: 5px;
 padding: 0 0 1px 0;
 }
+.btn-declaration{
+width: 50px;
+height: 30px;
+background: white;
+border: 2px solid #ca4e4e;
+border-radius: 5px;
+padding: 0 0 1px 0;
+}
+
 </style>
 <script>
 //장바구니 기능 코드
@@ -335,6 +344,7 @@ function basketCheck(check,sellNo,memberId){
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 		<input type="button" class="btn-process" id="declarationProcess" value="신고처리" />
 		</c:if>
+		<input type='button' class='btn-declaration' value='신고' id="productDeclaration"  onclick='goDeclaration();'/>
 		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
 		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
@@ -426,7 +436,7 @@ function goToList() {
 $("#declarationProcess").click(()=>{
 	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${p.sellWriter}&decNo=${decNo}";
 });
-$("#acutionDeclaration").click(()=>{
+$("#productDeclaration").click(()=>{
 	$("#frmPop").submit();
 });
 
