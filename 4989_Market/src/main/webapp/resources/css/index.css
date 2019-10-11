@@ -4,14 +4,14 @@ a{
 	background-color: transparent;
 }
 /*image - new*/
-#sec2-img {
+#sec2-img li{
 
     position: relative;
     display: inline-block;
     overflow: hidden; /* 불필요한 부분 가리기 */
     padding: 1px;
 }
-#sec2-img:after {
+#sec2-img li:after {
     content: "";
     position: absolute;
     z-index: 1;

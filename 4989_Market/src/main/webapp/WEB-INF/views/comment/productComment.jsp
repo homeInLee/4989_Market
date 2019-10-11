@@ -80,7 +80,7 @@ margin: 0 5px 5px 0;
 	<form action="" id="commentFrm_pro" method="post">
 	<br />
 		<div>
-			<span><strong>Comments</strong></span> <span id="cCnt"></span>
+			<span><strong style="color: black;">Comments</strong></span> <span id="cCnt"></span>
 		</div>
 		<div>
 			<table>

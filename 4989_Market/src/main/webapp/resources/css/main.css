@@ -168,6 +168,13 @@ body{
 	float: right;
 }
 
+#logo a{
+	text-decoration:none;
+}
+#logo a:hover{
+	color: black;
+}
+
 .log {
 	width: 80px;
 	height: 35px;
