@@ -52,6 +52,11 @@ a:visited {color: #333;}
     color: #2F9D27;
 }
 
+#f_logo a{
+	text-decoration:none;
+	width:150px; 
+}
+
 .f_info {
     padding: 15px 0;
     font-size: 14px;
