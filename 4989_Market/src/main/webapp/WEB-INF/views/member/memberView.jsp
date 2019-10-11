@@ -78,7 +78,9 @@ div#enroll-container table td{text-align: left;}
 		<c:if test="${member.memberDeltype.trim()=='Y' }">
 		<button type="button" onclick="memberDelete();" class="log" id="btnDelete">회원복구</button>
 		</c:if>
+		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 		<button type="button" class="log"  onclick="location.href='${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${member.memberId}&decNo=${decNo}'">신고처리</button>
+		</c:if>
 </div>
 <script>
 function memberDelete(){

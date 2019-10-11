@@ -29,8 +29,6 @@ public interface NoticeDAO {
 
 	int totalContents();
 
-	int updateReadCount(int noticeNo);
-
 	int insertAttachment(Attachment a);
 
 	int selectNoticeNo();
@@ -54,5 +52,7 @@ public interface NoticeDAO {
 	int noticeAuctionCnt();
 
 	int noticeOtherCnt();
+
+	int noticeViewCount(int noticeNo);
 
 }

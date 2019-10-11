@@ -98,7 +98,7 @@ margin-left: -290px;
 					<option value="m">회원관련</option>	
 					<option value="p">결제관련</option>	
 					<option value="s">중고거래관련</option>	
-					<option value="d">경매관련</option>	
+					<option value="a">경매관련</option>	
 					<option value="o">기타</option>	
 				</select>
 				</td>
@@ -127,6 +127,15 @@ margin-left: -290px;
 		<input class="btn-cancel" type="button" value="취소" >
 	</form>
 </div>
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
 <script>
 var cnt = 0;
 attachFile = {
@@ -181,7 +190,7 @@ attachFile = {
        }
 }
 $("input:button.btn-cancel").click(()=>{
-	location.href='${pageContext.request.contextPath}/notice/noticeList.do'
+	location.href='${pageContext.request.contextPath}/notice/noticeList.do';
 })
 $("#plusFile").click(()=>{
 	var html = '<input type="file" name="upFile" id="upFile';

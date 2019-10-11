@@ -274,6 +274,14 @@ border: 2px solid #ca4e4e;
 border-radius: 5px;
 padding: 0 0 1px 0;
 }
+.btn-declaration{
+width: 50px;
+height: 30px;
+background: white;
+border: 2px solid #ca4e4e;
+border-radius: 5px;
+padding: 0 0 1px 0;
+}
 </style>
 <script>
 //장바구니 기능 코드
@@ -420,6 +428,7 @@ function basketCheck(check,sellNo,memberId){
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 		<input type="button" class="btn-process" id="declarationProcess" value="신고처리" />
 		</c:if>
+		<input type='button' class='btn-declaration' value='신고' id="acutionDeclaration"  onclick='goDeclaration();'/>
 		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
 		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
@@ -433,7 +442,7 @@ function basketCheck(check,sellNo,memberId){
 	<div>
 		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
 		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
-		<p>${auctionSelectOne.get(0).auctionContent}</p>
+		<div style="white-space:pre;"><p>${auctionSelectOne.get(0).auctionContent}</p></div>
 		
 					
 		<c:if test="${memberLoggedIn.memberId eq auctionSelectOne.get(0).auctionWriter }">
@@ -477,6 +486,9 @@ function basketCheck(check,sellNo,memberId){
 				</span>&nbsp;
 				
 				<span><button type="button" class="btn btn-danger" id="kakao2" onclick="kakao2();">즉시구매가로 구매하기</button></span>
+				<p style="font-size: 10px; color:red;">
+					* 가격에 배송료가 포함된 가격입니다.
+				</p>
 			</div>
 			<br />
 			

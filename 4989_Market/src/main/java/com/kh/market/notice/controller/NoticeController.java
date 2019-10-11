@@ -7,7 +7,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -221,6 +223,8 @@ public class NoticeController {
 				logger.info("attachList={}", attachList);
 			}
 		}
+		
+
 		int result = noticeService.insertNotice(notice, attachList);
 		
 		String msg = result > 0?"게시물 등록 성공!":"게시물 등록 실패ㅠㅠ";
@@ -236,6 +240,8 @@ public class NoticeController {
 	
 	@RequestMapping("/noticeView")
 	public ModelAndView noticeView(ModelAndView mav,
+									HttpServletRequest request,
+									HttpServletResponse response,
 									@RequestParam("noticeNo") int noticeNo,
 									@RequestParam(value="decNo", defaultValue="0", required=false)int decNo ){
 		System.out.println("decNo="+decNo);
@@ -245,13 +251,58 @@ public class NoticeController {
 		Notice notice = noticeService.selectNoticeOne(noticeNo);
 		List<Map<Attachment, String>> attachMap = noticeService.selectAttachmentOne(noticeNo);
 		
-		mav.addObject("decNo",decNo);
-		mav.addObject("attachMap", attachMap);
-		mav.addObject("notice", notice);
-		mav.addObject("noticeNo", noticeNo);
-		mav.setViewName("/notice/noticeView");
+		Cookie[] cookies = request.getCookies();
 		
-		return mav;
+		Cookie viewCookie = null;
+		
+		if(cookies != null && cookies.length > 0) {
+			for(int i = 0; i<cookies.length; i++) {
+				if(cookies[i].getName().equals("cookie"+noticeNo)) {
+					System.out.println("첫 쿠키 생성");
+					viewCookie = cookies[i];
+				}
+			}
+		}
+		
+		if(notice != null) {
+			mav.addObject("decNo",decNo);
+			mav.addObject("attachMap", attachMap);
+			mav.addObject("notice", notice);
+			mav.addObject("noticeNo", noticeNo);
+			
+			if(viewCookie==null) {
+				System.out.println("쿠키 없음");
+				
+				//쿠키생성
+				Cookie newCookie = new Cookie("cookie"+noticeNo,"|" + noticeNo +"|");
+				
+				//쿠키 추가
+				response.addCookie(newCookie);
+				
+				//쿠키를 추가 시키고 조회수 증가시킴
+				int result = noticeService.noticeViewCount(noticeNo);
+			
+				
+				if(result >0) {
+					System.out.println("조회수 증가");
+				}else {
+					System.out.println("조회수 증가 에러");
+				}
+			}else {
+				System.out.println("쿠키있음");
+				
+				//쿠키 값 받아옴
+				String value = viewCookie.getValue();
+				System.out.println("cookie 값 : "+value);
+			}
+			
+			mav.setViewName("/notice/noticeView");
+			return mav;
+			
+		}else {
+			mav.setViewName("/common/error");
+			return mav;
+		}
 	}
 	
 	

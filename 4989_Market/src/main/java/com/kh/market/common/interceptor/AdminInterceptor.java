@@ -17,7 +17,7 @@ public class AdminInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 		Member memberLoggedIn = (Member)session.getAttribute("memberLoggedIn");
 		
-		if(memberLoggedIn.getMemberId() != "admin") {
+		if(!memberLoggedIn.getMemberId().equals("admin")) {
 			request.setAttribute("msg", "관리자 로그인 후 이용하세요.");
 			request.setAttribute("loc", "/");
 			request.getRequestDispatcher("/WEB-INF/views/common/msg.jsp").forward(request, response);

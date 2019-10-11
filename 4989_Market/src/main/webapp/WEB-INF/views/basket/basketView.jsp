@@ -115,28 +115,19 @@ ul li a:hover, ul li a:focus {
 				<a href="${pageContext.request.contextPath}/product/productView.do?productNo=${b.sellNo}&memberId=${memberLoggedIn.memberId}" style="text-decoration: none;">
 					<c:forEach items="${attachment}" var="a">					
 					  		<c:if test="${b.sellNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='S'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:220px; height: 200px;">
+					  			<img src="${pageContext.request.contextPath}/resources/upload/product/${a.renamedfileName}" style="width:215px; height: 200px;">
 					  		</c:if>
 					</c:forEach>
 					<div>
 					  	<br />
 					  	<h5>${b.sellTitle }</h5>
 						<div class="auction-content">
-							${b.sellContent }
+							${b.sellAddress }
 						</div>
 						<div class="auction-price">
 							<fmt:formatNumber value="${b.sellPrice }" pattern="#,###" />원
 						</div>
-						<c:if test="${'sale' eq fn:trim(b.sellState)}">
-							<div>
-								판매중
-							</div>
-						</c:if>
-						<c:if test="${'soldout' eq fn:trim(b.sellState)}">
-							<div>
-								판매완료된 물품
-							</div>
-						</c:if>
+						
 					</div>
 				</a>
 				<br /><br />

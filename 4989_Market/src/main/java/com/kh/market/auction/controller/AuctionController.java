@@ -64,14 +64,14 @@ public class AuctionController {
 	Logger logger = LoggerFactory.getLogger(getClass());
 	
 	@RequestMapping("/auction.do")
-	public String auctionMain(Model model) {
+	public String auctionMain(Model model,@RequestParam(value="auctionCategory",required=false,defaultValue="") String auctionCategory) {
 		
-		List<Map<String,String>> auctionList = auctionService.auctionList();
+		List<Map<String,String>> auctionList = auctionService.auctionList(auctionCategory);
 		
 		
 		List<Map<String,String>> mainImage = auctionService.mainImage();
 		
-
+		logger.info("auctionCategory="+auctionCategory);
 		model.addAttribute("auctionList",auctionList);
 		model.addAttribute("mainImage", mainImage);
 		
@@ -200,6 +200,7 @@ public class AuctionController {
 		String boardName="A";
 		int listCnt = auctionService.auctionSellCnt(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
@@ -219,6 +220,7 @@ public class AuctionController {
 		String boardName="A";
 		int listCnt = auctionService.auctionBuyCnt(memberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("memberId", memberId);
@@ -263,15 +265,15 @@ public class AuctionController {
 		
 		int result1=auctionService.auctionComplete(auctionNo);
 		List<AuctionForList> a=auctionService.auctionSelectOne(auctionNo);
-		Message m=new Message(0, auctionWriter+"님과의 거래가 완료되었습니다", auctionWriter, auctionBuyer, "구매물품 제목:"+a.get(0).getAuctionTitle()+",가격:"+a.get(0).getAuctionPrice(), null,"Y" ,null, null, null);
+		Message m=new Message(0, "("+a.get(0).getAuctionTitle()+")물품 거래 완료", auctionWriter, auctionBuyer, "물품 제목:"+a.get(0).getAuctionTitle()+" / 가격:"+a.get(0).getAuctionPrice()+"원", null,"Y" ,null, null, null);
 		int result2=messageService.messageReview(m);
 	
 		String msg="";
 		String loc="/auction/memberAuctionSellView.do?memberId="+auctionWriter;
 		
-		int result3=basketService.basketAuctionCompleteDelete(auctionNo);
+		basketService.basketAuctionCompleteDelete(auctionNo);
 		
-		if(result1>0&&result2>0&&result3>0) {
+		if(result1>0&&result2>0) {
 			msg="판매완료확정 성공";
 			
 		}else {

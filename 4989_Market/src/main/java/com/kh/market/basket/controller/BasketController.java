@@ -52,6 +52,7 @@ public class BasketController {
 
 		int basketListSize=basketService.totalBasketCount(basketMemberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, basketListSize);
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardName", boardName);
@@ -59,7 +60,7 @@ public class BasketController {
 		map.put("paging", paging);
 		List<Product> myBasketList=basketService.basketView(map);
 		List<Attachment> attachment=auctionService.auctionAttachment(boardName);
-		System.out.println("attachment값은?"+attachment);
+		System.out.println("myBasketList값은?"+myBasketList);
 		//2.2 전체게시글수, 전체페이지수 구하기
 		
 		mav.addObject("attachment",attachment);
@@ -75,6 +76,7 @@ public class BasketController {
 		
 		int listCnt=basketService.auctionBasketCnt(basketMemberId);
 		Paging paging = new Paging();
+		paging.setListSize(8);
 		paging.pageInfo(page, range, listCnt);
 		Map<String, Object> map = new HashMap<>();
 		map.put("boardName", boardName);

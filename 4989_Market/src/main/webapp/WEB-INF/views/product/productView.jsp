@@ -287,15 +287,17 @@ function basketCheck(check,sellNo,memberId){
 <!-- 장바구니 기능 코드 -->	
 <hr />
 <br />
-<c:if test="${'sale' eq fn:trim(p.sellState)}">
-	<c:if test="${empty basket}">
-		<div ><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-	</c:if>
-		
-	<c:if test="${not empty basket}">
-		<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-	</c:if>
-</c:if> 
+<c:if test="${memberLoggedIn.memberId ne p.sellWriter }">
+	<c:if test="${'sale' eq fn:trim(p.sellState)}">
+		<c:if test="${empty basket}">
+			<div ><img id="image" onclick="basketCheck(0,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+			
+		<c:if test="${not empty basket}">
+			<div ><img id="image" onclick="basketCheck(1,${p.sellNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+		</c:if>
+	</c:if> 
+</c:if>
 <br />	
 <c:if test="${memberLoggedIn.memberId ne p.sellWriter }">
 <button type="button" id="call" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${memberLoggedIn.memberId}&messageReciver=${p.sellWriter }'">&nbsp;&nbsp;연락하기&nbsp;&nbsp;</button>
