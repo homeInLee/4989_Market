@@ -135,73 +135,47 @@ h2, section {
 
 function moreResult() {
 	var startCount = Number($("#startCount").val());
-	var endCount = Number($("#endCount").val());
-
-
-
-	console.log(startCount);
-	console.log(endCount);
+	var endCount = Number($("#endCount").val());	
 	
 	
-	
-	var moreResultForm = $("#moreResultForm").serialize();
+	var moreResultForm = $("#moreResultForm").serialize(); //moreResultForm을 Ajax로 submit 하기위한 작업
 	var values = [];
 	var html = "";
 	var attach = [] 
 	var contentCount = 8; //한 페이지당 게시물 수
-
-
 	 $.ajax({
 	        type    :   "post",
 	        url     :   "${pageContext.request.contextPath}/product/moreResult.do",
 	        data    :   moreResultForm,
 	        dataType:   "json",
-	        success :   function(retnVal) {
-			        					        				
+	        success :   function(retnVal) {			        					        				
 	        						values = retnVal.moreList;
-	        						attach = retnVal.attachList;
-
+	        						attach = retnVal.attachList;  							
         							
-        							
-	        						for(var i=0; contentCount>i; i++ ){
-	        								
+	        						for(var i=0; contentCount>i; i++ ){	        								
 	        							html += "<article class='top-card'>";
 	        							html += "<a href='<%=request.getContextPath()%>/product/productView.do?productNo="+values[i].sellNo+"&memberId=null' style='text-decoration: none;'>";
 	        							for(var idxx = 0; attach.length>idxx; idxx++){
-
 											if(attach[idxx].boardNo == values[i].sellNo){
 	        								html += "<img class='product-img' src='<%=request.getContextPath()%>/resources/upload/product/"+attach[idxx].renamedfileName+"'/> <br/>"
 	        								
 											}
 	        							}
 
-
 	        							html += "<div class='info'>";
 	        							html += "<br/>";
 	        							html += "<h5>"+values[i].sellTitle+"</h5>";
 	        							html += "<div class='auction-content'>"+values[i].sellAddress+"</div>";
 	        							html += "<div class='auction-price'>"+values[i].sellPrice.toLocaleString()+"원";
-	        							/* <fmt:formatNumber value="${product.sellPrice}" pattern="#,###" /> */
 	        							html += "</div>";
 	        							html += "</div>";
 	        							html += "</a> <br /> <br />";
 	        							html += "</article>";
 										$("#plist").append(html);
 										html = "";
-
-
-	        						}
-
-	        			
-	        						
-	        						
-        				
-			        			 	$("#startCount").attr('value', startCount + 8);
-			        				$("#endCount").attr('value', endCount + 8); 
-									
-
-			        				
-			        				
+									}       				
+			        			 	$("#startCount").attr('value', startCount + 8); //초기값 1
+			        				$("#endCount").attr('value', endCount + 8); 	//초기값 8     				
 	                    },
 	        error   :   function(request,status,error){
 	                    alert("에러 코드 = "+ request.status + " 내용 = " + request.responseText + " 에러메세지 = " + error); // 실패 시 처리
