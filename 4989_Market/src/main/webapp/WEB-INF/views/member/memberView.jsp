@@ -7,10 +7,8 @@
 	//System.out.println("memberEnroll.jsp");
 %>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
-<jsp:include page="/WEB-INF/views/common/header.jsp">
+<jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/footer.css">
-	<jsp:param value="회원수정" name="pageTitle"/>
-</jsp:include>
 <style>
 div#enroll-container{width:500px; margin:0 auto; text-align:center;}
 div#enroll-container input, div#enroll-container select {margin-bottom:10px;}
