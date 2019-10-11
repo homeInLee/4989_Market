@@ -8,6 +8,7 @@
 %>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/footer.css">
 	<jsp:param value="회원등록" name="pageTitle"/>
 </jsp:include>
 <style>
