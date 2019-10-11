@@ -140,7 +140,7 @@ a:visited {
 
 .txt_center {
     text-align: center;
-    padding: 75px 0 35px;
+    padding: 0 0 35px;
 }
 
 .txt_left {
@@ -159,6 +159,10 @@ a:visited {
     height: 100%;
 }
 
+body{
+	padding: 10px;
+	
+}
 /*로그인 회원가입*/
 #header-btn {
 	float: right;

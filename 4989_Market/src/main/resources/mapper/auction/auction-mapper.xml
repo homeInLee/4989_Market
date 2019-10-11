@@ -5,9 +5,10 @@
 <mapper namespace="auction">
 	
 	<select id="auctionList" resultType="auctionForList">
-		select * from
+		select rownum, a.*, b.*  from
 		(select board_no, board_name, originalfile_name, renamedfile_name, attachment_main_image
-		from attachment)a join auction b on a.board_no = b.auction_no
+		from attachment order by board_no desc)a join auction b on a.board_no = b.auction_no
+        where rownum between 1 and 8
 	</select>
 	
 	<select id="mainImage" resultType="attachment">
@@ -124,4 +125,17 @@
 		delete from auction where auction_no = #{auctionNo}
 	</delete>
 	
+	<select id="moreResult" parameterType="int" resultType="auction">
+        	    select *
+		from(select rownum as rnum, a.* from (select * from auction where auction_deltype in 'N' order by auction_no desc) a) rownumsell
+		where rnum between #{startCount} and #{endCount}
+	</select>
+	<select id="moreAttach" resultType="attachment">
+	    select * 
+    	from attachment
+        where board_name = 'A'
+    	order by attachment_no asc
+	
+	
+	</select>
 </mapper>

@@ -19,7 +19,12 @@
 a{text-decoration:none; color:#666;}
 a:hover{color:#1bc1a3;}
 body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
-
+p{
+	color: black;
+}
+h3{
+	color: black;
+}
 
 #call {
 	border: 1px solid #da1519;
@@ -144,6 +149,14 @@ body, hmtl{background: #fff; font-family: 'Anton', sans-serif;}
 .zeta-menu ul ul {
 	left: 100%;
 	top: 0;
+}
+.btn-process{
+width: 80px;
+height: 30px;
+background: white;
+border: 2px solid #ca4e4e;
+border-radius: 5px;
+padding: 0 0 1px 0;
 }
 </style>
 <script>
@@ -314,13 +327,12 @@ function basketCheck(check,sellNo,memberId){
 <!-- 		<a href=""> -->
 <%-- 			<h6>${p.sellWriter}</h6> --%>
 <!--    		</a> -->
-	   		<span>${p.sellAddress}</span>	
+	   		<span style="color: black;">${p.sellAddress}</span>	
 	   		<!-- 	신고 버튼	 -->
 
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
-		<input type="button" id="declarationProcess" value="신고처리" />
+		<input type="button" class="btn-process" id="declarationProcess" value="신고처리" />
 		</c:if>
-		<input type="button" id="acutionDeclaration" value="신고" />		
 		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
 		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />
@@ -334,7 +346,7 @@ function basketCheck(check,sellNo,memberId){
 </div>
 <div id="productInfo">
 	<div>
-		<h3 style="padding:32px 0;">${p.sellTitle}</h3>
+		<h3 style="padding:32px 0; color: black;">${p.sellTitle}</h3>
 		<hr />
 		<br />		
 		<br />
@@ -349,7 +361,14 @@ function basketCheck(check,sellNo,memberId){
 		<hr />
 		<br />
 		<br />
+		<c:if test="${0 ne p.sellPrice  }">
 		<span style="color:#ff8a3d; font-size:32px;"><fmt:formatNumber value="${p.sellPrice }" pattern="#,###"/>원</span>
+		</c:if>
+		
+		<c:if test="${0 eq p.sellPrice  }">
+		<span style="color:#ff8a3d; font-size:32px;">무료나눔</span>
+		</c:if>
+		
 		<hr />
 		<br />
 			<div id="productControl">
@@ -393,7 +412,7 @@ function deleteProduct() {
 
 
 function goToList() {
-	location.href = "${pageContext.request.contextPath}/product/productList.do"
+	window.history.back()
 	
 }
 </script>
@@ -458,5 +477,5 @@ $(()=>{
 
 <!-- 이미지 슬라이더 -->
 <script src="${pageContext.request.contextPath}/resources/js/imageSlider.js"></script>
-<jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
-
+<%-- <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
+ --%>

@@ -8,6 +8,9 @@
 tbody, tr{
 display: block;
 }
+tbody td:last-child{
+margin-right: 50px;
+}
 #commentFrm{
 	border: 1px solid #9999;
 	margin: 0px;
@@ -32,9 +35,7 @@ border: 2px solid #1b5ac2;
 border-radius: 4px;
 background: #fff;
 margin: 5px;
- }
-#re-send{
- margin-left: 50px;
+margin-left: inherit;
  }
 textarea{
 border:1px solid #F2F2F2;
@@ -60,6 +61,20 @@ border-bottom:1px solid #F2F2F2;
 padding: 5px;
 }
 
+.btn-declaration{
+padding: 0 3px 3px;
+border: 2px solid #ca4e4e;
+border-radius: 4px;
+background: #fff;
+margin: 0 5px 5px 0;
+}
+.btn-auction-decProcess{
+padding: 0 3px 3px;
+border: 2px solid #ca4e4e;
+border-radius: 4px;
+background: #fff;
+margin: 0 5px 5px 0;
+}
 </style>
 <p style="font-size: 13px; line-height: 1.46; letter-spacing: -0.6px; color: #868e96;">댓글 <span id="cCnt_"></span> ∙ 관심 <span id="aCnt_"></span> ∙ 조회 ${auctionSelectOne.get(0).auctionReadcount }</p>
 <div id="container">
@@ -102,7 +117,7 @@ function replyComment(btn) {
 	"<input type='hidden' name='commentWriter' value='${memberLoggedIn.memberId}'>"+
 	"<input type='hidden' name='commentREF' value='"+param.commentNo+"'>"+
 	"<input type='hidden' name='coBoardNo' name='auctionSelectOne.auctionNo' value='${auctionSelectOne.get(0).auctionNo }'/>"+
-	"<textarea rows='3' cols='30' name='commentContent_' placeholder='답글을 입력하세요'></textarea>"+
+	"<textarea style='width:800px;' rows='3' cols='30' name='commentContent_' placeholder='답글을 입력하세요'></textarea>"+
 	"<div id='rbtn'><input type='button' id='btn-resend' value='등록'></div></td></tr></table>";
 	$("#reply").html(reply);
 }
@@ -213,7 +228,7 @@ function getcommentList() {
                     html += "<table class='commentList_table'>";
                     if(data[i].commentLevel==1){
 	                    html += "<tr><td colspan='2'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
-	                    html += "<tr><td>"+data[i].commentContent+"</td>";
+	                    html += "<tr><td style='width: 700px; margin-left: 100px;'>"+data[i].commentContent+"</td>";
 	                    html += "<td>";
 	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
 	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
@@ -221,15 +236,17 @@ function getcommentList() {
 	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
 	                    html += "</c:if>";
-	                    html += "<input type='button' value='신고'  onclick='goDeclaration();'/>"; 
-	                    html += "<input type='button' value='신고처리'  onclick='declarationProcess();'/>"; 
+	                    html += "<input type='button' class='btn-declaration' value='신고'  onclick='goDeclaration();'/>"; 
+	                    html += "<c:if test="${'admin' eq memberLoggedIn.memberId}">"
+	                    html += "<input type='button' class='btn-auction-decProcess' value='신고처리'  onclick='declarationProcess();'/>"; 
+	                    html += "</c:if>";
 	                    html += "<input type='hidden' id='commentNo' name='commentNo' value="+data[i].commentNo+" />"; 
 	                    html += "<input type='hidden' id='co1Receiver' name='co1Receiver' value="+data[i].commentWriter+" />"; 
 	                    html += "<input type='hidden' id='commentContent' name='commentContent' value="+data[i].commentContent+" />"; 
 	                    html += "</td></tr>";
                     } else if(data[i].commentLevel == 2){
 	                    html += "<tr><td colspan='2' style='padding-left : 30px;'><h6><strong>"+data[i].commentWriter+"</strong></h6></td></tr>";
-	                    html += "<tr><td style='padding-left : 30px;'>"+data[i].commentContent+"</td>";
+	                    html += "<tr><td style='padding-left : 30px; margin-left: 100px; width: 700px;'>"+data[i].commentContent+"</td>";
 	                    html += "<td>";
 	                    html += "<c:if test='${memberLoggedIn.memberId == auctionSelectOne.get(0).auctionWriter }'>";
 	                    html += "<input type='button' id='re-send' value='답글' onclick='replyComment("+data[i].commentNo+");' />"; 
@@ -237,7 +254,10 @@ function getcommentList() {
 	                    html += "<c:if test='${memberLoggedIn.memberId != commentWriter }'>";
 	                    html += "<input type='button' id='re-delete' value='삭제'  onclick='deleteComment("+data[i].commentNo+");'/>"; 
 	                    html += "</c:if>";
-	                    html += "<input type='button' value='신고'  onclick='goDeclaration();'/>"; 
+	                    html += "<input type='button' class='btn-declaration' value='신고'  onclick='goDeclaration();'/>"; 
+	                    html += "<c:if test="${'admin' eq memberLoggedIn.memberId}">"
+	                    html += "<input type='button' class='btn-auction-decProcess' value='신고처리'  onclick='declarationProcess();'/>";
+	                    html += "</c:if>";
 	                    html += "<input type='hidden' id='commentNo' name='commentNo' value="+data[i].commentNo+" />"; 
 	                    html += "<input type='hidden' id='co2Receiver' name='declarationReceiver' value="+data[i].commentWriter+" />"; 
 	                    html += "<input type='hidden' id='commentContent' name='commentContent' value="+data[i].commentContent+" />"; 

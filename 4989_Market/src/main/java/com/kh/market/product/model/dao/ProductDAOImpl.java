@@ -23,9 +23,9 @@ public class ProductDAOImpl implements ProductDAO {
 	SqlSessionTemplate sqlSession;
 
 	@Override
-	public List<Product> productList() {
+	public List<Product> productList(String sellCategory) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectList("product.productList");
+		return sqlSession.selectList("product.productList", sellCategory);
 	}
 
 	@Override
@@ -128,6 +128,18 @@ public class ProductDAOImpl implements ProductDAO {
 	public List<Product> srchMoreResult(Map<String, String> sendMap) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("product.srchMoreResult", sendMap);
+	}
+
+	@Override
+	public List<Product> freeProductList() {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.freeProductList");
+	}
+
+	@Override
+	public List<Product> moreFreeResult(Map<String, String> pageMap) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("product.moreFreeResult", pageMap);
 	}
 
 

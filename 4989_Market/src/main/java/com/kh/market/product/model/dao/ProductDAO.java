@@ -9,7 +9,7 @@ import com.kh.market.product.model.vo.Product;
 
 public interface ProductDAO {
 
-	List<Product> productList();
+	List<Product> productList(String sellCategory);
 
 	int productRegistration(Product p);
 
@@ -46,6 +46,10 @@ public interface ProductDAO {
 	int memberBuySize(String memberId);
 
 	List<Product> srchMoreResult(Map<String, String> sendMap);
+
+	List<Product> freeProductList();
+
+	List<Product> moreFreeResult(Map<String, String> pageMap);
 
 
 	

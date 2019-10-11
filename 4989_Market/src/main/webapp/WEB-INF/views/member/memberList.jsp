@@ -6,6 +6,9 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
+div{
+	margin-left: -15px;
+}
 #messageList{
 width: 800px;
 margin: auto;
@@ -66,6 +69,26 @@ ul li a:hover, ul li a:focus {
 	border:1px solid #1b5ac2;
 	background-color:#1b5ac2;
 }
+#goMemList{
+width: 150px;
+height: 50px;
+margin-left: 10px;
+cursor: pointer;
+margin-top: -20px; 
+border-radius: 5px;
+background: #1b5ac2;
+color: white;
+}
+#goDecList{
+width: 150px;
+height: 50px;
+margin-left: -5px;
+cursor: pointer;
+border-radius: 5px;
+background: white;
+border: 1px solid #1b5ac2;
+color: #1b5ac2;
+}
 </style>
 <script>
 
@@ -103,10 +126,15 @@ function fn_next(page, range, rangeSize) {
 	location.href = url;
 }
 </script>
-<input type="button" value="회원목록" />
-<input type="button" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'"/>
+<input type="button" id="goMemList" value="회원목록" onclick="location.href='${pageContext.request.contextPath}/member/memberList.do'" />
+<input type="button" id="goDecList" value="신고관리" onclick="location.href='${pageContext.request.contextPath}/declaration/declarationList'" />
+<br />
+<br />
+<br />
 	<div id="">
 	<h2 style="text-align: center;">회원목록</h2>
+	<br />
+	<br />
 	<c:if test="${memberLoggedIn != null}">
 		<table id="messageList">
 			<tr>

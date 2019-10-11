@@ -10,12 +10,12 @@
 <title>4989Market</title>
 <script src="${pageContext.request.contextPath }/resources/js/jquery-3.4.1.js"></script>
 <link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/main.css">
-
 <!-- 부트스트랩관련 라이브러리 -->
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <script
 	src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm" crossorigin="anonymous"></script>
+
 
 
 </head>
@@ -119,202 +119,240 @@ $(()=>{
 			</div>
 		</section>		
 		<section id="header-bottom">
+			<div id="header-catagory">
+			<ul id="menu">
+					<li>
+						<a href="${pageContext.request.contextPath }/product/productList.do">상품</a>
+						<ul>
+						    <li><a href="#">상품분류</a></li>
+						    <li><a href="#">지역분류</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+				    </li>
+					<li>
+						<a href="${pageContext.request.contextPath }/product/freeProductList.do">무료나눔</a>
+						<ul>
+						    <li><a href="#">menu1</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/auction/auction.do">경매</a>
+						<ul>
+						    <li><a href="#">menu1</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+					</li>
+					<li>
+						<a href="${pageContext.request.contextPath }/product/productRegistration.do">등록하기</a>
+						<ul>
+						    <li><a href="${pageContext.request.contextPath }/auction/auctionEnroll.do">경매물품 등록</a></li>
+						    <li><a href="#">menu2</a></li>
+						    <li><a href="#">menu3</a></li>
+					    </ul>
+					</li>
+                    <li><a href="${pageContext.request.contextPath }/notice/noticeList.do">공지사항</a></li>
+				</ul>
+			</div>
 			<div id="menu">
         <ul class="main1">
             <li><a href="${pageContext.request.contextPath }/product/productList.do">중고거래</a>
                 <ul class="main2">
-                    <li><a href="#">의류</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=의류">의류</a>
                         <ul class="main3">
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">언더웨어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=의류 여성의류">여성의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=의류 남성의류">남성의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=의류 언더웨어">언더웨어</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">뷰티/잡화</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화">뷰티/잡화</a>
                         <ul class="main3">
-                            <li><a href="#">화장품/향수</a></li>
-                            <li><a href="#">바디/헤어</a></li>
-                            <li><a href="#">신발</a></li>
-                            <li><a href="#">가방/패션잡화</a></li>
-                            <li><a href="#">쥬얼리/시계/선글라스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화 화장품/향수">화장품/향수</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화 바디/헤어">바디/헤어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화 신발">신발</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화 가방/패션잡화">가방/패션잡화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=뷰티/잡화 쥬얼리/시계/선글라스">쥬얼리/시계/선글라스</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">식품/마트/유아</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아">식품/마트/유아</a>
                         <ul class="main3">
-                            <li><a href="#">쌀/과일/농수축산물</a></li>
-                            <li><a href="#">건강식품/다이어트</a></li>
-                            <li><a href="#">커피/음료</a></li>
-                            <li><a href="#">즉석/간식/가공식품</a></li>
-                            <li><a href="#">화장지/물티슈/생리대</a></li>
-                            <li><a href="#">세제/구강</a></li>
-                            <li><a href="#">기저귀/분유/유아식</a></li>
-                            <li><a href="#">출산/유아용품/임부복</a></li>
-                            <li><a href="#">장난감/교육완구/인형</a></li>
-                            <li><a href="#">유아동의류</a></li>
-                            <li><a href="#">유아동신발/가방/잡화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 쌀/과일/농수축산물">쌀/과일/농수축산물</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 건강식품/다이어트">건강식품/다이어트</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 커피/음료">커피/음료</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 즉석/간식/가공식품">즉석/간식/가공식품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 화장지/물티슈/생리대">화장지/물티슈/생리대</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 세제/구강">세제/구강</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 기저귀/분유/유아식">기저귀/분유/유아식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 출산/유아용품/임부복">출산/유아용품/임부복</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 장난감/교육완구/인형">장난감/교육완구/인형</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 유아동의류">유아동의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=식품/마트/유아 유아동신발/가방/잡화">유아동신발/가방/잡화</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">가구/생활/건강/렌탈</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈">가구/생활/건강/렌탈</a>
                         <ul class="main3">
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">조명/인테리어</a></li>
-                            <li><a href="#">생활/욕실/수납용품</a></li>
-                            <li><a href="#">주방용품</a></li>
-                            <li><a href="#">침구/커튼</a></li>
-                            <li><a href="#">건강/의료용품</a></li>
-                            <li><a href="#">반려동물용품</a></li>
-                            <li><a href="#">악기/취미/키덜트</a></li>
-                            <li><a href="#">디자인/문구/사무용품</a></li>
-                            <li><a href="#">꽃/이벤트용품</a></li>
-                            <li><a href="#">렌탈서비스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 가구/DIY">가구/DIY</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 조명/인테리어">조명/인테리어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 생활/욕실/수납용품">생활/욕실/수납용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 주방용품">주방용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 침구/커튼">침구/커튼</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 건강/의료용품">건강/의료용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 반려동물용품">반려동물용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 악기/취미/키덜트">악기/취미/키덜트</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 디자인/문구/사무용품">디자인/문구/사무용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 꽃/이벤트용품">꽃/이벤트용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=가구/생활/건강/렌탈 렌탈서비스">렌탈서비스</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">디지털/가전/컴퓨터</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터">디지털/가전/컴퓨터</a>
                         <ul class="main3">
-                            <li><a href="#">영상가전</a></li>
-                            <li><a href="#">계절가전</a></li>
-                            <li><a href="#">주방가전</a></li>
-                            <li><a href="#">생활/미용가전</a></li>
-                            <li><a href="#">카메라</a></li>
-                            <li><a href="#">음향기기</a></li>
-                            <li><a href="#">게임</a></li>
-                            <li><a href="#">모바일/태블릿</a></li>
-                            <li><a href="#">노트불/PC</a></li>
-                            <li><a href="#">모니터/프린터</a></li>
-                            <li><a href="#">PC주변기기</a></li>
-                            <li><a href="#">저장장치</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 영상가전">영상가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 계절가전">계절가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 주방가전">주방가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 생활/미용가전">생활/미용가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 카메라">카메라</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 음향기기">음향기기</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 게임">게임</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 모바일/태블릿">모바일/태블릿</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 노트불/PC">노트불/PC</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 모니터/프린터">모니터/프린터</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 PC주변기기">PC주변기기</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=디지털/가전/컴퓨터 저장장치">저장장치</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">스포츠/레저/자동차</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차">스포츠/레저/자동차</a>
                         <ul class="main3">
-                            <li><a href="#">휘트니스/수영</a></li>
-                            <li><a href="#">스포츠의류/운동화</a></li>
-                            <li><a href="#">골프클럼/의류/용품</a></li>
-                            <li><a href="#">등산/아웃도어</a></li>
-                            <li><a href="#">캠핑/낚시</a></li>
-                            <li><a href="#">구기/라켓</a></li>
-                            <li><a href="#">자전거/보드</a></li>
-                            <li><a href="#">자동차용품/블랙박스</a></li>
-                            <li><a href="#">타이어/오일/부품</a></li>
-                            <li><a href="#">공구/안전/산업용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 휘트니스/수영">휘트니스/수영</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 스포츠의류/운동화">스포츠의류/운동화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 골프클럼/의류/용품">골프클럼/의류/용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 등산/아웃도어">등산/아웃도어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 캠핑/낚시">캠핑/낚시</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 구기/라켓">구기/라켓</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 자전거/보드">자전거/보드</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 자동차용품/블랙박스">자동차용품/블랙박스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 타이어/오일/부품">타이어/오일/부품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=스포츠/레저/자동차 공구/안전/산업용품">공구/안전/산업용품</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">도서/티켓/여행/e쿠폰</a>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰">도서/티켓/여행/e쿠폰</a>
                         <ul class="main3">
-                            <li><a href="#">유아/아동</a></li>
-                            <li><a href="#">교육/참고서</a></li>
-                            <li><a href="#">문학/인문/음반</a></li>
-                            <li><a href="#">콘서트/클래식</a></li>
-                            <li><a href="#">뮤지컬/연극</a></li>
-                            <li><a href="#">행사/전시</a></li>
-                            <li><a href="#">항공권</a></li>
-                            <li><a href="#">해외여행/호텔</a></li>
-                            <li><a href="#">국내여행/숙박</a></li>
-                            <li><a href="#">커피/디저트/간식</a></li>
-                            <li><a href="#">영화/모바일상품권</a></li>
-                            <li><a href="#">백화점/제화상품권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 유아/아동">유아/아동</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 교육/참고서">교육/참고서</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 문학/인문/음반">문학/인문/음반</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 콘서트/클래식">콘서트/클래식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 뮤지컬/연극">뮤지컬/연극</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 행사/전시">행사/전시</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 항공권">항공권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 해외여행/호텔">해외여행/호텔</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 국내여행/숙박">국내여행/숙박</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 커피/디저트/간식">커피/디저트/간식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 영화/모바일상품권">영화/모바일상품권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=도서/티켓/여행/e쿠폰 백화점/제화상품권">백화점/제화상품권</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">기타</a></li>
+                    <li><a href="${pageContext.request.contextPath }/product/productList.do?sellCategory=기타">기타</a></li>
                 </ul>
             </li>
             <li><a href="${pageContext.request.contextPath }/auction/auction.do">중고경매</a>
                 <ul class="main2">
-                    <li><a href="#">의류</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=의류">의류</a>
                         <ul class="main3">
-                            <li><a href="#">여성의류</a></li>
-                            <li><a href="#">남성의류</a></li>
-                            <li><a href="#">언더웨어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=의류 여성의류">여성의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=의류 남성의류">남성의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=의류 언더웨어">언더웨어</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">뷰티/잡화</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화">뷰티/잡화</a>
                         <ul class="main3">
-                            <li><a href="#">화장품/향수</a></li>
-                            <li><a href="#">바디/헤어</a></li>
-                            <li><a href="#">신발</a></li>
-                            <li><a href="#">가방/패션잡화</a></li>
-                            <li><a href="#">쥬얼리/시계/선글라스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화 화장품/향수">화장품/향수</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화 바디/헤어">바디/헤어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화 신발">신발</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화 가방/패션잡화">가방/패션잡화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=뷰티/잡화 쥬얼리/시계/선글라스">쥬얼리/시계/선글라스</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">식품/마트/유아</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아">식품/마트/유아</a>
                         <ul class="main3">
-                            <li><a href="#">쌀/과일/농수축산물</a></li>
-                            <li><a href="#">건강식품/다이어트</a></li>
-                            <li><a href="#">커피/음료</a></li>
-                            <li><a href="#">즉석/간식/가공식품</a></li>
-                            <li><a href="#">화장지/물티슈/생리대</a></li>
-                            <li><a href="#">세제/구강</a></li>
-                            <li><a href="#">기저귀/분유/유아식</a></li>
-                            <li><a href="#">출산/유아용품/임부복</a></li>
-                            <li><a href="#">장난감/교육완구/인형</a></li>
-                            <li><a href="#">유아동의류</a></li>
-                            <li><a href="#">유아동신발/가방/잡화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 쌀/과일/농수축산물">쌀/과일/농수축산물</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 건강식품/다이어트">건강식품/다이어트</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 커피/음료">커피/음료</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 즉석/간식/가공식품">즉석/간식/가공식품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 화장지/물티슈/생리대">화장지/물티슈/생리대</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 세제/구강">세제/구강</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 기저귀/분유/유아식">기저귀/분유/유아식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 출산/유아용품/임부복">출산/유아용품/임부복</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 장난감/교육완구/인형">장난감/교육완구/인형</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 유아동의류">유아동의류</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=식품/마트/유아 유아동신발/가방/잡화">유아동신발/가방/잡화</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">가구/생활/건강/렌탈</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈">가구/생활/건강/렌탈</a>
                         <ul class="main3">
-                            <li><a href="#">가구/DIY</a></li>
-                            <li><a href="#">조명/인테리어</a></li>
-                            <li><a href="#">생활/욕실/수납용품</a></li>
-                            <li><a href="#">주방용품</a></li>
-                            <li><a href="#">침구/커튼</a></li>
-                            <li><a href="#">건강/의료용품</a></li>
-                            <li><a href="#">반려동물용품</a></li>
-                            <li><a href="#">악기/취미/키덜트</a></li>
-                            <li><a href="#">디자인/문구/사무용품</a></li>
-                            <li><a href="#">꽃/이벤트용품</a></li>
-                            <li><a href="#">렌탈서비스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 가구/DIY">가구/DIY</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 조명/인테리어">조명/인테리어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 생활/욕실/수납용품">생활/욕실/수납용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 주방용품">주방용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 침구/커튼">침구/커튼</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 건강/의료용품">건강/의료용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 반려동물용품">반려동물용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 악기/취미/키덜트">악기/취미/키덜트</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 디자인/문구/사무용품">디자인/문구/사무용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 꽃/이벤트용품">꽃/이벤트용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=가구/생활/건강/렌탈 렌탈서비스">렌탈서비스</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">디지털/가전/컴퓨터</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터">디지털/가전/컴퓨터</a>
                         <ul class="main3">
-                            <li><a href="#">영상가전</a></li>
-                            <li><a href="#">계절가전</a></li>
-                            <li><a href="#">주방가전</a></li>
-                            <li><a href="#">생활/미용가전</a></li>
-                            <li><a href="#">카메라</a></li>
-                            <li><a href="#">음향기기</a></li>
-                            <li><a href="#">게임</a></li>
-                            <li><a href="#">모바일/태블릿</a></li>
-                            <li><a href="#">노트불/PC</a></li>
-                            <li><a href="#">모니터/프린터</a></li>
-                            <li><a href="#">PC주변기기</a></li>
-                            <li><a href="#">저장장치</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 영상가전">영상가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 계절가전">계절가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 주방가전">주방가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 생활/미용가전">생활/미용가전</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 카메라">카메라</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 음향기기">음향기기</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 게임">게임</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 모바일/태블릿">모바일/태블릿</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 노트불/PC">노트불/PC</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 모니터/프린터">모니터/프린터</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 PC주변기기">PC주변기기</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=디지털/가전/컴퓨터 저장장치">저장장치</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">스포츠/레저/자동차</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차">스포츠/레저/자동차</a>
                         <ul class="main3">
-                            <li><a href="#">휘트니스/수영</a></li>
-                            <li><a href="#">스포츠의류/운동화</a></li>
-                            <li><a href="#">골프클럼/의류/용품</a></li>
-                            <li><a href="#">등산/아웃도어</a></li>
-                            <li><a href="#">캠핑/낚시</a></li>
-                            <li><a href="#">구기/라켓</a></li>
-                            <li><a href="#">자전거/보드</a></li>
-                            <li><a href="#">자동차용품/블랙박스</a></li>
-                            <li><a href="#">타이어/오일/부품</a></li>
-                            <li><a href="#">공구/안전/산업용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 휘트니스/수영">휘트니스/수영</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 스포츠의류/운동화">스포츠의류/운동화</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 골프클럼/의류/용품">골프클럼/의류/용품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 등산/아웃도어">등산/아웃도어</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 캠핑/낚시">캠핑/낚시</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 구기/라켓">구기/라켓</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 자전거/보드">자전거/보드</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 자동차용품/블랙박스">자동차용품/블랙박스</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 타이어/오일/부품">타이어/오일/부품</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=스포츠/레저/자동차 공구/안전/산업용품">공구/안전/산업용품</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">도서/티켓/여행/e쿠폰</a>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰">도서/티켓/여행/e쿠폰</a>
                         <ul class="main3">
-                            <li><a href="#">유아/아동</a></li>
-                            <li><a href="#">교육/참고서</a></li>
-                            <li><a href="#">문학/인문/음반</a></li>
-                            <li><a href="#">콘서트/클래식</a></li>
-                            <li><a href="#">뮤지컬/연극</a></li>
-                            <li><a href="#">행사/전시</a></li>
-                            <li><a href="#">항공권</a></li>
-                            <li><a href="#">해외여행/호텔</a></li>
-                            <li><a href="#">국내여행/숙박</a></li>
-                            <li><a href="#">커피/디저트/간식</a></li>
-                            <li><a href="#">영화/모바일상품권</a></li>
-                            <li><a href="#">백화점/제화상품권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 유아/아동">유아/아동</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 교육/참고서">교육/참고서</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 문학/인문/음반">문학/인문/음반</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 콘서트/클래식">콘서트/클래식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 뮤지컬/연극">뮤지컬/연극</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 행사/전시">행사/전시</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 항공권">항공권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 해외여행/호텔">해외여행/호텔</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 국내여행/숙박">국내여행/숙박</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 커피/디저트/간식">커피/디저트/간식</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 영화/모바일상품권">영화/모바일상품권</a></li>
+                            <li><a href="${pageContext.request.contextPath }/auction/auction.do?auctionCategory=도서/티켓/여행/e쿠폰 백화점/제화상품권">백화점/제화상품권</a></li>
                         </ul>
                     </li>
-                    <li><a href="#">기타</a></li>
+                    <li><a href="${pageContext.request.contextPath }/auction/auction.do?sellCategory=기타">기타</a></li>
                 </ul>
             </li>
+            <li><a href="${pageContext.request.contextPath }/product/freeProductList.do">무료나눔</a></li>
             <li><a href="#">상품등록</a>
                 <ul class="main2">
                     <li><a href="${pageContext.request.contextPath }/product/productRegistration.do">중고물품 등록</a></li>

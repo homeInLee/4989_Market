@@ -12,7 +12,7 @@ public interface ProductService {
 	//페이지당 게시물수
 	int NUM_PER_PAGE=8;
 	
-	List<Product> productList();
+	List<Product> productList(String sellCategory);
 
 	int productRegistration(Product p, List<Attachment> attachList);
 
@@ -47,6 +47,10 @@ public interface ProductService {
 	int memberBuySize(String memberId);
 
 	List<Product> srchMoreResult(Map<String, String> sendMap);
+
+	List<Product> freeProductList();
+
+	List<Product> moreFreeResult(Map<String, String> pageMap);
 
 	
 

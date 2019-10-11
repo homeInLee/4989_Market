@@ -3,9 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="product">
-	<select id="productList" resultType="product">
+	<select id="productList" resultType="product" parameterType="String">
 		select *
-		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' order by sell_no desc) a) rownumsell
+		from(select rownum as rnum, a.* from (select * from sell 
+		where sell_deltype in 'N' 
+		<if test="value != ''">
+	    AND sell_category like '%'||#{value}||'%'
+	  	</if>
+		order by sell_no desc) a) rownumsell
+	</select>
+	<select id="productList" resultType="product">
+        		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and sell_price not in 0 order by sell_no desc) a) rownumsell
 		where rnum between 1 and 8
 	
 	
@@ -23,6 +32,7 @@
 							default, 
 							default,
 							#{sellAddress},
+							default,
 							#{sellCategory})
 		<selectKey keyProperty="sellNo" resultType="_int" order="AFTER">
 			select seq_product_no.currval from dual
@@ -133,5 +143,16 @@
 		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and (sell_title like '%'||#{searchWord}||'%' or sell_address like '%'||#{searchWord}||'%') order by sell_no desc) a) rownumsell
 		where rnum between #{startCount} and #{endCount}) aa		
 	</select>
-
+	<select id="freeProductList" resultType="product">
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and sell_price in 0 order by sell_no desc) a) rownumsell
+		where rnum between 1 and 8	
+	</select>
+	
+	<select id="moreFreeResult" resultType="product">
+		select *
+		from(select rownum as rnum, a.* from (select * from sell where sell_deltype in 'N' and sell_price in 0 order by sell_no desc) a) rownumsell
+		where rnum between #{startCount} and #{endCount}	
+	
+	</select>
 </mapper>

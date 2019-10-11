@@ -24,9 +24,9 @@ public class ProductServiceImpl implements ProductService {
 
 	
 	@Override
-	public List<Product> productList() {
+	public List<Product> productList(String sellCategory) {
 		// TODO Auto-generated method stub
-		return productDAO.productList();
+		return productDAO.productList(sellCategory);
 	}
 
 	@Override
@@ -150,6 +150,18 @@ public class ProductServiceImpl implements ProductService {
 	public List<Product> srchMoreResult(Map<String, String> sendMap) {
 		// TODO Auto-generated method stub
 		return productDAO.srchMoreResult(sendMap);
+	}
+
+	@Override
+	public List<Product> freeProductList() {
+		// TODO Auto-generated method stub
+		return productDAO.freeProductList();
+	}
+
+	@Override
+	public List<Product> moreFreeResult(Map<String, String> pageMap) {
+		// TODO Auto-generated method stub
+		return productDAO.moreFreeResult(pageMap);
 	}
 
 

@@ -5,6 +5,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/footer.css">
 <fmt:requestEncoding value="utf-8"/>
 <jsp:include page="/WEB-INF/views/common/header.jsp">
 	<jsp:param value= "경매제품 상세보기" name="pageTitle"/>
@@ -265,6 +266,14 @@ a{
 	left: 100%;
 	top: 0;
 }
+.btn-process{
+width: 80px;
+height: 30px;
+background: white;
+border: 2px solid #ca4e4e;
+border-radius: 5px;
+padding: 0 0 1px 0;
+}
 </style>
 <script>
 //장바구니 기능 코드
@@ -396,7 +405,7 @@ function basketCheck(check,sellNo,memberId){
 		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?declarationWriter=${memberLoggedIn.memberId }&declarationReceiver=${auctionSelectOne.get(0).auctionWriter }&declarationDivision=m" id="id-declaration"
 		      		>신고</a>
 		      		</li>
-	          <li><input type="hidden" name="declarationReceiver" value="${auctionSelectOne.get(0).auctionWriter }"/></li>
+	          <li><input type="hidden"  name="declarationReceiver" value="${auctionSelectOne.get(0).auctionWriter }"/></li>
 	          <li><input type="hidden" name="declarationDivision" value="m"/></li>
 	        </ul>
 		</li>
@@ -409,9 +418,8 @@ function basketCheck(check,sellNo,memberId){
 <!-- 	신고 버튼	 -->
 
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
-		<input type="button" id="declarationProcess" value="신고처리" />
+		<input type="button" class="btn-process" id="declarationProcess" value="신고처리" />
 		</c:if>
-		<input type="button" id="acutionDeclaration" value="신고" />		
 		<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 		<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
 		<input type="hidden" id="declarationDivision" name="declarationDivision" value="w" />

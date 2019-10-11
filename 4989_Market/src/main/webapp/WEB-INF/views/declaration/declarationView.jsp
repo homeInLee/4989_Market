@@ -11,52 +11,53 @@
 }
 
 #declarationView tr {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 800px;
 }
 
 #declarationView th {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 100px;
+	font-style: normal;
 }
-
 #declarationView td {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 100px;
 	padding: 10px;
+	
 }
+
+/* #declarationView td { */
+/* 	border: 1px solid; */
+/* 	width: 100px; */
+/* 	padding: 10px; */
+/* } */
 
 /* table#declarationView td#drop { */
 /* 	cursor: pointer; */
 /* } */
 
 </style>
-<h2>신고 상세보기</h2>
 <table id="declarationView">
+	<tr><td colspan="6" style="background: #1b5ac2; color: white; height: 30px; text-align: left;">&nbsp;&nbsp;&nbsp;신고</td></tr>
 	<tr>
-		<th>신고 번호</th>
+		<td style="color: #1b5ac2;">신고 번호</td>
 		<td>${declaration.declarationNo}</td>
-		<th>분류</th>
+		<td style="color: #1b5ac2;">분류</td>
 		<td>
 		<c:if test="${declaration.declarationDivision eq 'w'}">작성글</c:if>
 		<c:if test="${declaration.declarationDivision eq 'm'}">회원</c:if>
 		<c:if test="${declaration.declarationDivision eq 's'}">쪽지</c:if> 
 		<c:if test="${declaration.declarationDivision eq 'c'}">댓글</c:if>
 		</td>
-		<th>신고자</th>
+		<td style="color: #1b5ac2;">신고자</td>
 		<td>${declaration.declarationWriter }</td>
 		</tr>
 		<tr>
-		<th>제목</th>
-		<td colspan="5">${declaration.declarationTitle }</td>
-	</tr>
-	<tr>
-		<th>첨부파일</th>
-		<td colspan="5">없음</td>
+		<td style="text-align: left; color: " colspan="6">${declaration.declarationTitle }</td>
 	</tr>
 	<tr style="height: 300px;">
-		<th>내용</th>
-		<td colspan="5">
+		<td colspan="6">
 		<br />
 		${declaration.declarationContent }
 		</td>

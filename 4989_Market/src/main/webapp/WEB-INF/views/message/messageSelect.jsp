@@ -40,6 +40,27 @@ width: 591px;
 
 #containertable textarea:disabled,
 #containertable input:disabled {background:#fff}
+
+.btn-declaration{
+width: 80px;
+height: 35px;
+background: #ffffff;
+border: 1px solid #ca4e4e;
+outline: 0;
+border-radius: 7px;
+}
+#declarationProcess{
+width: 80px;
+height: 35px;
+background: #ffffff;
+border: 1px solid #ca4e4e;
+outline: 0;
+border-radius: 7px;
+}
+
+#return{
+margin-left: 40%;
+}
 </style>
 <div class="submenu">
   	<a id="submenu-btn" href="${pageContext.request.contextPath}/message/messageList.do?memberId=${memberLoggedIn.memberId}">받은 쪽지함</a>
@@ -66,13 +87,17 @@ width: 591px;
 		</table>
 		<br />
 		<c:if test="${memberLoggedIn.memberId != message.messageWriter }">
-		<input class="log" type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${message.messageReciver }&messageReciver=${message.messageWriter }'"/>
-		<input class="log" type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/message/messageDelete.do?messageNo=${message.messageNo}&memberId=${message.messageReciver }'" />
+		<input class="log" id="return" type="button" value="답장" onclick="location.href='${pageContext.request.contextPath}/message/messageListEnd.do?messageWriter=${message.messageReciver }&messageReciver=${message.messageWriter }'"/>
+		<input class="log" id="delete" type="button" value="삭제" onclick="location.href='${pageContext.request.contextPath}/message/messageDelete.do?messageNo=${message.messageNo}&memberId=${message.messageReciver }'" />
+		</c:if>
+		<c:if test="${message.messageReview eq 'Y'}">
+			<!-- 여기서부터 하자 -->
+			<input class="log"  type="button" value="설문조사" onclick="location.href='${pageContext.request.contextPath}/review/reviewCheckForm.do?messageWriter=${message.messageWriter}&messageNo=${message.messageNo}'"/>
 		</c:if>
 		<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 			<input type="button" id="declarationProcess" value="신고처리" />
 			</c:if>
-			<button id="messageDeclaration">신고</button>
+			<button class="btn-declaration" id="messageDeclaration">신고</button>
 			<form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
 				<input type="hidden" id="declarationWriter" name="declarationWriter" value="${memberLoggedIn.memberId }" />
 				<input type="hidden" id="declarationDivision" name="declarationDivision" value="s" />
@@ -80,12 +105,8 @@ width: 591px;
 				<input type="hidden" id="boardName" name="boardName" value="s" />
 				<input type="hidden" id="boardNo" name="boardNo" value="${message.messageNo}" />
 			</form>	
-		<c:if test="${message.messageReview eq 'Y'}">
-			<!-- 여기서부터 하자 -->
-			<input class="log" type="button" value="설문조사" onclick="location.href='${pageContext.request.contextPath}/review/reviewCheckForm.do?messageWriter=${message.messageWriter}&messageNo=${message.messageNo}'"/>
-		</c:if>
-	</div>
 	
+	</div>
 <!-- 	신고처리 -->
 	<script>
 	$("#declarationProcess").click(()=>{

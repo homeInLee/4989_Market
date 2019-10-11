@@ -6,41 +6,72 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
-textarea {
-border: 1px solid lightgray;
-}
+
 div#noticeWrite-container{
-width:800px; 
 margin:0 auto; 
 text-align:center;
-padding: 0 130px;
-}
-div#noticeWrite-container table tr,td{
-margin-bottom:15px;
-padding-left:100px;
+/* padding: 0 130px; */
 }
 
-div#noticeWrite-container input,
-div#noticeWrite-container textarea{
-margin-bottom:5px;
-margin-top: 5px;
+table,tr,td{
+width: 80%;
+border: 1px solid lightgray;
+height: 50px;
+border-left-width: 0;
+border-right-width: 0;
+text-align: center;
+margin-left: 105px;
 }
 
-div#noticeWrite-container .log{
+select{
+width: 200px;
+height: 45px;
+border: 0 solid;
+}
+
+th{
+width: 20%;
+text-align: center;
+}
+.btn-writeEnd{
+background: #1b5ac2;
+color: white;
+width: 75px;
+height: 40px;
+cursor: pointer;
+border-radius: 5px;
+}
+.btn-cancel{
 color: #1b5ac2;
 width: 75px;
 height: 40px;
+cursor: pointer;
+background: white;
+border: 1px solid #1b5ac2;
+border-radius: 5px;
 }
 div#noticeWrite-container select{
 border: 1px solid lightgray;
 }
-input.log{
-cursor: pointer;
+#btn-del{
+background: #1b5ac2; 
+border: 1px solid #1b5ac2; 
+border-radius: 5px; 
+color: white; 
+}
+input#upFile1{
+margin-left: -290px;
+}
+input#upFile2{
+margin-left: -290px;
+}
+input#upFile3{
+margin-left: -290px;
 }
 </style>
 <br />
 <br />
-<h2 style="text-align: center;">공지사항 글쓰기</h2>
+<h2 style="text-align: center; color:#1b5ac2; border: 1px solid #1b5ac2; height: 100px; padding-top: 27px; width: 800px; margin-left:115;">F A Q</h2>
 <br />
 <div id="noticeWrite-container">
 	<form name="noticeWriteFrm" 
@@ -49,13 +80,19 @@ cursor: pointer;
 		  enctype="multipart/form-data">
 		<table>
 			<tr>
-				<th>제목</th>
+				<td>제 목</td>
 				<td>
-					<input type="text" class="form-control" name="noticeTitle" id="noticeTitle" required>
+					<input type="text" style="width: 90%;" class="form-control" name="noticeTitle" id="noticeTitle" required>
 				</td>
 			</tr>
 			<tr>
-				<th>분류</th>
+				<td>아이디</td>
+				<td >
+					<input type="text" style="width: 200px;" class="form-control" readonly value="${memberLoggedIn.memberId}" name="noticeWriter" id="noticeWriter" required>
+				</td>
+			</tr>
+			<tr>
+				<td>분 류</td>
 				<td style="text-align: left">
 				<select name="noticeType" id="noticeType">
 					<option value="m">회원관련</option>	
@@ -67,23 +104,17 @@ cursor: pointer;
 				</td>
 				</tr>
 			<tr>
-				<th>아이디</th>
-				<td>
-					<input type="text" class="form-control" readonly value="${memberLoggedIn.memberId}" name="noticeWriter" id="noticeWriter" required>
-				</td>
-			</tr>
-			<tr>
-				<th>내용</th>
+				<td>내 용</td>
 				<td>	
-				<textarea name="noticeContent" id="noticeContent" cols="40" rows="10" required></textarea>
+				<textarea name="noticeContent" id="noticeContent" cols="78" rows="20" required></textarea>
 				</td>
 			</tr>
 			<tr>
-				<th>첨부파일</th>
+				<td>첨부파일</td>
 				<td>
 					<div id="attachFile" style="margin-left: 0.5px;">
-					<input type="file" name="upFile" id="upFile1" />
-					<input type="button" value="추가"  onclick="attachFile.add()"/>
+					<input type="file" style="color: black; padding-left: 0;" name="upFile" id="upFile1" />
+					<input type="button" style="background: white; border: 1px solid #1b5ac2; border-radius: 5px; color: #1b5ac2; " value="추가"  onclick="attachFile.add()"/>
 					</div>
 					<div id="attachFileDiv"></div>
 				</td>
@@ -91,9 +122,9 @@ cursor: pointer;
 			
 		</table>
 		<br />
-		<input class="log" type="submit" value="등록" >
+		<input class="btn-writeEnd" type="submit" value="등록" >
 		&nbsp;&nbsp;&nbsp;
-		<input class="log" type="button" value="취소" >
+		<input class="btn-cancel" type="button" value="취소" >
 	</form>
 </div>
 <script>
@@ -127,6 +158,7 @@ attachFile = {
 
            var btn = document.createElement('input');
            btn.type = 'button';
+           btn.id = 'btn-del';
            btn.value = '삭제';
            btn.onclick = function(){o.del(idx)};
            btn.style.marginLeft = '5px';
@@ -138,9 +170,17 @@ attachFile = {
            document.getElementById('attachFileDiv').appendChild(dv);
 
            o.idx++;
+       },
+       del:function(idx){ // 파일필드 삭제
+           if(document.getElementById('upFile' + idx).value != '' && !confirm('삭제 하시겠습니까?')){
+               return;
+           }
+           cnt--;
+           document.getElementById('attachFileDiv').removeChild(document.getElementById('file' + idx));
+           document.getElementById('attachFileDiv').removeChild(document.getElementById('dv' + idx));
        }
 }
-$("input:button.log").click(()=>{
+$("input:button.btn-cancel").click(()=>{
 	location.href='${pageContext.request.contextPath}/notice/noticeList.do'
 })
 $("#plusFile").click(()=>{

@@ -6,8 +6,8 @@
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
-input.btn.btn{
-width:200px;
+input.btn.btn:nth-child(1){
+width:190px;
 background-color: white; 
 border: 1px solid #1b5ac2;
 color: navy;
@@ -16,11 +16,28 @@ text-align: center;
 text-decoration: none;
 display: inline;
 font-size: 15px;
-margin: 50px 0 0 0;
+cursor: pointer;
+margin-left:30px;
+}
+input.btn.btn:nth-child(n):not(:nth-child(1)){
+width:190px;
+background-color: white; 
+border: 1px solid #1b5ac2;
+color: navy;
+padding: 15px 0;
+text-align: center;
+text-decoration: none;
+display: inline;
+font-size: 15px;
+margin: 0 0 0 0;
 cursor: pointer;
 }
 
-input.btn:hover{
+input.btn.btn:nth-child(n):hover{
+background: #1b5ac2;
+color: #fff;
+}
+input.btn:active{
 background: #1b5ac2;
 color: #fff;
 }
@@ -51,7 +68,7 @@ div#result tr{
 border: none;
 height: 40px;
 margin: auto;
-padding: 0px;
+padding: 10px; 
 text-align: center;
 }
 div#result td{
@@ -59,11 +76,6 @@ border: none;
 padding: 0 0;
 text-align: center;
 }
-/* div#result td:nth-child(1){ */
-/* width: 200px; */
-/* } */
-
-
 
 .btn-write{
 width: 75px;
@@ -125,13 +137,21 @@ ul li a:hover, ul li a:focus {
 	border:1px solid #1b5ac2;
 	background-color:#1b5ac2;
 }
+h2{
+text-align: center;
+height: 100px;
+padding-top: 30px;
+background: #1b5ac2;
+color:white;
+width: 950px;
+margin-left: 37px;
+}
 </style>
 
 
 <br />
 <br />
-<h2 style="text-align: center;">noticeListView</h2>
-<br />
+<h2>FAQ</h2>
 <div id="noticeListView-container">
 <section id="header-bottom">
 	<div id="header-catagory">
@@ -298,9 +318,9 @@ ul li a:hover, ul li a:focus {
 		</ul>
 		</div>
 		</c:if>
-<%-- 	<c:if test="${memberLoggedIn.memberId eq 'admin' }"> --%>
+	<c:if test="${memberLoggedIn.memberId eq 'admin' }">
 	<input type="button" class="btn-write" onclick="location.href='${pageContext.request.contextPath}/notice/noticeWrite'" value="글쓰기"/>
-<%-- 	</c:if> --%>
+	</c:if>
 </section>
 </div>
 <script>

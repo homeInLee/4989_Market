@@ -84,7 +84,8 @@ h2, section {
 </jsp:include>
 
 
-
+<h2 style="display:block">중고상품 목록</h2>
+<br /><br />
 <section id="section">
 	<div id="plist">
 		<c:forEach items="${plist }" var="product">

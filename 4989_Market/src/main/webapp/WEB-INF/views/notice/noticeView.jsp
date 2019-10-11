@@ -7,22 +7,22 @@
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 #noticeViewTable {
-	margin-left: 150px;
+/* 	margin-left: 205px; */
 	text-align: center;
 }
 
 #noticeViewTable tr {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 800px;
 }
 
 #noticeViewTable th {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 100px;
 }
 
 #noticeViewTable td {
-	border: 1px solid;
+	border: 1px solid lightgray;
 	width: 100px;
 	padding: 10px;
 }
@@ -65,12 +65,6 @@ table#noticeViewTable td#drop {
 	text-decoration: none;
 }
 
-/* .zeta-menu li.expand #declaration:hover{ */
-/* background: lightgray;}  */
-
-/* .zeta-menu li.expand>a:hover{ */
-/* background: white;}  */
-
 .zeta-menu ul {
 	background: #fff;
 	border: 1px solid silver;
@@ -103,40 +97,163 @@ table#noticeViewTable td#drop {
 	left: 100%;
 	top: 0;
 }
+
+table#noticeViewTable{
+ width: 90%;
+ border-top: 1px solid #444444;
+ border-collapse: collapse;
+ margin-left: 60px;
+}
+
+.btn-list{
+width: 75px;
+height: 40px;
+position: absolute; 
+right: 50;
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
+.btn-update{
+width: 75px;
+height: 40px;
+position: absolute; 
+right: 130;
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
+.btn-noticeDel{
+width: 75px;
+height: 40px;
+position: absolute; 
+right: 50;
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
+.btn-decProcess{
+width: 75px;
+height: 40px;
+position: absolute; 
+right: 130;
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
+.btn-noticeDec{
+width: 75px;
+height: 40px;
+position: absolute; 
+right: 210;
+font-size: 16px;
+margin: 20px 0 0 0;
+background: #fff;
+border: 1px solid #1b5ac2;
+border-radius: 7px;
+color: #1b5ac2;
+cursor: pointer;
+}
 </style>
 
-<h2>공지사항 view</h2>
+<%-- <h2 style="text-align: center; background: #1b5ac2;">${notice.noticeTitle }</h2> --%>
+<c:if test="${memberLoggedIn.memberId eq 'admin' }">
+<input type="button" class="btn-decProcess" id="declarationProcess" value="신고처리" />
+<!-- <input type="button" class="btn-noticeDec" id="noticeDeclaration" onclick="goDeclaration();" value="신고" /> -->
+</c:if>
+<input type="button" class="btn-list" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
+
+<br />
+<br />
+<br />
 <table id="noticeViewTable">
+<!-- 	<tr> -->
+<!-- 		<th>글번호</th> -->
+<%-- 		<td>${notice.noticeNo} --%>
+<!-- 		</td> -->
+<!-- 		<th>조회수</th> -->
+<%-- 		<td>${notice.noticeReadCount}</td> --%>
+<!-- 		<th>글쓴이</th> -->
+<!-- 		<td> -->
+<!-- 		<div class='zeta-menu-bar'> -->
+<!--   		<ul class="zeta-menu">	 -->
+<%-- 		<li><a href="#">${notice.noticeWriter }</a> --%>
+<!-- 	   		<ul> -->
+<!-- 		      <li><a id="memberNotice">회원정보</a></li> -->
+<%-- 		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?noticeNo?${notice.noticeNo}" id="id-declaration" --%>
+<!-- 		      		>신고</a> -->
+<!-- 		      		</li> -->
+<%-- 	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li> --%>
+<!-- 	        </ul> -->
+<!-- 		</li> -->
+<!-- 		</ul> -->
+<!-- 	     </div>    -->
+<!-- 		</td> -->
+<!-- 	</tr> -->
+<!-- 	<tr> -->
+<!-- 		<th >제목</th> -->
+<%-- 		<td  >${notice.noticeTitle }</td> --%>
+<!-- 	</tr> -->
+	<tr style="background: #1b5ac2; color: white; text-align: left; height: 50px;" >
+	<th colspan="2">
+	&nbsp;&nbsp;&nbsp;&nbsp;FAQ
+	</th>
+	</tr>
 	<tr>
-		<th>글번호</th>
-		<td>${notice.noticeNo}
-		</td>
-		<th>조회수</th>
-		<td>${notice.noticeReadCount}</td>
-		<th>글쓴이</th>
-		<td>
-		<div class='zeta-menu-bar'>
-  		<ul class="zeta-menu">	
-		<li><a href="#">${notice.noticeWriter }</a>
-	   		<ul>
-		      <li><a id="memberNotice">회원정보</a></li>
-		      <li><a href="${pageContext.request.contextPath}/declaration/connectDeclaration?noticeNo?${notice.noticeNo}" id="id-declaration"
-		      		>신고</a>
-		      		</li>
-	          <li><input type="hidden" name="declarationReceiver" value="${notice.noticeWriter}"/></li>
-	        </ul>
-		</li>
-		</ul>
-	     </div>   
+	<td style="color: #1b5ac2; text-align: left; border-right-width: 0; width: 500px;">
+	<c:if test="${not empty notice.noticeType}">
+				<c:choose>
+					<c:when test="${notice.noticeType == 'm'}">
+					[회원관련]
+					</c:when>
+					<c:when test="${notice.noticeType == 'p'}">
+					[결제관련]
+					</c:when>
+					<c:when test="${notice.noticeType == 's'}">
+					[중고거래관련]
+					</c:when>
+					<c:when test="${notice.noticeType == 'a'}">
+					[경매관련]
+					</c:when>
+					<c:when test="${notice.noticeType == 'o'}">
+					[기타]
+					</c:when>
+				</c:choose>
+				</c:if>
+	${notice.noticeTitle }
+	</td>
+	<td style="color: #1b5ac2; text-align: right;  border-collapse: collapse; border-left-width: 0; width: 100px;" >${notice.noticeDate }</td>
+	</tr>
+	<tr style="height: 300px;">
+		<td colspan="6" >
+	<c:forEach items="${attachMap}" var="a">
+		<img style="width: 200px; height: 200px;" alt="" src="${pageContext.request.contextPath}/resources/upload/notice/${a['renamedfileName']}">
+	</c:forEach>
+		<br />
+		<br />
+		<input type="hidden" id="decNo" name="decNo" value="${decNo}"/>
+		${notice.noticeContent }
 		</td>
 	</tr>
 	<tr>
-		<th>제목</th>
-		<td colspan="5">${notice.noticeTitle }</td>
-	</tr>
-	<tr>
-		<th>첨부파일</th>
-		<td colspan="5">
+		<td style="color: #1b5ac2; background: white; width: 40px;">첨부파일</td>
+		<td style="color: gray; text-align: left; width: 1000px;">
 	<c:choose>
 	<c:when test="${not empty attachMap}">
 	<c:forEach items="${attachMap}" var="a" varStatus="status">
@@ -149,19 +266,6 @@ table#noticeViewTable td#drop {
 	</c:choose>
 		</td>
 	</tr>
-	<tr style="height: 300px;">
-		<th>내용</th>
-		<td colspan="5">
-	<c:forEach items="${attachMap}" var="a">
-		<img style="width: 200px; height: 200px;" alt="" src="${pageContext.request.contextPath}/resources/upload/notice/${a['renamedfileName']}">
-		<br />
-	</c:forEach>
-		<br />
-		<input type="hidden" id="decNo" name="decNo" value="${decNo}"/>
-		${notice.noticeContent }
-		</td>
-	</tr>
-
 
 </table>
 <form name="frmPop" id="frmPop" method=post action="${pageContext.request.contextPath}/declaration/connectDeclaration">
@@ -171,20 +275,18 @@ table#noticeViewTable td#drop {
 <input type="hidden" id="boardName" name="boardName" value="n" />
 <input type="hidden" id="boardNo" name="boardNo" value="${notice.noticeNo}" />
 </form>
-<input type="button" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
-<input type="button" id="noticeDelete" value="삭제" />
+
 <c:if test="${memberLoggedIn.memberId eq 'admin' }">
-<input type="button" id="declarationProcess" value="신고처리" />
+<input type="button" class="btn-update" id="noticeUpdate" value="수정" onclick="location.href='${pageContext.request.contextPath}/notice/noticeUpdate?noticeNo=${noticeNo}'"/>
+<input type="button" class="btn-noticeDel" id="noticeDelete" value="삭제" />
 </c:if>
-<input type="button" id="noticeDeclaration" onclick="goDeclaration();" value="신고" />
-<input type="button" id="noticeList" value="목록" onclick="location.href='${pageContext.request.contextPath}/notice/noticeList.do'"/>
+
 <script>
 $("#noticeDelete").click(function(){
     if(!confirm("정말 삭제하시겠습니까?")){
     	console.log("삭제취소");
     	return false;
     }else {
-//     	console.log("삭제");
     	location.href="${pageContext.request.contextPath}/notice/noticeDelete?noticeNo=${noticeNo}"
 		return true;    	
     }
@@ -223,47 +325,13 @@ $("#noticeDeclaration").click(()=>{
 		$("#frmPop").submit();
 	});
 
-// function goDeclaration() {
-// 	var frmPop = document.frmPopup;
-	
-// 	var url='${pageContext.request.contextPath}/declaration/connectDeclaration';
-// 	window.open(url,'글신고','width=500,height=500'); 
-// 	return false;
-// }
-
-// $("input:button#noticeDeclaration").click(()=>{
-// 	alert("!!!");
-// 	$("input:hidden[name=declarationDivision]").val('w');
-// 	var a = $("input:hidden[name=declarationDivision]").val();
-// 	console.log(a);
-// });
-
-// $("#id-declaration").click(()=>{
-// 	alert("사람신고");
-// // 	$("input:hidden[name=declarationDivision]").val('m');
-// // 	var a = $("input:hidden[name=declarationDivision]").val();
-// // 	console.log(a);
-// });
 
 $("#declarationProcess").click(()=>{
-// 	alert($("input:hidden#decNo").val());
 	location.href="${pageContext.request.contextPath}/declaration/declarationProcess?memberId=${notice.noticeWriter}&decNo=${decNo}";
 });
 
 
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
 
 <jsp:include page="/WEB-INF/views/common/footer.jsp"></jsp:include>
 

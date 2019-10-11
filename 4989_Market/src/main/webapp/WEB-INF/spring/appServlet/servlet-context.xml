@@ -48,15 +48,63 @@
 	<!-- #10.로깅을 위한 interceptor등록 -->
 	<!-- DispatcherServlet이 Controller를 호출하는 중간에 intercept한다. -->
 	<!-- 그래서 이 설정은 web.xml의 DispatcherServlet의 servlet-context.xml에 있다. -->
-<!-- 	<interceptors>
+	<interceptors>
 		<interceptor>
-			<mapping path="/**"/>
 			<mapping path="/auction/auctionEnroll.do"/>
+			<mapping path="/auction/auctionEnrollEnd.do"/>
+			<mapping path="/auction/auctionSelectOne.do"/>
+			<mapping path="/auction/updateAuction.do"/>
+			<mapping path="/auction/ingPrice.do"/>
+			<mapping path="/auction/directPrice.do"/>
+			<mapping path="/auction/auctionComplete.do"/>
+			<mapping path="/auction/memberAuctionSellView.do"/>
+			<mapping path="/auction/memberAuctionBuyView.do"/>
+			<mapping path="/product/editAddress.do"/>
+			<mapping path="/product/productEdit.do"/>
+			<mapping path="/product/productRegistration.do"/>
+			<mapping path="/product/productRegistrationEnd.do"/>
+			<mapping path="/product/productView.do"/>
+			<mapping path="/product/productDelete.do"/>
+			<mapping path="/product/memberSellView.do"/>
+			<mapping path="/product/memberSellDetailView.do"/>
+			<mapping path="/product/sellComplete.do"/>
+			<mapping path="/product/memberbuyView.do"/>
+			<mapping path="/product/memberBuyDetailView.do"/>
+			<mapping path="/product/fileUpload"/>
+			<mapping path="/product/moreResult.do"/>
+			<mapping path="/product/srchMoreResult.do"/>
+			<mapping path="/member/memberUpdate.do"/>
+			<mapping path="/member/memberUpdateEnd.do"/>
+			<mapping path="/member/memberDelete.do"/>
+			<mapping path="/member/editAddressEnd.do"/>
+			<mapping path="/member/memberList.do"/>
+			<mapping path="/basket/*.do"/>
+			<mapping path="/comment/*.do"/>
+			<mapping path="/declaration/*.do"/>
+			<mapping path="/message/*.do"/>
+			<mapping path="/notice/*.do"/>
+			<mapping path="/review/*.do"/>
 			<beans:bean id="LoginInterceptor" class="com.kh.market.common.interceptor.LoginInterceptor"/>
 		</interceptor>
-	</interceptors> -->
+	</interceptors>
+	<interceptors>
+		<interceptor>
+			<mapping path="/notice/noticeWrite"/>
+			<mapping path="/notice/noticeWriteEnd.do"/>
+			<mapping path="/notice/noticeUpdate"/>
+			<mapping path="/notice/noticeDelete"/>
+			<mapping path="/notice/noticeUpdateEnd"/>
+			<mapping path="/notice/memberList.do"/>
+			<mapping path="/declaration/declarationList"/>
+			<mapping path="/declaration/selectOneDeclaration"/>
+			<mapping path="/declaration/declarationProcess"/>
+			<mapping path="/declaration/declarationCheck"/>
+			<beans:bean id="AdminInterceptor" class="com.kh.market.common.interceptor.AdminInterceptor"/>
+		</interceptor>
+	</interceptors>
 	 <!-- #13.1 파일업로드를 처리할 Resolver클래스 빈등록(빈이름 주의) -->
-	<beans:bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
+	<beans:bean id="multipartResolver" 
+				class="org.springframework.web.multipart.commons.CommonsMultipartResolver">   
 		<beans:property name="maxUploadSize" value="10485760" /> <!-- max 파일용량은 10MB이다. -->
 	</beans:bean>
 	
