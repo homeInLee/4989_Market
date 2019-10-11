@@ -313,8 +313,8 @@ public class ProductController {
 			@RequestParam("sellWriter") String sellWriter, @RequestParam("sellBuyer") String sellBuyer) {
 		int result1 = productService.sellComplete(sellNo);
 		Product p = productService.memberSellDetailView(sellNo);
-		Message m = new Message(0, sellWriter + "님과의 거래가 완료되었습니다", sellWriter, sellBuyer,
-				"구매물품 제목:" + p.getSellTitle() + ",가격:" + p.getSellPrice(), null, "Y", null, null, null);
+		Message m = new Message(0, "("+p.getSellTitle() + ")물품 거래 완료", sellWriter, sellBuyer,
+				"물품 제목:" + p.getSellTitle() + " / 가격:" + p.getSellPrice()+"원", null, "Y", null, null, null);
 		int result2 = messageService.messageReview(m);
 
 		Map<Object, Object> map = new HashMap<Object, Object>();
@@ -323,11 +323,11 @@ public class ProductController {
 		map.put("sellBuyer", sellBuyer);
 		int result3=productService.productBuyerUpdate(map);
 		
-		int result4=basketService.basketSellCompleteDelete(sellNo);
+		basketService.basketSellCompleteDelete(sellNo);
 		
 		String msg="";
 		String loc="";
-		if(result1>0&&result2>0&&result3>0&&result4>0) {
+		if(result1>0&&result2>0&&result3>0) {
 			msg="판매완료확정 성공";
 			loc="/product/memberSellView.do?memberId="+sellWriter;
 		}else {

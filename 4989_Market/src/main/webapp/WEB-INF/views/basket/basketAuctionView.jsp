@@ -103,7 +103,7 @@ ul li a:hover, ul li a:focus {
 					  	<c:forEach items="${attachment}" var="a">
 
 					  		<c:if test="${l.auctionNo==a.boardNo and a.attachmentMainImage=='Y' and a.boardName=='A'}">				
-					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:220px; height: 200px;">
+					  			<img src="${pageContext.request.contextPath}/resources/upload/auction/${a.renamedfileName}" style="width:215px; height: 200px;">
 					  		</c:if>
 					  	</c:forEach>
 					<div>
@@ -120,12 +120,7 @@ ul li a:hover, ul li a:focus {
 						<div class="auction-content">
 							${l.auctionDate}~${l.auctionEndDate}
 						</div>
-						<c:if test="${'Y' eq fn:trim(l.auctionDeltype)}">
-							판매완료된 물품
-						</c:if>
-						<c:if test="${'N' eq fn:trim(l.auctionDeltype)}">
-							판매중
-						</c:if>
+						
 					</div>
 				</a>
 				<br /><br />

@@ -387,13 +387,15 @@ function basketCheck(check,sellNo,memberId){
 
 <!--  -->
 	<div id="memberInfo">
-	<c:if test="${auctionSelectOne.get(0).auctionDeltype=='N' }">
-		<c:if test="${empty basket}">
-			<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
-		</c:if>
-		
-		<c:if test="${not empty basket}">
-			<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+	<c:if test="${memberLoggedIn.memberId ne auctionSelectOne.get(0).auctionWriter }">
+		<c:if test="${auctionSelectOne.get(0).auctionDeltype=='N' }">
+			<c:if test="${empty basket}">
+				<div ><img id="image" onclick="basketCheck(0,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/whiteheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+			</c:if>
+			
+			<c:if test="${not empty basket}">
+				<div ><img id="image" onclick="basketCheck(1,${auctionSelectOne.get(0).auctionNo},'${memberLoggedIn.memberId}')" src="${pageContext.request.contextPath }/resources/images/redheart.PNG" alt="" style="width: 20px; height: 20px; cursor: pointer;"/></div>
+			</c:if>
 		</c:if>
 	</c:if>
 	<hr />
