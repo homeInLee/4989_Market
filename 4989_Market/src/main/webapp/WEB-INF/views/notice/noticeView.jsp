@@ -4,6 +4,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <link href="https://fonts.googleapis.com/css?family=Nanum+Gothic+Coding&display=swap&subset=korean" rel="stylesheet">
+<link rel="stylesheet" href="<%=request.getContextPath() %>/resources/css/footer.css">
 <jsp:include page="/WEB-INF/views/common/header.jsp"></jsp:include>
 <style>
 #noticeViewTable {
