@@ -442,7 +442,7 @@ function basketCheck(check,sellNo,memberId){
 	<div>
 		<h3 style="padding:32px 0;">${auctionSelectOne.get(0).auctionTitle}</h3>
 		<p>거래 가능 지역 : ${auctionSelectOne.get(0).auctionAddress }</p>
-		<p>${auctionSelectOne.get(0).auctionContent}</p>
+		<div style="white-space:pre;"><p>${auctionSelectOne.get(0).auctionContent}</p></div>
 		
 					
 		<c:if test="${memberLoggedIn.memberId eq auctionSelectOne.get(0).auctionWriter }">
@@ -486,6 +486,9 @@ function basketCheck(check,sellNo,memberId){
 				</span>&nbsp;
 				
 				<span><button type="button" class="btn btn-danger" id="kakao2" onclick="kakao2();">즉시구매가로 구매하기</button></span>
+				<p style="font-size: 10px; color:red;">
+					* 가격에 배송료가 포함된 가격입니다.
+				</p>
 			</div>
 			<br />
 			

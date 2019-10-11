@@ -57,7 +57,7 @@ div#memberId-container span.error{color:red;}
 			<tr>
 				<th>경매시작 가격</th>
 				<td>
-					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" required>
+					<input type="number" class="form-control" name="auctionPrice" id="auctionPrice" required placeholder="* 배송비 포함된 가격으로 입력하세요.">
 				</td>
 			</tr>
 			<tr>
